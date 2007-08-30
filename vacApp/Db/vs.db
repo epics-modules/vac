@@ -1,0 +1,5 @@
+record(vs,"$(P)$(GAUGE)") {
+	field(DTYP,"asyn VacSen")
+	field(TYPE,"$(DEV)")
+	field(INP,"@asyn($(PORT) $(ADDR))$(STN)")
+}
