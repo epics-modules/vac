@@ -1,5 +1,10 @@
 VacApp Modules:
 
+For external  use:
+vacSupport.dbd
+libvac.a(so)
+
+Internals:
 vsRecord.c
 vsRecord.dbd
 devVacSen.h             
