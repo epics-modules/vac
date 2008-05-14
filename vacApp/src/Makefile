@@ -33,12 +33,16 @@ vac_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #=============================================================================
 # Build an ioc application <name>
-PROD_IOC = vacApp
+# Don't need for /APSshare --tmm 10/16/2007
+#PROD_IOC = vacApp
 
 #-----------------------------------------------------------------------------
 # <name>.dbd and <name>VX.dbd will be created and installed
 DBD += vacApp.dbd
 DBD += vacAppVX.dbd
+DBD += vacSupport.dbd
+DBD += devDigitelPump.dbd
+DBD += devVacSen.dbd
 
 #-----------------------------------------------------------------------------
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
@@ -49,7 +53,8 @@ vacApp_SRCS_vxWorks += vacAppVX_registerRecordDeviceDriver.cpp
 #-----------------------------------------------------------------------------
 # Include application sources
 vacApp_SRCS_DEFAULT += vacAppMain.cpp
-vacApp_SRCS_vxWorks += tyGSAsynInit.c
+# We'll use the original copy in IP
+#vacApp_SRCS_vxWorks += tyGSAsynInit.c
 vacApp_SRCS_vxWorks += -nil-
 
 #-----------------------------------------------------------------------------
