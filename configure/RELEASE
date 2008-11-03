@@ -17,19 +17,19 @@
 #  RELEASE.$(EPICS_HOST_ARCH).$(T_A)
 
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
-SUPPORT=/home/oxygen/MOONEY/epics/synApps/support
+SUPPORT=/home/oxygen/SLUITER/R3-14-10/support
 #If using the sequencer, point SNCSEQ at its top directory:
 #SNCSEQ=$(EPICS_BASE)/../modules/soft/seq
 
 #IPAC=/usr/local/iocapps/R3.14.9/modules/bus/ipac/2-8-asd7
-IPAC=$(SUPPORT)/ipac/2-8
+IPAC=/home/oxygen/SLUITER/R3-14-10/support/ipac/cvs
 
 #ASYN=/usr/local/iocapps/R3.14.9/modules/soft/asyn/4-7-asd1
-ASYN=$(SUPPORT)/asyn/4-6
+ASYN=/home/oxygen/SLUITER/R3-14-10/support/asyn/cvs
 
 # EPICS_BASE usually appears last so other apps can override stuff:
 #EPICS_BASE=/usr/local/iocapps/R3.14.9/base/3-14-9-asd1
-EPICS_BASE=/home/oxygen/MOONEY/epics/base-3.14.8.2
+EPICS_BASE=/home/oxygen/SLUITER/R3-14-10/base-3.14.10
 #Capfast users may need the following definitions
 #CAPFAST_TEMPLATES=
 #SCH2EDIF_PATH=
