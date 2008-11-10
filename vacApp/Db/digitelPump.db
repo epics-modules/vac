@@ -1,4 +1,5 @@
 record(digitel,"$(P)$(PUMP)") {
+        field(SCAN,"2 second")
 	field(DTYP,"asyn DigitelPump")
         field(TYPE,"$(DEV)")
         field(INP,"@asyn($(PORT) $(ADDR))$(STN)")
