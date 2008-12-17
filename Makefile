@@ -2,12 +2,8 @@
 TOP = .
 include $(TOP)/configure/CONFIG
 
-DIRS := configure
-
-DIRS += vacApp
+DIRS += configure vacApp iocBoot
 vacApp_DEPEND_DIRS  = configure
-
-DIRS += iocBoot
 iocBoot_DEPEND_DIRS = vacApp
 
 include $(TOP)/configure/RULES_TOP
