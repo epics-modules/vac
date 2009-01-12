@@ -22,7 +22,7 @@ SUPPORT=/home/oxygen/MOONEY/epics/synApps/support
 #SNCSEQ=$(EPICS_BASE)/../modules/soft/seq
 
 #IPAC=/usr/local/iocapps/R3.14.9/modules/bus/ipac/2-8-asd7
-IPAC=/home/oxygen/MOONEY/epics/synApps/support/ipac/2-9
+IPAC=/home/oxygen/MOONEY/epics/synApps/support/ipac/2-10
 
 #ASYN=/usr/local/iocapps/R3.14.9/modules/soft/asyn/4-7-asd1
 ASYN=/home/oxygen/MOONEY/epics/synApps/support/asyn/4-10
