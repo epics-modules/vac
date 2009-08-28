@@ -79,6 +79,7 @@
 #include "alarm.h"
 #include "dbAccess.h"
 #include "recGbl.h"
+#include "menuYesNo.h"
 #include "dbEvent.h"
 #include "dbDefs.h"
 #include "dbAccess.h"
@@ -301,7 +302,7 @@ static long process(void *precord)
     status = dbGetLink(&(pdg->siml),
 		       DBR_USHORT, &(pdg->simm), &options, &nRequest);
     if (status == 0) {
-	if (pdg->simm == YES) {
+	if (pdg->simm == menuYesNoYES) {
 	    recDigitelsimFlag = 1;
 	    if (recDigitelDebug >= 5)
 		printf("recDigitel.c: Record being processed in simulation mode\n");
