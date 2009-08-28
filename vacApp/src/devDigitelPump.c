@@ -27,6 +27,7 @@
 #include <dbAccess.h>
 #include <dbCommon.h>
 #include <alarm.h>
+#include <errlog.h>
 #include <link.h>
 #include <recGbl.h>
 #include <recSup.h>

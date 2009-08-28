@@ -20,6 +20,7 @@
 #include <dbDefs.h>
 #include <dbAccess.h>
 #include <dbCommon.h>
+#include <errlog.h>
 #include <alarm.h>
 #include <link.h>
 #include <recGbl.h>
