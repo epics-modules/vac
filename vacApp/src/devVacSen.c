@@ -659,7 +659,7 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
 {
     dbCommon *pr = (dbCommon *)pasynUser->userPvt;
     devVacSenPvt *pPvt = (devVacSenPvt *)pr->dpvt;
-    unsigned int  nwrite; 
+    size_t nwrite; 
     int eomReason;
                                            
     pPvt->pasynUser->timeout = vacSen_TIMEOUT;

@@ -830,7 +830,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
 {
     dbCommon *pr = (dbCommon *)pasynUser->userPvt;
     devDigitelPumpPvt *pPvt = (devDigitelPumpPvt *)pr->dpvt;
-    unsigned int  nwrite; 
+    size_t  nwrite; 
     int eomReason;
                                            
     pPvt->pasynUser->timeout = DigitelPump_TIMEOUT;
