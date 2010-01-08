@@ -12,6 +12,9 @@
 *  July 2007  
 *  A common one for Digitel 500, Digitel 1500 and MPC/LPC/SPC
 *
+*   revision:  01
+*	01-07-2010   Fixed the code to work with D500 bitbus bug
+*
 *
 */
 
@@ -160,6 +163,9 @@ static long init(digitelRecord *pr)
 *    It echos all the characters sent and then starts with a linefeed.
 *    All monitors end with a linefeed & carriage return (\n\r). 
 *    For control commands it ends with just "*".
+*
+*    In the case of BITBUS BUGS for D500 the device strips out the command echos.
+*    So the reply from the device in this case is no echos of commands.
 */ 
 
     /*  MPC controller*/
@@ -770,22 +776,30 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
 *		RD  = "RD\r\nDD HH:MM XXXXV x.xE-xI HCB123\n\r"
 *		RC  = "RC\r\nXXP XXI XC XS\n\r"
 *		RSx = "RSx\r\nX.0E-X Y.0E-Y ZZZZ HH\n\r"
+*
+*	For BITBUS and Digitel the driver does not receive the echos 
+*		of the commands and strips the leading \n	
 */              
 	/* for Digitel */
 	if (pPvt->devType) {
-            if (readBuffer[4] =='E' || readBuffer[5] =='E') {
+            if (readBuffer[4] =='E' || readBuffer[5] =='E' || readBuffer[0] =='E') {
             	asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   	"devDigitelPumpCallback %s Read reply has error=[%s]\n", 
                   	pr->name, readBuffer);
 	    	pPvt->errCount++;
             	goto finish;
 	    }
- 	    /*  find the echoed command followed by \n  (\r\n) */
-            if ( i < 2 )
-            	pstartdata = &readBuffer[4];
-            else  
-            	pstartdata = &readBuffer[5]; 
 
+ 	    /*  find the echoed command followed by \n  (\r\n) */
+ 	    /*  No "R" as first character for bitbus case  */
+            if (readBuffer[0] == 'R') {
+            	if ( i < 2 )
+            		pstartdata = &readBuffer[4];
+           	else  
+            		pstartdata = &readBuffer[5]; 
+            } else {
+            	pstartdata = &readBuffer[0];
+            }
 
 	/* for MPC */	
 	} else  {    
