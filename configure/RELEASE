@@ -17,19 +17,18 @@
 #  RELEASE.$(EPICS_HOST_ARCH).$(T_A)
 
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
+
 SUPPORT=/corvette/home/epics/devel
-#If using the sequencer, point SNCSEQ at its top directory:
-#SNCSEQ=$(EPICS_BASE)/../modules/soft/seq
+-include $(TOP)/../configure/SUPPORT.$(EPICS_HOST_ARCH)
 
-#IPAC=/usr/local/iocapps/R3.14.9/modules/bus/ipac/2-8-asd7
-IPAC=/corvette/home/epics/devel/ipac/2-10
+IPAC=$(SUPPORT)/ipac-2-11
 
-#ASYN=/usr/local/iocapps/R3.14.9/modules/soft/asyn/4-7-asd1
-ASYN=/corvette/home/epics/devel/asyn/4-13
+ASYN=$(SUPPORT)/asyn-4-17
 
 # EPICS_BASE usually appears last so other apps can override stuff:
-#EPICS_BASE=/usr/local/iocapps/R3.14.9/base/3-14-9-asd1
-EPICS_BASE=/corvette/usr/local/epics/base-3.14.11
+EPICS_BASE=/corvette/usr/local/epics/base-3.14.12.1
+-include $(TOP)/../configure/EPICS_BASE.$(EPICS_HOST_ARCH)
+
 #Capfast users may need the following definitions
 #CAPFAST_TEMPLATES=
 #SCH2EDIF_PATH=
