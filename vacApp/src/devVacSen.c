@@ -101,6 +101,7 @@ static long init(vsRecord *pr)
     int address;
     char *port, *userParam;
     int station,stationC1, stationC2,spt;
+    int i;
    
     /* Allocate private structure */
     pPvt = calloc(1, sizeof(devVacSenPvt));
@@ -116,7 +117,29 @@ static long init(vsRecord *pr)
     strcpy(pPvt->address,"");
     pPvt->PortName = port;
     pPvt->devType = pr->type;
-    sscanf(userParam,"%1d %1d %1d %1d",&station,&stationC1,&stationC2,&spt);
+    i = sscanf(userParam,"%1d %1d %1d %1d",&station,&stationC1,&stationC2,&spt);
+    if (i==1) {
+        /* backward compatibility with old hard-coded station assignments */
+        switch (station) {
+	    case 3:
+	    case 4:
+	        stationC1 = station-2;
+	        stationC2 = 0;
+		break;
+	    case 5:
+	    case 6:
+	        stationC1 = station-4;
+	        stationC2 = station-2;
+		break;
+	    default:
+	    	errlogPrintf("devVacSen::init %s station out of range %d\n",
+            	       pr->name, station);
+	    	goto bad;
+
+	}
+	spt = stationC1;
+
+    }
     pPvt->noSPT = 4;
     
 
