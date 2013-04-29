@@ -118,27 +118,32 @@ static long init(vsRecord *pr)
     pPvt->PortName = port;
     pPvt->devType = pr->type;
     i = sscanf(userParam,"%1d %1d %1d %1d",&station,&stationC1,&stationC2,&spt);
-    if (i==1) {
-        /* backward compatibility with old hard-coded station assignments */
-        switch (station) {
-	    case 3:
-	    case 4:
-	        stationC1 = station-2;
-	        stationC2 = 0;
+    switch (i) {
+	case 1:
+	/* backward compatibility with old hard-coded station assignments */
+	        switch (station) {
+		    case 3:
+		    case 4:
+		        stationC1 = station-2;
+	        	stationC2 = 0;
+			break;
+		    case 5:
+		    case 6:
+		        stationC1 = station-4;
+	        	stationC2 = station-2;
+			break;
+		    default:
+	    		printf("devVacSen::init %s station out of range %d\n",
+	            	       pr->name, station);
+		    	goto bad;
+		}
+		spt = stationC1;
+	case 4: /* This is a good configuration */
 		break;
-	    case 5:
-	    case 6:
-	        stationC1 = station-4;
-	        stationC2 = station-2;
+	default:
+		printf("Invalid dbLoadRecords parameter for vs.db\n");
+		printf("Valid configuration is either 1 or 4 parameters for STN\n");
 		break;
-	    default:
-	    	errlogPrintf("devVacSen::init %s station out of range %d\n",
-            	       pr->name, station);
-	    	goto bad;
-
-	}
-	spt = stationC1;
-
     }
     pPvt->noSPT = 4;
     
