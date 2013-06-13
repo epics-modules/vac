@@ -79,5 +79,7 @@ include $(TOP)/configure/RULES
 # Parallel build sometimes fails.
 # Make dependences on new records explicit.
 digitelRecord$(OBJ): $(COMMON_DIR)/digitelRecord.h
+devDigitelPump$(OBJ): $(COMMON_DIR)/digitelRecord.h
 vsRecord$(OBJ): $(COMMON_DIR)/vsRecord.h
+devVacSen$(OBJ): $(COMMON_DIR)/vsRecord.h
 
