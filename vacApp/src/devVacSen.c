@@ -121,6 +121,7 @@ static long init(vsRecord *pr)
     switch (i) {
 	case 1:
 	/* backward compatibility with old hard-coded station assignments */
+	    if ( pPvt->devType == 2) {
 	        switch (station) {
 		    case 3:
 		    case 4:
@@ -138,6 +139,7 @@ static long init(vsRecord *pr)
 		    	goto bad;
 		}
 		spt = stationC1;
+	    }
 	case 4: /* This is a good configuration */
 		break;
 	default:
