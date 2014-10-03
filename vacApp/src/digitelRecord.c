@@ -94,13 +94,6 @@
 #undef  GEN_SIZE_OFFSET
 #include "epicsExport.h"
 
-#include	<epicsVersion.h>
-#ifndef EPICS_VERSION_INT
-#define VERSION_INT(V,R,M,P) ( ((V)<<24) | ((R)<<16) | ((M)<<8) | (P))
-#define EPICS_VERSION_INT VERSION_INT(EPICS_VERSION, EPICS_REVISION, EPICS_MODIFICATION, EPICS_PATCH_LEVEL)
-#endif
-#define LT_EPICSBASE(V,R,M,P) (EPICS_VERSION_INT < VERSION_INT((V),(R),(M),(P)))
-
 #define DIGITEL_MAXHY	1e-3
 #define DIGITEL_MINHY	0
 #define DIGITEL_MAXSP   1e-3
@@ -260,8 +253,6 @@ static long process(void *precord)
     long status;
     unsigned char pact = pdg->pact;
 
-    long nRequest = 1;
-    long options = 0;
 
     if (recDigitelDebug >= 25)
 	printf("recDigitel.c: Process(%s)\n", pdg->name);
@@ -307,7 +298,7 @@ static long process(void *precord)
     }
     /*** check to see if simulation mode is being called for from the link ***/
     status = dbGetLink(&(pdg->siml),
-		       DBR_USHORT, &(pdg->simm), &options, &nRequest);
+		       DBR_USHORT, &(pdg->simm), 0,0);
     if (status == 0) {
 	if (pdg->simm == menuYesNoYES) {
 	    recDigitelsimFlag = 1;
@@ -334,7 +325,7 @@ static long process(void *precord)
 	/*** pump, if set to 1 (OPERATE) make pump voltage appear to be at  ***/
 	/*** an "on" (6000V) level ***/
 	status = dbGetLink(&(pdg->slmo),
-			   DBR_USHORT, &(pdg->svmo), &options, &nRequest);
+			   DBR_USHORT, &(pdg->svmo), 0,0);
 	if (status == 0)
 	    pdg->modr = pdg->svmo;
 	if (pdg->modr == 1)
@@ -343,19 +334,19 @@ static long process(void *precord)
 	    pdg->volt = 0;
 	/*** simulation *** setpoint 1 set ***/
 	status = dbGetLink(&(pdg->sls1),
-			   DBR_USHORT, &(pdg->svs1), &options, &nRequest);
+			   DBR_USHORT, &(pdg->svs1), 0,0);
 	if (status == 0)
 	    pdg->set1 = pdg->svs1;
 	/*** simulation *** setpoint 2 set ***/
 	status = dbGetLink(&(pdg->sls2),
-			   DBR_USHORT, &(pdg->svs2), &options, &nRequest);
+			   DBR_USHORT, &(pdg->svs2), 0,0);
 	if (status == 0)
 	    pdg->set2 = pdg->svs2;
 	/*** simulation *** current level ***/
 	/*** adjust current, and make pressure look like there is a 220 l/s ***/
 	/*** pump being controlled ***/
 	status = dbGetLink(&(pdg->slcr),
-			   DBR_DOUBLE, &(pdg->svcr), &options, &nRequest);
+			   DBR_DOUBLE, &(pdg->svcr), 0,0);
 	if (status == 0)
 	    pdg->crnt = pdg->svcr;
 	if (pdg->modr == 0)
@@ -638,11 +629,7 @@ static void checkAlarms(digitelRecord *pdg)
     if (pdg->udf == TRUE) {
 	if (recDigitelDebug >= 20)
 	    printf("recDigitel.c: udf set true... valid alarm\n");
-#if LT_EPICSBASE(3,15,0,2)
-	recGblSetSevr(pdg,UDF_ALARM,INVALID_ALARM);
-#else
-	recGblSetSevr(pdg,UDF_ALARM,pdg->udfs);
-#endif
+	recGblSetSevr(pdg, UDF_ALARM, INVALID_ALARM);
 	return;
     }
     hihi = pdg->hihi;
