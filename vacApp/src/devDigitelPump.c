@@ -15,6 +15,10 @@
 *   revision:  01
 *	01-07-2010   Fixed the code to work with D500 bitbus bug
 *
+*   revision: 02
+*   10-02-2014   Fixed connecton problems with MOXA terminal server
+*        will work correctly when MOXA is rebooted now
+*
 *
 */
 
@@ -89,7 +93,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
 
 dsetDigitelPump devDigitelPump = {5,0,0,init,0,readWrite_dg};
 epicsExportAddress(dset,devDigitelPump);
-
+
 
 static long init(digitelRecord *pr)
 {
@@ -120,11 +124,11 @@ static long init(digitelRecord *pr)
     pPvt->noSPT = 3;
     /* set ERR to non zero for initialization for Digitel 500/1500 */
     if (pPvt->devType)
-    	pPvt->errCount = 1;
+    	pPvt->errCount = 3;
 
 /*
 * devType needed to be set to device as followsin record "TYPE":
-*	MPC	=	0
+*	MPC	    =	0
 *	D500	=	1
 *	D1500	=	2
 *
@@ -245,7 +249,7 @@ static void buildCommand(devDigitelPumpPvt *pPvt, char *pvalue)
     }
     asynPrint(pPvt->pasynUser, ASYN_TRACEIO_DEVICE,
               "devDigitelPump::buildCommand %s len=%d string=|%s|\n",
-              pr->name, strlen(pPvt->sendBuf), pPvt->sendBuf);
+              pr->name, (int) strlen(pPvt->sendBuf), pPvt->sendBuf);
 
     return;
 }
@@ -414,11 +418,18 @@ static long readWrite_dg(digitelRecord *pr)
  
         asynPrint(pPvt->pasynUser, ASYN_TRACEIO_DEVICE,
               "devDigitelPump::readWrite_dg %s command %d len=%d string=|%s|\n",
-              pr->name, pPvt->command, strlen(pPvt->sendBuf), pPvt->sendBuf);
+              pr->name, pPvt->command, (int) strlen(pPvt->sendBuf), pPvt->sendBuf);
 	
 	pr->pact = 1;
 	status = pasynManager->queueRequest(pasynUser, 0, 0);
-	if (status != asynSuccess) status = -1;
+    if (status != asynSuccess) {
+        asynPrint(pasynUser, ASYN_TRACE_ERROR,
+              "devDigitelPump::readWrite %s ERROR calling queueRequest status=%d, error=%s\n",
+		        pr->name, status, pasynUser->errorMessage);
+	    status = -1;
+	    pr->pact = 0;
+        recGblSetSevr(pr, COMM_ALARM, INVALID_ALARM);
+    }
         return(status);
     }
 /*  
@@ -764,12 +775,12 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
         }
 
 /*
-*     For MPC check whether status is "OK" for good
+*     For MPC check whether status is "OK" for good or ER for error
 *     For Digitel sends out message with the words ERROR at the beginning
 *     Lets look for these and set the alarm on the record if problems.
 *
 *     For MPC lets strip the leading 9 characters all the way to "d"
-*     For MPC the reply "AA XX d cc\r" (letters are same as controls)
+*     For MPC the reply "AA OK XX d cc\r" (letters are same as controls)
 *
 *     Digitel echos all the characters sent and then starts with a linefeed.
 *     For digitel the reply 
@@ -873,7 +884,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
 
     asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
              	"devDigitelPumpProcess %s nwrite=%d output=[%s]\n",
-              	pr->name, nwrite, pPvt->sendBuf);
+              	pr->name, (int) nwrite, pPvt->sendBuf);
     
     pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser, 
                             readBuffer, DigitelPump_SIZE, &nwrite, &eomReason);
