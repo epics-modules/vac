@@ -15,8 +15,13 @@ Revision 1.0  - 4/1/2013
 	Explicitly state the station numbers in the startup file
 	order is :  CC,CV1,CV2,SP1
 	For setpoint lets assume odd or even based on the first setpoint.
+	
 Revision - 7/30/2014
-Added CC-10 controller  which is similar to Televac
+    Added CC-10  from Televac  similar to MM200
+        Single device which covers the range of 10^3  to 10^-9 in one gauge
+
+    Fixed connecton problems with MOXA
+        will work crrectly when MOXA is rebooted now
 */
 
 #include <stdlib.h>
@@ -121,34 +126,36 @@ static long init(vsRecord *pr)
     pPvt->PortName = port;
     pPvt->devType = pr->type;
     i = sscanf(userParam,"%1d %1d %1d %1d",&station,&stationC1,&stationC2,&spt);
-    switch (i) {
-	case 1:
+    if (pPvt->devType == 2) {
+        switch (i) {
+	    case 1:
 	/* backward compatibility with old hard-coded station assignments */
-      if ( pPvt->devType == 2 ) {
-        switch (station) {
-        case 3:
-        case 4:
-          stationC1 = station-2;
-          stationC2 = 0;
-          break;
-        case 5:
-        case 6:
-          stationC1 = station-4;
-          stationC2 = station-2;
-          break;
-        default:
-          printf("devVacSen::init %s station out of range %d\n",
+         if ( pPvt->devType == 2 ) {
+            switch (station) {
+            case 3:
+            case 4:
+                stationC1 = station-2;
+                stationC2 = 0;
+            break;
+            case 5:
+            case 6:
+                stationC1 = station-4;
+                stationC2 = station-2;
+            break;
+            default:
+                printf("devVacSen::init %s station out of range %d\n",
                                                   pr->name, station);
-          goto bad;
+                goto bad;
+            }
+            spt = stationC1;
         }
-        spt = stationC1;
-      }
-	case 4: /* This is a good configuration */
+	    case 4: /* This is a good configuration with each station specified */
 		break;
-	default:
-		printf("Invalid dbLoadRecords parameter for vs.db\n");
-		printf("Valid configuration is either 1 or 4 parameters for STN\n");
+	    default:
+		    printf("Invalid dbLoadRecords parameter for vs.db\n");
+		    printf("Valid configuration is either 1 or 4 parameters for STN\n");
 		break;
+        }
     }
     pPvt->noSPT = 4;
     
@@ -164,100 +171,81 @@ static long init(vsRecord *pr)
 *  For RS485 Address has to be a positive number
 *	for GP350 has to be between 1 and 31 of the form "AA"
 * 	for MM200 has to be between 0 and 59 of the form [0..9..A..Z..a..z]
-*      Also for GP350 the prefix is "#" so we will force for MM200 the same!!
+*   for GP350 the prefix is "#" so we will force for MM200 the same!!
 *	for CC10 has to be between 0 and F  in HEX
 *	for CC10  the prefix is <STX>  = hex 02
 */
     if ( pPvt->devType == 1) {
-/*
-      strcpy(pPvt->cmdPrefix,"#");
-*/
-      if (address > 0) 
-        sprintf(pPvt->address,"%02X",address);
-      if (address < 0 || address > 31) {
-        errlogPrintf("devVacSen::init %s address out of range %s\n",
+        if (address > 0) 
+            sprintf(pPvt->address,"%02X",address);
+        if (address < 0 || address > 31) {
+            errlogPrintf("devVacSen::init %s address out of range %s\n",
                    pr->name, pPvt->address);
-        goto bad;
-      }
-      sprintf(pPvt->cmdPrefix,"#%s",pPvt->address);
+            goto bad;
+        }
+        sprintf(pPvt->cmdPrefix,"#%s",pPvt->address);
 
     } else if (pPvt->devType == 2) {
-      if (address < 0 || address > 59) {
-        errlogPrintf("devVacSen::init %s address out of range %d\n",
+        if (address < 0 || address > 59) {
+            errlogPrintf("devVacSen::init %s address out of range %d\n",
                    pr->name, address);
-        goto bad;
-      }
-      if (address > 0 && address <10)	
-        sprintf(pPvt->address,"%c",address+48);
-      if (address > 9 && address <33) 
-        sprintf(pPvt->address,"%c",address+55);
-      if (address >32 && address <35) 
-        sprintf(pPvt->address,"%c",address+56);
-      if (address >34 && address <58) 
-        sprintf(pPvt->address,"%c",address+62);
-      if (address >57 && address <60) 
-        sprintf(pPvt->address,"%c",address+63);
+            goto bad;
+        }
+        if (address > 0 && address <10)	
+            sprintf(pPvt->address,"%c",address+48);
+        if (address > 9 && address <33) 
+            sprintf(pPvt->address,"%c",address+55);
+        if (address >32 && address <35) 
+            sprintf(pPvt->address,"%c",address+56);
+        if (address >34 && address <58) 
+            sprintf(pPvt->address,"%c",address+62);
+        if (address >57 && address <60) 
+            sprintf(pPvt->address,"%c",address+63);
 	
-      if (address > 0) 
-        sprintf(pPvt->cmdPrefix,"#%s",pPvt->address);
-      if (station < 3 || station > 9) {
-        errlogPrintf("devVacSen::init %s station for CC out of range %d\n",
+        if (address > 0) 
+            sprintf(pPvt->cmdPrefix,"#%s",pPvt->address);
+        if (station < 3 || station > 9) {
+            errlogPrintf("devVacSen::init %s station for CC out of range %d\n",
                    pr->name, station);
-        goto bad;
-      }
-      pPvt->cc=station;
-      pPvt->spt=0;
-      if ( (stationC1 < 1) || (stationC1 > 6) ) {
-	    pPvt->cv1 = 0;
-      } else {
-	    pPvt->cv1=stationC1;
-      }
+            goto bad;
+        }
+        pPvt->cc=station;
+        pPvt->spt=0;
+        if ( (stationC1 < 1) || (stationC1 > 6) ) {
+	        pPvt->cv1 = 0;
+        } else {
+	        pPvt->cv1=stationC1;
+        }
 	
-      if ( (stationC2 < 1) || (stationC2 > 6) ) {
-	    pPvt->cv2 = 0;
-      } else {
-	    pPvt->cv2=stationC2;
-      }
+        if ( (stationC2 < 1) || (stationC2 > 6) ) {
+	        pPvt->cv2 = 0;
+        } else {
+	        pPvt->cv2=stationC2;
+        }
       /* Check The setpoint is in range */
-      if ( spt<1 || spt>pPvt->noSPT ) {
-        errlogPrintf("devVacSen::init %s setpoint out of range %d\n",
+        if ( spt<1 || spt>pPvt->noSPT ) {
+            errlogPrintf("devVacSen::init %s setpoint out of range %d\n",
                    pr->name, spt);
-        goto bad;
-      }
-      pPvt->spt = spt;
+            goto bad;
+        }
+        pPvt->spt = spt;
 
 
-/*    switch (station) {
-	    case 3:
-	    case 4:
-	    	pPvt->cc=station;
-	    	pPvt->cv1=station-2;
-	    	pPvt->cv2=0;
-		break;
-	    case 5:
-	    case 6:
-	    	pPvt->cc=station;
-	    	pPvt->cv1=station-4;
-	    	pPvt->cv2=station-2;
-		break;
-      }	
-*/
     } else if (pPvt->devType == 3) {
-	strcpy(stx,"\02");
-	sprintf(pPvt->address,"%1X",address);
-	if (address < 0 || address > 15) {
-	    errlogPrintf("devVacSen::init %s address out of range %s\n",
+	    strcpy(stx,"\02");
+	    sprintf(pPvt->address,"%1X",address);
+	    if (address < 0 || address > 15) {
+	        errlogPrintf("devVacSen::init %s address out of range %s\n",
                    pr->name, pPvt->address);
-	    goto bad;
-	}
-	sprintf(pPvt->cmdPrefix,"%c%1X",*stx,address);
-
+	        goto bad;
+	    }
+	    sprintf(pPvt->cmdPrefix,"%c%1X",*stx,address);
     }
 
     if (status != asynSuccess) {
-      errlogPrintf("devVacSen::init %s bad link %s\n",
+        errlogPrintf("devVacSen::init %s bad link %s\n",
                    pr->name, pasynUser->errorMessage);
-      goto bad;
+        goto bad;
     }
 
     status = pasynManager->connectDevice(pasynUser,pPvt->PortName,0);
@@ -279,6 +267,8 @@ static long init(vsRecord *pr)
 bad:
     if(pasynUser) pasynManager->freeAsynUser(pasynUser);
     if(pPvt) free(pPvt);
+	errlogPrintf("devVacSen::init %s Problem initializing - quiting \n",
+                   pr->name);
     pr->pact = 1;
     return -1;
 }
@@ -299,41 +289,48 @@ static long readWrite_vs(vsRecord *pr)
 
     if (!pr->pact) {
 
-	memset(pPvt->sendBuf, 0, vacSen_SIZE);
+	    memset(pPvt->sendBuf, 0, vacSen_SIZE);
 	
-    if (pr->chgc) {
-      if (pr->chgc & IG1_FIELD)
-        cmd = (int) pr->ig1s;
-      else if (pr->chgc & IG2_FIELD)
-        cmd = 2 + (int) pr->ig2s;
-      else if (pr->chgc & DGS_FIELD) 
-        cmd = 4 + (int) pr->dgss;
+        if (pr->chgc) {
+            if (pr->chgc & IG1_FIELD)
+                cmd = (int) pr->ig1s;
+            else if (pr->chgc & IG2_FIELD)
+                cmd = 2 + (int) pr->ig2s;
+            else if (pr->chgc & DGS_FIELD) 
+                cmd = 4 + (int) pr->dgss;
 
-      pr->chgc = 0;
+            pr->chgc = 0;
 
-      type = cmdControl;
+            type = cmdControl;
       /* depending of devType offset the commands  by multiples of 10.. */
-      strcpy( pPvt->sendBuf,pPvt->cmdPrefix);
-      strcat( pPvt->sendBuf,ctlCmdString[cmd+(pPvt->devType *10)]);
+            strcpy( pPvt->sendBuf,pPvt->cmdPrefix);
+            strcat( pPvt->sendBuf,ctlCmdString[cmd+(pPvt->devType *10)]);
 
        /*  For MM200 and CC10 there are no commands to send. */
-       if (pPvt->devType == 2 || pPvt->devType == 3)
-        type = cmdRead;
-    }
-    else {
-      type = cmdRead;
-    }
+            if (pPvt->devType == 2 || pPvt->devType == 3)
+                type = cmdRead;
+        }
+        else {
+            type = cmdRead;
+        }
         
-    pPvt->command = type;
+        pPvt->command = type;
  
-    asynPrint(pPvt->pasynUser, ASYN_TRACEIO_DEVICE,
+        asynPrint(pPvt->pasynUser, ASYN_TRACEIO_DEVICE,
           "devVacSen::readWrite %s command %d len=%d string=|%s|\n",
           pr->name, pPvt->command, (int)strlen(pPvt->sendBuf), pPvt->sendBuf);
 	
-	pr->pact = 1;
-	status = pasynManager->queueRequest(pasynUser, 0, 0);
-	if (status != asynSuccess) status = -1;
-      return(status);
+	    pr->pact = 1;
+	    status = pasynManager->queueRequest(pasynUser, 0, 0);
+        if (status != asynSuccess) {
+            asynPrint(pasynUser, ASYN_TRACE_ERROR,
+              "devVacSen::readWrite %s ERROR calling queueRequest status=%d, error=%s\n",
+		        pr->name, status, pasynUser->errorMessage);
+	        status = -1;
+	        pr->pact = 0;
+     	    recGblSetSevr(pr, COMM_ALARM, INVALID_ALARM);
+        }
+        return(status);
     }
 /*  
 *	Now process the data back from the device during callback 
@@ -346,14 +343,14 @@ static long readWrite_vs(vsRecord *pr)
 *	if errCount >0  & < ERR then skip writing to fields.
 */
     if (pPvt->errCount >= pr->err) {
-      recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
-      pr->udf=0;
-      return(0);
+        recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
+        pr->udf=0;
+        return(0);
     }
 
     if ( (pPvt->errCount > 0) && (pPvt->errCount < pr->err) ) {
-      pr->udf=0;
-      return(0);
+        pr->udf=0;
+        return(0);
     } 
  
     pr->dgsr = 0;
@@ -363,224 +360,205 @@ static long readWrite_vs(vsRecord *pr)
 
     /*  for GP 307 and GP350 similar commands */
     if (pPvt->devType < 2) {
-      switch (pPvt->devType) {
+        switch (pPvt->devType) {
 	    case 1:
-          strncpy(data,&pPvt->recBuf[0],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp1 = value;
-          strncpy(data,&pPvt->recBuf[1],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp2 = value;
-          strncpy(data,&pPvt->recBuf[2],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp3 = value;
-          strncpy(data,&pPvt->recBuf[3],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp4 = value;
-          break;
+            strncpy(data,&pPvt->recBuf[0],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp1 = value;
+            strncpy(data,&pPvt->recBuf[1],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp2 = value;
+            strncpy(data,&pPvt->recBuf[2],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp3 = value;
+            strncpy(data,&pPvt->recBuf[3],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp4 = value;
+        break;
 	    case 0:
-          strncpy(data,&pPvt->recBuf[0],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp1 = value;
-          strncpy(data,&pPvt->recBuf[2],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp2 = value;
-          strncpy(data,&pPvt->recBuf[4],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp3 = value;
-          strncpy(data,&pPvt->recBuf[6],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp4 = value;
-          strncpy(data,&pPvt->recBuf[8],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp5 = value;
-          strncpy(data,&pPvt->recBuf[10],2);
-          data[1]=0;
-          sscanf(data,"%d",&value);
-          pr->sp6 = value;
-/*
-          strncpy(data,&pPvt->recBuf[0],13);
-          data[11]=0;
-          sscanf(data,"%d,%d,%d,%d,%d,%d",
-                &pr->sp1, &pr->sp2,  &pr->sp3,
-                &pr->sp4, &pr->sp5, &pr->sp6);
-*/
-          break;
-      }
+            strncpy(data,&pPvt->recBuf[0],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp1 = value;
+            strncpy(data,&pPvt->recBuf[2],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp2 = value;
+            strncpy(data,&pPvt->recBuf[4],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp3 = value;
+            strncpy(data,&pPvt->recBuf[6],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp4 = value;
+            strncpy(data,&pPvt->recBuf[8],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp5 = value;
+            strncpy(data,&pPvt->recBuf[10],2);
+            data[1]=0;
+            sscanf(data,"%d",&value);
+            pr->sp6 = value;
+        break;
+        }
 
       /*  degas is either 0 or 1 */
-      if(pPvt->recBuf[15] == '1')
-	    pr->dgsr = 1;
+        if(pPvt->recBuf[15] == '1')
+	        pr->dgsr = 1;
       /* for 4 pressure values  of the x.xxE-(+)yy */
-      for (i = 2; i<6; i++) {    	
-	    strncpy(data,&pPvt->recBuf[10*i],10);
-	    data[8] = 0;
-	    sscanf(data,"%e",&fvalue);
-	    switch (i) {
-          case 2:
-		    if (fvalue < 1.0) {
-              pr->ig1r = 1;
-              pr->val = (double) fvalue;
-		    }
+        for (i = 2; i<6; i++) {    	
+	        strncpy(data,&pPvt->recBuf[10*i],10);
+	        data[8] = 0;
+	        sscanf(data,"%e",&fvalue);
+	        switch (i) {
+            case 2:
+		        if (fvalue < 1.0) {
+                pr->ig1r = 1;
+                pr->val = (double) fvalue;
+		        }
 		    break;
-          case 3:
-		    if (fvalue < 1.0) {
-              pr->ig2r = 1;
-              pr->val = (double) fvalue;
-		    }
+            case 3:
+		        if (fvalue < 1.0) {
+                pr->ig2r = 1;
+                pr->val = (double) fvalue;
+		        }
 		    break;
-          case 4:
-            pr->cgap = (double) fvalue;;
+            case 4:
+                pr->cgap = (double) fvalue;;
 		    break;
-          case 5:
-            pr->cgbp = (double) fvalue;;
+            case 5:
+                pr->cgbp = (double) fvalue;;
 		    break;
-	    }
-      }
-
+	        }
+        }
+            
     /*  for MM200 commands */
     } else if (pPvt->devType ==2) {
       /*  process the setpoint "xx" */        
-      if(pPvt->recBuf[0] == 'n')
-        pPvt->recBuf[0] = '0';
-      if(pPvt->recBuf[1] == 'n')
-  	    pPvt->recBuf[0] = '0';
-      strncpy(data,&pPvt->recBuf[0],3);
-      data[2] =0;
-      sscanf(data, "%x", &value);
+        if(pPvt->recBuf[0] == 'n')
+            pPvt->recBuf[0] = '0';
+        if(pPvt->recBuf[1] == 'n')
+  	        pPvt->recBuf[0] = '0';
+        strncpy(data,&pPvt->recBuf[0],3);
+        data[2] =0;
+        sscanf(data, "%x", &value);
       /* Set SP# to On/Off values */
-      pr->sp1 = (value & 0x01 && pPvt->spt == 1 ?1:0);
-      pr->sp2 = (value & 0x02 && pPvt->spt == 2 ?1:0);
-      pr->sp3 = (value & 0x04 && pPvt->spt == 3 ?1:0);
-      pr->sp4 = (value & 0x08 && pPvt->spt == 4 ?1:0);
-      /*
-      pr->sp1 = value & (1 << (pPvt->spt-1));
-      pr->sp2 = value & (1 << (pPvt->spt+1));
-      pr->sp3 = value & (1 << (pPvt->spt+3));
-      pr->sp4 = value & (1 << (pPvt->spt+5));
-      */
-
-      for (i = 1; i<8; i++) {
+        pr->sp1 = (value & 0x01 && pPvt->spt == 1 ?1:0);
+        pr->sp2 = (value & 0x02 && pPvt->spt == 2 ?1:0);
+        pr->sp3 = (value & 0x04 && pPvt->spt == 3 ?1:0);
+        pr->sp4 = (value & 0x08 && pPvt->spt == 4 ?1:0);
+        
+        for (i = 1; i<8; i++) {
         /* process the cc,cv1 and (cv2 if exists) n=x.xx-(+)eT */
-        if (i < 4 ) {
-          strncpy(data,&pPvt->recBuf[10*i+2],8);
-          if (data[6] == 'T') {
-            data[6] =0;
-            sscanf(data,"%f%c%x",&fvalue,&sign,&exp);
-          } else {
-            fvalue = 9.9;
-            sign = '+';
-            exp=9; 
-          }
+            if (i < 4 ) {
+                strncpy(data,&pPvt->recBuf[10*i+2],8);
+                if (data[6] == 'T') {
+                    data[6] =0;
+                    sscanf(data,"%f%c%x",&fvalue,&sign,&exp);
+                } else {
+                    fvalue = 9.9;
+                    sign = '+';
+                    exp=9; 
+                }
   	    /* process the setpoint values x.x-(+)e  or x.xx-(+)e*/
-        } else {
-          strncpy(data,&pPvt->recBuf[10*i],10);
-          if (data[3] == '-' || data[3] == '+') {
-            data[5] =0;
-            sscanf(data,"%f%c%x",&fvalue,&sign,&exp);
-          } else if (data[4] == '-' || data[4] == '+'){
-            data[6] =0;
-            sscanf(data,"%f%c%x",&fvalue,&sign,&exp);
-          } else {
-            fvalue = 0;
-            sign = '+';
-            exp=0; 
-          }
-        }
+            } else {
+                strncpy(data,&pPvt->recBuf[10*i],10);
+                if (data[3] == '-' || data[3] == '+') {
+                    data[5] =0;
+                    sscanf(data,"%f%c%x",&fvalue,&sign,&exp);
+                } else if (data[4] == '-' || data[4] == '+'){
+                    data[6] =0;
+                    sscanf(data,"%f%c%x",&fvalue,&sign,&exp);
+                } else {
+                    fvalue = 0;
+                    sign = '+';
+                    exp=0; 
+                }
+            }
 
-        if (sign == '-')
-          exp -= exp*2;
-        fvalue = fvalue * pow(10,exp);
-        switch (i) {
-          case 1:
-            pr->val = (double) fvalue;
- 		    if (fvalue < 1.0)
-              pr->ig1r = 1;
+            if (sign == '-')
+                exp -= exp*2;
+            fvalue = fvalue * pow(10,exp);
+            switch (i) {
+            case 1:
+                pr->val = (double) fvalue;
+ 		        if (fvalue < 1.0)
+                    pr->ig1r = 1;
             break;
-          case 2:
-            pr->cgap = (double) fvalue;
+            case 2:
+                pr->cgap = (double) fvalue;
             break;
-          case 3:
-            pr->cgbp = (double) fvalue;
+            case 3:
+                pr->cgbp = (double) fvalue;
             break;
-          case 4:
-            pr->sp1r = (double) fvalue;
+            case 4:
+                pr->sp1r = (double) fvalue;
             break;
-          case 5:
-            pr->sp2r = (double) fvalue;
+            case 5:
+                pr->sp2r = (double) fvalue;
             break;
-          case 6:
-            /*if (pPvt->noSPT ==2) 
-              pr->sp3r = -1;
-            else */
-              pr->sp3r = (double) fvalue;
+            case 6:
+                pr->sp3r = (double) fvalue;
             break;
-          case 7:
-            /*if (pPvt->noSPT ==2) 
-              pr->sp4r = -1;
-            else */
-              pr->sp4r = (double) fvalue;
+            case 7:
+                pr->sp4r = (double) fvalue;
             break;
-        }	
-      }
+            }	
+        }
 
    /*  for CC10 commands */
     } else if (pPvt->devType ==3){
 
         /*  process the setpoint "xxxx" */        
-	strncpy(data,&pPvt->recBuf[0],2);
-	data[1]=0;
-	sscanf(data,"%d",&value);
-	pr->sp1 = value;
-	strncpy(data,&pPvt->recBuf[1],2);
-	data[1]=0;
-	sscanf(data,"%d",&value);
-	pr->sp2 = value;
-	strncpy(data,&pPvt->recBuf[2],2);
-	data[1]=0;
-	sscanf(data,"%d",&value);
-	pr->sp3 = value;
-	strncpy(data,&pPvt->recBuf[3],2);
-	data[1]=0;
-	sscanf(data,"%d",&value);
-	pr->sp4 = value;
+	    strncpy(data,&pPvt->recBuf[0],2);
+	    data[1]=0;
+	    sscanf(data,"%d",&value);
+	    pr->sp1 = value;
+	    strncpy(data,&pPvt->recBuf[1],2);
+	    data[1]=0;
+	    sscanf(data,"%d",&value);
+	    pr->sp2 = value;
+	    strncpy(data,&pPvt->recBuf[2],2);
+	    data[1]=0;
+	    sscanf(data,"%d",&value);
+	    pr->sp3 = value;
+	    strncpy(data,&pPvt->recBuf[3],2);
+	    data[1]=0;
+	    sscanf(data,"%d",&value);
+	    pr->sp4 = value;
 
 	/* for 4 pressure values  of the abcd where a.b^10-(+)d where c=0 is - and c=1 is + */
-	for (i = 1; i<5; i++) {    	
-	    strncpy(data,&pPvt->recBuf[10*i],10);
-	    data[4] = 0;
-	    sscanf(data,"%2d%c%x",&value,&sign,&exp);
-	    if (sign =='0') 
-		exp -= exp*2;
+	    for (i = 1; i<5; i++) {    	
+	        strncpy(data,&pPvt->recBuf[10*i],10);
+	        data[4] = 0;
+	        sscanf(data,"%2d%c%x",&value,&sign,&exp);
+	        if (sign =='0') 
+		        exp -= exp*2;
 
     	    fvalue = value/10.0 * pow(10,exp);
 
-	    switch (i) {
-		case 1:
+	        switch (i) {
+		    case 1:
         	    pr->val = (double) fvalue;
 		    break;
-		case 2:
+		    case 2:
         	    pr->sp1r = (double) fvalue;
  		    break;
-		case 3:
+		    case 3:
         	    pr->sp2r = (double) fvalue;
 		    break;
-		case 4:
+		    case 4:
         	    pr->sp3r = (double) fvalue;
  		    break;
+	        }
 	    }
-	}
-	pr->sp4 = 0;
- 	pr->ig1r = 1;
+	    pr->sp4 = 0;
+ 	    pr->ig1r = 1;
     }
 
     pr->lprs = log10(pr->val);
@@ -610,33 +588,33 @@ static void devVacSenCallback(asynUser *pasynUser)
  *  For commands issued the sendBuf will have a finite value.
  */
     if (pPvt->command) {
-      devVacSenWriteRead(pasynUser, pPvt->sendBuf,readBuffer,&nread);
+        devVacSenWriteRead(pasynUser, pPvt->sendBuf,readBuffer,&nread);
     
-      if (nread < 1 ) {
-        asynPrint(pasynUser, ASYN_TRACE_ERROR,
+        if (nread < 1 ) {
+            asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   "devVacSen::devVacSenCallback %s Cmd reply too small=%d\n", 
                   pr->name, nread);
-        goto finish;
-      }
+            goto finish;
+        }
       /* for GP307 */
-      if (pPvt->devType == 0) {	
-        if (strcmp(readBuffer,"OK") != 0 ) {
-          asynPrint(pasynUser, ASYN_TRACE_ERROR,
+        if (pPvt->devType == 0) {	
+            if (strcmp(readBuffer,"OK") != 0 ) {
+                asynPrint(pasynUser, ASYN_TRACE_ERROR,
                     "devVacSen::devVacSenCallback %s Cmd reply has error=[%s]\n", 
                     pr->name, readBuffer);
-          recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
-          goto finish;
-        }
+                recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
+                goto finish;
+            }
       /* for GP350 */
-      } else if (pPvt->devType == 1) {	
-        if (readBuffer[0] =='?') {
-          asynPrint(pasynUser, ASYN_TRACE_ERROR,
+        } else if (pPvt->devType == 1) {	
+            if (readBuffer[0] =='?') {
+                asynPrint(pasynUser, ASYN_TRACE_ERROR,
                     "devVacSen::devVacSenCallback %s Cmd reply has error=[%s]\n", 
                     pr->name, readBuffer);
-          recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
-          goto finish;
-        }
-      } 
+                recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
+                goto finish;
+            }
+        } 
     }
 
 /*   Now start the various reads ......
@@ -647,8 +625,8 @@ static void devVacSenCallback(asynUser *pasynUser)
  *   The data will be packed into responseBuf separated by ",".
 
  *   The locations are as follows for GP307 and GP350
- *   the one character doesnt work. so we use "PCS" for GP307 and "PC S" for GP350
- *	307 = x,x,x,x,x,x<cr><lf>     350=# xxxx     <cr>  where x=1 or 0
+ *   we use "PCS" for GP307 and "PC S" for GP350
+ *	 307 = x,x,x,x,x,x<cr><lf>     350=# xxxx     <cr>  where x=1 or 0
  *   responseBuffer[0-14]    = SetPoint Status
  *   responseBuffer[15]      = Degas Status 0 or 1
  *   responseBuffer[20-29]   = IG1 pressure  x.xxE-xx
@@ -666,7 +644,8 @@ static void devVacSenCallback(asynUser *pasynUser)
  *   responseBuffer[60-69]  = SP5/6 pressure  x.x-(+)e or x.xx-(+)e
  *   responseBuffer[70-79]  = SP7/8 pressure  x.x-(+)e or x.xx-(+)e
  
- *   The locations are as follows for CC10 all responses start with <stx><addr><cmd>
+ *   The locations are as follows for CC10 
+ *   all responses start with <stx><addr><cmd>
  *   responseBuffer[0-9]    = SetPoint Status in 4 char of 0 or 1 each
  *   responseBuffer[10-19]  = CC pressure   ppse where p.p-(+)e Torr where s= 0 for - and 1 for +
  *   responseBuffer[20-29]  = SP1 pressure  ppsePPSE p.p-(+)e and P.P-(+)E for low and high
@@ -678,57 +657,57 @@ static void devVacSenCallback(asynUser *pasynUser)
 
     for (i=0;i<8;i++) {
       /*  check for GP307 and GP350 and exit when commands are done */	
-      if (i > 5 && pPvt->devType < 2)  continue;
+        if (i > 5 && pPvt->devType < 2)  continue;
       /*  check for CV2 nonexistance and skip*/	
-      if (pPvt->devType ==2 && i==3 && pPvt->cv2==0) continue;
+        if (pPvt->devType ==2 && i==3 && pPvt->cv2==0) continue;
       /* for MM200 if no of setpoints is only 2 then skip */
       /*if (pPvt->devType ==2 && pPvt->noSPT==2 && i>5) continue;*/
 
       /*  for CC10 read gauges only once and go to setpoints  */
-      if (pPvt->devType ==3  && i>4) continue;
+        if (pPvt->devType ==3  && i>4) continue;
 	
-      strcpy( pPvt->sendBuf,pPvt->cmdPrefix);
-      strcat( pPvt->sendBuf,readCmdString[i+(pPvt->devType *10)]);
+        strcpy( pPvt->sendBuf,pPvt->cmdPrefix);
+        strcat( pPvt->sendBuf,readCmdString[i+(pPvt->devType *10)]);
 
       /* for MM200 we have to add the station number to command */
-      if (pPvt->devType == 2) {
-        switch (i) {
-          case 1:
-            sprintf(addcmd,"%d",pPvt->cc);
+        if (pPvt->devType == 2) {
+            switch (i) {
+            case 1:
+                sprintf(addcmd,"%d",pPvt->cc);
             break;
-          case 2:
-            sprintf(addcmd,"%d",pPvt->cv1);
+            case 2:
+                sprintf(addcmd,"%d",pPvt->cv1);
             break;
-          case 3:
-            sprintf(addcmd,"%d",pPvt->cv2);
+            case 3:
+                sprintf(addcmd,"%d",pPvt->cv2);
             break;
-          case 4:
-            sprintf(addcmd,"%dN",pPvt->cv1);
+            case 4:
+                sprintf(addcmd,"%dN",pPvt->cv1);
             break;
-          case 5:
-            sprintf(addcmd,"%dN",(2 + pPvt->cv1));
+            case 5:
+                sprintf(addcmd,"%dN",(2 + pPvt->cv1));
             break;
-          case 6:
-            sprintf(addcmd,"%dN",(4 + pPvt->cv1));
+            case 6:
+                sprintf(addcmd,"%dN",(4 + pPvt->cv1));
             break;
-          case 7:
-            sprintf(addcmd,"%dN",(6 + pPvt->cv1));
+            case 7:
+                sprintf(addcmd,"%dN",(6 + pPvt->cv1));
             break;
-          default:
-            strcpy(addcmd,"");
+            default:
+                strcpy(addcmd,"");
             break;
+            }
+            strcat(pPvt->sendBuf,addcmd);
         }
-        strcat(pPvt->sendBuf,addcmd);
-      }
 
-      devVacSenWriteRead(pasynUser, pPvt->sendBuf,readBuffer,&nread);
-      if (nread < 1) {
-        asynPrint(pasynUser, ASYN_TRACE_ERROR,
+        devVacSenWriteRead(pasynUser, pPvt->sendBuf,readBuffer,&nread);
+        if (nread < 1) {
+            asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   "devVacSen::devVacSenCallback %s Read reply too small=%d\n", 
                   pr->name, nread);
-        pPvt->errCount++;
-        goto finish;
-      }
+            pPvt->errCount++;
+            goto finish;
+        }
 
 /*
 *   For Problems:
@@ -740,72 +719,70 @@ static void devVacSenCallback(asynUser *pasynUser)
 *     FOR CC10  the reply is "<STX><addr>N000x<CR>
 */              
       /* for GP307 */	
-      if (pPvt->devType ==0) {
-        pstartdata = &readBuffer[nread-5];
-        if (strcmp(pstartdata,"ERROR") == 0 ) {
-          asynPrint(pasynUser, ASYN_TRACE_ERROR,
+        if (pPvt->devType ==0) {
+            pstartdata = &readBuffer[nread-5];
+            if (strcmp(pstartdata,"ERROR") == 0 ) {
+                asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   "devVacSen::devVacSenCallback %s Read reply has error=[%s]\n", 
-                  pr->name, readBuffer);
-          pPvt->errCount++;
-          goto finish;
-        }
-        pstartdata = &readBuffer[0];
+                   pr->name, readBuffer);
+                pPvt->errCount++;
+                goto finish;
+            }
+            pstartdata = &readBuffer[0];
 
       /* for GP350 */
-      } else if (pPvt->devType == 1) {    
-        if (readBuffer[0] =='?') {
-          asynPrint(pasynUser, ASYN_TRACE_ERROR,
+        } else if (pPvt->devType == 1) {    
+            if (readBuffer[0] =='?') {
+                asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   "devVacSen::devVacSenCallback %s Read reply has error=[%s]\n", 
-                  pr->name, readBuffer);
-          pPvt->errCount++;
-          goto finish;
-        }
+                   pr->name, readBuffer);
+                pPvt->errCount++;
+                goto finish;
+            }
         /* strip off the headers */
-        pstartdata = &readBuffer[2]; 
+            pstartdata = &readBuffer[2]; 
 
       /* for MM200 */
-      } else if (pPvt->devType == 2) {      
-        if (readBuffer[1] =='?') {
-          asynPrint(pasynUser, ASYN_TRACE_ERROR,
+        } else if (pPvt->devType == 2) {      
+            if (readBuffer[1] =='?') {
+                asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   "devVacSen::devVacSenCallback %s Read reply has error=[%s]\n", 
-                  pr->name, readBuffer);
-          pPvt->errCount++;
-          goto finish;
-	    }
+                   pr->name, readBuffer);
+                pPvt->errCount++;
+                goto finish;
+	        }
 	    /* Figure out how many relays are there based on reply. */
 	    /* The reply from a RY command is two characters (page 88 Televac manual). */
         /* Each charater is one relay board, one board has 4 relays. */
         /* A charater "n" denotes empty/no relay board. */
         /* Posible options are 0, 4 or 8 relays. */
         /* The APS uses at least one relay board. */
-	    if(i==0) {
-          if(readBuffer[0] == 'n')
-            /*pPvt->noSPT = 2;*/
-            pPvt->noSPT = 4;
-          else 
-            /*pPvt->noSPT = 4;*/
-            pPvt->noSPT = 8;
-	    }
- 	    pstartdata = &readBuffer[0];
+	        if(i==0) {
+                if(readBuffer[0] == 'n')
+                    pPvt->noSPT = 4;
+                else 
+                    pPvt->noSPT = 8;
+	        }
+ 	        pstartdata = &readBuffer[0];
 
 	/* for CC10 */
-      } else if (pPvt->devType == 3) {      
+        } else if (pPvt->devType == 3) {      
             if (readBuffer[2] =='N') {
-		readBuffer[0] = 'Z';
+		        readBuffer[0] = 'Z';
             	asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   "devVacSen::devVacSenCallback %s Read reply has error=[%s]\n", 
-                  pr->name, readBuffer);
-	        pPvt->errCount++;
+                   pr->name, readBuffer);
+	            pPvt->errCount++;
             	goto finish;
-	    }
- 	    pstartdata = &readBuffer[3];
-      }
+	        }
+ 	        pstartdata = &readBuffer[3];
+        }
 
       /* for Degas alone move the data by 5 to accomadate GP307 PCS */
-      if (pPvt->devType < 2 && i==1)
-	    strcpy(&responseBuffer[15],pstartdata);
-      else
-	    strcpy(&responseBuffer[10*i],pstartdata);
+        if (pPvt->devType < 2 && i==1)
+	        strcpy(&responseBuffer[15],pstartdata);
+        else
+	        strcpy(&responseBuffer[10*i],pstartdata);
 	
     }
     /* for successful read set errCount=0 */
@@ -816,7 +793,8 @@ static void devVacSenCallback(asynUser *pasynUser)
  */
 finish:
     memset(pPvt->recBuf, 0, vacSen_BUFFER_SIZE);
-    memcpy(pPvt->recBuf, responseBuffer, vacSen_BUFFER_SIZE);
+    if (pPvt->errCount == 0)
+	    memcpy(pPvt->recBuf, responseBuffer, vacSen_BUFFER_SIZE);
     dbScanLock(pr);
     (*prset->process)(pr);
     dbScanUnlock(pr);
@@ -835,6 +813,14 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
     pPvt->status = pPvt->pasynOctet->write(pPvt->octetPvt, pasynUser, 
                             sendBuffer, strlen(sendBuffer), &nwrite);
 
+
+    if (pPvt->status != asynSuccess) {
+	    asynPrint(pasynUser, ASYN_TRACE_ERROR,
+              "devVacSen::devVacSenWriteRead %s pasynOctet->write, status=%d, error=%s\n",
+		pr->name, pPvt->status, pasynUser->errorMessage);
+    }
+
+
     asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
               "devVacSen::devVacSenWriteRead %s nwrite=%ld output=[%s]\n",
               pr->name, nwrite, sendBuffer);
@@ -843,6 +829,12 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
                             readBuffer, vacSen_SIZE, &nwrite, &eomReason);
 
     *nread = nwrite;
+
+    if (pPvt->status != asynSuccess) {
+	    asynPrint(pasynUser, ASYN_TRACE_ERROR,
+              "devVacSen::devVacSenWriteRead %s pasynOctet->read, status=%d, error=%s\n",
+		pr->name, pPvt->status, pasynUser->errorMessage);
+    }
 
     asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
               "devVacSen::devVacSenWriteRead %s nread=%d input=[%s]\n",
