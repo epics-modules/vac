@@ -26,15 +26,17 @@ vacAppVXInclude.dbd
 
 August 2007.   Mohan Ramanathan
 
-At this time the module has support for vacuum sensors GP307, GP350, Televac MM200 and Pfifier TPG26x
+At this time the module has support for vacuum sensors GP307, GP350, Televac MM200
+October 2014:
+The new Televac controller CC10 has been aded to the Vac Sensor.
 
-For the Ion pumps we have support for PI Digitel 500/1500 and the MPC ( gamma One)
+For the Ion pumps we have support for PI Digitel 500/1500 and the MPC (Gamma One)
 
 Support for newer devices will be added at a later date.
 
 The generic record "vs" is for the vac sensors. this record and 
 the associated devVanSen supports the following gauges:
-	GP307,  GP350 and MM200 (televac)
+	GP307,  GP350,  MM200 (Televac) and CC10 (Televac)
 	
 The startup file  has the following substitution:
 The database has a field called "TYPE" which has to be set correctly. 
@@ -43,7 +45,9 @@ vs.db has various substitions for startup file.
   For RS485 Address has to be a positive number
 	for GP350 has to be between 1 and 31 of the form "AA"
  	for MM200 has to be between 0 and 59 of the form [0..9..A..Z..a..z]
+	for CC10 has to be between 0 and F  in HEX
       Also for GP350 the prefix is "#" so we will force for MM200 the same!!
+ 	  for CC10  the prefix is <STX>  = hex 02
 
 excerpts for an example st.cmd file:
 
@@ -71,6 +75,10 @@ dbLoadRecords("db/vs.db","P=MR:,GAUGE=VS3,PORT=serial3,ADDR=0,DEV=MM200,STN=3 1 
 dbLoadRecords("db/vs.db","P=MR:,GAUGE=VS4,PORT=serial3,ADDR=0,DEV=MM200,STN=5 1 0 2")
 tyGSAsynInit("serial3",  "UART0", 2, 9600,'N',1,8,'N',"\r","\r")  
 
+#  For CC10 the Televac has a diode and the cold cathode integrated into one unit.
+#  It has three setpoints which are being read
+dbLoadRecords("db/vs.db", "P=MR:,GAUGE=VS1,PORT=serial3,ADDR=1,DEV=CC10,STN=0")
+tyGSAsynInit("serial3",  "UART0", 2, 9600,'N',1,8,'N',"\r","\r")  
 
 
 
@@ -86,4 +94,5 @@ tyGSAsynInit("serial5",  "UART0", 4, 9600,'E',1,7,'N',"\n\r","\r")
 #  Then the corrresponding setpoints are odd and even for the respective pumps.
 dbLoadRecords("db/digitelPump.db", "P=MR:,PUMP=IP2,PORT=serial6,ADDR=5,DEV=MPC,STN=1")
 dbLoadRecords("db/digitelPump.db", "P=MR:,PUMP=IP3,PORT=serial6,ADDR=5,DEV=MPC,STN=2")
-tyGSAsynInit("serial6",  "UART0", 5, 9600,'N',1,8,'N',"\r","\r")  
+tyGSAsynInit("serial6",  "UART0", 5, 9600,'N',1,8,'N',"\r","\r") 
+
