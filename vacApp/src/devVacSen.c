@@ -21,7 +21,7 @@ Revision - 7/30/2014
         Single device which covers the range of 10^3  to 10^-9 in one gauge
 
     Fixed connecton problems with MOXA
-        will work crrectly when MOXA is rebooted now
+        will work correctly when MOXA is rebooted now
 */
 
 #include <stdlib.h>
@@ -51,7 +51,8 @@ Revision - 7/30/2014
 
 #define vacSen_BUFFER_SIZE 80
 #define vacSen_SIZE 15
-#define vacSen_TIMEOUT 1.0
+#define vacSen_READ_SIZE 40
+#define vacSen_TIMEOUT 3.0
 
 /* from vsRecord.c*/
 #define IG1_FIELD	0x0001
@@ -309,8 +310,8 @@ static long readWrite_vs(vsRecord *pr)
        /*  For MM200 and CC10 there are no commands to send. */
             if (pPvt->devType == 2 || pPvt->devType == 3)
                 type = cmdRead;
-        }
-        else {
+
+        }  else {
             type = cmdRead;
         }
         
@@ -514,7 +515,8 @@ static long readWrite_vs(vsRecord *pr)
    /*  for CC10 commands */
     } else if (pPvt->devType ==3){
 
-        /*  process the setpoint "xxxx" */        
+        /*  process the setpoint "xxxx" */
+              
 	    strncpy(data,&pPvt->recBuf[0],2);
 	    data[1]=0;
 	    sscanf(data,"%d",&value);
@@ -557,8 +559,6 @@ static long readWrite_vs(vsRecord *pr)
  		    break;
 	        }
 	    }
-	    pr->sp4 = 0;
- 	    pr->ig1r = 1;
     }
 
     pr->lprs = log10(pr->val);
@@ -574,7 +574,7 @@ static void devVacSenCallback(asynUser *pasynUser)
 {
     dbCommon *pr = (dbCommon *)pasynUser->userPvt;
     devVacSenPvt *pPvt = (devVacSenPvt *)pr->dpvt;
-    char readBuffer[vacSen_SIZE];
+    char readBuffer[vacSen_READ_SIZE];
     char responseBuffer[vacSen_BUFFER_SIZE];
     struct rset *prset = (struct rset *)(pr->rset);
     int i, nread;
@@ -701,9 +701,9 @@ static void devVacSenCallback(asynUser *pasynUser)
         }
 
         devVacSenWriteRead(pasynUser, pPvt->sendBuf,readBuffer,&nread);
-        if (nread < 1) {
+        if (nread < 1 || nread > 14) {
             asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                  "devVacSen::devVacSenCallback %s Read reply too small=%d\n", 
+                  "devVacSen::devVacSenCallback %s Read reply too small/too large =%d\n", 
                   pr->name, nread);
             pPvt->errCount++;
             goto finish;
@@ -826,13 +826,19 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
               pr->name, nwrite, sendBuffer);
     
     pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser, 
-                            readBuffer, vacSen_SIZE, &nwrite, &eomReason);
+                            readBuffer, vacSen_READ_SIZE, &nwrite, &eomReason);
 
     *nread = nwrite;
 
     if (pPvt->status != asynSuccess) {
 	    asynPrint(pasynUser, ASYN_TRACE_ERROR,
               "devVacSen::devVacSenWriteRead %s pasynOctet->read, status=%d, error=%s\n",
+		pr->name, pPvt->status, pasynUser->errorMessage);
+    }
+    if (nwrite == vacSen_READ_SIZE ) {
+        pPvt->status = pPvt->pasynOctet->flush(pPvt->octetPvt, pasynUser);
+	    asynPrint(pasynUser, ASYN_TRACE_ERROR,
+              "devVacSen::devVacSenWriteRead %s pasynOctet->flush, status=%d, error=%s\n",
 		pr->name, pPvt->status, pasynUser->errorMessage);
     }
 
