@@ -1,2 +1,2 @@
 device(digitel,	INST_IO, devDigitelPump, "asyn DigitelPump")
-include "asyn.dbd"
+#include "asyn.dbd"
