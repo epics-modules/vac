@@ -1,0 +1,14 @@
+# ### vacSensor.iocsh ###
+
+#- ###################################################
+#- PREFIX         - IOC Prefix
+#- INSTANCE       - Instance Prefix
+#- PORT           - Asyn serial port
+#- DEV            - Device model
+#- STN            - STN field, Optional for GP307 and GP350
+#- VAC            - Location of vac module
+#- ADDR           - Optional: Asyn address
+#-                  Default: 0
+#- ###################################################
+
+iocshLoad("$(VAC)/iocsh/vacSensor_$(DEV).iocsh")

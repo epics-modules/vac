@@ -1,0 +1,14 @@
+# ### digitelPump.iocsh ###
+
+#- ###################################################
+#- PREFIX         - IOC Prefix
+#- INSTANCE       - Instance Prefix
+#- PORT           - Asyn serial port
+#- DEV            - Device model
+#- STN            - STN field
+#- VAC            - Location of vac module
+#- ADDR           - Optional: Asyn address
+#-                  Default: 0
+#- ###################################################
+
+iocshLoad("$(VAC)/iocsh/digitelPump_$(DEV).iocsh")

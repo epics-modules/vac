@@ -53,8 +53,6 @@ vacApp_SRCS_vxWorks += vacAppVX_registerRecordDeviceDriver.cpp
 #-----------------------------------------------------------------------------
 # Include application sources
 vacApp_SRCS_DEFAULT += vacAppMain.cpp
-# We'll use the original copy in IP
-#vacApp_SRCS_vxWorks += tyGSAsynInit.c
 vacApp_SRCS_vxWorks += -nil-
 
 #-----------------------------------------------------------------------------
