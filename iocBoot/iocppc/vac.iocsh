@@ -1,0 +1,29 @@
+#The following command is for a Greenspring VIP616-01 carrier
+ipacAddVIPC616_01("0x6000,B0000000")
+#The following is for a Greenspring TVME200 carrier
+#ipacAddTVME200("602fb0")
+
+#ipacReport(2)
+
+#The following initialize a Greenspring octalUart in the second IP slot
+tyGSOctalDrv(1)
+tyGSOctalModuleInit("UART0","232", 0x80, 0, 0)
+#tyGSOctalModuleInit("UART1","232", 0x90, 0, 1)
+
+tyGSOctalDevCreateAll("serial", "UART0", 1000, 1000)
+
+asynSetTraceMask("serial0",1,0x1)
+
+cd asyn
+dbLoadRecords("db/asynRecord.db", "P=MR:,R=asyn1,PORT=serial0,ADDR=0,OMAX=256, IMAX=256")
+
+iocshLoad("$(VAC)/iocsh/vacSensor.iocsh", "PREFIX=MR:, INSTANCE=VS1, PORT=serial1, ADDR=0, DEV=GP307")
+iocshLoad("$(VAC)/iocsh/vacSensor.iocsh", "PREFIX=MR:, INSTANCE=VS2, PORT=serial2, ADDR=0, DEV=GP350")
+
+iocshLoad("$(VAC)/iocsh/vacSensor.iocsh", "PREFIX=MR:, INSTANCE=VS3, PORT=serial3, ADDR=0, DEV=MM200, STN=3")
+iocshLoad("$(VAC)/iocsh/vacSensor.iocsh", "PREFIX=MR:, INSTANCE=VS4, PORT=serial3, ADDR=0, DEV=MM200, STN=4")
+
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=MR:, INSTANCE=IP1, PORT=serial4, ADDR=0, DEV=D500, STN=2")
+
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=MR:, INSTANCE=IP2, PORT=serial5, ADDR=5, DEV=MPC, STN=1")
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=MR:, INSTANCE=IP3, PORT=serial5, ADDR=5, DEV=MPC, STN=2")

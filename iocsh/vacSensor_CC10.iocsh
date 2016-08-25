@@ -1,0 +1,10 @@
+asynSetOption("$(PORT)", -1, "baud",    "9600")
+asynSetOption("$(PORT)", -1, "bits",    "8")
+asynSetOption("$(PORT)", -1, "stop",    "1")
+asynSetOption("$(PORT)", -1, "parity",  "none")
+asynSetOption("$(PORT)", -1, "clocal",  "Y")
+asynSetOption("$(PORT)", -1, "crtscts", "N")
+asynOctetSetInputEos( "$(PORT)", -1, "\r")
+asynOctetSetOutputEos("$(PORT)", -1, "\r")
+
+dbLoadRecords("$(VAC)/vacApp/Db/vs.db", "P=$(PREFIX),GAUGE=$(INSTANCE),PORT=$(PORT),ADDR=$(ADDR=0),DEV=CC10,STN=$(STN)")
