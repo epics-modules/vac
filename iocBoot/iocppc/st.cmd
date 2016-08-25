@@ -15,10 +15,10 @@ cd top
 dbLoadDatabase("dbd/vacAppVX.dbd")
 vacAppVX_registerRecordDeviceDriver(pdbbase)
 
+cd startup
 
 iocsh("vac.iocsh")
 
-cd startup
 iocInit()
 
 ## Start any sequence programs
