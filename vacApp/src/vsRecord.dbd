@@ -7,7 +7,7 @@ menu(vsTYPE) {
 	choice(vsTYPE_GP350,"GP350")
 	choice(vsTYPE_MM200,"MM200")
 	choice(vsTYPE_CC10,"CC10")
-
+	choice(vsTYPE_MX200,"MX200")
 }
 recordtype(vs) {
 	include "dbCommon.dbd" 

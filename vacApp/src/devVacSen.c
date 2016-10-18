@@ -14,14 +14,25 @@ Revision 1.0  - 4/1/2013
 	removed the predetermined combination of CC and CV
 	Explicitly state the station numbers in the startup file
 	order is :  CC,CV1,CV2,SP1
-	For setpoint lets assume odd or even based on the first setpoint.
+	For setpoint lets assume odd or even based on the first setpoint 
+	and has to 1 or 2.
 	
+
 Revision - 7/30/2014
     Added CC-10  from Televac  similar to MM200
         Single device which covers the range of 10^3  to 10^-9 in one gauge
 
     Fixed connecton problems with MOXA
         will work correctly when MOXA is rebooted now
+
+Revision - 3/22/2016
+    Added support for MX200 very similar to MM200 but the comm and front panels 
+    are different. Can handle high speed comm speeds of 115K baud and also USB.
+    Will use the options similar to MM200 for configuration and label this MX200
+    
+    This version only supports 4 setpoints per CC 
+    based on the starting no of the setpoint its either even or odd..
+
 */
 
 #include <stdlib.h>
@@ -51,7 +62,7 @@ Revision - 7/30/2014
 
 #define vacSen_BUFFER_SIZE 80
 #define vacSen_SIZE 15
-#define vacSen_READ_SIZE 40
+#define vacSen_READ_SIZE 55
 #define vacSen_TIMEOUT 3.0
 
 /* from vsRecord.c*/
@@ -127,12 +138,11 @@ static long init(vsRecord *pr)
     pPvt->PortName = port;
     pPvt->devType = pr->type;
     i = sscanf(userParam,"%1d %1d %1d %1d",&station,&stationC1,&stationC2,&spt);
-    if (pPvt->devType == 2) {
-        switch (i) {
-	    case 1:
-	/* backward compatibility with old hard-coded station assignments */
-         if ( pPvt->devType == 2 ) {
-            switch (station) {
+    pPvt->noSPT = 8;
+
+/*  for MM200 for backward compatability when only CC station is defined... */
+    if (pPvt->devType == 2 && i  == 1) {
+        switch (station) {
             case 3:
             case 4:
                 stationC1 = station-2;
@@ -147,18 +157,9 @@ static long init(vsRecord *pr)
                 printf("devVacSen::init %s station out of range %d\n",
                                                   pr->name, station);
                 goto bad;
-            }
-            spt = stationC1;
         }
-	    case 4: /* This is a good configuration with each station specified */
-		break;
-	    default:
-		    printf("Invalid dbLoadRecords parameter for vs.db\n");
-		    printf("Valid configuration is either 1 or 4 parameters for STN\n");
-		break;
-        }
+        spt = stationC1;
     }
-    pPvt->noSPT = 4;
     
 
 /*
@@ -167,14 +168,18 @@ static long init(vsRecord *pr)
 *	GP350	=	1
 *	MM200	=	2
 *	CC10	=	3
+*   	MX200   =   4
 *
-*  If address is 0 then it is RS232 
+*  If address is 0 then it is RS232
+*
 *  For RS485 Address has to be a positive number
 *	for GP350 has to be between 1 and 31 of the form "AA"
 * 	for MM200 has to be between 0 and 59 of the form [0..9..A..Z..a..z]
 *   for GP350 the prefix is "#" so we will force for MM200 the same!!
 *	for CC10 has to be between 0 and F  in HEX
 *	for CC10  the prefix is <STX>  = hex 02
+*   for MX200 has to be between 00 and 99 in decimal 2 digit
+*   for MX200  the prefix is "*"
 */
     if ( pPvt->devType == 1) {
         if (address > 0) 
@@ -223,8 +228,11 @@ static long init(vsRecord *pr)
         } else {
 	        pPvt->cv2=stationC2;
         }
-      /* Check The setpoint is in range */
-        if ( spt<1 || spt>pPvt->noSPT ) {
+      /* Check the setpoint is in range 
+        if ( spt<1 || spt > pPvt->noSPT ) { */
+        
+      /* at this time to read all 8 spt let the first be either 1 or 2 */
+        if ( spt<1 || spt > 2 ) {        
             errlogPrintf("devVacSen::init %s setpoint out of range %d\n",
                    pr->name, spt);
             goto bad;
@@ -241,6 +249,47 @@ static long init(vsRecord *pr)
 	        goto bad;
 	    }
 	    sprintf(pPvt->cmdPrefix,"%c%1X",*stx,address);
+
+
+    } else if (pPvt->devType == 4) {
+        if (address < 0 || address > 99) {
+            errlogPrintf("devVacSen::init %s address out of range %s\n",
+                   pr->name, pPvt->address);
+            goto bad;
+        }
+        if (address > 0) {
+            sprintf(pPvt->address,"%02X",address);
+            sprintf(pPvt->cmdPrefix,"*%s",pPvt->address);
+        }
+        
+        if (station < 3 || station > 9) {
+            errlogPrintf("devVacSen::init %s station for CC out of range %d\n",
+                   pr->name, station);
+            goto bad;
+        }
+        pPvt->cc=station;
+        pPvt->spt=0;
+        if ( (stationC1 < 1) || (stationC1 > 6) ) {
+	        pPvt->cv1 = 0;
+        } else {
+	        pPvt->cv1=stationC1;
+        }
+	
+        if ( (stationC2 < 1) || (stationC2 > 6) ) {
+	        pPvt->cv2 = 0;
+        } else {
+	        pPvt->cv2=stationC2;
+        }
+      /* Check the setpoint is in range 
+        if ( spt<1 || spt > pPvt->noSPT ) { */
+        
+      /* at this time to read all 8 spt let the first be either 1 or 2 */
+        if ( spt<1 || spt > 2 ) {        
+            errlogPrintf("devVacSen::init %s setpoint out of range %d\n",
+                   pr->name, spt);
+            goto bad;
+        }
+        pPvt->spt = spt;
     }
 
     if (status != asynSuccess) {
@@ -307,8 +356,8 @@ static long readWrite_vs(vsRecord *pr)
             strcpy( pPvt->sendBuf,pPvt->cmdPrefix);
             strcat( pPvt->sendBuf,ctlCmdString[cmd+(pPvt->devType *10)]);
 
-       /*  For MM200 and CC10 there are no commands to send. */
-            if (pPvt->devType == 2 || pPvt->devType == 3)
+       /*  For MM200, MX200 and CC10 there are no commands to send. */
+            if (pPvt->devType == 2 || pPvt->devType == 3 || pPvt->devType == 4)
                 type = cmdRead;
 
         }  else {
@@ -337,6 +386,7 @@ static long readWrite_vs(vsRecord *pr)
 *	Now process the data back from the device during callback 
 *	for GP307 and GP350 pack the data differently than for MM200
 *	and for CC10  similar to MM200 but different
+*   Mx200 is simliar to MM200 but different
 *
 *	check the error count.
 *	if errCount = 0 then process normally.  
@@ -448,12 +498,22 @@ static long readWrite_vs(vsRecord *pr)
         strncpy(data,&pPvt->recBuf[0],3);
         data[2] =0;
         sscanf(data, "%x", &value);
-      /* Set SP# to On/Off values */
+      /* Set SP# to On/Off values This code is wrong!! reads as is...
         pr->sp1 = (value & 0x01 && pPvt->spt == 1 ?1:0);
         pr->sp2 = (value & 0x02 && pPvt->spt == 2 ?1:0);
         pr->sp3 = (value & 0x04 && pPvt->spt == 3 ?1:0);
         pr->sp4 = (value & 0x08 && pPvt->spt == 4 ?1:0);
-        
+*/
+
+/*      We need to check the starting spt and offset by 2 each for 4 spts
+        correcponding to the values we read on the setpoints.
+*/      
+        pr->sp1 = (value >> (pPvt->spt-1)) & 1;
+        pr->sp2 = (value >> (pPvt->spt+1)) & 1;
+        pr->sp3 = (value >> (pPvt->spt+3)) & 1;
+	pr->sp4 = (value >> (pPvt->spt+5)) & 1;
+
+
         for (i = 1; i<8; i++) {
         /* process the cc,cv1 and (cv2 if exists) n=x.xx-(+)eT */
             if (i < 4 ) {
@@ -559,6 +619,59 @@ static long readWrite_vs(vsRecord *pr)
  		    break;
 	        }
 	    }
+
+    /*  for MX200 commands */ 
+    } else if (pPvt->devType ==4) {
+      /*  process the setpoint "xx" */        
+        strncpy(data,&pPvt->recBuf[0],3);
+        data[2] =0;
+        sscanf(data, "%x", &value);
+/*      We need to check the starting spt and offset by 2 each for 4 spts
+        correcponding to the values we read on the setpoints.
+*/      
+        pr->sp1 = (value >> (pPvt->spt-1)) & 1;
+        pr->sp2 = (value >> (pPvt->spt+1)) & 1;
+        pr->sp3 = (value >> (pPvt->spt+3)) & 1;
+	    pr->sp4 = (value >> (pPvt->spt+5)) & 1;
+        
+        for (i = 1; i<8; i++) {
+        /* process the cc,cv1 and cv2   = ppsee
+             stands for p.p x 10^see where s of 0 =- 1 =+ 
+        and the setpoint of ppseePPSEE  where we ingore the second values */
+ 	        strncpy(data,&pPvt->recBuf[10*i],10);
+	        data[5] = 0;
+	        sscanf(data,"%2d%c%2d",&value,&sign,&exp);
+	        if (sign =='0') 
+		        exp -= exp*2;
+		        
+    	    fvalue = value/10.0 * pow(10,exp);
+
+            switch (i) {
+            case 1:
+                pr->val = (double) fvalue;
+ 		        if (fvalue < 1.0)
+                    pr->ig1r = 1;
+            break;
+            case 2:
+                pr->cgap = (double) fvalue;
+            break;
+            case 3:
+                pr->cgbp = (double) fvalue;
+            break;
+            case 4:
+                pr->sp1r = (double) fvalue;
+            break;
+            case 5:
+                pr->sp2r = (double) fvalue;
+            break;
+            case 6:
+                pr->sp3r = (double) fvalue;
+            break;
+            case 7:
+                pr->sp4r = (double) fvalue;
+            break;
+            }	
+        }
     }
 
     pr->lprs = log10(pr->val);
@@ -577,9 +690,10 @@ static void devVacSenCallback(asynUser *pasynUser)
     char readBuffer[vacSen_READ_SIZE];
     char responseBuffer[vacSen_BUFFER_SIZE];
     struct rset *prset = (struct rset *)(pr->rset);
-    int i, nread;
+    int i, nread, j;
     char *pstartdata=0;
     char addcmd[3];
+    char *value;
 
     pPvt->pasynUser->timeout = vacSen_TIMEOUT;
 
@@ -619,8 +733,8 @@ static void devVacSenCallback(asynUser *pasynUser)
 
 /*   Now start the various reads ......
  *   make sure to check the devType and send the correct set of commands
- *   devType ->  0 = GP307, 1=GP350, 2=MM200    3=CC10
- *   GP307 and GP350 have only 6 commands while MM200 has 8 commands
+ *   devType ->  0 = GP307, 1=GP350, 2=MM200    3=CC10 4=MX200
+ *   GP307 and GP350 have only 6 commands while MM200/MX200 has 8 commands
  *   CC10  has only 5 commands
  *   The data will be packed into responseBuf separated by ",".
 
@@ -652,14 +766,27 @@ static void devVacSenCallback(asynUser *pasynUser)
  *   responseBuffer[30-39]  = SP2 pressure  ppsePPSE p.p-(+)e and P.P-(+)E for low and high
  *   responseBuffer[40-49]  = SP3 pressure  ppsePPSE p.p-(+)e and P.P-(+)E for low and high
 
+ *   The locations are as follows for MX200
+ *   responseBuffer[0-9]    = 01=xx 02=xx ...08=xx where xx can be ON OF 00
+ *   responseBuffer[10-19]  = CC pressure  ppsee where p.p x 10^see wher s of 0 =- 1 =+
+ *   responseBuffer[20-29   = CG1 pressure 
+ *   responseBuffer[30-39]  = CG2 pressure 
+ *   responseBuffer[40-49]  = SP1/2 pressure  ppseePPSEEZZ p.p-(+)e and P.P-(+)E for low and high
+ *   responseBuffer[50-59]  = SP3/4 pressure  ppseePPSEEZZ p.p-(+)e and P.P-(+)E for low and high
+ *   responseBuffer[60-69]  = SP5/6 pressure  ppseePPSEEZZ p.p-(+)e and P.P-(+)E for low and high
+ *   responseBuffer[70-79]  = SP7/8 pressure  ppseePPSEEZZ p.p-(+)e and P.P-(+)E for low and high
+
+
 */ 
     memset(responseBuffer, 0, vacSen_BUFFER_SIZE);
 
     for (i=0;i<8;i++) {
       /*  check for GP307 and GP350 and exit when commands are done */	
         if (i > 5 && pPvt->devType < 2)  continue;
+
       /*  check for CV2 nonexistance and skip*/	
         if (pPvt->devType ==2 && i==3 && pPvt->cv2==0) continue;
+
       /* for MM200 if no of setpoints is only 2 then skip */
       /*if (pPvt->devType ==2 && pPvt->noSPT==2 && i>5) continue;*/
 
@@ -682,16 +809,16 @@ static void devVacSenCallback(asynUser *pasynUser)
                 sprintf(addcmd,"%d",pPvt->cv2);
             break;
             case 4:
-                sprintf(addcmd,"%dN",pPvt->cv1);
+                sprintf(addcmd,"%dN",pPvt->spt);
             break;
             case 5:
-                sprintf(addcmd,"%dN",(2 + pPvt->cv1));
+                sprintf(addcmd,"%dN",(2 + pPvt->spt));
             break;
             case 6:
-                sprintf(addcmd,"%dN",(4 + pPvt->cv1));
+                sprintf(addcmd,"%dN",(4 + pPvt->spt));
             break;
             case 7:
-                sprintf(addcmd,"%dN",(6 + pPvt->cv1));
+                sprintf(addcmd,"%dN",(6 + pPvt->spt));
             break;
             default:
                 strcpy(addcmd,"");
@@ -700,8 +827,41 @@ static void devVacSenCallback(asynUser *pasynUser)
             strcat(pPvt->sendBuf,addcmd);
         }
 
+      /* for MX200 we have to add the station number to command */
+        if (pPvt->devType == 4) {
+            switch (i) {
+            case 1:
+                sprintf(addcmd,"%02d",pPvt->cc);
+            break;
+            case 2:
+                sprintf(addcmd,"%02d",pPvt->cv1);
+            break;
+            case 3:
+                sprintf(addcmd,"%02d",pPvt->cv2);
+            break;
+            case 4:
+                sprintf(addcmd,"%d",pPvt->spt);
+            break;
+            case 5:
+                sprintf(addcmd,"%d",(2 + pPvt->spt));
+            break;
+            case 6:
+                sprintf(addcmd,"%d",(4 + pPvt->spt));
+            break;
+            case 7:
+                sprintf(addcmd,"%d",(6 + pPvt->spt));
+            break;
+            default:
+                strcpy(addcmd,"");
+            break;
+            }
+            strcat(pPvt->sendBuf,addcmd);
+        }
+
+
+/*  Send the command to the device and read the response */
         devVacSenWriteRead(pasynUser, pPvt->sendBuf,readBuffer,&nread);
-        if (nread < 1 || nread > 14) {
+        if (nread < 1 || nread > 50) {
             asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   "devVacSen::devVacSenCallback %s Read reply too small/too large =%d\n", 
                   pr->name, nread);
@@ -717,6 +877,7 @@ static void devVacSenCallback(asynUser *pasynUser)
 *     For GP350 lets strip the leading character and the space [*]
 *     For MM200 the reply is "x?" where x=ACDLNORS
 *     FOR CC10  the reply is "<STX><addr>N000x<CR>
+*     For MX200  the reply is "0N000x"
 */              
       /* for GP307 */	
         if (pPvt->devType ==0) {
@@ -765,7 +926,7 @@ static void devVacSenCallback(asynUser *pasynUser)
 	        }
  	        pstartdata = &readBuffer[0];
 
-	/* for CC10 */
+	  /* for CC10 */
         } else if (pPvt->devType == 3) {      
             if (readBuffer[2] =='N') {
 		        readBuffer[0] = 'Z';
@@ -776,6 +937,37 @@ static void devVacSenCallback(asynUser *pasynUser)
             	goto finish;
 	        }
  	        pstartdata = &readBuffer[3];
+  
+      /* for MX200 */
+        } else if (pPvt->devType == 4) {      
+            if (readBuffer[1] =='N') {
+                asynPrint(pasynUser, ASYN_TRACE_ERROR,
+                  "devVacSen::devVacSenCallback %s Read reply has error=[%s]\n", 
+                   pr->name, readBuffer);
+                pPvt->errCount++;
+                goto finish;
+	        }
+	    /* The device will send all the relay status in one shot. */
+	    /*  strip the status of the relays and send only data */
+	    /*  Result = 0 for OFF or 1 for ON non existant is also 0 */
+	    /*  Send back 8 characters of either 0 or 1 */ 
+	    /*  lets check starting at 4th char every 6th char for */
+	    /*  either "N"  for ON or "F" for OFF  or "0"  for none */
+	    /*  Then load a 1 or 0  as abit for total 8 bits...*/
+	        if(i==0) {
+                value =0;
+                for (j=0;i<8;j++) {
+                    if (readBuffer[4 +j*6] == 'N')
+                        value += 1 << j;
+                }
+                *readBuffer = sprintf("%2x", value);
+
+        /* For setpoint readbacks the response is 12 character */
+        /* The last two characters are station no and can be striped off  */
+	        } else if ( i >3 ) {
+	            readBuffer[10] = 0;
+	        }
+ 	        pstartdata = &readBuffer[0];
         }
 
       /* for Degas alone move the data by 5 to accomadate GP307 PCS */
