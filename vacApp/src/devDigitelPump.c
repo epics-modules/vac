@@ -19,10 +19,6 @@
 *   10-02-2014   Fixed connecton problems with MOXA terminal server
 *        will work correctly when MOXA is rebooted now
 *
-*   revision: 03
-*   11-16-2015  Added null at end of readbuffer to make sure no overflow 
-*               when writing to responsebuf.  Problme with not setting
-*               proper EOS  in asyn.
 *
 */
 
@@ -819,18 +815,12 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
 	/* for MPC */	
 	} else  {    
     	    if(readBuffer[3]=='O' && readBuffer[4] == 'K') {
-/*
-*       Set the last character of the readbuffer to nul to avoid overflow of buffer 
-*/
-
         	if (nread < 12 ) {
             	    strcpy(readBuffer, "OK");
             	    pstartdata = &readBuffer[0];
-            	    readBuffer[11] = '\0';
         	} else {
             	    /* strip off the header cmds */
             	    pstartdata = &readBuffer[9];  
-           	        readBuffer[38] = '\0';
        		}
     	    } else {
             	asynPrint(pasynUser, ASYN_TRACE_ERROR,
