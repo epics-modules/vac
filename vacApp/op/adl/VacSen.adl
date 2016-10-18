@@ -1,6 +1,6 @@
 
 file {
-	name="/home/oxygen6/MOHAN/adl/VacSen.adl"
+	name="/home/phoebus/MLS/iocapps1/R3.14.12.5/ioc/vacuum/opi/VacSen.adl"
 	version=030108
 }
 display {
@@ -196,116 +196,6 @@ composite {
 		calc="(A==2) & !(B <-0.9)"
 		chan="$(P)$(GAUGE).TYPE"
 		chanB="$(P)$(GAUGE).SP3R"
-	}
-}
-composite {
-	object {
-		x=6
-		y=191
-		width=167
-		height=46
-	}
-	"composite name"=""
-	children {
-		"text update" {
-			object {
-				x=6
-				y=191
-				width=125
-				height=21
-			}
-			monitor {
-				chan="$(P)$(GAUGE).SP1R"
-				clr=15
-				bclr=14
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			format="exponential"
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=6
-				y=216
-				width=125
-				height=21
-			}
-			monitor {
-				chan="$(P)$(GAUGE).SP2R"
-				clr=15
-				bclr=14
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			format="exponential"
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=163
-				y=198
-				width=10
-				height=10
-			}
-			"basic attribute" {
-				clr=18
-			}
-			"dynamic attribute" {
-				vis="if not zero"
-				chan="$(P)$(GAUGE).SP1"
-			}
-		}
-		rectangle {
-			object {
-				x=163
-				y=224
-				width=10
-				height=10
-			}
-			"basic attribute" {
-				clr=18
-			}
-			"dynamic attribute" {
-				vis="if not zero"
-				chan="$(P)$(GAUGE).SP2"
-			}
-		}
-		text {
-			object {
-				x=138
-				y=199
-				width=20
-				height=10
-			}
-			"basic attribute" {
-				clr=13
-				fill="outline"
-			}
-			textix="SP1"
-			align="horiz. centered"
-		}
-		text {
-			object {
-				x=138
-				y=224
-				width=20
-				height=10
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-			}
-			textix="SP2"
-			align="horiz. centered"
-		}
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A>=2"
-		chan="$(P)$(GAUGE).TYPE"
 	}
 }
 composite {
@@ -1032,118 +922,6 @@ composite {
 composite {
 	object {
 		x=7
-		y=52
-		width=131
-		height=132
-	}
-	"composite name"=""
-	children {
-		text {
-			object {
-				x=8
-				y=128
-				width=130
-				height=10
-			}
-			"basic attribute" {
-				clr=0
-				fill="outline"
-			}
-			textix="Convectron A (Torr)"
-			align="horiz. centered"
-		}
-		"text update" {
-			object {
-				x=8
-				y=52
-				width=130
-				height=30
-			}
-			monitor {
-				chan="$(P)$(GAUGE).VAL"
-				clr=20
-				bclr=14
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			format="exponential"
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=8
-				y=96
-				width=130
-				height=30
-			}
-			monitor {
-				chan="$(P)$(GAUGE).CGAP"
-				clr=60
-				bclr=14
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			format="exponential"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=7
-				y=84
-				width=130
-				height=10
-			}
-			"basic attribute" {
-				clr=0
-				fill="outline"
-			}
-			textix="Vac Gauge (Torr)"
-			align="horiz. centered"
-		}
-		text {
-			object {
-				x=8
-				y=174
-				width=130
-				height=10
-			}
-			"basic attribute" {
-				clr=0
-				fill="outline"
-			}
-			textix="Convectron B (Torr)"
-			align="horiz. centered"
-		}
-		"text update" {
-			object {
-				x=8
-				y=142
-				width=130
-				height=30
-			}
-			monitor {
-				chan="$(P)$(GAUGE).CGBP"
-				clr=60
-				bclr=14
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			format="exponential"
-			limits {
-			}
-		}
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A<3"
-		chan="$(P)$(GAUGE).TYPE"
-	}
-}
-composite {
-	object {
-		x=7
 		y=51
 		width=131
 		height=42
@@ -1185,7 +963,7 @@ composite {
 	}
 	"dynamic attribute" {
 		vis="calc"
-		calc="A==3"
+		calc="A=3"
 		chan="$(P)$(GAUGE).TYPE"
 	}
 }
@@ -1249,6 +1027,228 @@ composite {
 	"dynamic attribute" {
 		vis="calc"
 		calc="A==3"
+		chan="$(P)$(GAUGE).TYPE"
+	}
+}
+composite {
+	object {
+		x=8
+		y=49
+		width=131
+		height=132
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=9
+				y=125
+				width=130
+				height=10
+			}
+			"basic attribute" {
+				clr=0
+				fill="outline"
+			}
+			textix="Convectron A (Torr)"
+			align="horiz. centered"
+		}
+		"text update" {
+			object {
+				x=9
+				y=49
+				width=130
+				height=30
+			}
+			monitor {
+				chan="$(P)$(GAUGE).VAL"
+				clr=20
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=9
+				y=93
+				width=130
+				height=30
+			}
+			monitor {
+				chan="$(P)$(GAUGE).CGAP"
+				clr=60
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=8
+				y=81
+				width=130
+				height=10
+			}
+			"basic attribute" {
+				clr=0
+				fill="outline"
+			}
+			textix="Vac Gauge (Torr)"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=9
+				y=171
+				width=130
+				height=10
+			}
+			"basic attribute" {
+				clr=0
+				fill="outline"
+			}
+			textix="Convectron B (Torr)"
+			align="horiz. centered"
+		}
+		"text update" {
+			object {
+				x=9
+				y=139
+				width=130
+				height=30
+			}
+			monitor {
+				chan="$(P)$(GAUGE).CGBP"
+				clr=60
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A#3"
+		chan="$(P)$(GAUGE).TYPE"
+	}
+}
+composite {
+	object {
+		x=7
+		y=191
+		width=167
+		height=46
+	}
+	"composite name"=""
+	children {
+		"text update" {
+			object {
+				x=7
+				y=191
+				width=125
+				height=21
+			}
+			monitor {
+				chan="$(P)$(GAUGE).SP1R"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=7
+				y=216
+				width=125
+				height=21
+			}
+			monitor {
+				chan="$(P)$(GAUGE).SP2R"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		rectangle {
+			object {
+				x=164
+				y=198
+				width=10
+				height=10
+			}
+			"basic attribute" {
+				clr=18
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="$(P)$(GAUGE).SP1"
+			}
+		}
+		rectangle {
+			object {
+				x=164
+				y=224
+				width=10
+				height=10
+			}
+			"basic attribute" {
+				clr=18
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="$(P)$(GAUGE).SP2"
+			}
+		}
+		text {
+			object {
+				x=139
+				y=199
+				width=20
+				height=10
+			}
+			"basic attribute" {
+				clr=13
+				fill="outline"
+			}
+			textix="SP1"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=139
+				y=224
+				width=20
+				height=10
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+			}
+			textix="SP2"
+			align="horiz. centered"
+		}
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A>=2"
 		chan="$(P)$(GAUGE).TYPE"
 	}
 }
