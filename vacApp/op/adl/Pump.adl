@@ -1,14 +1,14 @@
 
 file {
-	name="/home/oxygen/MOHAN/adl/Pump.adl"
-	version=030102
+	name="/home/oxygen40/KLANG/Documents/Projects/Repository/git/vac/vacApp/op/adl/Pump.adl"
+	version=030107
 }
 display {
 	object {
-		x=150
-		y=110
-		width=414
-		height=161
+		x=149
+		y=399
+		width=420
+		height=165
 	}
 	clr=0
 	bclr=1
@@ -89,7 +89,7 @@ display {
 }
 menu {
 	object {
-		x=287
+		x=292
 		y=13
 		width=92
 		height=16
@@ -104,8 +104,8 @@ rectangle {
 	object {
 		x=2
 		y=2
-		width=415
-		height=163
+		width=420
+		height=165
 	}
 	"basic attribute" {
 		clr=59
@@ -350,7 +350,7 @@ rectangle {
 }
 "choice button" {
 	object {
-		x=214
+		x=215
 		y=26
 		width=45
 		height=30
@@ -426,7 +426,7 @@ rectangle {
 }
 "choice button" {
 	object {
-		x=214
+		x=215
 		y=70
 		width=45
 		height=45
@@ -439,7 +439,7 @@ rectangle {
 }
 text {
 	object {
-		x=214
+		x=215
 		y=58
 		width=45
 		height=10
@@ -453,7 +453,7 @@ text {
 }
 text {
 	object {
-		x=214
+		x=215
 		y=117
 		width=45
 		height=10
@@ -469,7 +469,7 @@ rectangle {
 	object {
 		x=3
 		y=20
-		width=260
+		width=265
 		height=140
 	}
 	"basic attribute" {
@@ -547,7 +547,7 @@ text {
 }
 rectangle {
 	object {
-		x=248
+		x=235
 		y=146
 		width=10
 		height=10
@@ -558,7 +558,7 @@ rectangle {
 }
 rectangle {
 	object {
-		x=248
+		x=235
 		y=146
 		width=10
 		height=10
@@ -573,7 +573,7 @@ rectangle {
 }
 text {
 	object {
-		x=228
+		x=215
 		y=146
 		width=18
 		height=10
@@ -587,9 +587,9 @@ text {
 }
 rectangle {
 	object {
-		x=225
+		x=212
 		y=143
-		width=36
+		width=50
 		height=15
 	}
 	"basic attribute" {
@@ -600,7 +600,7 @@ rectangle {
 }
 rectangle {
 	object {
-		x=248
+		x=235
 		y=131
 		width=10
 		height=10
@@ -611,7 +611,7 @@ rectangle {
 }
 rectangle {
 	object {
-		x=248
+		x=235
 		y=131
 		width=10
 		height=10
@@ -626,7 +626,7 @@ rectangle {
 }
 text {
 	object {
-		x=228
+		x=215
 		y=131
 		width=18
 		height=10
@@ -640,9 +640,9 @@ text {
 }
 rectangle {
 	object {
-		x=225
+		x=212
 		y=128
-		width=36
+		width=50
 		height=15
 	}
 	"basic attribute" {
@@ -653,27 +653,23 @@ rectangle {
 }
 "related display" {
 	object {
-		x=212
+		x=248
 		y=129
 		width=13
-		height=30
+		height=13
 	}
 	display[0] {
 		label="Setpoint 1"
 		name="Pump_sp.adl"
 		args="P=$(P),PUMP=$(PUMP),a=1"
 	}
-	display[1] {
-		label="Setpoint 2"
-		name="Pump_sp.adl"
-		args="P=$(P),PUMP=$(PUMP),a=2"
-	}
 	clr=14
 	bclr=51
+	label="-+"
 }
 "text update" {
 	object {
-		x=269
+		x=274
 		y=39
 		width=141
 		height=27
@@ -691,7 +687,7 @@ rectangle {
 }
 text {
 	object {
-		x=274
+		x=279
 		y=71
 		width=130
 		height=10
@@ -705,7 +701,7 @@ text {
 }
 "text update" {
 	object {
-		x=272
+		x=277
 		y=103
 		width=134
 		height=27
@@ -723,7 +719,7 @@ text {
 }
 text {
 	object {
-		x=274
+		x=279
 		y=138
 		width=130
 		height=10
@@ -734,4 +730,20 @@ text {
 	}
 	textix="Controller"
 	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=248
+		y=144
+		width=13
+		height=13
+	}
+	display[0] {
+		label="Setpoint 2"
+		name="Pump_sp.adl"
+		args="P=$(P),PUMP=$(PUMP),a=2"
+	}
+	clr=14
+	bclr=51
+	label="-+"
 }
