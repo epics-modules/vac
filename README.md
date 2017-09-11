@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/epics-modules/vac.svg?branch=master)](https://travis-ci.org/epics-modules/vac)
+
 # vac
 APS BCDA synApps module: vac
 
