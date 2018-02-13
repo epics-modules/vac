@@ -1,0 +1,1848 @@
+4 0 0
+beginScreenProperties
+major 4
+minor 0
+release 0
+x 354
+y 179
+w 190
+h 300
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-8.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 0
+bgColor index 4
+textColor index 14
+ctlFgColor1 index 30
+ctlFgColor2 index 32
+ctlBgColor1 index 34
+ctlBgColor2 index 35
+topShadowColor index 37
+botShadowColor index 44
+snapToGrid
+gridSize 5
+endScreenProperties
+
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 3
+y 47
+w 139
+h 139
+lineColor index 11
+fill
+fillColor index 11
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 146
+y 49
+w 39
+h 29
+lineColor index 11
+fill
+fillColor index 11
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 54
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 68
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 53
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP1
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP1)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 67
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP2
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP2)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 242
+w 169
+h 45
+
+beginGroup
+
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 242
+w 125
+h 21
+controlPv "$(P)$(GAUGE).SP3R"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 15
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 266
+w 125
+h 21
+controlPv "$(P)$(GAUGE).SP4R"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 15
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 138
+y 249
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 14
+useDisplayBg
+value {
+ "SP3"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 137
+y 273
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 14
+useDisplayBg
+value {
+ "SP4"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 164
+y 249
+w 9
+h 9
+lineColor index 18
+fill
+fillColor index 18
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP3)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 164
+y 271
+w 9
+h 9
+lineColor index 18
+fill
+fillColor index 18
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP4)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{((A==2) & !(B <-0.9))\}($(P)$(GAUGE).TYPE, $(P)$(GAUGE).SP3R)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 3
+y 189
+w 157
+h 67
+
+beginGroup
+
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 3
+y 189
+w 154
+h 49
+lineColor index 11
+fill
+fillColor index 11
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 192
+w 44
+h 14
+lineColor index 2
+fill
+fillColor index 2
+lineWidth 0
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 27
+y 194
+w 10
+h 10
+lineColor index 6
+fill
+fillColor index 6
+lineWidth 0
+startAngle  0
+totalAngle  360
+fillMode "pie"
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 27
+y 194
+w 10
+h 10
+lineColor index 61
+fill
+fillColor index 61
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).IG1R)"
+visInvert
+visMin 0
+visMax 1
+startAngle  0
+totalAngle  360
+fillMode "pie"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 58
+y 192
+w 44
+h 14
+lineColor index 2
+fill
+fillColor index 2
+lineWidth 0
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 75
+y 194
+w 10
+h 10
+lineColor index 6
+fill
+fillColor index 6
+lineWidth 0
+startAngle  0
+totalAngle  360
+fillMode "pie"
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 75
+y 194
+w 10
+h 10
+lineColor index 61
+fill
+fillColor index 61
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).IG2R)"
+visInvert
+visMin 0
+visMax 1
+startAngle  0
+totalAngle  360
+fillMode "pie"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 107
+y 192
+w 44
+h 14
+lineColor index 2
+fill
+fillColor index 2
+lineWidth 0
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 124
+y 194
+w 10
+h 10
+lineColor index 6
+fill
+fillColor index 6
+lineWidth 0
+startAngle  0
+totalAngle  360
+fillMode "pie"
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 124
+y 194
+w 10
+h 10
+lineColor index 61
+fill
+fillColor index 61
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).DGSR)"
+visInvert
+visMin 0
+visMax 1
+startAngle  0
+totalAngle  360
+fillMode "pie"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 241
+w 32
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "IG1"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 63
+y 241
+w 32
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "IG2"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 110
+y 241
+w 50
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "DEGAS"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A<2)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 3
+y 3
+w 182
+h 20
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 14
+useDisplayBg
+value {
+ "$(P)$(GAUGE)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 25
+w 158
+h 20
+controlPv "$(P)$(GAUGE).TYPE"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 14
+bgColor index 4
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 149
+y 52
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "SP1"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 149
+y 67
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "SP2"
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 146
+y 82
+w 40
+h 30
+
+beginGroup
+
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 146
+y 82
+w 39
+h 29
+lineColor index 11
+fill
+fillColor index 11
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 87
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 101
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 86
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP3
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP3)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 100
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP4
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP4)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 149
+y 85
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "SP3"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 149
+y 100
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "SP4"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A<3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 146
+y 114
+w 40
+h 30
+
+beginGroup
+
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 146
+y 114
+w 39
+h 29
+lineColor index 11
+fill
+fillColor index 11
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 119
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 133
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 118
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP5
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP5)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 132
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP6
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP6)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 149
+y 117
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "SP5"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 149
+y 132
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "SP6"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A==1)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 145
+y 81
+w 40
+h 30
+
+beginGroup
+
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 145
+y 81
+w 39
+h 29
+lineColor index 11
+fill
+fillColor index 11
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 171
+y 86
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 171
+y 100
+w 9
+h 9
+lineColor index 10
+fill
+fillColor index 10
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 171
+y 85
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP3
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP3)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 171
+y 99
+w 9
+h 9
+lineColor index 15
+fill
+fillColor index 15
+lineWidth 0
+fillAlarm
+lineAlarm
+alarmPv $(P)$(GAUGE).SP4
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP4)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 148
+y 84
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "SP3"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 148
+y 99
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "HV"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A==3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 51
+w 131
+h 42
+
+beginGroup
+
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 51
+w 130
+h 30
+controlPv "$(P)$(GAUGE).VAL"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 20
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 83
+w 130
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "Vac Gauge (Torr)"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A=3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 242
+w 168
+h 21
+
+beginGroup
+
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 242
+w 125
+h 21
+controlPv "$(P)$(GAUGE).SP3R"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 15
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 138
+y 249
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 14
+useDisplayBg
+value {
+ "SP3"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 164
+y 249
+w 9
+h 9
+lineColor index 18
+fill
+fillColor index 18
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP3)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A==3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 49
+w 131
+h 132
+
+beginGroup
+
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 125
+w 130
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "Convectron A (Torr)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 49
+w 130
+h 30
+controlPv "$(P)$(GAUGE).VAL"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 20
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 93
+w 130
+h 30
+controlPv "$(P)$(GAUGE).CGAP"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 60
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 81
+w 130
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "Vac Gauge (Torr)"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 171
+w 130
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 0
+useDisplayBg
+value {
+ "Convectron B (Torr)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 139
+w 130
+h 30
+controlPv "$(P)$(GAUGE).CGBP"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 60
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A#3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 191
+w 167
+h 46
+
+beginGroup
+
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 191
+w 125
+h 21
+controlPv "$(P)$(GAUGE).SP1R"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 15
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 216
+w 125
+h 21
+controlPv "$(P)$(GAUGE).SP2R"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 15
+fgAlarm
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 164
+y 198
+w 9
+h 9
+lineColor index 18
+fill
+fillColor index 18
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP1)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 164
+y 224
+w 9
+h 9
+lineColor index 18
+fill
+fillColor index 18
+lineWidth 0
+visPv "CALC\\\{(A)\}($(P)$(GAUGE).SP2)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 139
+y 199
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 13
+useDisplayBg
+value {
+ "SP1"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 139
+y 224
+w 20
+h 10
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 14
+useDisplayBg
+value {
+ "SP2"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A>=2)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 242
+w 169
+h 45
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{((A==2) & !(B <-0.9))\}($(P)$(GAUGE).TYPE, $(P)$(GAUGE).SP3R)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 3
+y 189
+w 157
+h 67
+
+beginGroup
+
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 107
+y 208
+w 45
+h 28
+fgColor index 14
+bgColor index 2
+selectColor index 2
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(GAUGE).DGSS"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 58
+y 209
+w 45
+h 28
+fgColor index 14
+bgColor index 2
+selectColor index 2
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(GAUGE).IG2S"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 209
+w 45
+h 28
+fgColor index 14
+bgColor index 2
+selectColor index 2
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(GAUGE).IG1S"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A<2)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 132
+y 283
+w 55
+h 15
+fgColor index 14
+bgColor index 5
+inconsistentColor index 12
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)$(GAUGE).SCAN"
+indicatorPv "$(P)$(GAUGE).SCAN"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 146
+y 82
+w 40
+h 30
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{(A<3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 146
+y 114
+w 40
+h 30
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{(A==1)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 145
+y 81
+w 40
+h 30
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{(A==3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 51
+w 131
+h 42
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{(A=3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 242
+w 168
+h 21
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{(A==3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 8
+y 49
+w 131
+h 132
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{(A#3)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 191
+w 167
+h 46
+
+beginGroup
+
+
+endGroup
+
+visPv "CALC\\\{(A>=2)\}($(P)$(GAUGE).TYPE)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
