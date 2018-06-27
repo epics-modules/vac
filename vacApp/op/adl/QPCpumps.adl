@@ -1,0 +1,1806 @@
+
+file {
+	name="/home/phoebus/MLS/epics/github/vac/vacApp/op/adl/QPCpumps.adl"
+	version=030114
+}
+display {
+	object {
+		x=140
+		y=102
+		width=800
+		height=380
+	}
+	clr=0
+	bclr=1
+	cmap=""
+	gridSpacing=5
+	gridOn=0
+	snapToGrid=0
+}
+"color map" {
+	ncolors=65
+	colors {
+		ffffff,
+		ececec,
+		dadada,
+		c8c8c8,
+		bbbbbb,
+		aeaeae,
+		9e9e9e,
+		919191,
+		858585,
+		787878,
+		696969,
+		5a5a5a,
+		464646,
+		2d2d2d,
+		000000,
+		00d800,
+		1ebb00,
+		339900,
+		2d7f00,
+		216c00,
+		fd0000,
+		de1309,
+		be190b,
+		a01207,
+		820400,
+		5893ff,
+		597ee1,
+		4b6ec7,
+		3a5eab,
+		27548d,
+		fbf34a,
+		f9da3c,
+		eeb62b,
+		e19015,
+		cd6100,
+		ffb0ff,
+		d67fe2,
+		ae4ebc,
+		8b1a96,
+		610a75,
+		a4aaff,
+		8793e2,
+		6a73c1,
+		4d52a4,
+		343386,
+		c7bb6d,
+		b79d5c,
+		a47e3c,
+		7d5627,
+		58340f,
+		99ffff,
+		73dfff,
+		4ea5f9,
+		2a63e4,
+		0a00b8,
+		ebf1b5,
+		d4db9d,
+		bbc187,
+		a6a462,
+		8b8239,
+		73ff6b,
+		52da3b,
+		3cb420,
+		289315,
+		1a7309,
+	}
+}
+rectangle {
+	object {
+		x=2
+		y=2
+		width=800
+		height=380
+	}
+	"basic attribute" {
+		clr=59
+		width=1
+	}
+}
+menu {
+	object {
+		x=272
+		y=71
+		width=92
+		height=16
+	}
+	control {
+		chan="$(P)$(PUMP1).SCAN"
+		clr=59
+		bclr=48
+	}
+}
+rectangle {
+	object {
+		x=17
+		y=67
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+text {
+	object {
+		x=89
+		y=99
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Pressure (Torr)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=89
+		y=144
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Current (Amps)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=88
+		y=189
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Voltage (Volts)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=17
+		y=87
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+rectangle {
+	object {
+		x=19
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=50
+	}
+}
+text {
+	object {
+		x=19
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="COOL DOWN"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=10
+		y=43
+		width=390
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="$(P)$(PUMP1)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=19
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP1).CMOR"
+	}
+}
+"text update" {
+	object {
+		x=89
+		y=67
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP1).VAL"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=89
+		y=112
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP1).CRNT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=88
+		y=157
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP1).VOLT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=19
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=20
+	}
+}
+text {
+	object {
+		x=19
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="STANDBY"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=19
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP1).MODR"
+	}
+}
+"choice button" {
+	object {
+		x=25
+		y=110
+		width=45
+		height=30
+	}
+	control {
+		chan="$(P)$(PUMP1).MODS"
+		clr=14
+		bclr=0
+	}
+}
+text {
+	object {
+		x=25
+		y=142
+		width=45
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Mode"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=7
+		y=61
+		width=390
+		height=140
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+}
+text {
+	object {
+		x=19
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP1).MODR"
+	}
+	textix="OPER"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=19
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP1).CMOR"
+	}
+	textix="NORMAL"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=51
+		y=171
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=57
+	}
+}
+rectangle {
+	object {
+		x=51
+		y=171
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP1).SET1"
+	}
+}
+text {
+	object {
+		x=31
+		y=172
+		width=18
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="SP1"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=28
+		y=169
+		width=36
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+		width=1
+	}
+}
+"text update" {
+	object {
+		x=243
+		y=91
+		width=141
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP1).PTYP"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=248
+		y=123
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Ion Pump Size"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=273
+		y=143
+		width=80
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP1).TYPE"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=273
+		y=178
+		width=80
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Controller"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=250
+		y=5
+		width=300
+		height=27
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="QPC Ion Pumps"
+	align="horiz. centered"
+}
+menu {
+	object {
+		x=667
+		y=71
+		width=92
+		height=16
+	}
+	control {
+		chan="$(P)$(PUMP2).SCAN"
+		clr=59
+		bclr=48
+	}
+}
+rectangle {
+	object {
+		x=414
+		y=67
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+text {
+	object {
+		x=486
+		y=99
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Pressure (Torr)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=486
+		y=144
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Current (Amps)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=485
+		y=189
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Voltage (Volts)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=414
+		y=87
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+rectangle {
+	object {
+		x=416
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=50
+	}
+}
+text {
+	object {
+		x=416
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="COOL DOWN"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=407
+		y=43
+		width=390
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="$(P)$(PUMP2)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=416
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP2).CMOR"
+	}
+}
+"text update" {
+	object {
+		x=486
+		y=67
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP2).VAL"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=486
+		y=112
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP2).CRNT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=485
+		y=157
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP2).VOLT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=416
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=20
+	}
+}
+text {
+	object {
+		x=416
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="STANDBY"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=416
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP2).MODR"
+	}
+}
+"choice button" {
+	object {
+		x=422
+		y=110
+		width=45
+		height=30
+	}
+	control {
+		chan="$(P)$(PUMP2).MODS"
+		clr=14
+		bclr=0
+	}
+}
+text {
+	object {
+		x=422
+		y=142
+		width=45
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Mode"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=404
+		y=61
+		width=390
+		height=140
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+}
+text {
+	object {
+		x=416
+		y=69
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP2).MODR"
+	}
+	textix="OPER"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=416
+		y=89
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP2).CMOR"
+	}
+	textix="NORMAL"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=448
+		y=171
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=57
+	}
+}
+rectangle {
+	object {
+		x=448
+		y=171
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP2).SET2"
+	}
+}
+text {
+	object {
+		x=428
+		y=172
+		width=18
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="SP2"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=425
+		y=169
+		width=36
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+		width=1
+	}
+}
+"text update" {
+	object {
+		x=640
+		y=91
+		width=141
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP2).PTYP"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=645
+		y=123
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Ion Pump Size"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=670
+		y=143
+		width=80
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP2).TYPE"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=670
+		y=178
+		width=80
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Controller"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=16
+		y=234
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+text {
+	object {
+		x=88
+		y=266
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Pressure (Torr)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=88
+		y=311
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Current (Amps)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=87
+		y=356
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Voltage (Volts)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=16
+		y=254
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+rectangle {
+	object {
+		x=18
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=50
+	}
+}
+text {
+	object {
+		x=18
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="COOL DOWN"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=9
+		y=210
+		width=390
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="$(P)$(PUMP3)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=18
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP3).CMOR"
+	}
+}
+"text update" {
+	object {
+		x=88
+		y=234
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP3).VAL"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=88
+		y=279
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP3).CRNT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=87
+		y=324
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP3).VOLT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=18
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=20
+	}
+}
+text {
+	object {
+		x=18
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="STANDBY"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=18
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP3).MODR"
+	}
+}
+"choice button" {
+	object {
+		x=24
+		y=277
+		width=45
+		height=30
+	}
+	control {
+		chan="$(P)$(PUMP3).MODS"
+		clr=14
+		bclr=0
+	}
+}
+text {
+	object {
+		x=24
+		y=309
+		width=45
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Mode"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=6
+		y=228
+		width=390
+		height=140
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+}
+text {
+	object {
+		x=18
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP3).MODR"
+	}
+	textix="OPER"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=18
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP3).CMOR"
+	}
+	textix="NORMAL"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=50
+		y=338
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=57
+	}
+}
+rectangle {
+	object {
+		x=50
+		y=338
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP3).SET3"
+	}
+}
+text {
+	object {
+		x=30
+		y=339
+		width=18
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="SP3"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=27
+		y=336
+		width=36
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+		width=1
+	}
+}
+"text update" {
+	object {
+		x=242
+		y=258
+		width=141
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP3).PTYP"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=247
+		y=290
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Ion Pump Size"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=272
+		y=310
+		width=80
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP3).TYPE"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=272
+		y=345
+		width=80
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Controller"
+	align="horiz. centered"
+}
+menu {
+	object {
+		x=663
+		y=237
+		width=92
+		height=16
+	}
+	control {
+		chan="$(P)$(PUMP4).SCAN"
+		clr=59
+		bclr=48
+	}
+}
+rectangle {
+	object {
+		x=412
+		y=234
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+text {
+	object {
+		x=484
+		y=266
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Pressure (Torr)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=484
+		y=311
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Current (Amps)"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=483
+		y=356
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Pump Voltage (Volts)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=412
+		y=254
+		width=68
+		height=18
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+rectangle {
+	object {
+		x=414
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=50
+	}
+}
+text {
+	object {
+		x=414
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="COOL DOWN"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=405
+		y=210
+		width=390
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="$(P)$(PUMP4)"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=414
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP4).CMOR"
+	}
+}
+"text update" {
+	object {
+		x=484
+		y=234
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP4).VAL"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=484
+		y=279
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP4).CRNT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=483
+		y=324
+		width=130
+		height=30
+	}
+	monitor {
+		chan="$(P)$(PUMP4).VOLT"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=414
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=20
+	}
+}
+text {
+	object {
+		x=414
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="STANDBY"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=414
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP4).MODR"
+	}
+}
+"choice button" {
+	object {
+		x=420
+		y=277
+		width=45
+		height=30
+	}
+	control {
+		chan="$(P)$(PUMP4).MODS"
+		clr=14
+		bclr=0
+	}
+}
+text {
+	object {
+		x=420
+		y=309
+		width=45
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Mode"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=402
+		y=228
+		width=390
+		height=140
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+}
+text {
+	object {
+		x=414
+		y=236
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP4).MODR"
+	}
+	textix="OPER"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=414
+		y=256
+		width=64
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(PUMP4).CMOR"
+	}
+	textix="NORMAL"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=446
+		y=338
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=57
+	}
+}
+rectangle {
+	object {
+		x=446
+		y=338
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PUMP4).SET4"
+	}
+}
+text {
+	object {
+		x=426
+		y=339
+		width=18
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="SP4"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=423
+		y=336
+		width=36
+		height=15
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+		width=1
+	}
+}
+"text update" {
+	object {
+		x=638
+		y=258
+		width=141
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP4).PTYP"
+		clr=20
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=643
+		y=290
+		width=130
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Ion Pump Size"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=668
+		y=310
+		width=80
+		height=27
+	}
+	monitor {
+		chan="$(P)$(PUMP4).TYPE"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=668
+		y=345
+		width=80
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Controller"
+	align="horiz. centered"
+}
+menu {
+	object {
+		x=267
+		y=237
+		width=92
+		height=16
+	}
+	control {
+		chan="$(P)$(PUMP3).SCAN"
+		clr=59
+		bclr=48
+	}
+}
+"text update" {
+	object {
+		x=738
+		y=8
+		width=50
+		height=20
+	}
+	monitor {
+		chan="$(P)$(PUMP1).VERS"
+		clr=15
+		bclr=14
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+text {
+	object {
+		x=733
+		y=33
+		width=60
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Firmware"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=733
+		y=45
+		width=60
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Version"
+	align="horiz. centered"
+}
