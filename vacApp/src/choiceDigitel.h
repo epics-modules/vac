@@ -143,5 +143,9 @@
 #define MOD_S3VS 0x0800
 #define MOD_S3BS 0x1000
 #define MOD_S3TS 0x2000
+#define MOD_SP4S 0x4000
+#define MOD_S4HS 0x8000
+#define MOD_S4MS 0x10000
+#define MOD_S4VS 0x20000
 
 #endif

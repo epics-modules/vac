@@ -3,22 +3,31 @@
 * INP has form @asyn(port address) station
 * TYPE has ("devType")
 * port is the asyn serial port name
-* address is the controller address (0-255 for MPC)
+* address is the controller address (0-255 for MPC/QPC)
 * station for Digitel500/1500 is no. of spts (0-3)
 * station for MPC is either 1 or 2 for the two pump controllers
-* devType is "MPC" or "D500" or "D1500" 
+*         and 1 - 4 for the QPC
+* devType is "MPC" or "D500" or "D1500 or QPC" 
 *
 *  Author: Mohan Ramanathan
 *  July 2007  
-*  A common one for Digitel 500, Digitel 1500 and MPC/LPC/SPC
+*  A common one for Digitel 500, Digitel 1500 and MPC/LPC/SPC/QPC
 *
 *   revision:  01
-*	01-07-2010   Fixed the code to work with D500 bitbus bug
+*   01-07-2010   Fixed the code to work with D500 bitbus bug
 *
 *   revision: 02
 *   10-02-2014   Fixed connecton problems with MOXA terminal server
 *        will work correctly when MOXA is rebooted now
 *
+*   revision 03
+*   Marty Smith
+*   01-25-2018  Added QPC which has 4 setpoints and added MODL and VERS
+*	 fields to the digitel record for MPC/QPC model and firmware vers
+*	 this should also work for the QPC (model without Ethernet option).
+*        The records TYPE field also shows the model, however, this relies 
+*        on the proper substitution being made in the database (DEV) and is
+*        prown to human error.
 *
 */
 
@@ -49,7 +58,7 @@
 #include "choiceDigitel.h"
 #include "devDigitelPump.h"
 
-#define DigitelPump_BUFFER_SIZE 250
+#define DigitelPump_BUFFER_SIZE 330
 #define DigitelPump_SIZE 50
 #define DigitelPump_TIMEOUT 1.0
 #define MAX_CONSEC_ERRORS 2
@@ -105,7 +114,7 @@ static long init(digitelRecord *pr)
     int address;
     char *port, *userParam;
     int station;
-   
+  
     /* Allocate private structure */
     pPvt = calloc(1, sizeof(devDigitelPumpPvt));
 
@@ -116,29 +125,39 @@ static long init(digitelRecord *pr)
     /* Parse input link */
     status = pasynEpicsUtils->parseLink(pasynUser, plink, &port, &address, 
     					&userParam);
+    if (status != asynSuccess) {
+	errlogPrintf("devDigitelPump::init %s bad link %s\n",
+                   pr->name, pasynUser->errorMessage);
+	goto bad;
+    }
 
     strcpy(pPvt->cmdPrefix,"");
     pPvt->PortName = port;
     pPvt->devType = pr->type;
     sscanf(userParam,"%d",&station);
-    pPvt->noSPT = 3;
+    if (pPvt->devType != 3){
+        pPvt->noSPT = 3;
+    } else {
+        pPvt->noSPT = 4; /* For QPC */
+    }
     /* set ERR to non zero for initialization for Digitel 500/1500 */
-    if (pPvt->devType)
+    if (pPvt->devType && pPvt->devType != 3)
     	pPvt->errCount = 3;
 
 /*
-* devType needed to be set to device as followsin record "TYPE":
-*	MPC	    =	0
-*	D500	=	1
-*	D1500	=	2
+* devType needed to be set to device as follows in record "TYPE" field:
+*	MPC   =	0
+*	D500  =	1
+*	D1500 =	2
+*	QPC  =	3
 *
 *  for digitel 500/1500 the address is "0"
-*  for MPC the default address is 5 and something has to be set between 1-255
+*  for MPC and QPC the default address is 5 and has to be set between 0-255
 * 
 */
 
 /*  
-*    All MPC commands are of the form :  "~ AA XX d cc\r"
+*    All MPC and QPC commands are of the form :  "~ AA XX d cc\r"
 *    AA = Address from 00 - FF
 *    XX = 2 character Hex Command
 *    d  =  parameter or data comma seperated
@@ -149,6 +168,8 @@ static long init(digitelRecord *pr)
 *   Add the sum and divide by 0x100 or decimal 256 and reminder in hex is 
 *   two character checksum ( just and it with 0xff). Follow the checksum 
 *   with a terminator of CR only.
+*
+*   The QPC has 4 setpoints (stations) one for each pump
 */
 
 /*
@@ -172,42 +193,56 @@ static long init(digitelRecord *pr)
 *    So the reply from the device in this case is no echos of commands.
 */ 
 
-    /*  MPC controller*/
-    if ( pPvt->devType == 0) {
+    /*  MPC and QPC controller */
+    if ( pPvt->devType == 0 || pPvt->devType == 3) {
 	if (address < 0 || address > 255) {
 	    errlogPrintf("devDigitelPump::init %s address out of range %d\n",
                    pr->name, address);
 	    goto bad;
 	}
-	if (station < 1 || station > 2) {
-	    errlogPrintf("devDigitelPump::init %s station out of range %d\n",
-                   pr->name, station);
-	    goto bad;
+	if (pPvt->devType == 0){
+	    if (station < 1 || station > 2) {
+	        errlogPrintf("devDigitelPump::init %s MPC station out of range %d\n",
+                       pr->name, station);
+	        goto bad;
+	    }
 	}
+	if (pPvt->devType == 3){
+	/* Station here refers to which setpoint in the QPC for this pump */
+	    if (station < 1 || station > 4) {
+	        errlogPrintf("devDigitelPump::init %s QPC station out of range %d\n",
+                       pr->name, station);
+	        goto bad;
+	    }
+	}
+	
 	sprintf(pPvt->cmdPrefix,"~ %02X",address);
 	pPvt->pumpNo = station;
 
     /*  Digitel 500/1500 controller*/
     } else {
+    /* Station here refers to the setpoint number used; 0 if not used otherwise
+       only 1 and 2 are valid for Digitels */
 	if (station < 0 || station > 3) {
-	    errlogPrintf("devDigitelPump::init %s station out of range %d\n",
+	    errlogPrintf("devDigitelPump::init %s Digitel station out of range %d\n",
                    pr->name, station);
 	    goto bad;
 	}
         pPvt->noSPT = station;
     }
 
-    if (status != asynSuccess) {
-	errlogPrintf("devDigitelPump::init %s bad link %s\n",
-                   pr->name, pasynUser->errorMessage);
-	goto bad;
+    status = pasynManager->connectDevice(pasynUser,pPvt->PortName,0);
+    if(status!=asynSuccess) {
+        printf("can't connect to serial port %s %s\n",pPvt->PortName,
+               pasynUser->errorMessage);
+        goto bad;
     }
 
-    status = pasynManager->connectDevice(pasynUser,pPvt->PortName,0);
-    if(status!=asynSuccess) goto bad;
-
     pasynInterface = pasynManager->findInterface(pasynUser,asynOctetType,1);
-    if(!pasynInterface) goto bad;
+    if(!pasynInterface) {
+        printf("%s driver not supported\n",asynOctetType);
+        goto bad;
+    }
    
     pPvt->pasynOctet = (asynOctet *)pasynInterface->pinterface;
     pPvt->octetPvt = pasynInterface->drvPvt;
@@ -217,6 +252,7 @@ static long init(digitelRecord *pr)
     asynPrint(pasynUser, ASYN_TRACE_FLOW,
       "devDigitelPump::init name=%s port=%s address=%d Device=%d station=%d\n", 
 		pr->name, pPvt->PortName, address, pPvt->devType, station);
+    
     return 0;
 
 bad:
@@ -238,8 +274,8 @@ static void buildCommand(devDigitelPumpPvt *pPvt, char *pvalue)
     strcpy(pPvt->sendBuf, pPvt->cmdPrefix);
     strcat(pPvt->sendBuf, pvalue);
 
-    /* For MPC only*/
-    if (pPvt->devType == 0) {
+    /* For MPC and QPC only*/
+    if (pPvt->devType == 0 || pPvt->devType == 3) {
     	strcat(pPvt->sendBuf, " ");
     	/* Now calculate the checksum.   */
     	for(i=1;i<strlen(pPvt->sendBuf);i++)
@@ -268,9 +304,9 @@ static long readWrite_dg(digitelRecord *pr)
     float val1;
     float val2;
     
+    pPvt->command = '\0'; /* Init this value first, it is checked later */
     memset(pvalue, 0, 30);
     if (!pr->pact) {
-
 	memset(pPvt->sendBuf, 0, DigitelPump_SIZE);
 /*
 *     We have to check to see if any record fields changed.
@@ -278,38 +314,64 @@ static long readWrite_dg(digitelRecord *pr)
 *     change will be sent. 
 *     If no record change was done then read the values from the record....
 */
+      /* This command for the display on the device was not implemented for the 
+         QPC by the vendor but will be in firmware version 1.35; although for
+         the QPC it is not necessarily needed as the display shows everything
+         anyway.
+       */
        if (pr->flgs) {
-            if (pr->flgs & MOD_DSPL) {
-             	if (pPvt->devType)
+            /* No need for this with the QPC */
+            if (pr->flgs & MOD_DSPL) { /* Change device display */
+             	if (pPvt->devType && pPvt->devType != 3){
             	    sprintf(pvalue,"M%d",3+pr->dspl);
-             	else 
+             	} else if(pPvt->devType == 0) {
+             	/* command[0] = Change the displays main parameter on device */
             	    sprintf(pvalue," %s %d,%s",ctlCmdString[0],
             				  pPvt->pumpNo, displayStr[pr->dspl]);
-
+            	} else { /* Don't use for QPC */
+            		*pvalue = '\0';
+            	}
+ 	    /* Standby or Operate mode setting (Mode  Select) */
             } else if (pr->flgs & MOD_MODS) {
-             	if (pPvt->devType)
+             	if (pPvt->devType && pPvt->devType != 3)
             	    sprintf(pvalue,"M%d",1+pr->mods);
-             	else 
-            	    sprintf(pvalue," %s %d",ctlCmdString[1+pr->mods],
-            	    				pPvt->pumpNo);
+             	else
+            	    sprintf(pvalue," %s %d",ctlCmdString[1+pr->mods],pPvt->pumpNo);
 
-            } else if (pr->flgs & MOD_KLCK) {
-             	if (pPvt->devType)
+     /* Lock/unlock device keypad; don't use for the QPC model 
+      * as it is for remote/local mode and you will loose remote mode if
+      * the keypad is locked
+      */
+            } else if (pr->flgs & MOD_KLCK) { 
+             	if (pPvt->devType && pPvt->devType != 3){
             	    sprintf(pvalue,"M%d",8+pr->klck);
-             	else 
-            	    sprintf(pvalue," %s %d",ctlCmdString[3+pr->klck],
-            	    				pPvt->pumpNo);
+                /* Establish Local communication mode for QPC 
+                 * so never send this commnd to the QPC devType == 3 
+                 * will not allow remote communication to be established again
+                 *
+                 * Should this also allow the Digitel 500/1500 to use this command?
+                 */
+             	} else if (pPvt->devType == 0) { /* MPC ONLY */
+            	    sprintf(pvalue," %s %d",ctlCmdString[3+pr->klck], pPvt->pumpNo);
+                } else { /* Don't use for QPC */
+            		*pvalue = '\0';
+            	}
+
         
             } else if ( (pr->flgs & MOD_BAKE) && pr->bkin) {
-             	if (pPvt->devType)
+             	if (pPvt->devType && pPvt->devType != 3) {
             	    sprintf(pvalue,"M%d",7-pr->baks);
+            	} else { /* Don't use for QPC */
+            		*pvalue = '\0';
+            	}
 
+		/* Set point/hysteresis commands */
             } else if (pr->flgs & MOD_SETP) {
-             	if (pPvt->devType) {
+             	if (pPvt->devType && pPvt->devType != 3) { /* Digitel ONLY */
              	    switch ( pPvt->noSPT) {
              	        case 3:
                   	    if ((pr->spfg & MOD_SP3S) && pr->bkin) {
-                    		/* format Snmxe-0x converted to Snmxy */
+            		/* format Snmxe-0x converted to Snmxy */
                     		sprintf(pvalue,"S31%.0e",pr->sp3s);
                         	pvalue[4] = pvalue[7];
                     		pvalue[5] = '\0';
@@ -369,51 +431,146 @@ static long readWrite_dg(digitelRecord *pr)
                 	    }
 		    }
 
-             	} else {
-            	    if (pr->spfg & MOD_SP1S) {
+             	} else { /* Only for MPC and QPC */
+             	/* Odd pump number uses odd setpoint number for device
+             	 * Even pump number uses even setpoint number for device
+             	 * Set point command 3D variables
+             	 * Command: ~ ADDR 3D Setpoint,Pump#,XX,YY CRC\r
+             	 * From table: XX and YY are record field values for ON set
+             	 * point and OFF set point respectively.
+             	 * Pump#	Setpoint	XX	YY
+             	 *  1		   1		sp1s	s1hr
+             	 *  2		   2		sp2s	s2hr
+             	 * Pumps 3 & 4 are for QPC ONLY
+             	 *  3		   3		sp3s	s3hr
+             	 *  4		   4		sp4s	s4hr
+             	 *
+             	 * In the QPC user manual Rev G both the 3C and 3D commands were
+             	 * replaced by the 3B command which this driver currently does not
+             	 * support; however, the 3C & 3D commands I am told are still
+             	 * made available for bakward compatilibility.
+             	 *
+             	 * Now if we send a on/off set point we must send both and they
+             	 * must be in the range 1.00E-11 - 1.00E-04 for both. Also the 
+             	 * off pressure must be 20% greater than the on pressure or the
+             	 * controller will automatically set the off pressure to 20%
+             	 * greater than the on pressure. THIS IS NOT CHECKED HERE.
+             	 * Because of the set point range noted above I added a check
+             	 * here to make sure that we don't send a bad set point value.
+             	 *
+             	 * Set points 1 & 2 are for MPC and QPC while set points 3 & 4
+             	 * are for the QPC ONLY.
+             	 */
+               /* Set point 1 */     
+           	    if (pr->spfg & MOD_SP1S) { /* ON Pressure */
+                        t1 = pPvt->pumpNo; /* This is defined in the st.cmd */
+                        if (pr->sp1s < 1e-4 || pr->sp1s > 1e-11){
+                        	val1 = pr->sp1s;
+                        	val2 = pr->s1hr;
+                        } else {
+                        	*pvalue = '\0';
+                        	val1 = 0;
+                        }
+          	    } else if (pr->spfg & MOD_S1HS) { /* OFF Pressure */
                         t1 = pPvt->pumpNo;
-                        val1 = pr->sp1s;
-                        val2 = pr->s1hr;
-          	    } else if (pr->spfg & MOD_S2HS) {
+                        if (pr->s1hs < 1e-4 || pr->s1hs > 1e-11){
+                        	val1 = pr->sp1r;
+                        	val2 = pr->s1hs;
+                        } else {
+                        	*pvalue = '\0';
+                        	val1 = 0;
+                        }
+               /* Set point 2 */     
+               	    } else if (pr->spfg & MOD_SP2S) { /* ON Pressure */
+               	    	if (pPvt->devType != 3) {
+                            t1 = 2 + pPvt->pumpNo;
+                        } else {
+                            t1 = pPvt->pumpNo;
+                        }
+                        if (pr->sp2s < 1e-4 || pr->sp2s > 1e-11){
+                        	val1 = pr->sp2s;
+                        	val2 = pr->s2hr; 
+                        } else {
+                        	*pvalue = '\0';
+                        	val1 = 0;
+                        }                       
+           	    } else if (pr->spfg & MOD_S2HS) { /* OFF Pressure */
+           	        if (pPvt->devType != 3) {
+                            t1 = 2 + pPvt->pumpNo;
+                        } else {
+                            t1 = pPvt->pumpNo;
+                        }
+                        if (pr->s2hs < 1e-4 || pr->s2hs > 1e-11){
+                        	val1 = pr->sp2r;
+                        	val2 = pr->s2hs; 
+                        } else {
+                        	*pvalue = '\0';
+                         	val1 = 0;
+                       }
+               /* Set point 3 */     
+               	    } else if ( (pr->spfg & MOD_SP3S)&&(pPvt->devType == 3) ) {
                         t1 = pPvt->pumpNo;
-                        val1 = pr->sp1r;
-                        val2 = pr->s1hs;
-                        
-               	    } else if (pr->spfg & MOD_SP2S) {
-                        t1 = 2 + pPvt->pumpNo;
-                        val1 = pr->sp2s;
-                        val2 = pr->s2hr;
-           	    } else if (pr->spfg & MOD_S2HS) {
-                        t1 = 2 + pPvt->pumpNo;
-                        val1 = pr->sp2r;
-                        val2 = pr->s2hs;
-
-           	    } else if (pr->spfg & MOD_SP3S) {
-                        t1 = 4 + pPvt->pumpNo;
-                        val1 = pr->sp3s;
-                        val2 = pr->s3hr;
-
-            	    } else if (pr->spfg & MOD_S3HS) {
-                        t1 = 4 + pPvt->pumpNo;
-                        val1 = pr->sp3r;
-                        val2 = pr->s3hs;
-            	    }
-            	    sprintf(pvalue," %s %d,%d,%7.1E,%7.1E",ctlCmdString[5],
+                        if (pr->sp3s < 1e-4 || pr->sp3s > 1e-11){
+                        	val1 = pr->sp3s;
+                        	val2 = pr->s3hr; 
+                        } else {
+                        	*pvalue = '\0';
+                         	val1 = 0;
+                       }
+           	    } else if ( (pr->spfg & MOD_S3HS)&&(pPvt->devType == 3) ) {
+                        t1 = pPvt->pumpNo;
+                        if (pr->s3hs < 1e-4 || pr->s3hs > 1e-11){
+                        	val1 = pr->sp3r;
+                        	val2 = pr->s3hs; 
+                        } else {
+                        	*pvalue = '\0';
+                         	val1 = 0;
+                       }
+               /* Set point 4 */     
+               	    } else if ( (pr->spfg & MOD_SP4S)&&(pPvt->devType == 3) ) {
+                        t1 = pPvt->pumpNo;
+                        if (pr->sp4s < 1e-4 || pr->sp4s > 1e-11){
+                        	val1 = pr->sp4s;
+                        	val2 = pr->s4hr; 
+                        } else {
+                        	*pvalue = '\0';
+                        	val1 = 0;
+                        }
+           	    } else if ( (pr->spfg & MOD_S4HS)&&(pPvt->devType == 3) ) {
+                        t1 = pPvt->pumpNo;
+                        if (pr->s4hs < 1e-4 || pr->s4hs > 1e-11){
+                        	val1 = pr->sp4r;
+                        	val2 = pr->s4hs; 
+                        } else {
+                        	*pvalue = '\0';
+                        	val1 = 0;
+                        }
+		    }
+		    if (val1 != 0){
+		    	/* ctlCmdString[5] = Set supply set point */
+            	    	sprintf(pvalue," %s %d,%d,%7.1E,%7.1E",ctlCmdString[5],
             				t1,pPvt->pumpNo,val1,val2);
+            	    } else {
+            	    	*pvalue = '\0';
+         		asynPrint(pPvt->pasynUser, ASYN_TRACEIO_DEVICE,
+              			"devDigitelPump::readWrite_dg Invalid set \
+              			 point value for record %s SP%d \n",
+              			 pr->name, pPvt->pumpNo);
+           	    }
 		}
-
             	pr->spfg = 0;
             }
             pr->flgs = 0;
-	    pPvt->command = cmdControl;
-	    buildCommand(pPvt, pvalue);	    
+	    if (val1 != 0){ /* Then send the command via buildCommand */
+	    	pPvt->command = cmdControl;
+	    	buildCommand(pPvt, pvalue);	    
+	    }
 
-	/* if record has error for Digitel then  send the reset command */
-        } else if (pPvt->errCount != 0 && pPvt->devType) {
-	    pPvt->command = cmdReset;
-
+	/* if record has error for Digitel then send the reset command */
+        } else if (pPvt->errCount != 0 && pPvt->devType > 0 && pPvt->devType != 3) {
+		pPvt->command = cmdReset;
         } else {
-	    pPvt->command = cmdRead;
+		pPvt->command = cmdRead;
         }
  
         asynPrint(pPvt->pasynUser, ASYN_TRACEIO_DEVICE,
@@ -422,14 +579,14 @@ static long readWrite_dg(digitelRecord *pr)
 	
 	pr->pact = 1;
 	status = pasynManager->queueRequest(pasynUser, 0, 0);
-    if (status != asynSuccess) {
-        asynPrint(pasynUser, ASYN_TRACE_ERROR,
-              "devDigitelPump::readWrite %s ERROR calling queueRequest status=%d, error=%s\n",
+        if (status != asynSuccess) {
+        	asynPrint(pasynUser, ASYN_TRACE_ERROR,
+                  "devDigitelPump::readWrite %s ERROR calling queueRequest status=%d, error=%s\n",
 		        pr->name, status, pasynUser->errorMessage);
-	    status = -1;
-	    pr->pact = 0;
-        recGblSetSevr(pr, COMM_ALARM, INVALID_ALARM);
-    }
+	        status = -1;
+	        pr->pact = 0;
+            recGblSetSevr(pr, COMM_ALARM, INVALID_ALARM);
+        }
         return(status);
     }
 /*  
@@ -437,7 +594,7 @@ static long readWrite_dg(digitelRecord *pr)
 *	check the error count.
 *	if ERR = 0 then process normally.  
 *	If ERR > allowed Error then set the invalid read alarm and return.
-*	if ERR >0  & <= allowed Error then skip writing to fields.
+*	if ERR > 0  & <= allowed Error then skip writing to fields.
 */
     pr->err = pPvt->errCount;
     if (pr->err > MAX_CONSEC_ERRORS) {
@@ -459,6 +616,7 @@ static long readWrite_dg(digitelRecord *pr)
     pr->set1 = 0;
     pr->set2 = 0;
     pr->set3 = 0;
+    pr->set4 = 0;
     pr->ptyp = 0;
     pr->s1mr = 0;
     pr->s1vr = 1;
@@ -467,10 +625,12 @@ static long readWrite_dg(digitelRecord *pr)
     pr->s3mr = 0;
     pr->s3vr = 1;
     pr->s3br = 0;
+    pr->s4mr = 0;
+    pr->s4vr = 1;
     pr->val = 9.9e+9;
 
 /*  for Digitel commands */
-    if (pPvt->devType ) {
+    if (pPvt->devType && pPvt->devType != 3) {
 	/*  Decode the time online, pump voltage & current */
 	strncpy(pvalue,&pPvt->recBuf[0],22);
 	sscanf(pvalue,"%d %d:%d %lfV%leI",&t1,&t2,&t3,&pr->volt,&pr->crnt);
@@ -575,9 +735,8 @@ static long readWrite_dg(digitelRecord *pr)
             	    pr->s1vr = 0;
 	}   	
 
-/*  for MPC   */
+/* for MPC and QPC */
     } else {
-
 	/*  get the status first and the mode and cool down mode properly. */
     	strncpy(pvalue,&pPvt->recBuf[0],20);
     	if (strncmp(pvalue,"RUNNING",7) == 0)
@@ -590,17 +749,16 @@ static long readWrite_dg(digitelRecord *pr)
     	sscanf(pvalue,"%e",&val1);
     	pr->val = val1;
 
-	/*  read the voltage */
-    	strncpy(pvalue,&pPvt->recBuf[90],4);
-    	sscanf(pvalue,"%d",&t1);
-    	pr->volt = t1;
-
 	/*  read the current */
     	strncpy(pvalue,&pPvt->recBuf[60],7);
     	sscanf(pvalue,"%e",&val2);
     	pr->crnt = val2;
 
-    
+	/*  read the voltage */
+    	strncpy(pvalue,&pPvt->recBuf[90],4);
+    	sscanf(pvalue,"%d",&t1);
+    	pr->volt = t1;
+
 	/* When pump is turned off */
     	if (pr->volt < 1000 && pr->crnt < 1e-6)
     	    pr->val = 9.9e9;
@@ -608,6 +766,11 @@ static long readWrite_dg(digitelRecord *pr)
 /*
 *  	read the Pump Size - the record has a list of old pump sizes in
 *    	30,60,120,220,400,700 l/s so change the value to fit one of these.
+*       
+*       For the QPC the pump size may be set on the front panel display
+*       to any number up to 4 digits. Not sure at this time if it allows
+*       0000 - 9999 inclusive or not but there must be a finite number of
+*       ion pump sizes.
 */
     	strncpy(pvalue,&pPvt->recBuf[120],4);
     	sscanf(pvalue,"%d ",&pumpType);
@@ -622,33 +785,61 @@ static long readWrite_dg(digitelRecord *pr)
     	else if (pumpType < 500)
     	    pr->ptyp = 4;
     	else
-    	    pr->ptyp = 5;
-   
-	/*  read the Setpoint 1 or 2 */
+    	    pr->ptyp = 5; /* This is 700 L/s in record dbd file */
+    	    
+        /* Even pump number goes with even setpoints */
+        /* Odd pump number goes with odd setpoints */
+	/*  read Setpoint 1 or 2 */
+	/* Format is n,s,X.XE-XX,Y.YE-YY,ST 
+	 * Where: n = Set point number (1-8)
+	 *        s = Supply number (1-4)
+	 * X.XXE-XX = On Point pressure
+	 * Y.YYE-YY = Off Point pressure
+	 *       ST = 1 (active) or 0 (inactive)
+	 */
 	strncpy(pvalue,&pPvt->recBuf[150],25);
     	sscanf(pvalue,"%d,%d,%e,%e,%d",&t1,&t2,&val1,&val2,&t3);
     	pr->sp1r = val1;
     	pr->s1hr = val2;
     	pr->set1 = t3;
 
-	/*  read the Setpoint 3 or 4 */
+	/*  read Setpoint 3 or 4 */
 	strncpy(pvalue,&pPvt->recBuf[180],25);
     	sscanf(pvalue,"%d,%d,%e,%e,%d",&t1,&t2,&val1,&val2,&t3);
     	pr->sp2r = val1;
     	pr->s2hr = val2; 
     	pr->set2 = t3;
 
-	/*  read the Setpoint 5 or 6  */
+	/*  read Setpoint 5 or 6 */
 	strncpy(pvalue,&pPvt->recBuf[210],25);
     	sscanf(pvalue,"%d,%d,%e,%e,%d",&t1,&t2,&val1,&val2,&t3);
     	pr->sp3r = val1;
     	pr->s3hr = val2;
     	pr->set3 = t3;
-    }
+	
+	/* Read set point 4 */
+	strncpy(pvalue,&pPvt->recBuf[240],25);
+    	sscanf(pvalue,"%d,%d,%e,%e,%d",&t1,&t2,&val1,&val2,&t3);
+    	pr->sp4r = val1;
+    	pr->s4hr = val2; 
+    	pr->set4 = t3;
+
+    	/* Currently not using setpoints 7 & 8 which are digital */
+    	
+	/*  read Model Number */
+	strncpy(pr->modl,&pPvt->recBuf[278],4);	
+	/*  read Firmware Version */
+	if (pPvt->devType == 3){
+	    strncpy(pr->vers,&pPvt->recBuf[318],5);
+	} else {
+	    strncpy(pr->vers,&pPvt->recBuf[318],8);
+	}	
+     }
 
     pr->lval = log10(pr->val);
     if (pr->val < 1e-12 ) pr->lval = -12;
     pr->udf=0;
+
     return(0);
 }
 
@@ -692,15 +883,15 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
         }
 
 	/* for Digitel */
-	if (pPvt->devType) {	
+	if (pPvt->devType && pPvt->devType != 3) {	
             if (readBuffer[0] !='M' && readBuffer[0] != 'S') {
             	asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   	"devDigitelPumpCallback %s Cmd reply has error=[%s]\n", 
                   	pr->name, readBuffer);
 	    	recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
-            	goto finish;;
+            	goto finish;
             }
-	/* for MPC */
+	/* for MPC and QPC */
 	} else  {	
 	    if(readBuffer[3]!='O' || readBuffer[4] != 'K') {
             	asynPrint(pasynUser, ASYN_TRACE_ERROR,
@@ -711,8 +902,8 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
             }
 	} 
 
-    /*  for Digitel 500/1500 issue reset commands  */
-    } else if (pPvt->command == cmdReset && pPvt->devType) {
+    /*  for Digitel 500/1500 issue reset commands not for QPC */
+    } else if (pPvt->command == cmdReset && pPvt->devType && pPvt->devType != 3) {
    	strcpy( pPvt->sendBuf,"SL3");
         devDigitelPumpProcess(pasynUser,readBuffer,&nread);
        	strcpy( pPvt->sendBuf,"SL4");
@@ -722,19 +913,22 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
 
 /*   Now start the various reads ......
  *   make sure to check the devType and send the correct set of commands
- *   devType ->  0 = MPC , 1 & 2 Digitel 500 and 1500
+ *   devType ->  0 = MPC , 1 & 2 Digitel 500 and 1500, 3 = QPC
  *   MPC has 8 commands while Digitel has either 2-5 based on noSPT
  *   The data will be packed into responseBuf 
 
- *   The locations are as follows for MPC:
+ *   The locations are as follows for MPC and QPC:
  *   responseBuf[0-29]    = Pump Status
  *   responseBuf[30-59]   = Pressure
  *   responseBuf[60-89]   = Current
  *   responseBuf[90-119]   = Voltage
  *   responseBuf[120-149] = Pump Size
  *   responseBuf[150-179] = SetPoint 1 or 2
- *   responseBuf[180-209] = SetPoint 3 or 4
- *   responseBuf[210-239] = SetPoint 5 or 6 
+ *   responseBuf[180-209] = SetPoint 2
+ *   responseBuf[210-239] = SetPoint 3 or 4
+ *   responseBuf[240-269] = SetPoint 4 
+ *   responseBuf[270-299] = Model Number 
+ *   responseBuf[300-319] = Firmware Version 
  *
  *   The locations are as follows for Digitel:
  *   responseBuf[0-29]    = Pump Status
@@ -744,27 +938,85 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
  *   responseBuf[120-149] = SetPoint 3
 */   
 
-
-    for (i=0;i<8;i++) {
+    /****************************************************
+     * See devDigitelPump.h
+     * This for loop is for the read commands
+     * i	Command	    Description
+     * 0	  OD	    Get Supply Status
+     * 1	  0B	    Read Pressure
+     * 2 	  0A	    Read Current
+     * 3	  0C	    Read Voltage
+     * 4	  11	    Get Pump Size
+     * 5	  3C	    Get Setpoint
+     * 6	  3C	    Get Setpoint
+     * 7	  3C	    Get Setpoint
+     * 8	  01	    Read Model Number
+     * 9	  02	    Read Firmware Version Level
+     *****************************************************/
+    for (i=0;i<11;i++) {
 	/*  check for Digitel setpoints and exit when commands are done */	
-        if (pPvt->devType && pPvt->noSPT == 0 && i > 1) continue;
-        if (pPvt->devType && pPvt->noSPT == 1 && i > 2) continue;
-        if (pPvt->devType && pPvt->noSPT == 2 && i > 3) continue;
-        if (pPvt->devType && pPvt->noSPT == 3 && i > 4) continue;
+        if (pPvt->devType && pPvt->devType != 3 && pPvt->noSPT == 0 && i > 1) continue;
+        if (pPvt->devType && pPvt->devType != 3 && pPvt->noSPT == 1 && i > 2) continue;
+        if (pPvt->devType && pPvt->devType != 3 && pPvt->noSPT == 2 && i > 3) continue;
+        if (pPvt->devType && pPvt->devType != 3 && pPvt->noSPT == 3 && i > 4) continue;
 	
 	/* for Digitel 500/1500 the read commands are offset by 10 */
-	if (pPvt->devType) {
-	    strcpy(pvalue,readCmdString[10 + i]);
-	} else {
-	    if ( i < 5) 
+	if (pPvt->devType && pPvt->devType != 3) {
+	    strcpy(pvalue,readCmdString[11 + i]);
+	} else { /* For MPC and QPC commands */
+	    if ( i < 5){
+	    /* Good for the following commands:
+	     * readCmdString[0] = 0D = Get Supply Status
+	     * readCmdString[1] = 0B = Read Pressure
+	     * readCmdString[2] = 0A = Read Current
+	     * readCmdString[3] = 0C = Read Voltage
+	     * readCmdString[4] = 11 = Get pump size
+	     */
                 sprintf(pvalue," %s %d",readCmdString[i], pPvt->pumpNo);
-	    else 
-            	/* set the setpoint based on pump being odd/even */
-            	sprintf(pvalue," %s %d",readCmdString[i], 
-            	    			((i-5)*2 + pPvt->pumpNo));
+	    } else if (i > 4 && i < 9){ 
+             /* Good for the following commands:
+              * readCmdString[5] = 3C = Get Set point
+              * readCmdString[6] = 3C = Get Set point
+              * readCmdString[7] = 3C = Get Set point
+              * readCmdString[8] = 3C = Get Set point
+              */
+                if (pPvt->devType == 0){
+                	if(i<8){
+            	/* Get the setpoint based on pump being odd/even for MPC */
+            			sprintf(pvalue," %s %d",readCmdString[i],
+            			          ((i-5)*2 + pPvt->pumpNo));
+            		}
+            	} else { /* For QPC ONLY */
+            	/* Here we have only 1 set point per pump so only get 1*/
+            		if(i==5){
+            			sprintf(pvalue," %s %d",readCmdString[i], 
+            			        pPvt->pumpNo);
+            		}
+            	}
+            } else { /* For MPC & QPC model and version commands */
+            	if (i > 8 || i < 11){
+             /* Good for the following commands:
+              * readCmdString[9] = 01 = Get model number
+              * readCmdString[10] = 02 = Get firmware version
+              */
+            	    sprintf(pvalue," %s",readCmdString[i]);
+            	}
+            }
 	}
-	buildCommand(pPvt,pvalue);
-	devDigitelPumpProcess(pasynUser,readBuffer,&nread);
+	/* Don't send more than one 3C command for a QPC pump */
+	if (pPvt->devType == 3 && ((i<6)||(i>8)) ){
+		/* Build the command to send to the device */
+		buildCommand(pPvt,pvalue);
+		/* send and receive the command */
+		devDigitelPumpProcess(pasynUser,readBuffer,&nread);
+	} else {
+		if (pPvt->devType == 0){
+		/* Build the command to send to the device */
+			buildCommand(pPvt,pvalue);
+		/* send and receive the command */
+			devDigitelPumpProcess(pasynUser,readBuffer,&nread);
+            	}
+	}
 
         if (nread < 1) {
             asynPrint(pasynUser, ASYN_TRACE_ERROR,
@@ -792,7 +1044,7 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
 *		of the commands and strips the leading \n	
 */              
 	/* for Digitel */
-	if (pPvt->devType) {
+	if (pPvt->devType && pPvt->devType != 3) {
             if (readBuffer[4] =='E' || readBuffer[5] =='E' || readBuffer[0] =='E') {
             	asynPrint(pasynUser, ASYN_TRACE_ERROR,
                   	"devDigitelPumpCallback %s Read reply has error=[%s]\n", 
@@ -812,7 +1064,7 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
             	pstartdata = &readBuffer[0];
             }
 
-	/* for MPC */	
+	/* for MPC and QPC */	
 	} else  {    
     	    if(readBuffer[3]=='O' && readBuffer[4] == 'K') {
         	if (nread < 12 ) {
@@ -820,7 +1072,7 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
             	    pstartdata = &readBuffer[0];
         	} else {
             	    /* strip off the header cmds */
-            	    pstartdata = &readBuffer[9];  
+            	    pstartdata = &readBuffer[9];
        		}
     	    } else {
             	asynPrint(pasynUser, ASYN_TRACE_ERROR,
@@ -831,11 +1083,14 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
     	    
     	    }
         }
-
+ 	asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
+                  "devDigitelPumpCallback %s Read reply = [%s]\n", 
+                   pr->name, pstartdata);
  	strcpy(&responseBuffer[30*i],pstartdata);
+ 	strcpy(&pPvt->recBuf[30*i],pstartdata);
     }
     /* for successful read set err field=0 */
-    pPvt->errCount=0;    
+    pPvt->errCount=0;
 
 /* 
 * 	Process the record. This will result in the readWrite_dg routine
@@ -857,7 +1112,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
     devDigitelPumpPvt *pPvt = (devDigitelPumpPvt *)pr->dpvt;
     size_t  nwrite; 
     int eomReason;
-                                           
+                                               
     pPvt->pasynUser->timeout = DigitelPump_TIMEOUT;
 
 /*
@@ -879,20 +1134,35 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
                             inputEos, strlen(inputEos));
     }
  */
-    pPvt->status = pPvt->pasynOctet->write(pPvt->octetPvt, pasynUser, 
+    if(strlen(pPvt->sendBuf) >= 10){
+        pPvt->status = pPvt->pasynOctet->write(pPvt->octetPvt, pasynUser, 
                             pPvt->sendBuf, strlen(pPvt->sendBuf), &nwrite);
-
-    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
-             	"devDigitelPumpProcess %s nwrite=%d output=[%s]\n",
-              	pr->name, (int) nwrite, pPvt->sendBuf);
+        if(pPvt->status!=asynSuccess) {
+            asynPrint(pasynUser,ASYN_TRACE_ERROR,
+                "devDigitelPumpProcess write failed %s\n",pasynUser->errorMessage);
+        } else {
+    	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
+             	   "devDigitelPumpProcess %s nwrite=%d output=[%s]\n",
+              	   pr->name, (int) nwrite, pPvt->sendBuf);
+        }
     
-    pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser, 
+        pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser, 
                             readBuffer, DigitelPump_SIZE, &nwrite, &eomReason);
-
-    *nread = nwrite;
-    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
-              	"devDigitelPumpProcess %s nread=%d input=[%s]\n",
-              	pr->name, *nread, readBuffer);
+        if(pPvt->status!=asynSuccess) {
+            asynPrint(pasynUser,ASYN_TRACE_ERROR,
+                "devDigitelPumpProcess read failed %s\n",pasynUser->errorMessage);
+            *nread = nwrite;
+        } else {
+    	    *nread = nwrite;
+    	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
+              	    "devDigitelPumpProcess %s nread=%d input=[%s]\n",
+              	    pr->name, *nread, readBuffer);
+        }
+    } else {
+            asynPrint(pasynUser,ASYN_TRACE_ERROR,
+                "devDigitelPumpProcess sendBuf too small %s command=[%s]\n",
+                      pasynUser->errorMessage,pPvt->sendBuf);
+    }
 
 /*
  *  	for Digitel 500/1500 the reply for commands is only "\n*" 

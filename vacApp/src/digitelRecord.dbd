@@ -63,9 +63,24 @@ menu(digitelTYPE) {
 	choice(digitelTYPE_Digitel_MPC,"MPC")
 	choice(digitelTYPE_Digitel_500,"D500")
 	choice(digitelTYPE_Digitel_1500,"D1500")
+	choice(digitelTYPE_Digitel_QPC,"QPC")
 }
 recordtype(digitel) {
 	include "dbCommon.dbd" 
+	field(MODL,DBF_STRING) {
+		prompt("Device Model Number")
+		promptgroup(GUI_COMMON)
+		special(SPC_NOMOD)
+		size(13)
+		interest(1)
+	}
+	field(VERS,DBF_STRING) {
+		prompt("Device Firmware Vers")
+		promptgroup(GUI_COMMON)
+		special(SPC_NOMOD)
+		size(10)
+		interest(1)
+	}
 	field(INP,DBF_INLINK) {
 		prompt("Device Specification")
 		promptgroup(GUI_COMMON)
@@ -208,6 +223,11 @@ recordtype(digitel) {
 	}
 	field(SET3,DBF_MENU) {
 		prompt("Setpoint 3")
+		special(SPC_NOMOD)
+		menu(digitelSET1)
+	}
+	field(SET4,DBF_MENU) {
+		prompt("Setpoint 4")
 		special(SPC_NOMOD)
 		menu(digitelSET1)
 	}
@@ -378,6 +398,48 @@ recordtype(digitel) {
 		prompt("Bake Time Read")
 		special(SPC_NOMOD)
 	}
+	field(SP4S,DBF_DOUBLE) {
+		prompt("SP4 Setpoint")
+		special(SPC_MOD)
+		pp(TRUE)
+	}
+	field(SP4R,DBF_DOUBLE) {
+		prompt("SP4 SP Readback")
+		special(SPC_NOMOD)
+	}
+	field(S4HS,DBF_DOUBLE) {
+		prompt("SP4 Hysteresis")
+		special(SPC_MOD)
+		pp(TRUE)
+	}
+	field(S4HR,DBF_DOUBLE) {
+		prompt("SP4 HY Readback")
+		special(SPC_NOMOD)
+	}
+	field(S4MS,DBF_MENU) {
+		prompt("SP4 Mode")
+		promptgroup(GUI_LINKS)
+		special(SPC_MOD)
+		pp(TRUE)
+		menu(digitelS1MS)
+	}
+	field(S4MR,DBF_MENU) {
+		prompt("SP4 Mode Readback")
+		special(SPC_NOMOD)
+		menu(digitelS1MS)
+	}
+	field(S4VS,DBF_MENU) {
+		prompt("SP4 HV Interlock")
+		promptgroup(GUI_MBB)
+		special(SPC_MOD)
+		pp(TRUE)
+		menu(digitelS1VS)
+	}
+	field(S4VR,DBF_MENU) {
+		prompt("SP4 HVI Readback")
+		special(SPC_NOMOD)
+		menu(digitelS1VS)
+	}
 	field(HOPR,DBF_FLOAT) {
 		prompt("Pressure Display Hi")
 		promptgroup(GUI_SEQ2)
@@ -537,6 +599,11 @@ recordtype(digitel) {
 		special(SPC_NOMOD)
 		menu(digitelSET1)
 	}
+	field(ISP4,DBF_MENU) {
+		prompt("init set4")
+		special(SPC_NOMOD)
+		menu(digitelSET1)
+	}
 	field(IACW,DBF_DOUBLE) {
 		prompt("init Acc power")
 		special(SPC_NOMOD)
@@ -613,6 +680,24 @@ recordtype(digitel) {
 		prompt("init sp3 bake time md")
 		special(SPC_NOMOD)
 		menu(digitelS3BS)
+	}
+	field(IS4,DBF_DOUBLE) {
+		prompt("init sp4")
+		special(SPC_NOMOD)
+	}
+	field(IH4,DBF_DOUBLE) {
+		prompt("init sp4 HY")
+		special(SPC_NOMOD)
+	}
+	field(IM4,DBF_MENU) {
+		prompt("init sp4 mode")
+		special(SPC_NOMOD)
+		menu(digitelS1MS)
+	}
+	field(II4,DBF_MENU) {
+		prompt("init sp4 HVI")
+		special(SPC_NOMOD)
+		menu(digitelS1VS)
 	}
 	field(IT3,DBF_DOUBLE) {
 		prompt("init sp3 bake time")

@@ -1,2 +1,5 @@
 device(digitel,	INST_IO, devDigitelPump, "asyn DigitelPump")
 #include "asyn.dbd"
+
+variable(recDigitelDebug, int)
+

@@ -64,6 +64,7 @@
  * .02  11-4-96      nda     converted to R3.13 compatibility
  * .03  2-20-01      mr      Added additional field to keep track of errors
  *	Modified by Mohan Ramanathan 8/15/07 for ASYN on R3.14
+ * .04  03-27-18     mls     Added exportAddress for recDigitelDebug
 #include <limits.h>
 
  *
@@ -100,7 +101,8 @@
 #define DIGITEL_MINSP	0
 
 int recDigitelsimFlag = 0;
-int recDigitelDebug = 0;
+volatile int recDigitelDebug = 0;
+epicsExportAddress(int,recDigitelDebug);
 /***** recDigitelDebug information *****/
 /** recDigitelDebug >= 0 --- initialization information **/
 /** recDigitelDebug >= 5 --- simulation mode **/
@@ -291,6 +293,10 @@ static long process(void *precord)
 	pdg->ii3 = pdg->s3vr;
 	pdg->ib3 = pdg->s3br;
 	pdg->it3 = pdg->s3tr;
+	pdg->is4 = pdg->sp4r;
+	pdg->ih4 = pdg->s4hr;
+	pdg->im4 = pdg->s4mr;
+	pdg->ii4 = pdg->s4vr;
 	pdg->iton = pdg->tonl;
 	pdg->icrn = pdg->crnt;
 	pdg->ivol = pdg->volt;
@@ -404,7 +410,7 @@ static long get_precision(DBADDR *paddr, long *precision)
  * precord->flgs.
  *
  * A secondary purpose of this function is to clamp the limits of the
- * SP1, SP2, and SP3 setpoint and hysteresis fields.
+ * SP1, SP2, SP3, and SP4 setpoint and hysteresis fields.
  *
  ******************************************************************************/
 static long special(DBADDR *paddr, int after)
@@ -535,6 +541,34 @@ static long special(DBADDR *paddr, int after)
 	pdg->flgs |= MOD_SETP;
 	if (recDigitelDebug >= 15)
 	    printf("recDigitel.c: >%s< S3TS changed to %f\n", pdg->name, pdg->s3ts);
+    } else if (p == &(pdg->sp4s)) {
+	if (pdg->sp4s > DIGITEL_MAXSP)
+	    pdg->sp4s = DIGITEL_MAXSP;
+	else if (pdg->sp4s < DIGITEL_MINSP)
+	    pdg->sp4s = DIGITEL_MINSP;
+	if (recDigitelDebug >= 15)
+	    printf("recDigitel.c: >%s< SP4S changed to %e\n", pdg->name, pdg->sp4s);
+	pdg->spfg |= MOD_SP4S;
+	pdg->flgs |= MOD_SETP;	
+    } else if (p == &(pdg->s4hs)) {
+	if (pdg->s4hs > DIGITEL_MAXHY)
+	    pdg->s4hs = DIGITEL_MAXHY;
+	else if (pdg->s4hs < DIGITEL_MINHY)
+	    pdg->s4hs = DIGITEL_MINHY;
+	if (recDigitelDebug >= 15)
+	    printf("recDigitel.c: >%s< S4HS changed to %e\n", pdg->name, pdg->s4hs);
+	pdg->spfg |= MOD_S4HS;
+	pdg->flgs |= MOD_SETP;
+    } else if (p == &(pdg->s4ms)) {
+	pdg->spfg |= MOD_S4MS;
+	pdg->flgs |= MOD_SETP;
+	if (recDigitelDebug >= 15)
+	    printf("recDigitel.c: >%s< S4MS changed to %d\n", pdg->name, pdg->s4ms);
+    } else if (p == &(pdg->s4vs)) {
+	pdg->spfg |= MOD_S4VS;
+	pdg->flgs |= MOD_SETP;
+	if (recDigitelDebug >= 15)
+	    printf("recDigitel.c: >%s< S4VS changed to %d\n", pdg->name, pdg->s4vs);
     }
     return (0);
 }
@@ -549,12 +583,15 @@ static long get_graphic_double(DBADDR *paddr, struct dbr_grDouble *pgd)
     void *p;
     p = (void *) (paddr->pfield);
     if ((p == &(pdg->s1hs)) || (p == &(pdg->s2hs)) || (p == &(pdg->s3hs)) ||
-	(p == &(pdg->s1hr)) || (p == &(pdg->s2hr)) || (p == &(pdg->s3hr))) {
+	(p == &(pdg->s1hr)) || (p == &(pdg->s2hr)) || (p == &(pdg->s3hr)) ||
+	(p == &(pdg->s4hs)) || 
+	(p == &(pdg->s4hr))) {
 	pgd->upper_disp_limit = DIGITEL_MAXHY;
 	pgd->lower_disp_limit = DIGITEL_MINHY;
     } else if ((p == &(pdg->sp1s)) || (p == &(pdg->sp2s)) || 
-               (p == &(pdg->sp3s)) || (p == &(pdg->sp1r)) || 
-               (p == &(pdg->sp2r)) || (p == &(pdg->sp3r))) {
+               (p == &(pdg->sp3s)) || (p == &(pdg->sp4s)) ||
+               (p == &(pdg->sp1r)) || (p == &(pdg->sp2r)) || 
+               (p == &(pdg->sp3r)) || (p == &(pdg->sp4r))) {
 	pgd->upper_disp_limit = DIGITEL_MAXSP;
 	pgd->lower_disp_limit = DIGITEL_MINSP;
     } else if (p == &(pdg->val)) {
@@ -583,11 +620,12 @@ static long get_control_double(DBADDR *paddr, struct dbr_ctrlDouble * pcd)
     digitelRecord *pdg = (digitelRecord *) (paddr->precord);
     void *p;
     p = (void *) (paddr->pfield);
-    if ((p == &(pdg->s1hs)) || (p == &(pdg->s2hs)) || (p == &(pdg->s3hs))) {
+    if ((p == &(pdg->s1hs)) || (p == &(pdg->s2hs)) || (p == &(pdg->s3hs)) || 
+        (p == &(pdg->s4hs))) {
 	pcd->upper_ctrl_limit = DIGITEL_MAXHY;
 	pcd->lower_ctrl_limit = DIGITEL_MINHY;
     } else if ((p == &(pdg->sp1s)) || (p == &(pdg->sp2s)) || 
-    	       (p == &(pdg->sp3s))) {
+    	       (p == &(pdg->sp3s)) || (p == &(pdg->sp4s))) {
 	pcd->upper_ctrl_limit = DIGITEL_MAXSP;
 	pcd->lower_ctrl_limit = DIGITEL_MINSP;
     } else
@@ -709,6 +747,8 @@ static void monitor(digitelRecord *pdg)
 	db_post_events(pdg, &pdg->set2, monitor_mask);
     if ((pdg->isp3 != pdg->set3) || (alrm_chg_flg))
 	db_post_events(pdg, &pdg->set3, monitor_mask);
+    if ((pdg->isp4 != pdg->set4) || (alrm_chg_flg))
+	db_post_events(pdg, &pdg->set4, monitor_mask);
     if ((pdg->iacw != pdg->accw) || (alrm_chg_flg))
 	db_post_events(pdg, &pdg->accw, monitor_mask);
     if ((pdg->iaci != pdg->acci) || (alrm_chg_flg))
@@ -743,6 +783,14 @@ static void monitor(digitelRecord *pdg)
 	db_post_events(pdg, &pdg->s3br, monitor_mask);
     if ((pdg->it3 != pdg->s3tr) || (alrm_chg_flg))
 	db_post_events(pdg, &pdg->s3tr, monitor_mask);
+    if ((pdg->is4 != pdg->sp4r) || (alrm_chg_flg))
+	db_post_events(pdg, &pdg->sp4r, monitor_mask);
+    if ((pdg->ih4 != pdg->s4hr) || (alrm_chg_flg))
+	db_post_events(pdg, &pdg->s4hr, monitor_mask);
+    if ((pdg->im4 != pdg->s4mr) || (alrm_chg_flg))
+	db_post_events(pdg, &pdg->s4mr, monitor_mask);
+    if ((pdg->ii4 != pdg->s4vr) || (alrm_chg_flg))
+	db_post_events(pdg, &pdg->s4vr, monitor_mask);
     if ((pdg->iton != pdg->tonl) || (alrm_chg_flg))
 	db_post_events(pdg, &pdg->tonl, monitor_mask);
     if ((pdg->icrn != pdg->crnt) || (alrm_chg_flg))

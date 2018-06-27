@@ -2,17 +2,16 @@
 *
 *  Author: Mohan Ramanathan
 *  July 2007  
-*  A common one for Digitel 500, Digitel 1500 and MPC/LPC/SPC
+*  A common one for Digitel 500, Digitel 1500 and MPC/LPC/SPC/QPCe
 *
 *
 */
-
 
 typedef enum {cmdRead, cmdControl, cmdReset} cmdType;
 
 static const char * const readCmdString[] = 
 {
-    "0D", "0B", "0A", "0C", "11", "3C", "3C", "3C" ,"","", 
+    "0D", "0B", "0A", "0C", "11", "3C", "3C", "3C","3C", "01","02", 
     "RD", "RC",  "RS1",  "RS2",  "RS3","","","","",""
 };
 
