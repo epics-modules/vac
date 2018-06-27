@@ -1,0 +1,76 @@
+eval 'exec perl -S -w  $0 ${1+"$@"}'  # -*- Mode: perl -*-
+        if 0; 
+#
+# Startup for ASD-compliant soft IOC applications
+# siocAsdStart,v 1.22 2004/10/04 15:26:10 norume Exp
+#
+
+my (@options, $executable, $script, $ioc, $host, @screenOptions);
+
+#############################################################################
+##### Application developer should edit the following lines as required #####
+#
+# siocAsdLaunch script options (e.g. -r == restart, -cN == restart N times)
+@options = ("-c10");
+#
+##############################
+# override
+#$ENV{"IOC_INFO"} = "/home/phoebus/JBA/epics/apps/R3.14.7/asdStd1/iocinfo";
+##############################
+#
+# IOC executable
+# If the IOC is to be run on a single architectures the $ENV{EPICS_HOST_ARCH}
+# can be changed to that architecture.
+$executable = "../../bin/$ENV{EPICS_HOST_ARCH}/fe";
+#
+#
+# IOC startup script
+$script = "st.cmd";
+#
+#
+# IOC name (default is name of directory containing IOC startup script)
+#$ioc = "<siocname>";
+#
+#
+# Machine on which IOC is to run (default is to run anywhere)
+$host = "";
+#
+############### No changes should be needed beyond this point ###############
+#############################################################################
+
+#
+# Chdir to the directory where this script resides.
+# This allows the application to be started from any directory.
+#
+use File::Basename;
+use Cwd 'abs_path';
+my ($dir, $start);
+$dir = abs_path(dirname("$0"));
+$start = $dir."/".basename("$0");
+chdir $dir or die "Can't cd to $dir";
+
+#
+# Revert to default name if necessary
+#
+if(!$ioc) {
+    use File::Spec;
+    my @startupPath;
+    @startupPath = File::Spec->splitdir(abs_path(dirname($script)));
+    $ioc = "$startupPath[$#startupPath]";
+    $ioc="s".$ioc if($ioc =~ /^ioc/);
+}
+$screenName = lc($ioc);
+
+#
+# Start in detached mode if necessary
+#
+@screenOptions = ("-d", "-m") if (!-t STDIN || !-t STDOUT || !-t STDERR);
+
+#
+# Start the IOC launcher script inside a screen session.
+#
+exec "screen", ("-S", "$screenName", @screenOptions,
+                "perl", "../../templates/siocAsdLaunch",
+                @options, "$ioc", "$executable", "$script", "$start",
+                "$host" ? "$host" : "" );
+die "Can't execute IOC launcher";
