@@ -18,15 +18,15 @@
 
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
-SUPPORT=/home/oxygen/MOONEY/epics/synAppsSVN/support
+SUPPORT=/home/oxygen/MOONEY/epics/synAppsGIT/support
 -include $(TOP)/../configure/SUPPORT.$(EPICS_HOST_ARCH)
 
-IPAC=$(SUPPORT)/ipac-2-12
+IPAC=$(SUPPORT)/ipac-2-14
 
-ASYN=$(SUPPORT)/asyn-4-23
+ASYN=$(SUPPORT)/asyn-R4-32
 
 # EPICS_BASE usually appears last so other apps can override stuff:
-EPICS_BASE=/APSshare/epics/base-3.14.12.4
+EPICS_BASE=/APSshare/epics/base-3.14.12.5
 -include $(TOP)/../configure/EPICS_BASE.$(EPICS_HOST_ARCH)
 
 #Capfast users may need the following definitions
