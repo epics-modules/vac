@@ -1,0 +1,67 @@
+OutTerminator = CR;
+InTerminator = CR;
+ReadTimeout = 2000;
+ReplyTimeout = 2000;
+
+getCurrent
+{
+	out "cmd 0A \$1";
+	# out "~ 00 0A \$1 00";
+	in "%*6c%E";
+	ExtraInput = Ignore;
+}
+
+getPressure
+{
+	out "cmd 0B \$1";
+	# out "~ 00 0B \$1 00";
+	in "%*6c%E";
+	ExtraInput = Ignore;
+}
+
+getVoltage
+{
+	out "cmd 0C \$1";
+	# out "~ 00 0C \$1 00";
+	in "%*6c%f";
+}
+
+getStatus
+{
+	out "cmd 0D \$1";
+	# out "~ 00 0D \$1 00";
+	in "%*6c%s";
+	ExtraInput = Ignore;
+}
+
+getPressureUnit
+{
+	out "cmd 0B 1";
+	# out "~ 00 0B 01 00";
+	in "%*6c%*f%*1c%s";
+}
+
+isEnabled
+{
+	out "cmd 61 \$1";
+	in "%*6c%s";
+}
+
+enable
+{
+	out "cmd 37 \$1";
+}
+
+disable
+{
+	out "cmd 38 \$1";
+}
+
+getModel
+{
+	out "cmd 01";
+	# out "~ 05 01 26";
+	in "%3[^Q]";
+	ExtraInput = Ignore;
+}
+
