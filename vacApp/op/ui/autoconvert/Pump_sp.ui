@@ -202,81 +202,71 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <set>Qt::AlignAbsolute|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
         </widget>
-        <widget class="caFrame" name="caFrame_0">
+        <widget class="caLabel" name="caLabel_4">
+            <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="foreground">
+                <color alpha="255">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="background">
+                <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="text">
+                <string>HV INTERLOCK</string>
+            </property>
+            <property name="fontScaleMode">
+                <enum>ESimpleLabel::WidthAndHeight</enum>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignAbsolute|Qt::AlignHCenter|Qt::AlignVCenter</set>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>427</x>
+                    <y>62</y>
+                    <width>70</width>
+                    <height>10</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="caChoice" name="caChoice_0">
             <property name="geometry">
                 <rect>
                     <x>427</x>
                     <y>26</y>
-                    <width>72</width>
-                    <height>48</height>
+                    <width>70</width>
+                    <height>32</height>
                 </rect>
             </property>
-            <widget class="caLabel" name="caLabel_4">
-                <property name="frameShape">
-                    <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="foreground">
-                    <color alpha="255">
-                        <red>0</red>
-                        <green>0</green>
-                        <blue>0</blue>
-                    </color>
-                </property>
-                <property name="background">
-                    <color alpha="0">
-                        <red>0</red>
-                        <green>0</green>
-                        <blue>0</blue>
-                    </color>
-                </property>
-                <property name="text">
-                    <string>HV INTERLOCK</string>
-                </property>
-                <property name="fontScaleMode">
-                    <enum>ESimpleLabel::WidthAndHeight</enum>
-                </property>
-                <property name="alignment">
-                    <set>Qt::AlignAbsolute|Qt::AlignHCenter|Qt::AlignVCenter</set>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>0</x>
-                        <y>36</y>
-                        <width>72</width>
-                        <height>10</height>
-                    </rect>
-                </property>
-            </widget>
-            <widget class="caChoice" name="caChoice_0">
-                <property name="geometry">
-                    <rect>
-                        <x>0</x>
-                        <y>0</y>
-                        <width>70</width>
-                        <height>32</height>
-                    </rect>
-                </property>
-                <property name="channel">
-                    <string>$(P)$(PUMP).S$(a)VS</string>
-                </property>
-                <property name="foreground">
-                    <color alpha="255">
-                        <red>0</red>
-                        <green>0</green>
-                        <blue>0</blue>
-                    </color>
-                </property>
-                <property name="background">
-                    <color alpha="255">
-                        <red>235</red>
-                        <green>241</green>
-                        <blue>181</blue>
-                    </color>
-                </property>
-                <property name="colorMode">
-                    <enum>caChoice::Static</enum>
-                </property>
-            </widget>
+            <property name="channel">
+                <string>$(P)$(PUMP).S$(a)VS</string>
+            </property>
+            <property name="foreground">
+                <color alpha="255">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="background">
+                <color alpha="255">
+                    <red>235</red>
+                    <green>241</green>
+                    <blue>181</blue>
+                </color>
+            </property>
+            <property name="colorMode">
+                <enum>caChoice::Static</enum>
+            </property>
         </widget>
         <widget class="caLabel" name="caLabel_5">
             <property name="frameShape">
@@ -312,7 +302,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>137</x>
                     <y>31</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -354,7 +344,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>137</x>
                     <y>31</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -396,7 +386,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>330</x>
                     <y>30</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -438,7 +428,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>330</x>
                     <y>30</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -480,7 +470,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>138</x>
                     <y>85</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -522,7 +512,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>138</x>
                     <y>85</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -564,7 +554,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>331</x>
                     <y>85</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -606,7 +596,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>331</x>
                     <y>85</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -846,7 +836,7 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
                 <rect>
                     <x>63</x>
                     <y>1</y>
-                    <width>444</width>
+                    <width>400</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -950,7 +940,6 @@ QPushButton::menu-indicator {image: url(none.png); width: 0}
         <zorder>caLabel_2</zorder>
         <zorder>caLabel_3</zorder>
         <zorder>caLabel_4</zorder>
-        <zorder>caFrame_0</zorder>
         <zorder>caLabel_5</zorder>
         <zorder>caLabel_6</zorder>
         <zorder>caLabel_7</zorder>
