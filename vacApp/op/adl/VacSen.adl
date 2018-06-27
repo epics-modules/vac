@@ -87,6 +87,82 @@ display {
 		1a7309,
 	}
 }
+rectangle {
+	object {
+		x=3
+		y=47
+		width=140
+		height=140
+	}
+	"basic attribute" {
+		clr=11
+	}
+}
+rectangle {
+	object {
+		x=146
+		y=49
+		width=40
+		height=30
+	}
+	"basic attribute" {
+		clr=11
+	}
+}
+rectangle {
+	object {
+		x=172
+		y=54
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=10
+	}
+}
+rectangle {
+	object {
+		x=172
+		y=68
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=10
+	}
+}
+rectangle {
+	object {
+		x=172
+		y=53
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		clr="alarm"
+		vis="if not zero"
+		chan="$(P)$(GAUGE).SP1"
+	}
+}
+rectangle {
+	object {
+		x=172
+		y=67
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		clr="alarm"
+		vis="if not zero"
+		chan="$(P)$(GAUGE).SP2"
+	}
+}
 composite {
 	object {
 		x=5
@@ -433,17 +509,6 @@ composite {
 		chan="$(P)$(GAUGE).TYPE"
 	}
 }
-rectangle {
-	object {
-		x=3
-		y=47
-		width=140
-		height=140
-	}
-	"basic attribute" {
-		clr=11
-	}
-}
 text {
 	object {
 		x=3
@@ -488,109 +553,33 @@ menu {
 		bclr=5
 	}
 }
-composite {
+text {
 	object {
-		x=146
-		y=49
-		width=40
-		height=30
+		x=149
+		y=52
+		width=20
+		height=10
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=146
-				y=49
-				width=40
-				height=30
-			}
-			"basic attribute" {
-				clr=11
-			}
-		}
-		rectangle {
-			object {
-				x=172
-				y=54
-				width=10
-				height=10
-			}
-			"basic attribute" {
-				clr=10
-			}
-		}
-		rectangle {
-			object {
-				x=172
-				y=68
-				width=10
-				height=10
-			}
-			"basic attribute" {
-				clr=10
-			}
-		}
-		rectangle {
-			object {
-				x=172
-				y=53
-				width=10
-				height=10
-			}
-			"basic attribute" {
-				clr=15
-			}
-			"dynamic attribute" {
-				clr="alarm"
-				vis="if not zero"
-				chan="$(P)$(GAUGE).SP1"
-			}
-		}
-		rectangle {
-			object {
-				x=172
-				y=67
-				width=10
-				height=10
-			}
-			"basic attribute" {
-				clr=15
-			}
-			"dynamic attribute" {
-				clr="alarm"
-				vis="if not zero"
-				chan="$(P)$(GAUGE).SP2"
-			}
-		}
-		text {
-			object {
-				x=149
-				y=52
-				width=20
-				height=10
-			}
-			"basic attribute" {
-				clr=0
-				fill="outline"
-			}
-			textix="SP1"
-			align="horiz. centered"
-		}
-		text {
-			object {
-				x=149
-				y=67
-				width=20
-				height=10
-			}
-			"basic attribute" {
-				clr=0
-				fill="outline"
-			}
-			textix="SP2"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=0
+		fill="outline"
 	}
+	textix="SP1"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=149
+		y=67
+		width=20
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="SP2"
+	align="horiz. centered"
 }
 composite {
 	object {

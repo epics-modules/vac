@@ -154,41 +154,30 @@ text {
 	}
 	textix="hysteresis readback"
 }
-composite {
+text {
+	object {
+		x=427
+		y=62
+		width=70
+		height=10
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="HV INTERLOCK"
+	align="horiz. centered"
+}
+"choice button" {
 	object {
 		x=427
 		y=26
 		width=70
-		height=46
+		height=32
 	}
-	"composite name"=""
-	children {
-		text {
-			object {
-				x=427
-				y=62
-				width=70
-				height=10
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="HV INTERLOCK"
-			align="horiz. centered"
-		}
-		"choice button" {
-			object {
-				x=427
-				y=26
-				width=70
-				height=32
-			}
-			control {
-				chan="$(P)$(PUMP).S$(a)VS"
-				clr=14
-				bclr=55
-			}
-		}
+	control {
+		chan="$(P)$(PUMP).S$(a)VS"
+		clr=14
+		bclr=55
 	}
 }
 text {
