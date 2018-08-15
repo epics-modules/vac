@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 0
-x 140
-y 102
-w 410
-h 220
+x 102
+y 78
+w 453
+h 263
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-8.0"
 btnFont "helvetica-medium-r-18.0"
@@ -32,27 +32,11 @@ minor 0
 release 0
 x 2
 y 2
-w 408
-h 218
+w 448
+h 258
 lineColor index 59
 fill
 fillColor index 59
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 17
-y 67
-w 67
-h 17
-lineColor index 14
-fill
-fillColor index 14
-lineWidth 0
 endObjectProperties
 
 # (Static Text)
@@ -61,16 +45,16 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 89
-y 99
-w 130
+x 111
+y 108
+w 80
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
- "Pump Pressure (Torr)"
+ "Pump Pressure"
 }
 endObjectProperties
 
@@ -80,13 +64,13 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 89
-y 144
+x 111
+y 153
 w 130
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
  "Pump Current (Amps)"
@@ -99,125 +83,54 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 88
-y 189
+x 110
+y 198
 w 130
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
  "Pump Voltage (Volts)"
 }
 endObjectProperties
 
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 17
-y 87
-w 67
-h 17
-lineColor index 14
-fill
-fillColor index 14
-lineWidth 0
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 19
-y 89
-w 63
-h 13
-lineColor index 50
-fill
-fillColor index 50
-lineWidth 0
-endObjectProperties
-
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 19
-y 89
-w 64
-h 14
-font "helvetica-medium-r-8.0"
-fontAlign "center"
-fgColor index 14
-useDisplayBg
-value {
- "COOL DOWN"
-}
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 10
-y 43
+x 31
+y 50
 w 390
 h 15
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
- "$(P)$(PUMP1)"
+ "Ion Pump $(P)$(PMP) Setpoint $(SPT)"
 }
 endObjectProperties
 
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 19
-y 89
-w 63
-h 13
-lineColor index 15
-fill
-fillColor index 15
-lineWidth 0
-visPv "CALC\\\{(A)\}($(P)$(PUMP1).CMOR)"
-visMin 0
-visMax 1
-endObjectProperties
-
 # (Text Control)
 object activeXTextDspClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 89
-y 67
+x 111
+y 76
 w 130
 h 30
-controlPv "$(P)$(PUMP1).VAL"
+controlPv "$(P)$(PMP):Pressure"
 font "helvetica-medium-r-8.0"
 fontAlign "center"
 smartRefresh
 fastUpdate
-fgColor index 20
-fgAlarm
+fgColor index 61
 bgColor index 14
 autoHeight
 format "exponential"
@@ -233,17 +146,16 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 89
-y 112
+x 111
+y 121
 w 130
 h 30
-controlPv "$(P)$(PUMP1).CRNT"
+controlPv "$(P)$(PMP):Current"
 font "helvetica-medium-r-8.0"
 fontAlign "center"
 smartRefresh
 fastUpdate
-fgColor index 20
-fgAlarm
+fgColor index 61
 bgColor index 14
 autoHeight
 format "exponential"
@@ -259,17 +171,16 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 88
-y 157
+x 110
+y 166
 w 130
 h 30
-controlPv "$(P)$(PUMP1).VOLT"
+controlPv "$(P)$(PMP):Voltage"
 font "helvetica-medium-r-8.0"
 fontAlign "center"
 smartRefresh
 fastUpdate
-fgColor index 20
-fgAlarm
+fgColor index 61
 bgColor index 14
 autoHeight
 format decimal
@@ -279,74 +190,19 @@ objType "controls"
 newPos
 endObjectProperties
 
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 19
-y 69
-w 63
-h 13
-lineColor index 20
-fill
-fillColor index 20
-lineWidth 0
-endObjectProperties
-
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 19
-y 69
-w 64
-h 14
-font "helvetica-medium-r-8.0"
-fontAlign "center"
-fgColor index 14
-useDisplayBg
-value {
- "STANDBY"
-}
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 19
-y 69
-w 63
-h 13
-lineColor index 30
-fill
-fillColor index 30
-lineWidth 0
-visPv "CALC\\\{(A)\}($(P)$(PUMP1).MODR)"
-visInvert
-visMin 0
-visMax 1
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 25
-y 142
+x 49
+y 119
 w 45
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
  "Mode"
@@ -359,58 +215,13 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 7
-y 61
+x 29
+y 70
 w 390
 h 140
-lineColor index 0
-fillColor index 0
+lineColor index 50
+fillColor index 50
 lineWidth 0
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 19
-y 69
-w 64
-h 14
-font "helvetica-medium-r-8.0"
-fontAlign "center"
-fgColor index 14
-useDisplayBg
-value {
- "OPER"
-}
-visPv "CALC\\\{(A)\}($(P)$(PUMP1).MODR)"
-visInvert
-visMin 0
-visMax 1
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 19
-y 89
-w 64
-h 14
-font "helvetica-medium-r-8.0"
-fontAlign "center"
-fgColor index 14
-useDisplayBg
-value {
- "NORMAL"
-}
-visPv "CALC\\\{(A)\}($(P)$(PUMP1).CMOR)"
-visMin 0
-visMax 1
 endObjectProperties
 
 # (Rectangle)
@@ -419,8 +230,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 51
-y 171
+x 73
+y 167
 w 9
 h 9
 lineColor index 57
@@ -435,15 +246,15 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 51
-y 171
+x 73
+y 167
 w 9
 h 9
 lineColor index 20
 fill
 fillColor index 20
 lineWidth 0
-visPv "CALC\\\{(A)\}($(P)$(PUMP1).SET$(SPT))"
+visPv "CALC\\\{(A)\}($(P)$(PMP):Spt$(SPT)Status)"
 visInvert
 visMin 0
 visMax 1
@@ -455,8 +266,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 32
-y 172
+x 54
+y 168
 w 18
 h 10
 font "helvetica-medium-r-8.0"
@@ -474,8 +285,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 28
-y 169
+x 50
+y 165
 w 35
 h 14
 lineColor index 0
@@ -488,20 +299,19 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 243
-y 91
+x 265
+y 78
 w 141
 h 27
-controlPv "$(P)$(PUMP1).PTYP"
+controlPv "$(P)$(PMP):PumpSize"
 font "helvetica-medium-r-8.0"
 fontAlign "center"
 smartRefresh
 fastUpdate
-fgColor index 20
-fgAlarm
+fgColor index 61
 bgColor index 14
 autoHeight
-format "exponential"
+format decimal
 nullColor index 32
 useHexPrefix
 objType "controls"
@@ -514,13 +324,13 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 248
-y 123
+x 270
+y 110
 w 130
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
  "Ion Pump Size"
@@ -533,11 +343,11 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 237
-y 135
+x 259
+y 131
 w 80
-h 25
-controlPv "$(P)$(PUMP1).TYPE"
+h 27
+controlPv "$(P)$(PMP):Model"
 font "helvetica-medium-r-8.0"
 fontAlign "center"
 smartRefresh
@@ -559,13 +369,13 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 237
-y 187
+x 259
+y 166
 w 80
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
  "Controller"
@@ -578,8 +388,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 55
-y 6
+x 82
+y 11
 w 300
 h 27
 font "helvetica-medium-r-8.0"
@@ -597,11 +407,11 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 333
-y 146
+x 355
+y 133
 w 50
 h 20
-controlPv "$(P)$(PUMP1).VERS"
+controlPv "$(P)$(PMP):FirmwareVers"
 font "helvetica-medium-r-8.0"
 fontAlign "center"
 smartRefresh
@@ -622,13 +432,13 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 328
-y 171
+x 350
+y 158
 w 60
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
  "Firmware"
@@ -641,13 +451,13 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 328
-y 183
+x 350
+y 170
 w 60
 h 10
 font "helvetica-medium-r-8.0"
 fontAlign "center"
-fgColor index 0
+fgColor index 50
 useDisplayBg
 value {
  "Version"
@@ -660,24 +470,121 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 237
-y 162
-w 80
-h 25
-controlPv "$(P)$(PUMP1).MODL"
+x 85
+y 215
+w 300
+h 20
+controlPv "$(P)$(PMP):Status"
 font "helvetica-medium-r-8.0"
-fontAlign "center"
 smartRefresh
 fastUpdate
-fgColor index 15
-fgAlarm
+fgColor index 60
 bgColor index 14
 autoHeight
-format "exponential"
+format "string"
 nullColor index 32
 useHexPrefix
 objType "controls"
 newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 195
+y 108
+w 43
+h 12
+controlPv "$(P)$(PMP):getPressUnits"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 50
+bgColor index 14
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 84
+y 238
+w 300
+h 20
+controlPv "$(P)$(PMP):Pump$(SPLY)Name"
+font "helvetica-medium-r-8.0"
+smartRefresh
+fastUpdate
+fgColor index 60
+bgColor index 14
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 42
+y 84
+w 61
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(PMP):enable.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV ON"
+offLabel "HV ON"
+3d
+useEnumNumeric
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 42
+y 101
+w 61
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(PMP):disable.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV OFF"
+offLabel "HV OFF"
+3d
+useEnumNumeric
+font "helvetica-medium-r-10.0"
 endObjectProperties
 
 # (Menu Button)
@@ -686,37 +593,47 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 272
-y 71
-w 92
-h 16
+x 42
+y 132
+w 61
+h 18
 fgColor index 59
-bgColor index 48
+bgColor index 14
 inconsistentColor index 12
 topShadowColor index 2
 botShadowColor index 12
-controlPv "$(P)$(PUMP1).SCAN"
-indicatorPv "$(P)$(PUMP1).SCAN"
+controlPv "$(P)$(PMP):setPressUnits"
+indicatorPv "$(P)$(PMP):setPressUnits"
 font "helvetica-medium-r-10.0"
 endObjectProperties
 
-# (Choice Button)
-object activeChoiceButtonClass
+# (Related Display)
+object relatedDisplayClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 25
-y 110
-w 45
-h 30
+x 38
+y 184
+w 65
+h 15
 fgColor index 14
-bgColor index 0
-selectColor index 0
-inconsistentColor index 14
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)$(PUMP1).MODS"
+bgColor index 50
+topShadowColor index 2
+botShadowColor index 12
 font "helvetica-medium-r-10.0"
+icon
+buttonLabel "SETPOINT"
+numPvs 2
+numDsps 1
+displayFileName {
+  0 QPCsingle_pump_sp_streams.edl
+}
+menuLabel {
+  0 
+}
+symbols {
+  0 "P=$(P),PMP=$(PMP),SPT=$(SPT)"
+}
 endObjectProperties
 

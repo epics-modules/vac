@@ -1,0 +1,160 @@
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 272
+y 71
+w 92
+h 16
+fgColor index 59
+bgColor index 48
+inconsistentColor index 12
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)$(PUMP1).SCAN"
+indicatorPv "$(P)$(PUMP1).SCAN"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 25
+y 110
+w 45
+h 30
+fgColor index 14
+bgColor index 0
+selectColor index 0
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(PUMP1).MODS"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 667
+y 71
+w 92
+h 16
+fgColor index 59
+bgColor index 48
+inconsistentColor index 12
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)$(PUMP2).SCAN"
+indicatorPv "$(P)$(PUMP2).SCAN"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 422
+y 110
+w 45
+h 30
+fgColor index 14
+bgColor index 0
+selectColor index 0
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(PUMP2).MODS"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 24
+y 277
+w 45
+h 30
+fgColor index 14
+bgColor index 0
+selectColor index 0
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(PUMP3).MODS"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 663
+y 237
+w 92
+h 16
+fgColor index 59
+bgColor index 48
+inconsistentColor index 12
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)$(PUMP4).SCAN"
+indicatorPv "$(P)$(PUMP4).SCAN"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 420
+y 277
+w 45
+h 30
+fgColor index 14
+bgColor index 0
+selectColor index 0
+inconsistentColor index 14
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)$(PUMP4).MODS"
+font "helvetica-medium-r-10.0"
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 267
+y 237
+w 92
+h 16
+fgColor index 59
+bgColor index 48
+inconsistentColor index 12
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)$(PUMP3).SCAN"
+indicatorPv "$(P)$(PUMP3).SCAN"
+font "helvetica-medium-r-10.0"
+endObjectProperties

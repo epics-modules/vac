@@ -1,0 +1,32 @@
+####################################################################################
+# Substitutions
+# PORT - Port name from drvAsynIPPortConfigure in st.cmd
+# P - PV Name prefix
+# PMP - Which ion pump number (i.e. IP1)
+# SPLY - Which ion pump supply in the QPC (Typically the same number as IP)
+# SPT - Which set point for this ion pump (Typically the same number as IP)
+# PROTO - Name of proto file to use (not including .proto)
+####################################################################################
+# Use this for Ethernet and serial communications using streamDevice 
+# (This database contains 27 records)
+####################################################################################
+file db/QPCstreams.db{
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP1",SPLY="1",SPT="1",PROTO="QPC-eth"}
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP2",SPLY="2",SPT="2",PROTO="QPC-eth"}
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP3",SPLY="3",SPT="3",PROTO="QPC-eth"}
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP4",SPLY="4",SPT="4",PROTO="QPC-eth"}
+# Use this one for serial port	
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP3",SPLY="1",SPT="1",PROTO="QPC-serial"}
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP4",SPLY="2",SPT="2",PROTO="QPC-serial"}
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP5",SPLY="3",SPT="3",PROTO="QPC-serial"}
+	{PORT="QPC-1",P="FE:28:ID:",PMP="IP6",SPLY="4",SPT="4",PROTO="QPC-serial"}
+}
+####################################################################################
+# Use this for Modbus communications (This database contains 27 records)
+# This is currently setup for only the first pump controller and is missing the 
+# pump status in the database which is commented out as the last record
+#file db/QPCmodbus.db{
+#	{PORT="QPC1",PORT1="QPC2",PORT2="QPC3",PORT3="QPC4",PORT4="QPC5",
+#	 PORT5="QPC6",PORT6="QPC7",
+#	 P="FE:28:ID:",PMP="IP2",SPT="1",SPLY="1"}
+#}

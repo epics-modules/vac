@@ -1,0 +1,214 @@
+# This is used for Modbus communications and the register map
+# at the time can be found in the ${TOP}/documentation directory
+# This was only a start and as such some things may be missing
+# Also this database includes only records for a single pump on
+# the QPC device
+#########################################################
+# Modbus Function 4 PVs READ ONLY
+#########################################################
+# Running voltage
+record(ai, "$(P)$(PMP):Voltage"){
+	field(DESC, "Reads Channel Voltage")
+	field(SCAN, "I/O Intr")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(INP,"@asyn($(PORT) 0 1)MODBUS_DATA")
+}
+# Running current
+record(ai, "$(P)$(PMP):Current"){
+	field(DESC, "Reads Channel Current")
+	field(SCAN, "I/O Intr")
+	field(PINI, "YES")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT) 8)FLOAT32_BE")
+	field(PREC, "1")
+}
+# Running pressure
+record(ai, "$(P)$(PMP):Pressure"){
+	field(DESC, "Reads Channel Pressure")
+	field(SCAN, "I/O Intr")
+	field(PINI, "YES")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT) 24)FLOAT32_BE")
+	field(PREC, "1")
+}
+record(stringin, "$(P)$(PMP):Model"){
+	field(DESC, "Reads Device Model")
+	field(PINI, "YES")
+	field(DTYP, "asynOctetRead")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT) 48 1)STRING_HIGH_LOW")
+}
+#########################################################
+record(ai, "$(P)$(PMP):FirmwareVers1"){
+	field(DESC, "Reads Device Firmware")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT) 56)MODBUS_DATA")
+}
+record(ai, "$(P)$(PMP):FirmwareVers2"){
+	field(DESC, "Reads Device Firmware")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT) 57)MODBUS_DATA")
+}
+record(ai, "$(P)$(PMP):FirmwareVers3"){
+	field(DESC, "Reads Device Firmware")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT) 58)MODBUS_DATA")
+}
+record(scalcout,"$(P)$(PMP):FirmwareVers4") {
+        field(DESC,"Device Firmware")
+        field(CALC,"$P('%1d',A)+'.'+$P('%.2d',B)")
+        field(INPA,"$(P)$(PMP):FirmwareVers1.VAL CP NMS")
+        field(INPB,"$(P)$(PMP):FirmwareVers2.VAL CP NMS")
+        field(INPC,"$(P)$(PMP):FirmwareVers3.VAL CP NMS")
+        field(OUT,"$(P)$(PMP):FirmwareVers.VAL PP NMS")
+        field(OOPT,"Every Time")
+}
+record(ai, "$(P)$(PMP):FirmwareVers"){
+	field(DESC, "Device Firmware")
+        field(PREC,"2")
+}
+#########################################################
+record(ai, "$(P)$(PMP):EthAddr1"){
+	field(DESC, "Reads MAC Address Octet 1")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT) 60)MODBUS_DATA")
+}
+record(ai, "$(P)$(PMP):EthAddr2"){
+	field(DESC, "Reads MAC Address Octet 2")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT) 61)MODBUS_DATA")
+}
+record(ai, "$(P)$(PMP):EthAddr3"){
+	field(DESC, "Reads MAC Address Octet 3")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT) 62)MODBUS_DATA")
+}
+record(scalcout,"$(P)$(PMP):MacAddr") {
+        field(DESC,"Device MAC Addr")
+        field(CALC,"$P('%X',A)+':'+$P('%X',B)+':'+$P('%X',C)")
+        field(INPA,"$(P)$(PMP):EthAddr1.VAL CP NMS")
+        field(INPB,"$(P)$(PMP):EthAddr2.VAL CP NMS")
+        field(INPC,"$(P)$(PMP):EthAddr3.VAL CP NMS")
+        field(OUT,"$(P)$(PMP):MacAddress.VAL PP NMS")
+        field(OOPT,"Every Time")
+}
+record(stringin, "$(P)$(PMP):MacAddress"){
+	field(DESC, "Device Hardware Address")
+}
+#########################################################
+# Modbus Function 3 PVs
+#########################################################
+record(ai, "$(P)$(PMP):PumpSize"){
+	field(DESC, "Pump Size L/s")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT1) 0)MODBUS_DATA")
+}
+record(stringin, "$(P)$(PMP):Pump$(SPLY)Name"){
+	field(DESC, "Reads Pump/Supply Name")
+	field(PINI, "YES")
+	field(DTYP, "asynOctetRead")
+	field(SCAN, "10 second")
+	field(INP, "@asyn($(PORT1) 32)STRING_HIGH_LOW")
+}
+# These are outside the range of the previous addresses
+# Relay on Pressure setpoint readback
+record(ai, "$(P)$(PMP):Spt$(SPT)OnPress"){
+	field(DESC, "Reads Relay On Press")
+	field(SCAN, "I/O Intr")
+	field(PINI, "YES")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT2) 16)FLOAT32_BE")
+        field(PREC,"1")
+}
+record(ai, "$(P)$(PMP):Spt$(SPT)OffPress"){
+	field(DESC, "Reads Relay Off Press")
+	field(SCAN, "I/O Intr")
+	field(PINI, "YES")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT2) 48)FLOAT32_BE")
+        field(PREC,"1")
+}
+########################################################################
+# Working on this now but having problems between setting and reading
+record(ai, "$(P)$(PMP):getPress"){
+	field(DESC, "Reads Channel Current")
+	field(SCAN, "I/O Intr")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(INP, "@asyn($(PORT2) 80 1)MODBUS_DATA")
+}
+record(mbbi,"$(P)$(PMP):getPressUnits") {
+        field(DESC, "Pressure Units Readback")
+        field(INP, "$(P)$(PMP):getPress.VAL CP NMS")
+	field(NOBT,"2")
+	field(ZRST,"TORR")
+	field(ONST,"MBAR")
+	field(TWST,"PASCAL")
+}
+record(mbbo,"$(P)$(PMP):setPressUnits") {
+        field(DESC, "Set Pressure Units")
+	field(ZRST,"TORR")
+	field(ONST,"MBAR")
+	field(TWST,"PASCAL")
+}
+record(ao, "$(P)$(PMP):setPUnits"){
+	field(DESC, "Set Pressure Units")
+	field(DTYP, "asynInt32")
+	field(DOL, "$(P)$(PMP):setPressUnits.VAL CP NMS")
+	field(OMSL, "closed_loop")
+	field(OUT, "@asyn($(PORT3) 80 1)MODBUS_DATA")
+}
+###########################################################################
+# HV Enable: 0 = Off and 1 = On
+# These writes use Modbus function 5
+record(bo, "$(P)$(PMP):enable"){
+	field(DESC, "Enable ion pump HV")
+	field(DTYP, "asynInt32")
+	field(DOL, "1")
+	field(OMSL, "closed_loop")
+	field(OUT, "@asyn($(PORT4) 0 1)MODBUS_DATA")
+}
+record(bo, "$(P)$(PMP):disable"){
+	field(DESC, "Disable ion pump HV")
+	field(DTYP, "asynInt32")
+	field(DOL, "0")
+	field(OMSL, "closed_loop")
+	field(OUT, "@asyn($(PORT4) 0 1)MODBUS_DATA")
+}
+###########################################################################
+# Set points
+record(bi, "$(P)$(PMP):Spt$(SPT)Status") {
+	field(DESC, "Read Spt$(SPT) status for pump $(PMP)")
+	field(PINI, "YES")
+	field(SCAN, "5 second")
+	field(DTYP, "asynInt32")
+	field(INP, "@asyn($(PORT5) 0 1)MODBUS_DATA")
+	field(OSV, "MAJOR")
+	field(ZNAM, "Setpoint $(SPT) Off")
+	field(ONAM, "Setpoint $(SPT) On")
+}
+###########################################################################
+# Possibly this one does not work at all
+#record(ai, "$(P)$(PMP):Status"){
+#	field(DESC, "Reads System Status Bit field")
+#	field(SCAN, "5 second")
+#	field(PINI, "YES")
+#	field(DTYP, "asynInt32")
+#	field(INP, "@asyn($(PORT6) 0 1)MODBUS_DATA")
+#}
+

@@ -1,14 +1,14 @@
 
 file {
-	name="/home/phoebus/MLS/epics/github/vac/vacApp/op/adl/QPCsingle_pump.adl"
+	name="/home/phoebus/MLS/epics/github/vac/vacApp/op/adl/QPCsingle_pump_streams.adl"
 	version=030114
 }
 display {
 	object {
-		x=140
-		y=102
-		width=410
-		height=220
+		x=102
+		y=78
+		width=453
+		height=263
 	}
 	clr=0
 	bclr=1
@@ -91,61 +91,37 @@ rectangle {
 	object {
 		x=2
 		y=2
-		width=410
-		height=220
+		width=450
+		height=260
 	}
 	"basic attribute" {
 		clr=59
 		width=1
 	}
 }
-menu {
-	object {
-		x=272
-		y=71
-		width=92
-		height=16
-	}
-	control {
-		chan="$(P)$(PUMP1).SCAN"
-		clr=59
-		bclr=48
-	}
-}
-rectangle {
-	object {
-		x=17
-		y=67
-		width=68
-		height=18
-	}
-	"basic attribute" {
-		clr=14
-	}
-}
 text {
 	object {
-		x=89
-		y=99
-		width=130
+		x=111
+		y=108
+		width=80
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
-	textix="Pump Pressure (Torr)"
+	textix="Pump Pressure"
 	align="horiz. centered"
 }
 text {
 	object {
-		x=89
-		y=144
+		x=111
+		y=153
 		width=130
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 	textix="Pump Current (Amps)"
@@ -153,95 +129,44 @@ text {
 }
 text {
 	object {
-		x=88
-		y=189
+		x=110
+		y=198
 		width=130
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 	textix="Pump Voltage (Volts)"
 	align="horiz. centered"
 }
-rectangle {
-	object {
-		x=17
-		y=87
-		width=68
-		height=18
-	}
-	"basic attribute" {
-		clr=14
-	}
-}
-rectangle {
-	object {
-		x=19
-		y=89
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=50
-	}
-}
 text {
 	object {
-		x=19
-		y=89
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="COOL DOWN"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=10
-		y=43
+		x=31
+		y=50
 		width=390
 		height=15
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
-	textix="$(P)$(PUMP1)"
+	textix="Ion Pump $(P)$(PMP) Setpoint $(SPT)"
 	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=19
-		y=89
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=15
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P)$(PUMP1).CMOR"
-	}
 }
 "text update" {
 	object {
-		x=89
-		y=67
+		x=111
+		y=76
 		width=130
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PUMP1).VAL"
-		clr=20
+		chan="$(P)$(PMP):Pressure"
+		clr=61
 		bclr=14
 	}
-	clrmod="alarm"
 	align="horiz. centered"
 	format="exponential"
 	limits {
@@ -249,17 +174,16 @@ rectangle {
 }
 "text update" {
 	object {
-		x=89
-		y=112
+		x=111
+		y=121
 		width=130
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PUMP1).CRNT"
-		clr=20
+		chan="$(P)$(PMP):Current"
+		clr=61
 		bclr=14
 	}
-	clrmod="alarm"
 	align="horiz. centered"
 	format="exponential"
 	limits {
@@ -267,82 +191,29 @@ rectangle {
 }
 "text update" {
 	object {
-		x=88
-		y=157
+		x=110
+		y=166
 		width=130
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PUMP1).VOLT"
-		clr=20
+		chan="$(P)$(PMP):Voltage"
+		clr=61
 		bclr=14
 	}
-	clrmod="alarm"
 	align="horiz. centered"
 	limits {
 	}
 }
-rectangle {
-	object {
-		x=19
-		y=69
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=20
-	}
-}
 text {
 	object {
-		x=19
-		y=69
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="STANDBY"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=19
-		y=69
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=30
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(PUMP1).MODR"
-	}
-}
-"choice button" {
-	object {
-		x=25
-		y=110
-		width=45
-		height=30
-	}
-	control {
-		chan="$(P)$(PUMP1).MODS"
-		clr=14
-		bclr=0
-	}
-}
-text {
-	object {
-		x=25
-		y=142
+		x=49
+		y=119
 		width=45
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 	textix="Mode"
@@ -350,54 +221,20 @@ text {
 }
 rectangle {
 	object {
-		x=7
-		y=61
+		x=29
+		y=70
 		width=390
 		height=140
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 }
-text {
-	object {
-		x=19
-		y=69
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=14
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(PUMP1).MODR"
-	}
-	textix="OPER"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=19
-		y=89
-		width=64
-		height=14
-	}
-	"basic attribute" {
-		clr=14
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P)$(PUMP1).CMOR"
-	}
-	textix="NORMAL"
-	align="horiz. centered"
-}
 rectangle {
 	object {
-		x=51
-		y=171
+		x=73
+		y=167
 		width=10
 		height=10
 	}
@@ -407,8 +244,8 @@ rectangle {
 }
 rectangle {
 	object {
-		x=51
-		y=171
+		x=73
+		y=167
 		width=10
 		height=10
 	}
@@ -417,13 +254,13 @@ rectangle {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="$(P)$(PUMP1).SET$(SPT)"
+		chan="$(P)$(PMP):Spt$(SPT)Status"
 	}
 }
 text {
 	object {
-		x=32
-		y=172
+		x=54
+		y=168
 		width=18
 		height=10
 	}
@@ -436,8 +273,8 @@ text {
 }
 rectangle {
 	object {
-		x=28
-		y=169
+		x=50
+		y=165
 		width=36
 		height=15
 	}
@@ -449,31 +286,29 @@ rectangle {
 }
 "text update" {
 	object {
-		x=243
-		y=91
+		x=265
+		y=78
 		width=141
 		height=27
 	}
 	monitor {
-		chan="$(P)$(PUMP1).PTYP"
-		clr=20
+		chan="$(P)$(PMP):PumpSize"
+		clr=61
 		bclr=14
 	}
-	clrmod="alarm"
 	align="horiz. centered"
-	format="exponential"
 	limits {
 	}
 }
 text {
 	object {
-		x=248
-		y=123
+		x=270
+		y=110
 		width=130
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 	textix="Ion Pump Size"
@@ -481,13 +316,13 @@ text {
 }
 "text update" {
 	object {
-		x=237
-		y=135
+		x=259
+		y=131
 		width=80
-		height=25
+		height=27
 	}
 	monitor {
-		chan="$(P)$(PUMP1).TYPE"
+		chan="$(P)$(PMP):Model"
 		clr=15
 		bclr=14
 	}
@@ -499,13 +334,13 @@ text {
 }
 text {
 	object {
-		x=237
-		y=187
+		x=259
+		y=166
 		width=80
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 	textix="Controller"
@@ -513,8 +348,8 @@ text {
 }
 text {
 	object {
-		x=55
-		y=6
+		x=82
+		y=11
 		width=300
 		height=27
 	}
@@ -526,13 +361,13 @@ text {
 }
 "text update" {
 	object {
-		x=333
-		y=146
+		x=355
+		y=133
 		width=50
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PUMP1).VERS"
+		chan="$(P)$(PMP):FirmwareVers"
 		clr=15
 		bclr=14
 	}
@@ -542,13 +377,13 @@ text {
 }
 text {
 	object {
-		x=328
-		y=171
+		x=350
+		y=158
 		width=60
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 	textix="Firmware"
@@ -556,13 +391,13 @@ text {
 }
 text {
 	object {
-		x=328
-		y=183
+		x=350
+		y=170
 		width=60
 		height=10
 	}
 	"basic attribute" {
-		clr=0
+		clr=50
 		fill="outline"
 	}
 	textix="Version"
@@ -570,19 +405,108 @@ text {
 }
 "text update" {
 	object {
-		x=237
-		y=162
-		width=80
-		height=25
+		x=85
+		y=215
+		width=300
+		height=20
 	}
 	monitor {
-		chan="$(P)$(PUMP1).MODL"
-		clr=15
+		chan="$(P)$(PMP):Status"
+		clr=60
 		bclr=14
 	}
-	clrmod="alarm"
+	format="string"
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=42
+		y=84
+		width=61
+		height=16
+	}
+	control {
+		chan="$(P)$(PMP):enable.PROC"
+		clr=14
+		bclr=51
+	}
+	label="HV ON"
+	press_msg="0"
+}
+"message button" {
+	object {
+		x=42
+		y=101
+		width=61
+		height=16
+	}
+	control {
+		chan="$(P)$(PMP):disable.PROC"
+		clr=14
+		bclr=51
+	}
+	label="HV OFF"
+	press_msg="0"
+}
+menu {
+	object {
+		x=42
+		y=132
+		width=61
+		height=18
+	}
+	control {
+		chan="$(P)$(PMP):setPressUnits"
+		clr=59
+		bclr=14
+	}
+}
+"text update" {
+	object {
+		x=195
+		y=108
+		width=43
+		height=12
+	}
+	monitor {
+		chan="$(P)$(PMP):getPressUnits"
+		clr=50
+		bclr=14
+	}
 	align="horiz. centered"
-	format="exponential"
+	format="string"
+	limits {
+	}
+}
+"related display" {
+	object {
+		x=38
+		y=184
+		width=65
+		height=15
+	}
+	display[0] {
+		name="QPCsingle_pump_sp_streams.adl"
+		args="P=$(P),PMP=$(PMP),SPT=$(SPT)"
+	}
+	clr=14
+	bclr=50
+	label="SETPOINT"
+}
+"text update" {
+	object {
+		x=84
+		y=238
+		width=300
+		height=20
+	}
+	monitor {
+		chan="$(P)$(PMP):Pump$(SPLY)Name"
+		clr=60
+		bclr=14
+	}
+	format="string"
 	limits {
 	}
 }

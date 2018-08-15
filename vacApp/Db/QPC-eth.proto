@@ -1,0 +1,148 @@
+OutTerminator = CR;
+ReadTimeout = 2000;
+ReplyTimeout = 2000;
+
+# Command 0A Read Current
+getCurrent {
+	out "cmd 0A \$1";
+	in "%*6c%E";
+	ExtraInput = Ignore;
+}
+
+# Command 0B Read Pressure
+getPressure {
+	out "cmd 0B \$1";
+	in "%*6c%E";
+	ExtraInput = Ignore;
+}
+
+# Command 0C Read Voltage
+getVoltage {
+	out "cmd 0C \$1";
+	in "%*6c%f";
+	ExtraInput = Ignore;
+}
+
+# Command 0D Get Supply Status
+# New command has the format cmd 0D supply,option
+# If you send cmd 0D \$1,00 (Currently 00 is the only option)
+# The return format will be XX where XX is one of:
+# 00 - pump standby
+# 01 - pump starting
+# 02 - pump running
+# 03 - pump cooldown
+# 04 - pump error
+# Otherwise this protocol sends back a string as is done here
+getStatus {
+	out "cmd 0D \$1";
+	in "%*6c%s";
+	ExtraInput = Ignore;
+}
+
+# Command 61 Is High Voltage On - Indicates if the high voltage is on for 
+# the specified pump
+# This is likely a legacy command as it does not exist in the revision G
+# manual. I think that it is replaced by the 0D command above.
+isEnabled {
+	out "cmd 61 \$1";
+	in "%*6c%s";
+	ExtraInput = Ignore;
+}
+
+# Command 37 Start Pump - Enables high voltage of specified supply
+enable {
+	out "cmd 37 \$1";
+	ExtraInput = Ignore;
+}
+
+# Command 38 Stop Pump - Disables high voltage of specified supply
+disable {
+	out "cmd 38 \$1";
+	ExtraInput = Ignore;
+}
+
+# Command 01 Get Model - Returns the pump controller model (QPC,MPC,etc)
+getModel {
+	out "cmd 01";
+	in "%*14c%s";
+	ExtraInput = Ignore;
+}
+
+# Command 02 Version - Returns the firmware version of the pump controller
+getFirmware {
+	out "cmd 02";
+	in "%*25c%s";
+	ExtraInput = Ignore;
+}
+
+# Uses the command 0B above but returns only the pressure units selected
+# This function is used to initialize setPressUnit function below
+getPressureUnit {
+	out "cmd 0B \$1";
+	in "%*6c%*f%*1c%s";
+	ExtraInput = Ignore;
+}
+
+# Command 0E Set Pressure Units - Allows remote control over pressure units
+setPressUnit {
+	out "cmd 0E %s";
+	
+	@init { getPressureUnit; }	
+	ExtraInput = Ignore;
+}
+
+# Command 11 Get pump Size - Reads pump size in liters/second
+getPumpSize {
+	out "cmd 11 \$1";
+	in "%*6c%d L/S";
+	ExtraInput = Ignore;
+}
+	
+# Command 12 Set pump Size - Sets pump size in liters/second
+setPumpSize {
+	out "cmd 12 \$1,%s";
+	in "%*6c";
+
+	@init { getPumpSize; }	
+	ExtraInput = Ignore;
+}
+
+# For the set points here we just get the set point on/off pressure and output
+# relay/digital out status
+# NOTE:
+# We will use the new 3B command which has replaced the 3C and 3D commands
+# get the on pressure set point
+getOnPressSpt {
+	out "cmd 3B \$1";
+	in "%*13c%E";
+	ExtraInput = Ignore;	
+}
+
+# get off pressure set point
+getOffPressSpt {
+	out "cmd 3B \$1";
+	in "%*21c%E";
+	ExtraInput = Ignore;	
+}
+
+getSptStatus {
+	out "cmd 3B \$1";
+	in "%*29c%d";
+	ExtraInput = Ignore;	
+}
+
+# The mismatch is because I got lazy with the database and did not filter
+# bad on pressures being sent to the device mostly because the device
+# firmware will automatically set the off pressure 20% > than the on pressure.
+setOnPress {
+	out "cmd 3B \$2,1,\$1,%E,%(\$3\$4:Spt\$2OffPress.VAL)E";
+	in "%(\$3\$4:SptMessage.VAL)2c";
+	in "00*[^>]";
+	
+	@mismatch { in "ER 08 *ERROR: %(\$3\$4:SptMessage.VAL)36c";}
+}
+setOffPress {
+	out "cmd 3B \$2,1,\$1,%(\$3\$4:Spt\$2OnPress.VAL)E,%E";
+	ExtraInput = Ignore;	
+}
+
