@@ -799,5 +799,8 @@ static void monitor(digitelRecord *pdg)
 	db_post_events(pdg, &pdg->volt, monitor_mask);
     if ((pdg->ierr != pdg->err) || (alrm_chg_flg))
 	db_post_events(pdg, &pdg->err, monitor_mask);
+    db_post_events(pdg, &pdg->modl, monitor_mask);
+    db_post_events(pdg, &pdg->type, monitor_mask);
+    db_post_events(pdg, &pdg->vers, monitor_mask);    
     return;
 }

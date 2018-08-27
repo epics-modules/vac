@@ -304,7 +304,7 @@ static long readWrite_dg(digitelRecord *pr)
     float val1;
     float val2;
     
-    pPvt->command = '\0'; /* Init this value first, it is checked later */
+   /* pPvt->command = '\0'; *//* Init this value first, it is checked later */
     memset(pvalue, 0, 30);
     if (!pr->pact) {
 	memset(pPvt->sendBuf, 0, DigitelPump_SIZE);
@@ -468,7 +468,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp1s;
                         	val2 = pr->s1hr;
                         } else {
-                        	*pvalue = '\0';
                         	val1 = 0;
                         }
           	    } else if (pr->spfg & MOD_S1HS) { /* OFF Pressure */
@@ -477,7 +476,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp1r;
                         	val2 = pr->s1hs;
                         } else {
-                        	*pvalue = '\0';
                         	val1 = 0;
                         }
                /* Set point 2 */     
@@ -491,7 +489,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp2s;
                         	val2 = pr->s2hr; 
                         } else {
-                        	*pvalue = '\0';
                         	val1 = 0;
                         }                       
            	    } else if (pr->spfg & MOD_S2HS) { /* OFF Pressure */
@@ -504,7 +501,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp2r;
                         	val2 = pr->s2hs; 
                         } else {
-                        	*pvalue = '\0';
                          	val1 = 0;
                        }
                /* Set point 3 */     
@@ -514,7 +510,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp3s;
                         	val2 = pr->s3hr; 
                         } else {
-                        	*pvalue = '\0';
                          	val1 = 0;
                        }
            	    } else if ( (pr->spfg & MOD_S3HS)&&(pPvt->devType == 3) ) {
@@ -523,7 +518,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp3r;
                         	val2 = pr->s3hs; 
                         } else {
-                        	*pvalue = '\0';
                          	val1 = 0;
                        }
                /* Set point 4 */     
@@ -533,7 +527,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp4s;
                         	val2 = pr->s4hr; 
                         } else {
-                        	*pvalue = '\0';
                         	val1 = 0;
                         }
            	    } else if ( (pr->spfg & MOD_S4HS)&&(pPvt->devType == 3) ) {
@@ -542,7 +535,6 @@ static long readWrite_dg(digitelRecord *pr)
                         	val1 = pr->sp4r;
                         	val2 = pr->s4hs; 
                         } else {
-                        	*pvalue = '\0';
                         	val1 = 0;
                         }
 		    }
@@ -551,7 +543,7 @@ static long readWrite_dg(digitelRecord *pr)
             	    	sprintf(pvalue," %s %d,%d,%7.1E,%7.1E",ctlCmdString[5],
             				t1,pPvt->pumpNo,val1,val2);
             	    } else {
-            	    	*pvalue = '\0';
+            	    	val1 = 0;
          		asynPrint(pPvt->pasynUser, ASYN_TRACEIO_DEVICE,
               			"devDigitelPump::readWrite_dg Invalid set \
               			 point value for record %s SP%d \n",
@@ -561,13 +553,16 @@ static long readWrite_dg(digitelRecord *pr)
             	pr->spfg = 0;
             }
             pr->flgs = 0;
-	    if (val1 != 0){ /* Then send the command via buildCommand */
+            /* Then send the command via buildCommand */
+/*	    if (val1 != 0 && pPvt->devType && pPvt->devType != 3){ 
 	    	pPvt->command = cmdControl;
 	    	buildCommand(pPvt, pvalue);	    
-	    }
-
+	    } else {*/
+	    	pPvt->command = cmdControl;
+	    	buildCommand(pPvt, pvalue);   	
+/*	    }*/
 	/* if record has error for Digitel then send the reset command */
-        } else if (pPvt->errCount != 0 && pPvt->devType > 0 && pPvt->devType != 3) {
+        } else if (pPvt->errCount != 0 && pPvt->devType && pPvt->devType != 3) {
 		pPvt->command = cmdReset;
         } else {
 		pPvt->command = cmdRead;
@@ -994,7 +989,7 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
             		}
             	}
             } else { /* For MPC & QPC model and version commands */
-            	if (i > 8 || i < 11){
+            	if ((i > 8 || i < 11) && (pPvt->devType == 0 || pPvt->devType == 3)){
              /* Good for the following commands:
               * readCmdString[9] = 01 = Get model number
               * readCmdString[10] = 02 = Get firmware version
@@ -1003,19 +998,24 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
             	}
             }
 	}
-	/* Don't send more than one 3C command for a QPC pump */
+	/* Don't send more than one 3C command at a time for a QPC pump */
 	if (pPvt->devType == 3 && ((i<6)||(i>8)) ){
 		/* Build the command to send to the device */
 		buildCommand(pPvt,pvalue);
 		/* send and receive the command */
 		devDigitelPumpProcess(pasynUser,readBuffer,&nread);
+	} else if ( pPvt->devType != 3 && ((i>=6)||(i<=8)) ){  /* MPC */
+		/* Build the command to send to the device */
+			buildCommand(pPvt,pvalue);
+		/* send and receive the command */
+			devDigitelPumpProcess(pasynUser,readBuffer,&nread); 
 	} else {
-		if (pPvt->devType == 0){
+		if (pPvt->devType != 3 && ((i<6)||(i>8)) ){
 		/* Build the command to send to the device */
 			buildCommand(pPvt,pvalue);
 		/* send and receive the command */
 			devDigitelPumpProcess(pasynUser,readBuffer,&nread);
-            	}
+		}
 	}
 
         if (nread < 1) {
@@ -1134,12 +1134,14 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
                             inputEos, strlen(inputEos));
     }
  */
-    if(strlen(pPvt->sendBuf) >= 10){
+ 	/* All QPC commands should be > 9 chars */
+    if(strlen(pPvt->sendBuf) >= 10 && pPvt->devType == 3){
         pPvt->status = pPvt->pasynOctet->write(pPvt->octetPvt, pasynUser, 
                             pPvt->sendBuf, strlen(pPvt->sendBuf), &nwrite);
         if(pPvt->status!=asynSuccess) {
             asynPrint(pasynUser,ASYN_TRACE_ERROR,
-                "devDigitelPumpProcess write failed %s\n",pasynUser->errorMessage);
+                "devDigitelPumpProcess write failed %s Bytes read: %d, Reason: %d\n",
+                               pasynUser->errorMessage, &nwrite, eomReason);
         } else {
     	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
              	   "devDigitelPumpProcess %s nwrite=%d output=[%s]\n",
@@ -1148,21 +1150,52 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
     
         pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser, 
                             readBuffer, DigitelPump_SIZE, &nwrite, &eomReason);
-        if(pPvt->status!=asynSuccess) {
+        *nread = nwrite;
+       if(pPvt->status!=asynSuccess) {
             asynPrint(pasynUser,ASYN_TRACE_ERROR,
-                "devDigitelPumpProcess read failed %s\n",pasynUser->errorMessage);
-            *nread = nwrite;
+                "devDigitelPumpProcess read failed %s Bytes read: %d, Reason: %d\n",
+                               pasynUser->errorMessage, *nread, eomReason);
         } else {
-    	    *nread = nwrite;
     	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
               	    "devDigitelPumpProcess %s nread=%d input=[%s]\n",
-              	    pr->name, *nread, readBuffer);
+              	               pr->name, *nread, readBuffer);
         }
-    } else {
+    } else if(strlen(pPvt->sendBuf) < 10 && pPvt->devType == 3) {
             asynPrint(pasynUser,ASYN_TRACE_ERROR,
                 "devDigitelPumpProcess sendBuf too small %s command=[%s]\n",
                       pasynUser->errorMessage,pPvt->sendBuf);
+    } else if (pPvt->devType != 3){
+        pPvt->status = pPvt->pasynOctet->write(pPvt->octetPvt, pasynUser, 
+                            pPvt->sendBuf, strlen(pPvt->sendBuf), &nwrite);
+        if(pPvt->status!=asynSuccess) {
+            asynPrint(pasynUser,ASYN_TRACE_ERROR,
+                "devDigitelPumpProcess write failed %s Bytes read: %d, Reason: %d\n",
+                               pasynUser->errorMessage, &nwrite, eomReason);
+        } else {
+    	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
+             	   "devDigitelPumpProcess %s nwrite=%d output=[%s]\n",
+              	   pr->name, (int) nwrite, pPvt->sendBuf);
+        }
+    
+        pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser, 
+                            readBuffer, DigitelPump_SIZE, &nwrite, &eomReason);
+       *nread = nwrite;
+       if(pPvt->status!=asynSuccess) {
+            asynPrint(pasynUser,ASYN_TRACE_ERROR,
+                "devDigitelPumpProcess read failed %s Bytes read: %d, Reason: %d\n",
+                               pasynUser->errorMessage, *nread, eomReason);
+        } else {
+    	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
+              	    "devDigitelPumpProcess %s nread=%d input=[%s]\n",
+              	               pr->name, *nread, readBuffer);
+        }
     }
+
+    *nread = nwrite;
+    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
+              	"devDigitelPumpProcess %s nread=%d input=[%s]\n",
+              	pr->name, *nread, readBuffer);
+
 
 /*
  *  	for Digitel 500/1500 the reply for commands is only "\n*" 

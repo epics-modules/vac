@@ -1,0 +1,404 @@
+4 0 0
+beginScreenProperties
+major 4
+minor 0
+release 0
+x 43
+y 289
+w 546
+h 193
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-8.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 0
+bgColor index 32
+textColor index 14
+ctlFgColor1 index 30
+ctlFgColor2 index 32
+ctlBgColor1 index 34
+ctlBgColor2 index 35
+topShadowColor index 37
+botShadowColor index 44
+snapToGrid
+gridSize 5
+endScreenProperties
+
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 67
+y 58
+w 135
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "ON Setpoint Set"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 321
+y 57
+w 180
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "ON Setpoint Readback"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 67
+y 113
+w 135
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "OFF Setpoint Set"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 321
+y 113
+w 180
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "OFF Setpoint Readback"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 324
+y 26
+w 130
+h 30
+controlPv "$(P)$(PMP):Spt$(SPT)OnPress"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 20
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 324
+y 77
+w 130
+h 30
+controlPv "$(P)$(PMP):Spt$(SPT)OffPress"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 20
+bgColor index 14
+autoHeight
+format "exponential"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 66
+y 80
+w 130
+h 30
+controlPv "$(P)$(PMP):setSpt$(SPT)OffPressure.A"
+font "helvetica-medium-r-8.0"
+smartRefresh
+fastUpdate
+fgColor index 20
+bgColor index 14
+editable
+autoHeight
+format decimal
+motifWidget
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 63
+y 1
+w 400
+h 20
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+fgColor index 14
+useDisplayBg
+value {
+ "Setpoint $(SPT) Control for $(P)$(PMP)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 66
+y 26
+w 130
+h 30
+controlPv "$(P)$(PMP):setSpt$(SPT)OnPressure"
+font "helvetica-medium-r-8.0"
+smartRefresh
+fastUpdate
+fgColor index 20
+bgColor index 14
+editable
+autoHeight
+format decimal
+motifWidget
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 460
+y 30
+w 45
+h 20
+controlPv "$(P)$(PMP):getPressUnits"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 14
+bgColor index 32
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 460
+y 82
+w 45
+h 20
+controlPv "$(P)$(PMP):getPressUnits"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 14
+bgColor index 32
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 201
+y 32
+w 45
+h 20
+controlPv "$(P)$(PMP):getPressUnits"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 14
+bgColor index 32
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 84
+w 45
+h 20
+controlPv "$(P)$(PMP):getPressUnits"
+font "helvetica-medium-r-8.0"
+fontAlign "center"
+smartRefresh
+fastUpdate
+fgColor index 14
+bgColor index 32
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 230
+y 140
+w 300
+h 12
+controlPv "$(P)$(PMP):SptMessage"
+font "helvetica-medium-r-8.0"
+smartRefresh
+fastUpdate
+fgColor index 14
+bgColor index 32
+autoHeight
+format "decimal"
+precision 2
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 245
+y 160
+w 250
+h 20
+controlPv "$(P)$(PMP):OffPressMsg.SVAL"
+font "helvetica-medium-r-8.0"
+smartRefresh
+fastUpdate
+fgColor index 14
+bgColor index 32
+autoHeight
+format "string"
+nullColor index 32
+useHexPrefix
+objType "controls"
+newPos
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 138
+w 190
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "Last On Setpoint Message"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 162
+w 225
+h 15
+font "helvetica-medium-r-8.0"
+fgColor index 14
+useDisplayBg
+value {
+ "Last Off Setpoint Message"
+}
+endObjectProperties
+

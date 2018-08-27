@@ -15,17 +15,17 @@ xmlns="http://www.w3.org/TR/REC-html40">
  <o:DocumentProperties>
   <o:Author>Smith, Martin</o:Author>
   <o:LastAuthor>Smith, Martin</o:LastAuthor>
-  <o:Revision>4</o:Revision>
-  <o:TotalTime>15</o:TotalTime>
+  <o:Revision>6</o:Revision>
+  <o:TotalTime>24</o:TotalTime>
   <o:Created>2018-06-21T14:57:00Z</o:Created>
-  <o:LastSaved>2018-06-21T15:45:00Z</o:LastSaved>
-  <o:Pages>2</o:Pages>
-  <o:Words>325</o:Words>
-  <o:Characters>1857</o:Characters>
+  <o:LastSaved>2018-08-15T12:50:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>409</o:Words>
+  <o:Characters>2337</o:Characters>
   <o:Company>Argonne National Laboratory</o:Company>
-  <o:Lines>15</o:Lines>
-  <o:Paragraphs>4</o:Paragraphs>
-  <o:CharactersWithSpaces>2178</o:CharactersWithSpaces>
+  <o:Lines>19</o:Lines>
+  <o:Paragraphs>5</o:Paragraphs>
+  <o:CharactersWithSpaces>2741</o:CharactersWithSpaces>
   <o:Version>16.00</o:Version>
  </o:DocumentProperties>
  <o:OfficeDocumentSettings>
@@ -36,8 +36,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <link rel=colorSchemeMapping href="vacReleaseNotes_files/colorschememapping.xml">
 <!--[if gte mso 9]><xml>
  <w:WordDocument>
-  <w:View>Print</w:View>
-  <w:Zoom>190</w:Zoom>
   <w:TrackMoves/>
   <w:TrackFormatting/>
   <w:ValidateAgainstSchemas/>
@@ -651,7 +649,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	mso-font-charset:1;
 	mso-generic-font-family:roman;
 	mso-font-pitch:variable;
-	mso-font-signature:0 0 0 0 0 0;}
+	mso-font-signature:-536870145 1107305727 0 0 415 0;}
  /* Style Definitions */
  p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{mso-style-unhide:no;
@@ -1466,6 +1464,43 @@ ul
 <h2 align=center style='text-align:center'><span style='mso-fareast-font-family:
 "Times New Roman"'>vac Release Notes<o:p></o:p></span></h2>
 
+<h2><span style='mso-fareast-font-family:"Times New Roman"'>Release 1-8 (August
+15, 2018)<o:p></o:p></span></h2>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in;mso-list:l7 level1 lfo1'><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
+Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-fareast-font-family:"Times New Roman"'>devDigitelPump.c:
+Corrected communication issue found with Digitel 500/1500<o:p></o:p></span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in;mso-list:l7 level1 lfo1'><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
+Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-fareast-font-family:"Times New Roman"'>Added
+streamDevice support files (proto and databases) for both serial and Ethernet
+communication to the QPC<o:p></o:p></span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in;mso-list:l7 level1 lfo1'><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
+Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-fareast-font-family:"Times New Roman"'>Added
+Modbus support database for QPC (Currently only a single pump and status is
+missing)<o:p></o:p></span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in;mso-list:l7 level1 lfo1'><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
+Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-fareast-font-family:"Times New Roman"'>Updated
+some of the documentation and added a things to note section to vacDoc and added
+QPC Modbus register map v1.3<o:p></o:p></span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-.25in;mso-list:l7 level1 lfo1'><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
+Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-fareast-font-family:"Times New Roman"'>This
+support module should also now work for the MPCq and the SPC as well although
+has not been tested on either the command set is similar<o:p></o:p></span></p>
+
 <h2><span style='mso-fareast-font-family:"Times New Roman"'>Release 1-7 (June
 21, 2018)<o:p></o:p></span></h2>
 
@@ -1480,9 +1515,9 @@ from Gamma Vacuum<o:p></o:p></span></p>
 style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
 Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></span><![endif]><span style='mso-fareast-font-family:"Times New Roman"'>digitelRecord.dbd:
-Added new DTYP for the QPC device as well as a model and firmware version
-fields, which are also available for the MPC and MPC-II devices from Gamma.
-Also added fields for set point 4 for the QPC device.<o:p></o:p></span></p>
+Added new DTYP for the QPC device as well as a model and firmware version fields,
+which are also available for the MPC and MPC-II devices from Gamma. Also added
+fields for set point 4 for the QPC device.<o:p></o:p></span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in;mso-list:l7 level1 lfo1'><![if !supportLists]><span
 style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
@@ -1525,8 +1560,8 @@ pump (QPCsingle_pump.adl)<o:p></o:p></span></p>
  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
      mso-list:l5 level1 lfo3;tab-stops:list .5in'><span style='mso-fareast-font-family:
      "Times New Roman"'>Modifications to build support for EPICS 3.15. (Don't
-     include asyn.dbd in vacSupport.dbd, because asyn.dbd includes
-     asynRecord.dbd. EPICS 3.15 doesn't permit multiply defined record types.) <o:p></o:p></span></li>
+     include asyn.dbd in vacSupport.dbd, because asyn.dbd includes asynRecord.dbd.
+     EPICS 3.15 doesn't permit multiply defined record types.) <o:p></o:p></span></li>
 </ul>
 
 <h2><span style='mso-fareast-font-family:"Times New Roman"'>Release 1-5 (Nov.
@@ -1542,8 +1577,8 @@ pump (QPCsingle_pump.adl)<o:p></o:p></span></p>
      "Times New Roman"'>Updated display files for CSS-BOY and caQtDM. <o:p></o:p></span></li>
  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
      mso-list:l0 level1 lfo4;tab-stops:list .5in'><span style='mso-fareast-font-family:
-     "Times New Roman"'>CONFIG_SITE now -includes
-     $(SUPPORT)/configure/CONFIG_SITE <o:p></o:p></span></li>
+     "Times New Roman"'>CONFIG_SITE now -includes $(SUPPORT)/configure/CONFIG_SITE
+     <o:p></o:p></span></li>
 </ul>
 
 <h2><span style='mso-fareast-font-family:"Times New Roman"'>Release 1-4-1 (Apr.
@@ -1552,8 +1587,8 @@ pump (QPCsingle_pump.adl)<o:p></o:p></span></p>
 <ul type=disc>
  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
      mso-list:l4 level1 lfo5;tab-stops:list .5in'><span style='mso-fareast-font-family:
-     "Times New Roman"'>Modified devVacSen.c so user can specify station numbers
-     which previously were hard coded. <o:p></o:p></span></li>
+     "Times New Roman"'>Modified devVacSen.c so user can specify station
+     numbers which previously were hard coded. <o:p></o:p></span></li>
  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
      mso-list:l4 level1 lfo5;tab-stops:list .5in'><span style='mso-fareast-font-family:
      "Times New Roman"'>Added display files for CSS-BOY and caQtDM. <o:p></o:p></span></li>

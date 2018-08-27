@@ -12,7 +12,7 @@ typedef enum {cmdRead, cmdControl, cmdReset} cmdType;
 static const char * const readCmdString[] = 
 {
     "0D", "0B", "0A", "0C", "11", "3C", "3C", "3C","3C", "01","02", 
-    "RD", "RC",  "RS1",  "RS2",  "RS3","","","","",""
+    "RD", "RC",  "RS1",  "RS2",  "RS3","","","","","",""
 };
 
 static const char * const ctlCmdString[] = 

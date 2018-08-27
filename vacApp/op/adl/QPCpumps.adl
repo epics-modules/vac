@@ -481,10 +481,10 @@ text {
 }
 "text update" {
 	object {
-		x=273
+		x=229
 		y=143
 		width=80
-		height=27
+		height=25
 	}
 	monitor {
 		chan="$(P)$(PUMP1).TYPE"
@@ -499,8 +499,8 @@ text {
 }
 text {
 	object {
-		x=273
-		y=178
+		x=275
+		y=172
 		width=80
 		height=10
 	}
@@ -508,7 +508,7 @@ text {
 		clr=0
 		fill="outline"
 	}
-	textix="Controller"
+	textix="Controller Type/Model"
 	align="horiz. centered"
 }
 text {
@@ -906,10 +906,10 @@ text {
 }
 "text update" {
 	object {
-		x=670
+		x=624
 		y=143
 		width=80
-		height=27
+		height=25
 	}
 	monitor {
 		chan="$(P)$(PUMP2).TYPE"
@@ -921,20 +921,6 @@ text {
 	format="exponential"
 	limits {
 	}
-}
-text {
-	object {
-		x=670
-		y=178
-		width=80
-		height=10
-	}
-	"basic attribute" {
-		clr=0
-		fill="outline"
-	}
-	textix="Controller"
-	align="horiz. centered"
 }
 rectangle {
 	object {
@@ -1305,10 +1291,10 @@ text {
 }
 "text update" {
 	object {
-		x=272
+		x=226
 		y=310
 		width=80
-		height=27
+		height=25
 	}
 	monitor {
 		chan="$(P)$(PUMP3).TYPE"
@@ -1320,20 +1306,6 @@ text {
 	format="exponential"
 	limits {
 	}
-}
-text {
-	object {
-		x=272
-		y=345
-		width=80
-		height=10
-	}
-	"basic attribute" {
-		clr=0
-		fill="outline"
-	}
-	textix="Controller"
-	align="horiz. centered"
 }
 menu {
 	object {
@@ -1717,10 +1689,10 @@ text {
 }
 "text update" {
 	object {
-		x=668
+		x=622
 		y=310
 		width=80
-		height=27
+		height=25
 	}
 	monitor {
 		chan="$(P)$(PUMP4).TYPE"
@@ -1732,20 +1704,6 @@ text {
 	format="exponential"
 	limits {
 	}
-}
-text {
-	object {
-		x=668
-		y=345
-		width=80
-		height=10
-	}
-	"basic attribute" {
-		clr=0
-		fill="outline"
-	}
-	textix="Controller"
-	align="horiz. centered"
 }
 menu {
 	object {
@@ -1802,5 +1760,119 @@ text {
 		fill="outline"
 	}
 	textix="Version"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=314
+		y=143
+		width=80
+		height=25
+	}
+	monitor {
+		chan="$(P)$(PUMP1).MODL"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=709
+		y=142
+		width=80
+		height=25
+	}
+	monitor {
+		chan="$(P)$(PUMP2).MODL"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=707
+		y=309
+		width=80
+		height=25
+	}
+	monitor {
+		chan="$(P)$(PUMP4).MODL"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=311
+		y=309
+		width=80
+		height=25
+	}
+	monitor {
+		chan="$(P)$(PUMP3).MODL"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="exponential"
+	limits {
+	}
+}
+text {
+	object {
+		x=668
+		y=173
+		width=80
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Controller Type/Model"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=671
+		y=340
+		width=80
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Controller Type/Model"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=269
+		y=340
+		width=80
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Controller Type/Model"
 	align="horiz. centered"
 }
