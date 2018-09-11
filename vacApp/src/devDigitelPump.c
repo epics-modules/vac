@@ -1143,7 +1143,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
         if(pPvt->status!=asynSuccess) {
             asynPrint(pasynUser,ASYN_TRACE_ERROR,
                 "devDigitelPumpProcess write failed %s Bytes read: %d, Reason: %d\n",
-                               pasynUser->errorMessage, &nwrite, eomReason);
+                pasynUser->errorMessage, (int) nwrite, eomReason);
         } else {
     	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
              	   "devDigitelPumpProcess %s nwrite=%d output=[%s]\n",
@@ -1172,7 +1172,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
         if(pPvt->status!=asynSuccess) {
             asynPrint(pasynUser,ASYN_TRACE_ERROR,
                 "devDigitelPumpProcess write failed %s Bytes read: %d, Reason: %d\n",
-                               pasynUser->errorMessage, &nwrite, eomReason);
+                pasynUser->errorMessage, (int) nwrite, eomReason);
         } else {
     	    asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
              	   "devDigitelPumpProcess %s nwrite=%d output=[%s]\n",

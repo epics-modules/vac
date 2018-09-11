@@ -1017,7 +1017,7 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
 
     asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
               "devVacSen::devVacSenWriteRead %s nwrite=%ld output=[%s]\n",
-              pr->name, nwrite, sendBuffer);
+              pr->name, (long) nwrite, sendBuffer);
     
     pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser, 
                             readBuffer, vacSen_READ_SIZE, &nwrite, &eomReason);
