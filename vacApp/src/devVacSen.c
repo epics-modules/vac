@@ -641,7 +641,7 @@ static long readWrite_vs(vsRecord *pr)
              stands for p.p x 10^see where s of 0 =- 1 =+ 
         and the setpoint of ppseePPSEE  where we ingore the second values */
  	        strncpy(data,&pPvt->recBuf[10*i],10);
-	        data[5] = 0;
+	        data[6] = 0;
 	        sscanf(data,"%2d%c%2d",&value,&sign,&exp);
 	        if (sign =='0') 
 		        exp -= exp*2;
