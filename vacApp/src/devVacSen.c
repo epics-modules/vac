@@ -307,6 +307,8 @@ static long init(vsRecord *pr)
     pPvt->pasynOctet = (asynOctet *)pasynInterface->pinterface;
     pPvt->octetPvt = pasynInterface->drvPvt;
     pPvt->pasynUser = pasynUser;
+    pPvt->pasynOctet->flush(pPvt->octetPvt, pPvt->pasynUser);
+
     pr->dpvt = pPvt;
 
     asynPrint(pasynUser, ASYN_TRACE_FLOW,
