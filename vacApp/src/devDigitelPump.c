@@ -1199,18 +1199,5 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
     asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
               	"devDigitelPumpProcess %s nread=%d input=[%s]\n",
               	pr->name, *nread, readBuffer);
-
-
-/*
- *  	for Digitel 500/1500 the reply for commands is only "\n*" 
- *	for successful write and proper reply lets set the return to *
- *	also reset the EOS back to "\n\r"
- *	this code is not used now. better not change these inside the code
-    if ((pPvt->devType > 0) && (pPvt->command == cmdControl)) {
-	strcpy(inputEos,"\n\r");
-        pPvt->status = pPvt->pasynOctet->setInputEos(pPvt->octetPvt, pasynUser, 
-                            inputEos, strlen(inputEos));
-    }
-*/
 }
 
