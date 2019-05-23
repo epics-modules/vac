@@ -1138,6 +1138,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
  */
  	/* All QPC commands should be > 9 chars */
     if(strlen(pPvt->sendBuf) >= 10 && pPvt->devType == 3){
+	pPvt->pasynOctet->flush(pPvt->octetPvt, pPvt->pasynUser);
         pPvt->status = pPvt->pasynOctet->write(pPvt->octetPvt, pasynUser, 
                             pPvt->sendBuf, strlen(pPvt->sendBuf), &nwrite);
         if(pPvt->status!=asynSuccess) {
@@ -1167,6 +1168,7 @@ static void devDigitelPumpProcess(asynUser *pasynUser,
                 "devDigitelPumpProcess sendBuf too small %s command=[%s]\n",
                       pasynUser->errorMessage,pPvt->sendBuf);
     } else if (pPvt->devType != 3){
+	pPvt->pasynOctet->flush(pPvt->octetPvt, pPvt->pasynUser);
         pPvt->status = pPvt->pasynOctet->write(pPvt->octetPvt, pasynUser, 
                             pPvt->sendBuf, strlen(pPvt->sendBuf), &nwrite);
         if(pPvt->status!=asynSuccess) {
