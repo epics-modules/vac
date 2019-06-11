@@ -37,3 +37,8 @@ EPICS_BASE=/usr/local/iocapps/R3.14.12.5/base/3-14-12-5-asd1
 #CAPFAST_TEMPLATES=
 #SCH2EDIF_PATH=
 
+# These lines allow developers to override these RELEASE settings
+# without having to modify this file directly.
+-include $(TOP)/../RELEASE.local
+-include $(TOP)/../RELEASE.$(EPICS_HOST_ARCH).local
+-include $(TOP)/configure/RELEASE.local
