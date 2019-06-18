@@ -19,7 +19,8 @@ recordtype(vs) {
 	}
 	field(TYPE,DBF_MENU) {
 		prompt("Controller Type")
-		special(SPC_MOD)
+		promptgroup(GUI_COMMON)
+		special(SPC_NOMOD)
 		menu(vsTYPE)
 		interest(1)
 	}
