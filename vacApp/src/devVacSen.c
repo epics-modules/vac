@@ -118,6 +118,7 @@ static long init(vsRecord *pr)
     asynInterface *pasynInterface;
     int address;
     char *port, *userParam;
+    static const char *fn = "devVacSen::init";
 
     /* Create an asynUser */
     pasynUser = pasynManager->createAsynUser(devVacSenCallback, 0);
@@ -130,8 +131,8 @@ static long init(vsRecord *pr)
     status = pasynEpicsUtils->parseLink(pasynUser, plink, &port,
         &address, &userParam);
     if (status != asynSuccess) {
-        errlogPrintf("devVacSen::init %s bad link %s\n",
-            pr->name, pasynUser->errorMessage);
+        errlogPrintf("%s %s bad link %s\n",
+            fn, pr->name, pasynUser->errorMessage);
         goto bad;
     }
 
@@ -158,8 +159,8 @@ static long init(vsRecord *pr)
 
     if (pr->type == vsTYPE_GP350) {
         if (address < 0 || address > 31) {
-            errlogPrintf("devVacSen::init %s address out of range %s\n",
-                pr->name, pPvt->address);
+            errlogPrintf("%s %s address out of range %s\n",
+                fn, pr->name, pPvt->address);
             goto bad;
         }
 
@@ -174,8 +175,8 @@ static long init(vsRecord *pr)
         int nParms;
 
         if (address != 0) {
-            errlogPrintf("devVacSen::init %s RS485 to MM200 not supported\n",
-                pr->name);
+            errlogPrintf("%s %s RS485 to MM200 not supported\n",
+                fn, pr->name);
             goto bad;
         }
         pPvt->cmdPrefix[0] = 0;
@@ -191,8 +192,8 @@ static long init(vsRecord *pr)
             static const int CV2[] = {0, 0, 3, 4};
 
             if (station < 3 || station > 6) {
-                errlogPrintf("devVacSen::init %s CC out of range: %d\n",
-                    pr->name, station);
+                errlogPrintf("%s %s CC out of range: %d\n",
+                    fn, pr->name, station);
                 goto bad;
             }
 
@@ -202,29 +203,29 @@ static long init(vsRecord *pr)
         }
         else if (nParms == 4) {
             if (station < 3 || station > 9 ) {
-                errlogPrintf("devVacSen::init %s CC out of range: %d\n",
-                    pr->name, station);
+                errlogPrintf("%s %s CC out of range: %d\n",
+                    fn, pr->name, station);
                 goto bad;
             }
             if (spt < 1 || spt > 2) {
-                errlogPrintf("devVacSen::init %s spt out of range %d\n",
-                    pr->name, spt);
+                errlogPrintf("%s %s spt out of range %d\n",
+                    fn, pr->name, spt);
                 goto bad;
             }
             if (stationC1 < 1 || stationC1 > 6) {
-                errlogPrintf("devVacSen::init %s CV1 out of range: %d\n",
-                    pr->name, stationC1);
+                errlogPrintf("%s %s CV1 out of range: %d\n",
+                    fn, pr->name, stationC1);
                 goto bad;
             }
             if (stationC2 < 0 || stationC2 > 6) {
-                errlogPrintf("devVacSen::init %s CV2 out of range: %d\n",
-                    pr->name, stationC2);
+                errlogPrintf("%s %s CV2 out of range: %d\n",
+                    fn, pr->name, stationC2);
                 goto bad;
             }
         }
         else {
-            errlogPrintf("devVacSen::init %s Too few/many parameters: %s\n",
-                pr->name, userParam);
+            errlogPrintf("%s %s Too few/many parameters: %s\n",
+                fn, pr->name, userParam);
             goto bad;
         }
 
@@ -236,8 +237,8 @@ static long init(vsRecord *pr)
 
     else if (pr->type == vsTYPE_CC10) {
         if (address < 0 || address > 15) {
-            errlogPrintf("devVacSen::init %s address out of range %s\n",
-                pr->name, pPvt->address);
+            errlogPrintf("%s %s address out of range %s\n",
+                fn, pr->name, pPvt->address);
             goto bad;
         }
 
@@ -250,8 +251,8 @@ static long init(vsRecord *pr)
         int station, stationC1, stationC2, spt;
 
         if (address < 0 || address > 99) {
-            errlogPrintf("devVacSen::init %s address out of range %s\n",
-                pr->name, pPvt->address);
+            errlogPrintf("%s %s address out of range %s\n",
+                fn, pr->name, pPvt->address);
             goto bad;
         }
 
@@ -261,14 +262,14 @@ static long init(vsRecord *pr)
             &station, &stationC1, &stationC2, &spt);
 
         if (station < 3 || station > 9) {
-            errlogPrintf("devVacSen::init %s station for CC out of range %d\n",
-                pr->name, station);
+            errlogPrintf("%s %s station for CC out of range %d\n",
+                fn, pr->name, station);
             goto bad;
         }
 
         if (spt < 1 || spt > 2) {
-            errlogPrintf("devVacSen::init %s setpoint out of range %d\n",
-                pr->name, spt);
+            errlogPrintf("%s %s setpoint out of range %d\n",
+                fn, pr->name, spt);
             goto bad;
         }
 
@@ -297,8 +298,8 @@ static long init(vsRecord *pr)
     pr->dpvt = pPvt;
 
     asynPrint(pasynUser, ASYN_TRACE_FLOW,
-        "devVacSen::init name=%s  port=%s address=%s device=%d station=%d\n",
-        pr->name, pPvt->PortName, pPvt->address, pPvt->devType, pPvt->cc);
+        "%s name=%s  port=%s address=%s device=%d station=%d\n",
+        fn, pr->name, pPvt->PortName, pPvt->address, pPvt->devType, pPvt->cc);
     return 0;
 
 bad:
@@ -306,8 +307,8 @@ bad:
         pasynManager->freeAsynUser(pasynUser);
     if (pPvt)
         free(pPvt);
-    errlogPrintf("devVacSen::init %s Problem initializing - record disabled.\n",
-        pr->name);
+    errlogPrintf("%s %s Problem initializing - record disabled.\n",
+        fn, pr->name);
     pr->pact = 1;
     return -1;
 }
@@ -690,6 +691,7 @@ static void devVacSenCallback(asynUser *pasynUser)
     char *pstartdata=0;
     char addcmd[3];
     char *value;
+    static const char *fn = "devVacSen::callback";
 
     pPvt->pasynUser->timeout = vacSen_TIMEOUT;
 
@@ -702,17 +704,16 @@ static void devVacSenCallback(asynUser *pasynUser)
 
         if (nread < 1 ) {
             asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                "devVacSen::devVacSenCallback %s Cmd reply too small=%d\n",
-                pr->name, nread);
+                "%s %s Cmd reply too small=%d\n",
+                fn, pr->name, nread);
             goto finish;
         }
 
         if (pPvt->devType == vsTYPE_GP307) {
             if (strcmp(readBuffer, "OK") != 0 ) {
                 asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                    "devVacSen::devVacSenCallback "
-                    "%s Cmd reply has error=[%s]\n",
-                    pr->name, readBuffer);
+                    "%s %s Cmd reply has error=[%s]\n",
+                    fn, pr->name, readBuffer);
                 recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
                 goto finish;
             }
@@ -720,9 +721,8 @@ static void devVacSenCallback(asynUser *pasynUser)
         else if (pPvt->devType == vsTYPE_GP350) {
             if (readBuffer[0] =='?') {
                 asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                    "devVacSen::devVacSenCallback "
-                    "%s Cmd reply has error=[%s]\n",
-                    pr->name, readBuffer);
+                    "%s %s Cmd reply has error=[%s]\n",
+                    fn, pr->name, readBuffer);
                 recGblSetSevr(pr, READ_ALARM, INVALID_ALARM);
                 goto finish;
             }
@@ -861,9 +861,8 @@ static void devVacSenCallback(asynUser *pasynUser)
         devVacSenWriteRead(pasynUser, pPvt->sendBuf, readBuffer, &nread);
         if (nread < 1 || nread > 50) {
             asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                "devVacSen::devVacSenCallback "
-                "%s Read reply too small/too large =%d\n",
-                pr->name, nread);
+                "%s %s Read reply too small/too large =%d\n",
+                fn, pr->name, nread);
             pPvt->errCount++;
             goto finish;
         }
@@ -883,9 +882,8 @@ static void devVacSenCallback(asynUser *pasynUser)
             pstartdata = &readBuffer[nread-5];
             if (strcmp(pstartdata, "ERROR") == 0 ) {
                 asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                    "devVacSen::devVacSenCallback "
-                    "%s Read reply has error=[%s]\n",
-                    pr->name, readBuffer);
+                    "%s %s Read reply has error=[%s]\n",
+                    fn, pr->name, readBuffer);
                 pPvt->errCount++;
                 goto finish;
             }
@@ -895,9 +893,8 @@ static void devVacSenCallback(asynUser *pasynUser)
         else if (pPvt->devType == vsTYPE_GP350) {
             if (readBuffer[0] =='?') {
                 asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                    "devVacSen::devVacSenCallback "
-                    "%s Read reply has error=[%s]\n",
-                    pr->name, readBuffer);
+                    "%s %s Read reply has error=[%s]\n",
+                    fn, pr->name, readBuffer);
                 pPvt->errCount++;
                 goto finish;
             }
@@ -908,9 +905,8 @@ static void devVacSenCallback(asynUser *pasynUser)
         else if (pPvt->devType == vsTYPE_MM200) {
             if (readBuffer[1] == '?') {
                 asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                    "devVacSen::devVacSenCallback "
-                    "%s Read reply has error=[%s]\n",
-                    pr->name, readBuffer);
+                    "%s %s Read reply has error=[%s]\n",
+                    fn, pr->name, readBuffer);
                 pPvt->errCount++;
                 goto finish;
             }
@@ -921,9 +917,8 @@ static void devVacSenCallback(asynUser *pasynUser)
             if (readBuffer[2] =='N') {
                 readBuffer[0] = 'Z';
                 asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                    "devVacSen::devVacSenCallback "
-                    "%s Read reply has error=[%s]\n",
-                    pr->name, readBuffer);
+                    "%s %s Read reply has error=[%s]\n",
+                    fn, pr->name, readBuffer);
                 pPvt->errCount++;
                 goto finish;
             }
@@ -933,9 +928,8 @@ static void devVacSenCallback(asynUser *pasynUser)
         else if (pPvt->devType == vsTYPE_MX200) {
             if (readBuffer[1] =='N') {
                 asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                    "devVacSen::devVacSenCallback "
-                    "%s Read reply has error=[%s]\n",
-                    pr->name, readBuffer);
+                    "%s %s Read reply has error=[%s]\n",
+                    fn, pr->name, readBuffer);
                 pPvt->errCount++;
                 goto finish;
             }
@@ -995,6 +989,7 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
     devVacSenPvt *pPvt = (devVacSenPvt *)pr->dpvt;
     size_t nwrite;
     int eomReason;
+    static const char *fn = "devVacSen::writeRead";
 
     pPvt->pasynUser->timeout = vacSen_TIMEOUT;
 
@@ -1003,14 +998,13 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
 
     if (pPvt->status != asynSuccess) {
         asynPrint(pasynUser, ASYN_TRACE_ERROR,
-            "devVacSen::devVacSenWriteRead "
-            "%s pasynOctet->write, status=%d, error=%s\n",
-            pr->name, pPvt->status, pasynUser->errorMessage);
+            "%s %s pasynOctet->write, status=%d, error=%s\n",
+            fn, pr->name, pPvt->status, pasynUser->errorMessage);
     }
 
     asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
-        "devVacSen::devVacSenWriteRead %s nwrite=%ld output=[%s]\n",
-        pr->name, (long) nwrite, sendBuffer);
+        "%s %s nwrite=%ld output=[%s]\n",
+        fn, pr->name, (long) nwrite, sendBuffer);
 
     pPvt->status = pPvt->pasynOctet->read(pPvt->octetPvt, pasynUser,
         readBuffer, vacSen_READ_SIZE, &nwrite, &eomReason);
@@ -1019,19 +1013,17 @@ static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
 
     if (pPvt->status != asynSuccess) {
         asynPrint(pasynUser, ASYN_TRACE_ERROR,
-            "devVacSen::devVacSenWriteRead "
-            "%s pasynOctet->read, status=%d, error=%s\n",
-            pr->name, pPvt->status, pasynUser->errorMessage);
+            "%s %s pasynOctet->read, status=%d, error=%s\n",
+            fn, pr->name, pPvt->status, pasynUser->errorMessage);
     }
     if (nwrite == vacSen_READ_SIZE ) {
         pPvt->status = pPvt->pasynOctet->flush(pPvt->octetPvt, pasynUser);
         asynPrint(pasynUser, ASYN_TRACE_ERROR,
-            "devVacSen::devVacSenWriteRead "
-            "%s pasynOctet->flush, status=%d, error=%s\n",
-            pr->name, pPvt->status, pasynUser->errorMessage);
+            "%s %s pasynOctet->flush, status=%d, error=%s\n",
+            fn, pr->name, pPvt->status, pasynUser->errorMessage);
     }
 
     asynPrint(pasynUser, ASYN_TRACEIO_DEVICE,
-        "devVacSen::devVacSenWriteRead %s nread=%d input=[%s]\n",
-        pr->name, *nread, readBuffer);
+        "%s %s nread=%d input=[%s]\n",
+        fn, pr->name, *nread, readBuffer);
 }
