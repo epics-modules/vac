@@ -3,17 +3,6 @@ include $(TOP)/configure/CONFIG
 #----------------------------------------
 #  ADD MACRO DEFINITIONS AFTER THIS LINE
 
-#----------------------------------------------------
-#  Optimization of db files using dbst (DEFAULT: NO)
-#DB_OPT = YES
-
-#----------------------------------------------------
-# Create and install (or just install)
-# databases, templates, substitutions like this
-#DB += dbExample1.db
-#DB += dbExample2.db
-#DB += dbSubExample.db
-
 # This can also be used for the QPC communications if desired
 # but uses the digitelRecord rather than individual records.
 # It also does not use a streamDevice proto file but rather the
@@ -25,15 +14,19 @@ DB += vs.db
 
 # QPCstreams.db can be used for Ethernet or serial
 DB += QPCstreams.db
+DB += QPC-eth.proto
+DB += QPC-serial.proto
 
 # QPC Modbus
 DB += QPCmodbus.db
-
-#----------------------------------------------------
-# If <anyname>.db template is not named <anyname>*.template add
-# <anyname>_TEMPLATE = <templatename>
 
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
 
+ifndef BASE_3_15
+# Rule needed for 3.14 to install .proto files
+$(INSTALL_DB)/%: ../%
+	$(ECHO) "Installing $@"
+	@$(INSTALL) -d -m $(INSTALL_PERMISSIONS) $< $(@D)
+endif

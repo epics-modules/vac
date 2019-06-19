@@ -45,7 +45,7 @@ drvAsynIPPortConfigure("Televac1", "10.6.33.133:4006", 0, 0, 0)
 
 ###################################################################
 # streamDevice
-epicsEnvSet ("STREAM_PROTOCOL_PATH", "${TOP}/vacApp/Db")
+epicsEnvSet ("STREAM_PROTOCOL_PATH", "${TOP}/db")
 
 # Use this for QPC over Ethernet (QPC uses Ethernet port 23)
 drvAsynIPPortConfigure ("QPC-1", "10.6.33.134:23",0,0,0)
