@@ -10,6 +10,15 @@ menu(vsTYPE) {
 	choice(vsTYPE_MX200,"MX200")
 }
 recordtype(vs) {
+    %#include "devSup.h"
+    %
+    %/* Declare Device Support Entry Table */
+    %struct vsRecord;
+    %typedef struct {
+    %    dset common;
+    %    long (* readWrite_vs)(struct vsRecord *pr);
+    %} vsdset;
+    %
 	include "dbCommon.dbd" 
 	field(INP,DBF_INLINK) {
 		prompt("Device Specification")

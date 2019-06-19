@@ -55,21 +55,21 @@
 /* Create RSET - Record Support Entry Table*/
 #define report NULL
 #define initialize NULL
-static long init_record();
-static long process();
-static long special();  /* needed for special */
+static long init_record(dbCommon *, int);
+static long process(dbCommon *);
+static long special(struct dbAddr * paddr, int after);
 #define get_value NULL
 #define cvt_dbaddr NULL
 #define get_array_info NULL
 #define put_array_info NULL
 #define get_units NULL
+static long get_precision(const DBADDR *, long *);
 #define get_enum_str NULL
 #define get_enum_strs NULL
 #define put_enum_str NULL
-static long get_precision();
-static long get_graphic_double();
-static long get_control_double();
-static long get_alarm_double();
+static long get_graphic_double(DBADDR *, struct dbr_grDouble *);
+static long get_control_double(DBADDR *, struct dbr_ctrlDouble *);
+static long get_alarm_double(DBADDR *, struct dbr_alDouble *);
 
 rset vsRSET = {
     RSETNUMBER,
@@ -91,19 +91,8 @@ rset vsRSET = {
     get_control_double,
     get_alarm_double
 };
-epicsExportAddress(rset,vsRSET);
+epicsExportAddress(rset, vsRSET);
 
-
-typedef struct vsdset {	/* vs dset */
-    long number;
-    DEVSUPFUN dev_report;
-    DEVSUPFUN init;
-    DEVSUPFUN init_record;
-    DEVSUPFUN get_ioint_info;
-    DEVSUPFUN readWrite_vs;
-}vsdset;
-
- 
 static void checkAlarms(vsRecord *pvs);
 static void monitor(vsRecord *pvs);
 
@@ -113,35 +102,36 @@ static void monitor(vsRecord *pvs);
  * this record intends on using it.
  *
  ******************************************************************************/
-static long init_record(void *precord, int pass)
+static long init_record(dbCommon *prec, int pass)
 {
-    vsRecord *pvs = (vsRecord *)precord;
+    vsRecord *pvs = (vsRecord *) prec;
     vsdset *pdset;
     long status;
-        
-    if (pass == 0) return (0);
-    
+
+    if (pass == 0)
+        return 0;
+
     pvs->chgc = 0;
 
-    if ( (pdset = (vsdset *)(pvs->dset) )== NULL) {
-	recGblRecordError(S_dev_noDSET, (void *)pvs, "vs: init_record");
-	return (S_dev_noDSET);
+    if ((pdset = (vsdset *) pvs->dset) == NULL) {
+        recGblRecordError(S_dev_noDSET, pvs, "vs: init_record");
+        return S_dev_noDSET;
     }
 
     /*** must have readWrite_vs function defined ***/
-    if ((pdset->number < 5) || (pdset->readWrite_vs == NULL)) {
-	recGblRecordError(S_dev_missingSup, (void *)pvs, "vs: init_record");
-	return (S_dev_missingSup);
+    if ((pdset->common.number < 5) || (pdset->readWrite_vs == NULL)) {
+        recGblRecordError(S_dev_missingSup, pvs, "vs: init_record");
+        return S_dev_missingSup;
     }
     
     
     /*** if everything is OK init the record ***/
-    if (pdset->init_record) {
-	if ((status = (*pdset->init_record) (pvs))) {
-	    return (status);
-	}
+    if (pdset->common.init_record) {
+        if ((status = pdset->common.init_record(prec))) {
+            return status;
+        }
     }
-    return (0);
+    return 0;
 }
 
 /*****************************************************************************
@@ -153,24 +143,24 @@ static long init_record(void *precord, int pass)
  * from the machine.
  *
  ******************************************************************************/
-static long process(void *precord)
+static long process(dbCommon *precord)
 {
-    vsRecord *pvs = (vsRecord *)precord;
-    vsdset *pdset = (vsdset *)(pvs->dset);
+    vsRecord *pvs = (vsRecord *) precord;
+    vsdset *pdset = (vsdset *) pvs->dset;
     long status;
     unsigned char pact = pvs->pact;
 
     if ((pdset == NULL) || (pdset->readWrite_vs == NULL)) {
-	pvs->pact = TRUE;
-	recGblRecordError(S_dev_missingSup, (void *) pvs, "readWrite_vs");
-	return (S_dev_missingSup);
+        pvs->pact = TRUE;
+        recGblRecordError(S_dev_missingSup, pvs, "readWrite_vs");
+        return S_dev_missingSup;
     }
 
     /*** call device support for processing ***/
-    status = (*pdset->readWrite_vs) (pvs);
+    status = pdset->readWrite_vs(pvs);
     /*** Device support is in asynchronous mode, let it finish ***/
     if (!pact && pvs->pact)
-        return (0);
+        return 0;
     pvs->pact = TRUE;
     recGblGetTimeStamp(pvs);
 
@@ -182,7 +172,7 @@ static long process(void *precord)
     recGblFwdLink(pvs);
     pvs->chgc = 0;
     pvs->pact = FALSE;
-    return (status);
+    return status;
 }
 
 /*****************************************************************************
@@ -199,23 +189,23 @@ static long special(DBADDR *paddr, int after)
     vsRecord *pvs = (vsRecord *)(paddr->precord);
     
     if (!after)
-	return (0);
-		
+        return 0;
+
     if (paddr->pfield == &(pvs->ig1s))
-	pvs->chgc |= IG1_FIELD;
+        pvs->chgc |= IG1_FIELD;
     if (paddr->pfield == &(pvs->ig2s))
-	pvs->chgc |= IG2_FIELD;
+        pvs->chgc |= IG2_FIELD;
     if (paddr->pfield == &(pvs->dgss))
-	pvs->chgc |= DGS_FIELD;
+        pvs->chgc |= DGS_FIELD;
     if (paddr->pfield == &(pvs->sp1s))
-	pvs->chgc |= SP1_FIELD;
+        pvs->chgc |= SP1_FIELD;
     if (paddr->pfield == &(pvs->sp2s))
-	pvs->chgc |= SP2_FIELD;
+        pvs->chgc |= SP2_FIELD;
     if (paddr->pfield == &(pvs->sp3s))
-	pvs->chgc |= SP3_FIELD;
+        pvs->chgc |= SP3_FIELD;
     if (paddr->pfield == &(pvs->sp4s))
-	pvs->chgc |= SP4_FIELD;
-    return (0);
+        pvs->chgc |= SP4_FIELD;
+    return 0;
 }
 
 /*****************************************************************************
@@ -226,29 +216,29 @@ static long special(DBADDR *paddr, int after)
 static long get_graphic_double(DBADDR *paddr, struct dbr_grDouble *pgd)
 {
     vsRecord *pvs = (vsRecord *)paddr->precord;
-    int	fieldIndex = dbGetFieldIndex(paddr);
-    
+    int fieldIndex = dbGetFieldIndex(paddr);
+
     if (fieldIndex == vsRecordVAL || fieldIndex == vsRecordPRES) {
-	pgd->upper_disp_limit = pvs->hopr;
-	pgd->lower_disp_limit = pvs->lopr;
+        pgd->upper_disp_limit = pvs->hopr;
+        pgd->lower_disp_limit = pvs->lopr;
     } else if (fieldIndex == vsRecordCGAP) {
-	pgd->upper_disp_limit = pvs->hapr;
-	pgd->lower_disp_limit = pvs->lapr;
+        pgd->upper_disp_limit = pvs->hapr;
+        pgd->lower_disp_limit = pvs->lapr;
     } else if (fieldIndex == vsRecordCGBP) {
-	pgd->upper_disp_limit = pvs->hbpr;
-	pgd->lower_disp_limit = pvs->lbpr;
+        pgd->upper_disp_limit = pvs->hbpr;
+        pgd->lower_disp_limit = pvs->lbpr;
     } else if (fieldIndex == vsRecordLPRS) {
-	pgd->upper_disp_limit = pvs->hlpr;
-	pgd->lower_disp_limit = pvs->llpr;
+        pgd->upper_disp_limit = pvs->hlpr;
+        pgd->lower_disp_limit = pvs->llpr;
     } else if (fieldIndex == vsRecordLCAP) {
-	pgd->upper_disp_limit = pvs->halr;
-	pgd->lower_disp_limit = pvs->lalr;
+        pgd->upper_disp_limit = pvs->halr;
+        pgd->lower_disp_limit = pvs->lalr;
     } else if (fieldIndex == vsRecordLCBP) {
-	pgd->upper_disp_limit = pvs->hblr;
-	pgd->lower_disp_limit = pvs->lblr;
+        pgd->upper_disp_limit = pvs->hblr;
+        pgd->lower_disp_limit = pvs->lblr;
     } else
-	recGblGetGraphicDouble(paddr, pgd);
-    return (0);
+        recGblGetGraphicDouble(paddr, pgd);
+    return 0;
 }
 
 /*****************************************************************************
@@ -264,11 +254,11 @@ static long get_control_double(DBADDR *paddr, struct dbr_ctrlDouble * pcd)
     if (fieldIndex == vsRecordVAL || fieldIndex == vsRecordPRES
       || fieldIndex == vsRecordCGAP
       || fieldIndex == vsRecordCGBP) {
-	pcd->upper_ctrl_limit = pvs->hopr;
-	pcd->lower_ctrl_limit = pvs->lopr;
+        pcd->upper_ctrl_limit = pvs->hopr;
+        pcd->lower_ctrl_limit = pvs->lopr;
     } else
         recGblGetControlDouble(paddr, pcd);
-    return (0);
+    return 0;
 }
 
 /*****************************************************************************
@@ -278,26 +268,26 @@ static long get_control_double(DBADDR *paddr, struct dbr_ctrlDouble * pcd)
  *                              fields
  *
  ******************************************************************************/
-static long get_precision(DBADDR *paddr, long *precision)
+static long get_precision(const DBADDR *paddr, long *precision)
 {
-    int	fieldIndex = dbGetFieldIndex(paddr);
+    int fieldIndex = dbGetFieldIndex(paddr);
 
     if (fieldIndex == vsRecordVAL || fieldIndex == vsRecordPRES
       || fieldIndex == vsRecordCGAP || fieldIndex == vsRecordCGBP
       || fieldIndex == vsRecordSP1R || fieldIndex == vsRecordSP2R
       || fieldIndex == vsRecordSP3R || fieldIndex == vsRecordSP4R) {
-	*precision = 1;
-	return (0);
+        *precision = 1;
+        return 0;
     }
     if (fieldIndex == vsRecordLPRS
       || fieldIndex == vsRecordLCAP
       || fieldIndex == vsRecordLCBP) {
-	*precision = 2;
-	return (0);
+        *precision = 2;
+        return 0;
     }
     *precision = 0;
     recGblGetPrec(paddr, precision);
-    return (0);
+    return 0;
 }
 
 /*****************************************************************************
@@ -306,23 +296,23 @@ static long get_precision(DBADDR *paddr, long *precision)
 static long get_alarm_double(DBADDR *paddr, struct dbr_alDouble *pad)
 {
     vsRecord *pvs = (vsRecord *)paddr->precord;
-    int	fieldIndex = dbGetFieldIndex(paddr);
-    
+    int fieldIndex = dbGetFieldIndex(paddr);
+
     if (fieldIndex == vsRecordVAL || fieldIndex == vsRecordPRES) {
-	if ((pvs->ig1s == ON) || (pvs->ig2s == ON)) {
-	    pad->upper_alarm_limit = pvs->hihi;
-	    pad->upper_warning_limit = pvs->high;
-	    pad->lower_warning_limit = pvs->low;
-	    pad->lower_alarm_limit = pvs->lolo;
-	} else {
-	    pad->upper_alarm_limit = 0;
-	    pad->upper_warning_limit = 0;
-	    pad->lower_warning_limit = 0;
-	    pad->lower_alarm_limit = 0;
-	}
+        if ((pvs->ig1s == ON) || (pvs->ig2s == ON)) {
+            pad->upper_alarm_limit = pvs->hihi;
+            pad->upper_warning_limit = pvs->high;
+            pad->lower_warning_limit = pvs->low;
+            pad->lower_alarm_limit = pvs->lolo;
+        } else {
+            pad->upper_alarm_limit = 0;
+            pad->upper_warning_limit = 0;
+            pad->lower_warning_limit = 0;
+            pad->lower_alarm_limit = 0;
+        }
     } else
-	recGblGetAlarmDouble(paddr, pad);
-    return (0);
+        recGblGetAlarmDouble(paddr, pad);
+    return 0;
 }
 
 /*****************************************************************************
@@ -334,15 +324,16 @@ static void checkAlarms(vsRecord * pvs)
     double hyst, lalm;
     float hihi, high, lolo, low;
     unsigned short hhsv, llsv, hsv, lsv;
-    	
+
     if (pvs->udf) {
 #if LT_EPICSBASE(3,15,0,2)
-	recGblSetSevr(pvs,UDF_ALARM,INVALID_ALARM);
+    recGblSetSevr(pvs,UDF_ALARM,INVALID_ALARM);
 #else
-	recGblSetSevr(pvs,UDF_ALARM,pvs->udfs);
+    recGblSetSevr(pvs,UDF_ALARM,pvs->udfs);
 #endif
-	return;
+        return;
     }
+
     hihi = pvs->hihi;
     lolo = pvs->lolo;
     high = pvs->high;

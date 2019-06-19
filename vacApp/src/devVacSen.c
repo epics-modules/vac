@@ -88,29 +88,30 @@ typedef struct devVacSenPvt {
     int         errCount;
 } devVacSenPvt;
 
-typedef struct dsetVacSen{
-    long      number;
-    DEVSUPFUN report;
-    DEVSUPFUN init;
-    DEVSUPFUN init_record;
-    DEVSUPFUN get_ioint_info;
-    DEVSUPFUN readWrite_vs;
-} dsetVacSen;
-
 
 static void devVacSenCallback(asynUser *pasynUser);
 static void devVacSenWriteRead(asynUser *pasynUser, char *sendBuffer,
     char *readBuffer, int *nread);
 
-static long init(vsRecord *pr);
+static long init(struct dbCommon *prec);
 static long readWrite_vs(vsRecord *pr);
 
-dsetVacSen devVacSen = {5, 0, 0, init, 0, readWrite_vs};
+static vsdset devVacSen = {
+    {
+        5,
+        NULL,
+        NULL,
+        init,
+        NULL
+    },
+    readWrite_vs
+};
 epicsExportAddress(dset, devVacSen);
 
 
-static long init(vsRecord *pr)
+static long init(struct dbCommon *prec)
 {
+    vsRecord *pr = (vsRecord *) prec;
     DBLINK *plink = &pr->inp;
     devVacSenPvt *pPvt = NULL;
     asynUser *pasynUser;
@@ -686,7 +687,7 @@ static void devVacSenCallback(asynUser *pasynUser)
     devVacSenPvt *pPvt = (devVacSenPvt *)pr->dpvt;
     char readBuffer[vacSen_READ_SIZE];
     char responseBuffer[vacSen_BUFFER_SIZE];
-    struct rset *prset = (struct rset *)(pr->rset);
+    rset *prset = (rset *) pr->rset;
     int i, nread, j;
     char *pstartdata=0;
     char addcmd[3];

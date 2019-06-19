@@ -100,9 +100,7 @@
 #define DIGITEL_MAXSP   1e-3
 #define DIGITEL_MINSP	0
 
-int recDigitelsimFlag = 0;
 volatile int recDigitelDebug = 0;
-epicsExportAddress(int,recDigitelDebug);
 /***** recDigitelDebug information *****/
 /** recDigitelDebug >= 0 --- initialization information **/
 /** recDigitelDebug >= 5 --- simulation mode **/
@@ -110,56 +108,49 @@ epicsExportAddress(int,recDigitelDebug);
 /** recDigitelDebug >= 15 -- changed fields due to command output **/
 /** recDigitelDebug >= 20 -- alarms that are set **/
 /** recDigitelDebug >= 25 -- function calls **/
+epicsExportAddress(int, recDigitelDebug);
 
 /* Create RSET - Record Support Entry Table */
 #define report NULL
 #define initialize NULL
-static long init_record();
-static long process();
-static long special();
+static long init_record(dbCommon *, int);
+static long process(dbCommon *);
+static long special(struct dbAddr * paddr, int after);
 #define get_value NULL
 #define cvt_dbaddr NULL
 #define get_array_info NULL
 #define put_array_info NULL
 #define get_units NULL
-static long get_precision();
+static long get_precision(const DBADDR *, long *);
 #define get_enum_str NULL
 #define get_enum_strs NULL
 #define put_enum_str NULL
-static long get_graphic_double();
-static long get_control_double();
-static long get_alarm_double();
+static long get_graphic_double(DBADDR *, struct dbr_grDouble *);
+static long get_control_double(DBADDR *, struct dbr_ctrlDouble *);
+static long get_alarm_double(DBADDR *, struct dbr_alDouble *);
  
-rset digitelRSET={
-        RSETNUMBER,
-        report,
-        initialize,
-        init_record,
-        process,
-        special,
-        get_value,
-        cvt_dbaddr,
-        get_array_info,
-        put_array_info,
-        get_units,
-        get_precision,
-        get_enum_str,
-        get_enum_strs,
-        put_enum_str,
-        get_graphic_double,
-        get_control_double,
-        get_alarm_double
+rset digitelRSET = {
+    RSETNUMBER,
+    report,
+    initialize,
+    init_record,
+    process,
+    special,
+    get_value,
+    cvt_dbaddr,
+    get_array_info,
+    put_array_info,
+    get_units,
+    get_precision,
+    get_enum_str,
+    get_enum_strs,
+    put_enum_str,
+    get_graphic_double,
+    get_control_double,
+    get_alarm_double
 };
-epicsExportAddress(rset,digitelRSET);
+epicsExportAddress(rset, digitelRSET);
 
-typedef struct digiteldset {	/* digitel dset */
-    long number;
-    DEVSUPFUN dev_report;
-    DEVSUPFUN init;
-    DEVSUPFUN init_record;	/* (-1,0)=>(failure,success) */
-    DEVSUPFUN get_ioint_info;
-    DEVSUPFUN proc_xact;	/* Always return 2, (don't convert) */
-} digiteldset;
 
 static void checkAlarms(digitelRecord *pdg);
 static void monitor(digitelRecord *pdg);
@@ -170,9 +161,9 @@ static void monitor(digitelRecord *pdg);
  * this record intends on using it.
  *
  ******************************************************************************/
-static long init_record(void *precord,int pass)
+static long init_record(dbCommon *prec, int pass)
 {
-    digitelRecord *pdg = (digitelRecord *)precord;
+    digitelRecord *pdg = (digitelRecord *) prec;
     digiteldset *pdset;
     long status;
 
@@ -180,7 +171,7 @@ static long init_record(void *precord,int pass)
 	printf("recDigitel.c: Digitel 500 record initialization\n");
 
     if (pass == 0)
-	return (0);
+	return 0;
 
     pdg->flgs = 0;
 
@@ -212,30 +203,30 @@ static long init_record(void *precord,int pass)
 	printf("recDigitel.c: Look for device support\n");
 
     /*** look for device support ***/
-    if ( (pdset = (digiteldset *) (pdg->dset) )== NULL) {
-	recGblRecordError(S_dev_noDSET, (void*)pdg, "digitel: init_record");
+    if ((pdset = (digiteldset *) pdg->dset) == NULL) {
+	recGblRecordError(S_dev_noDSET, pdg, "digitel: init_record");
 	if (recDigitelDebug)
 	    printf("recDigitel.c: Missing device support entry table\n");
-	return (S_dev_noDSET);
+	return S_dev_noDSET;
     }
 
-    /*** must have proc_xact function defined ***/
-    if ((pdset->number < 5) || (pdset->proc_xact == NULL)) {
-	recGblRecordError(S_dev_missingSup, (void *)pdg, "digitel: init_record");
+    /*** must have readWrite function defined ***/
+    if ((pdset->common.number < 5) || (pdset->readWrite == NULL)) {
+	recGblRecordError(S_dev_missingSup, pdg, "digitel: init_record");
 	if (recDigitelDebug)
 	    printf("recDigitel.c: Missing device support\n");
-	return (S_dev_missingSup);
+	return S_dev_missingSup;
     }
 
     /*** if everything is OK init the record ***/
-    if (pdset->init_record) {
-	if ((status = (*pdset->init_record) (pdg))) {
+    if (pdset->common.init_record) {
+	if ((status = pdset->common.init_record(prec))) {
 	    if (recDigitelDebug)
 		printf("recDigitel.c: Failure in calling record initialization\n");
-	    return (status);
+	    return status;
 	}
     }
-    return (0);
+    return 0;
     /********** End Initialization of Record **********/
 }
 
@@ -244,25 +235,26 @@ static long init_record(void *precord,int pass)
  * This is called to "Process" the record.
  *
  * When we process a record for the digitel, we write out the new values for any
- * field whos'e value(s) might have changed, then read back the operating status
+ * field whose value(s) might have changed, then read back the operating status
  * from the machine.
  *
  ******************************************************************************/
-static long process(void *precord)
+static long process(dbCommon *precord)
 {
     digitelRecord *pdg = (digitelRecord *)precord;
-    digiteldset *pdset = (digiteldset *) (pdg->dset);
+    digiteldset *pdset = (digiteldset *) pdg->dset;
     long status;
+    int recDigitelsimFlag = 0;
     unsigned char pact = pdg->pact;
 
 
     if (recDigitelDebug >= 25)
-	printf("recDigitel.c: Process(%s)\n", pdg->name);
+        printf("recDigitel::Process(%s)\n", pdg->name);
 
-    if ((pdset == NULL) || (pdset->proc_xact == NULL)) {
-	pdg->pact = TRUE;
-	recGblRecordError(S_dev_missingSup, (void *)pdg, "read_digitel");
-	return (S_dev_missingSup);
+    if ((pdset == NULL) || (pdset->readWrite == NULL)) {
+        pdg->pact = TRUE;
+        recGblRecordError(S_dev_missingSup, pdg, "read_digitel");
+        return S_dev_missingSup;
     }
 
     /*** if not currently active... save initial values for pressure, voltage... ***/
@@ -302,27 +294,26 @@ static long process(void *precord)
 	pdg->ivol = pdg->volt;
 	pdg->ierr = pdg->err;
     }
+
     /*** check to see if simulation mode is being called for from the link ***/
-    status = dbGetLink(&(pdg->siml),
-		       DBR_USHORT, &(pdg->simm), 0,0);
+    status = dbGetLink(&(pdg->siml), DBR_USHORT, &(pdg->simm), 0,0);
     if (status == 0) {
-	if (pdg->simm == menuYesNoYES) {
-	    recDigitelsimFlag = 1;
-	    if (recDigitelDebug >= 5)
-		printf("recDigitel.c: Record being processed in simulation mode\n");
-	} else
-	    recDigitelsimFlag = 0;
+        if (pdg->simm == menuYesNoYES) {
+            recDigitelsimFlag = 1;
+            if (recDigitelDebug >= 5)
+                printf("recDigitel::process: In simulation mode\n");
+        }
     }
 
     /*** if not in simulation mode allow device support to be called ***/
-    if (!(recDigitelsimFlag)) {
-	/*** call device support for processing ***/
-	status = (*pdset->proc_xact) (pdg);
-	/*** Device support is in asynchronous mode, let it finish ***/
-	if (!pact && pdg->pact)
-	    return (0);
-	pdg->pact = TRUE;
-	recGblGetTimeStamp(pdg);
+    if (!recDigitelsimFlag) {
+        /*** call device support for processing ***/
+        status = pdset->readWrite(pdg);
+        /*** Device support is in asynchronous mode, let it finish ***/
+        if (!pact && pdg->pact)
+            return 0;
+        pdg->pact = TRUE;
+        recGblGetTimeStamp(pdg);
     }
     /*** if in simulation mode assign simulated values to fields ***/
     else {
@@ -330,8 +321,7 @@ static long process(void *precord)
 	/*** provides ability to simulate mode (OPERATE/ STANDBY) status of ***/
 	/*** pump, if set to 1 (OPERATE) make pump voltage appear to be at  ***/
 	/*** an "on" (6000V) level ***/
-	status = dbGetLink(&(pdg->slmo),
-			   DBR_USHORT, &(pdg->svmo), 0,0);
+	status = dbGetLink(&(pdg->slmo), DBR_USHORT, &(pdg->svmo), 0,0);
 	if (status == 0)
 	    pdg->modr = pdg->svmo;
 	if (pdg->modr == 1)
@@ -339,20 +329,17 @@ static long process(void *precord)
 	else
 	    pdg->volt = 0;
 	/*** simulation *** setpoint 1 set ***/
-	status = dbGetLink(&(pdg->sls1),
-			   DBR_USHORT, &(pdg->svs1), 0,0);
+	status = dbGetLink(&(pdg->sls1), DBR_USHORT, &(pdg->svs1), 0,0);
 	if (status == 0)
 	    pdg->set1 = pdg->svs1;
 	/*** simulation *** setpoint 2 set ***/
-	status = dbGetLink(&(pdg->sls2),
-			   DBR_USHORT, &(pdg->svs2), 0,0);
+	status = dbGetLink(&(pdg->sls2), DBR_USHORT, &(pdg->svs2), 0,0);
 	if (status == 0)
 	    pdg->set2 = pdg->svs2;
 	/*** simulation *** current level ***/
 	/*** adjust current, and make pressure look like there is a 220 l/s ***/
 	/*** pump being controlled ***/
-	status = dbGetLink(&(pdg->slcr),
-			   DBR_DOUBLE, &(pdg->svcr), 0,0);
+	status = dbGetLink(&(pdg->slcr), DBR_DOUBLE, &(pdg->svcr), 0,0);
 	if (status == 0)
 	    pdg->crnt = pdg->svcr;
 	if (pdg->modr == 0)
@@ -372,7 +359,7 @@ static long process(void *precord)
     /*** process the forward scan link record ***/
     recGblFwdLink(pdg);
     pdg->pact = FALSE;
-    return (status);
+    return status;
 }
 
 /*****************************************************************************
@@ -381,24 +368,24 @@ static long process(void *precord)
  *                         log pressure (LVAL) fields
  *
  ******************************************************************************/
-static long get_precision(DBADDR *paddr, long *precision)
+static long get_precision(const DBADDR *paddr, long *precision)
 {
     digitelRecord *pdg = (digitelRecord *) paddr->precord;
     if (paddr->pfield == (void *) &pdg->val) {
-	*precision = 1;
-	return (0);
+        *precision = 1;
+        return 0;
     }
     if (paddr->pfield == (void *) &pdg->lval) {
-	*precision = 2;
-	return (0);
+        *precision = 2;
+        return 0;
     }
     if (paddr->pfield == (void *) &pdg->crnt) {
-	*precision = 1;
-	return (0);
+        *precision = 1;
+        return 0;
     }
     *precision = 0;
     recGblGetPrec(paddr, precision);
-    return (0);
+    return 0;
 }
 
 /*****************************************************************************
@@ -419,17 +406,18 @@ static long special(DBADDR *paddr, int after)
     digitelRecord *pdg = (digitelRecord *) (paddr->precord);
 
     if (!after)
-	return (0);
+        return 0;
 
     if (recDigitelDebug >= 25)
-	printf("recDigitel.c: special()\n");
+        printf("recDigitel::special()\n");
 
     /*** Make sure we have the proper special flag type spec'd ***/
     if (paddr->special != SPC_MOD) {
-	recGblDbaddrError(S_db_badChoice, paddr, "dg: special");
-	return (S_db_badChoice);
+        recGblDbaddrError(S_db_badChoice, paddr, "dg: special");
+        return S_db_badChoice;
     }
-    p = (void *) (paddr->pfield);
+
+    p = paddr->pfield;
     /*** Figure out which field has been changed ***/
     if (p == &(pdg->dspl)) {
 	pdg->flgs |= MOD_DSPL;
@@ -570,7 +558,7 @@ static long special(DBADDR *paddr, int after)
 	if (recDigitelDebug >= 15)
 	    printf("recDigitel.c: >%s< S4VS changed to %d\n", pdg->name, pdg->s4vs);
     }
-    return (0);
+    return 0;
 }
 /*****************************************************************************
  *
@@ -608,7 +596,7 @@ static long get_graphic_double(DBADDR *paddr, struct dbr_grDouble *pgd)
 	pgd->lower_disp_limit = pdg->lvtr;
     } else
 	recGblGetGraphicDouble(paddr, pgd);
-    return (0);
+    return 0;
 }
 /*****************************************************************************
  *
@@ -630,7 +618,7 @@ static long get_control_double(DBADDR *paddr, struct dbr_ctrlDouble * pcd)
 	pcd->lower_ctrl_limit = DIGITEL_MINSP;
     } else
 	recGblGetControlDouble(paddr, pcd);
-    return (0);
+    return 0;
 }
 /*****************************************************************************
  *
@@ -652,7 +640,7 @@ static long get_alarm_double(DBADDR *paddr, struct dbr_alDouble *pad)
 	pad->lower_alarm_limit = 0;
 	recGblGetAlarmDouble(paddr, pad);
     }
-    return (0);
+    return 0;
 }
 /*****************************************************************************
  *

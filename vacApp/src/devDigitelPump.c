@@ -81,17 +81,8 @@ typedef struct devDigitelPumpPvt {
     int         errCount;
 } devDigitelPumpPvt;
 
-typedef struct dsetDigitelPump{
-    long      number;
-    DEVSUPFUN report;
-    DEVSUPFUN init;
-    DEVSUPFUN init_record;
-    DEVSUPFUN get_ioint_info;
-    DEVSUPFUN readWrite_dg;
-} dsetDigitelPump;
 
-
-static long init(digitelRecord *pr);
+static long init(struct dbCommon *prec);
 static long readWrite_dg(digitelRecord *pr);
 
 static void buildCommand(devDigitelPumpPvt *pPvt, char *pvalue);
@@ -100,12 +91,22 @@ static void devDigitelPumpCallback(asynUser *pasynUser);
 static void devDigitelPumpProcess(asynUser *pasynUser,
     char *readBuffer, int *nread);
 
-dsetDigitelPump devDigitelPump = {5, 0, 0, init, 0, readWrite_dg};
+static digiteldset devDigitelPump = {
+    {
+        5,
+        NULL,
+        NULL,
+        init,
+        NULL
+    },
+    readWrite_dg
+};
 epicsExportAddress(dset, devDigitelPump);
 
 
-static long init(digitelRecord *pr)
+static long init(struct dbCommon *prec)
 {
+    digitelRecord *pr = (digitelRecord *) prec;
     asynUser *pasynUser=NULL;
     asynStatus status;
     asynInterface *pasynInterface;
@@ -879,7 +880,7 @@ static void devDigitelPumpCallback(asynUser *pasynUser)
     devDigitelPumpPvt *pPvt = (devDigitelPumpPvt *)pr->dpvt;
     char readBuffer[DigitelPump_SIZE];
     char responseBuffer[DigitelPump_BUFFER_SIZE];
-    struct rset *prset = (struct rset *)(pr->rset);
+    rset *prset = (rset *) pr->rset;
     int i, nread;
     char pvalue[30]="";
     char *pstartdata=0;

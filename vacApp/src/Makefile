@@ -1,48 +1,38 @@
 TOP=../..
 
 include $(TOP)/configure/CONFIG
-#-----------------------------------------------------------------------------
-#  ADD MACRO DEFINITIONS AFTER THIS LINE
-#=============================================================================
 
-
-#=============================================================================
 # Build an IOC support library
 LIBRARY_IOC += vac
 
-#-----------------------------------------------------------------------------
-# Install database definition files into <top>/dbd
-#DBD += devXXX.dbd
-
-
 DBDINC += vsRecord
 DBDINC += digitelRecord
+
+DBD += vacSupport.dbd
+DBD += devDigitelPump.dbd
+DBD += devVacSen.dbd
+
+USR_CFLAGS += -DUSE_TYPED_RSET -DUSE_TYPED_DSET
+
 vac_SRCS += vsRecord.c
 vac_SRCS += digitelRecord.c
 
-#-----------------------------------------------------------------------------
-# The following are compiled and added to the Support library
 vac_SRCS += devDigitelPump.c
 vac_SRCS += devVacSen.c
 
 vac_LIBS += asyn
 vac_LIBS += $(EPICS_BASE_IOC_LIBS)
-#
-#==============================================================================
 
 
 #=============================================================================
 # Build an ioc application <name>
 # Don't need for /APSshare --tmm 10/16/2007
-#PROD_IOC = vacApp
+PROD_IOC = vacApp
 
 #-----------------------------------------------------------------------------
 # <name>.dbd and <name>VX.dbd will be created and installed
 DBD += vacApp.dbd
-DBD += vacAppVX.dbd
-DBD += vacSupport.dbd
-DBD += devDigitelPump.dbd
-DBD += devVacSen.dbd
+#DBD += vacAppVX.dbd
 
 #-----------------------------------------------------------------------------
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
@@ -63,7 +53,7 @@ vacApp_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 # Include libraries
 vacApp_Common_LIBS  += vac asyn
 vacApp_Common_LIBS  += $(EPICS_BASE_IOC_LIBS)
-vacApp_vxWorks_LIBS += TyGSOctal Ipac
+#vacApp_vxWorks_LIBS += TyGSOctal Ipac
 
 vacApp_LIBS_DEFAULT += $(vacApp_Common_LIBS)
 vacApp_LIBS_vxWorks += $(vacApp_Common_LIBS) $(vacApp_vxWorks_LIBS)
@@ -74,8 +64,7 @@ include $(TOP)/configure/RULES
 #------------------------------------------------------------------------------
 #  ADD RULES AFTER THIS LINE
 
-# Parallel build sometimes fails.
-# Make dependences on new records explicit.
+# Parallel build dependencies
 digitelRecord$(OBJ): $(COMMON_DIR)/digitelRecord.h
 devDigitelPump$(OBJ): $(COMMON_DIR)/digitelRecord.h
 vsRecord$(OBJ): $(COMMON_DIR)/vsRecord.h

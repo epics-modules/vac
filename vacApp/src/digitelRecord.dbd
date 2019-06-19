@@ -65,7 +65,17 @@ menu(digitelTYPE) {
 	choice(digitelTYPE_Digitel_1500,"D1500")
 	choice(digitelTYPE_Digitel_QPC,"QPC")
 }
+variable(recDigitelDebug, int)
 recordtype(digitel) {
+    %#include "devSup.h"
+    %
+    %/* Declare Device Support Entry Table */
+    %struct digitelRecord;
+    %typedef struct {
+    %    dset common;
+    %    long (* readWrite)(struct digitelRecord *pr);
+    %} digiteldset;
+    %
 	include "dbCommon.dbd" 
 	field(MODL,DBF_STRING) {
 		prompt("Device Model Number")
