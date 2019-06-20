@@ -101,7 +101,8 @@ vs.db has various substitions for startup file.
 	dbLoadRecords("db/digitelPump.db", "P=MR:,PUMP=IP3,PORT=serial6,ADDR=5,DEV=MPC,STN=2")
 	tyGSAsynInit("serial6", "UART0", 5, 9600,'N',1,8,'N',"\r","\r") 
 
-## HTML documentation
+## Documentation
 
-* [vacReleaseNotes.html](http://htmlpreview.github.com/?https://github.com/epics-modules/vac/blob/master/documentation/vacReleaseNotes.html)
+* [Documentation](vacDoc.md)
+* [Release Notes](vacReleaseNotes.md)
 
