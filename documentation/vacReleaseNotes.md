@@ -1,5 +1,16 @@
 # vac Release Notes
 
+## Release 1-9 (June 21, 2019)
+
+  * Device supports using Asyn have been updated to flush input queues at various places.
+  * The Televac MM200 code has been gone over and some issues fixed.
+  * The CONFIG_SITE and RELEASE files now have the standard `-include`s to support `.local` files.
+  * The vsRecord's TYPE field is now correctly marked `SPC_NOMOD`.
+  * Code comments have been improved and the code layout of both device support sources have gone through major reformatting.
+  * The module now builds against recent EPICS Base versions without warnings.
+  * The streamDevice protocol files for the QPC are now installed into the top-level `db/` directory.
+  * Documentation has been converted to GitHub-flavored Markdown.
+
 ## Release 1-8 (August 15, 2018)
 
   * devDigitelPump.c: Corrected communication issue found with Digitel
