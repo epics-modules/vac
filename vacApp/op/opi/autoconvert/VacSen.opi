@@ -7,11 +7,11 @@
   </auto_scale_widgets>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <background_color>
-    <color name="Gray_4" red="187" green="187" blue="187" />
+    <color red="187" green="187" blue="187" />
   </background_color>
-  <boy_version>5.1.0.201802081749</boy_version>
+  <boy_version>5.1.0</boy_version>
   <foreground_color>
-    <color name="Gray_0" red="255" green="255" blue="255" />
+    <color red="255" green="255" blue="255" />
   </foreground_color>
   <grid_space>5</grid_space>
   <height>300</height>
@@ -58,7 +58,7 @@
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="Gray_11" red="90" green="90" blue="90" />
+      <color red="90" green="90" blue="90" />
     </foreground_color>
     <gradient>false</gradient>
     <height>140</height>
@@ -115,7 +115,7 @@ $(pv_value)</tooltip>
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="Gray_11" red="90" green="90" blue="90" />
+      <color red="90" green="90" blue="90" />
     </foreground_color>
     <gradient>false</gradient>
     <height>30</height>
@@ -172,7 +172,7 @@ $(pv_value)</tooltip>
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="Gray_10" red="105" green="105" blue="105" />
+      <color red="105" green="105" blue="105" />
     </foreground_color>
     <gradient>false</gradient>
     <height>10</height>
@@ -229,7 +229,7 @@ $(pv_value)</tooltip>
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="Gray_10" red="105" green="105" blue="105" />
+      <color red="105" green="105" blue="105" />
     </foreground_color>
     <gradient>false</gradient>
     <height>10</height>
@@ -286,7 +286,7 @@ $(pv_value)</tooltip>
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+      <color red="0" green="216" blue="0" />
     </foreground_color>
     <gradient>false</gradient>
     <height>10</height>
@@ -353,7 +353,7 @@ $(pv_value)</tooltip>
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+      <color red="0" green="216" blue="0" />
     </foreground_color>
     <gradient>false</gradient>
     <height>10</height>
@@ -418,10 +418,10 @@ $(pv_value)</tooltip>
     <name>Grouping Container</name>
     <rules>
       <rule name="Visibility" prop_id="visible" out_exp="false">
-        <exp bool_exp="(pv0====2) &amp; !(pv1 &lt;-0.9)">
+        <exp bool_exp="(pv0==2) &amp; !(pv1 &lt;-0.9)">
           <value>true</value>
         </exp>
-        <exp bool_exp="!((pv0====2) &amp; !(pv1 &lt;-0.9))">
+        <exp bool_exp="!((pv0==2) &amp; !(pv1 &lt;-0.9))">
           <value>false</value>
         </exp>
         <pv trig="true">$(P)$(GAUGE).TYPE</pv>
@@ -470,7 +470,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_18" red="45" green="127" blue="0" />
+        <color red="45" green="127" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -537,7 +537,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_18" red="45" green="127" blue="0" />
+        <color red="45" green="127" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -582,7 +582,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -633,7 +633,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -694,7 +694,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -734,7 +734,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -836,7 +836,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_11" red="90" green="90" blue="90" />
+        <color red="90" green="90" blue="90" />
       </foreground_color>
       <gradient>false</gradient>
       <height>50</height>
@@ -893,7 +893,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_2" red="218" green="218" blue="218" />
+        <color red="218" green="218" blue="218" />
       </foreground_color>
       <gradient>false</gradient>
       <height>15</height>
@@ -950,7 +950,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_2" red="218" green="218" blue="218" />
+        <color red="218" green="218" blue="218" />
       </foreground_color>
       <gradient>false</gradient>
       <height>15</height>
@@ -1007,7 +1007,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_2" red="218" green="218" blue="218" />
+        <color red="218" green="218" blue="218" />
       </foreground_color>
       <gradient>false</gradient>
       <height>15</height>
@@ -1041,7 +1041,7 @@ $(pv_value)</tooltip>
       <alarm_pulsing>false</alarm_pulsing>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_2" red="218" green="218" blue="218" />
+        <color red="218" green="218" blue="218" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -1055,7 +1055,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>28</height>
       <horizontal>false</horizontal>
@@ -1091,7 +1091,7 @@ $(pv_value)</tooltip>
       <alarm_pulsing>false</alarm_pulsing>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_2" red="218" green="218" blue="218" />
+        <color red="218" green="218" blue="218" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -1105,7 +1105,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>28</height>
       <horizontal>false</horizontal>
@@ -1141,7 +1141,7 @@ $(pv_value)</tooltip>
       <alarm_pulsing>false</alarm_pulsing>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_2" red="218" green="218" blue="218" />
+        <color red="218" green="218" blue="218" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -1155,7 +1155,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>28</height>
       <horizontal>false</horizontal>
@@ -1208,7 +1208,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_6" red="158" green="158" blue="158" />
+        <color red="158" green="158" blue="158" />
       </foreground_color>
       <height>10</height>
       <line_style>0</line_style>
@@ -1255,7 +1255,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_61" red="82" green="218" blue="59" />
+        <color red="82" green="218" blue="59" />
       </foreground_color>
       <height>10</height>
       <line_style>0</line_style>
@@ -1312,7 +1312,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_6" red="158" green="158" blue="158" />
+        <color red="158" green="158" blue="158" />
       </foreground_color>
       <height>10</height>
       <line_style>0</line_style>
@@ -1359,7 +1359,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_61" red="82" green="218" blue="59" />
+        <color red="82" green="218" blue="59" />
       </foreground_color>
       <height>10</height>
       <line_style>0</line_style>
@@ -1416,7 +1416,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_6" red="158" green="158" blue="158" />
+        <color red="158" green="158" blue="158" />
       </foreground_color>
       <height>10</height>
       <line_style>0</line_style>
@@ -1463,7 +1463,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_61" red="82" green="218" blue="59" />
+        <color red="82" green="218" blue="59" />
       </foreground_color>
       <height>10</height>
       <line_style>0</line_style>
@@ -1514,7 +1514,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="9" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>15</height>
       <horizontal_alignment>0</horizontal_alignment>
@@ -1554,7 +1554,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="9" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>15</height>
       <horizontal_alignment>0</horizontal_alignment>
@@ -1594,7 +1594,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="9" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>15</height>
       <horizontal_alignment>0</horizontal_alignment>
@@ -1696,7 +1696,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_11" red="90" green="90" blue="90" />
+        <color red="90" green="90" blue="90" />
       </foreground_color>
       <gradient>false</gradient>
       <height>30</height>
@@ -1753,7 +1753,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_10" red="105" green="105" blue="105" />
+        <color red="105" green="105" blue="105" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -1810,7 +1810,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_10" red="105" green="105" blue="105" />
+        <color red="105" green="105" blue="105" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -1867,7 +1867,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+        <color red="0" green="216" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -1934,7 +1934,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+        <color red="0" green="216" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -1989,7 +1989,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -2029,7 +2029,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -2080,10 +2080,10 @@ $(pv_value)</tooltip>
     <name>Grouping Container</name>
     <rules>
       <rule name="Visibility" prop_id="visible" out_exp="false">
-        <exp bool_exp="pv0====1">
+        <exp bool_exp="pv0==1">
           <value>true</value>
         </exp>
-        <exp bool_exp="!(pv0====1)">
+        <exp bool_exp="!(pv0==1)">
           <value>false</value>
         </exp>
         <pv trig="true">$(P)$(GAUGE).TYPE</pv>
@@ -2131,7 +2131,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_11" red="90" green="90" blue="90" />
+        <color red="90" green="90" blue="90" />
       </foreground_color>
       <gradient>false</gradient>
       <height>30</height>
@@ -2188,7 +2188,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_10" red="105" green="105" blue="105" />
+        <color red="105" green="105" blue="105" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2245,7 +2245,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_10" red="105" green="105" blue="105" />
+        <color red="105" green="105" blue="105" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2302,7 +2302,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+        <color red="0" green="216" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2369,7 +2369,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+        <color red="0" green="216" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2424,7 +2424,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -2464,7 +2464,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -2515,10 +2515,10 @@ $(pv_value)</tooltip>
     <name>Grouping Container</name>
     <rules>
       <rule name="Visibility" prop_id="visible" out_exp="false">
-        <exp bool_exp="pv0====3">
+        <exp bool_exp="pv0==3">
           <value>true</value>
         </exp>
-        <exp bool_exp="!(pv0====3)">
+        <exp bool_exp="!(pv0==3)">
           <value>false</value>
         </exp>
         <pv trig="true">$(P)$(GAUGE).TYPE</pv>
@@ -2566,7 +2566,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_11" red="90" green="90" blue="90" />
+        <color red="90" green="90" blue="90" />
       </foreground_color>
       <gradient>false</gradient>
       <height>30</height>
@@ -2623,7 +2623,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_10" red="105" green="105" blue="105" />
+        <color red="105" green="105" blue="105" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2680,7 +2680,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="Gray_10" red="105" green="105" blue="105" />
+        <color red="105" green="105" blue="105" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2737,7 +2737,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+        <color red="0" green="216" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2804,7 +2804,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_15" red="0" green="216" blue="0" />
+        <color red="0" green="216" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -2859,7 +2859,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -2899,7 +2899,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -2979,7 +2979,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -3040,7 +3040,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -3091,10 +3091,10 @@ $(pv_value)</tooltip>
     <name>Grouping Container</name>
     <rules>
       <rule name="Visibility" prop_id="visible" out_exp="false">
-        <exp bool_exp="pv0====3">
+        <exp bool_exp="pv0==3">
           <value>true</value>
         </exp>
-        <exp bool_exp="!(pv0====3)">
+        <exp bool_exp="!(pv0==3)">
           <value>false</value>
         </exp>
         <pv trig="true">$(P)$(GAUGE).TYPE</pv>
@@ -3142,7 +3142,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_18" red="45" green="127" blue="0" />
+        <color red="45" green="127" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -3187,7 +3187,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -3248,7 +3248,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -3338,7 +3338,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -3368,7 +3368,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -3419,7 +3419,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -3480,7 +3480,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -3520,7 +3520,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_0" red="255" green="255" blue="255" />
+        <color red="255" green="255" blue="255" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -3550,7 +3550,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -3673,7 +3673,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_18" red="45" green="127" blue="0" />
+        <color red="45" green="127" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -3740,7 +3740,7 @@ $(pv_value)</tooltip>
       </font>
       <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
       <foreground_color>
-        <color name="MEDM_COLOR_18" red="45" green="127" blue="0" />
+        <color red="45" green="127" blue="0" />
       </foreground_color>
       <gradient>false</gradient>
       <height>10</height>
@@ -3785,7 +3785,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -3836,7 +3836,7 @@ $(pv_value)</tooltip>
       <auto_size>false</auto_size>
       <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
       <background_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </background_color>
       <border_alarm_sensitive>false</border_alarm_sensitive>
       <border_color>
@@ -3897,7 +3897,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_13" red="45" green="45" blue="45" />
+        <color red="45" green="45" blue="45" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -3937,7 +3937,7 @@ $(pv_value)</tooltip>
         <fontdata fontName="Sans" height="6" style="0" pixels="false" />
       </font>
       <foreground_color>
-        <color name="Gray_14" red="0" green="0" blue="0" />
+        <color red="0" green="0" blue="0" />
       </foreground_color>
       <height>10</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -3978,7 +3978,7 @@ $(pv_value)</tooltip>
       <fontdata fontName="Sans" height="11" style="0" pixels="false" />
     </font>
     <foreground_color>
-      <color name="Gray_14" red="0" green="0" blue="0" />
+      <color red="0" green="0" blue="0" />
     </foreground_color>
     <height>20</height>
     <horizontal_alignment>1</horizontal_alignment>
@@ -4008,7 +4008,7 @@ $(pv_value)</tooltip>
     <auto_size>false</auto_size>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
     <background_color>
-      <color name="Gray_4" red="187" green="187" blue="187" />
+      <color red="187" green="187" blue="187" />
     </background_color>
     <border_alarm_sensitive>true</border_alarm_sensitive>
     <border_color>
@@ -4022,7 +4022,7 @@ $(pv_value)</tooltip>
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="Gray_14" red="0" green="0" blue="0" />
+      <color red="0" green="0" blue="0" />
     </foreground_color>
     <format_type>4</format_type>
     <height>20</height>
@@ -4059,7 +4059,7 @@ $(pv_value)</tooltip>
     <alarm_pulsing>false</alarm_pulsing>
     <backcolor_alarm_sensitive>false</backcolor_alarm_sensitive>
     <background_color>
-      <color name="Gray_5" red="174" green="174" blue="174" />
+      <color red="174" green="174" blue="174" />
     </background_color>
     <border_alarm_sensitive>false</border_alarm_sensitive>
     <border_color>
@@ -4073,7 +4073,7 @@ $(pv_value)</tooltip>
     </font>
     <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
     <foreground_color>
-      <color name="Gray_14" red="0" green="0" blue="0" />
+      <color red="0" green="0" blue="0" />
     </foreground_color>
     <height>15</height>
     <label></label>
@@ -4113,7 +4113,7 @@ $(pv_value)</tooltip>
       <fontdata fontName="Sans" height="6" style="0" pixels="false" />
     </font>
     <foreground_color>
-      <color name="Gray_0" red="255" green="255" blue="255" />
+      <color red="255" green="255" blue="255" />
     </foreground_color>
     <height>10</height>
     <horizontal_alignment>1</horizontal_alignment>
@@ -4153,7 +4153,7 @@ $(pv_value)</tooltip>
       <fontdata fontName="Sans" height="6" style="0" pixels="false" />
     </font>
     <foreground_color>
-      <color name="Gray_0" red="255" green="255" blue="255" />
+      <color red="255" green="255" blue="255" />
     </foreground_color>
     <height>10</height>
     <horizontal_alignment>1</horizontal_alignment>
