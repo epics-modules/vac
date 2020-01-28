@@ -1,0 +1,1584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>VacSen</name>
+  <x>354</x>
+  <y>179</y>
+  <width>190</width>
+  <height>300</height>
+  <background_color>
+    <color red="187" green="187" blue="187">
+    </color>
+  </background_color>
+  <grid_visible>false</grid_visible>
+  <grid_step_x>5</grid_step_x>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #6</name>
+    <x>3</x>
+    <y>47</y>
+    <width>140</width>
+    <height>140</height>
+    <line_color>
+      <color red="90" green="90" blue="90">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="90" green="90" blue="90">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #9</name>
+    <x>146</x>
+    <y>49</y>
+    <width>40</width>
+    <height>30</height>
+    <line_color>
+      <color red="90" green="90" blue="90">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="90" green="90" blue="90">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #12</name>
+    <x>172</x>
+    <y>54</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="105" green="105" blue="105">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="105" green="105" blue="105">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #15</name>
+    <x>172</x>
+    <y>68</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="105" green="105" blue="105">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="105" green="105" blue="105">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #18</name>
+    <x>172</x>
+    <y>53</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="0" green="216" blue="0">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="0" green="216" blue="0">
+      </color>
+    </background_color>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).SP1</pv_name>
+      </rule>
+    </rules>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+        <pv_name>$(P)$(GAUGE).SP1</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #22</name>
+    <x>172</x>
+    <y>67</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="0" green="216" blue="0">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="0" green="216" blue="0">
+      </color>
+    </background_color>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).SP2</pv_name>
+      </rule>
+    </rules>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+        <pv_name>$(P)$(GAUGE).SP2</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #26</name>
+    <x>5</x>
+    <y>242</y>
+    <width>169</width>
+    <height>45</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!((pv0==2) &amp; !(pv1 &lt;-0.9))">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+        <pv_name>$(P)$(GAUGE).SP3R</pv_name>
+      </rule>
+    </rules>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #29</name>
+      <pv_name>$(P)$(GAUGE).SP3R</pv_name>
+      <x>1</x>
+      <width>125</width>
+      <height>21</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #33</name>
+      <pv_name>$(P)$(GAUGE).SP4R</pv_name>
+      <y>24</y>
+      <width>125</width>
+      <height>21</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #37</name>
+      <text>SP3</text>
+      <x>133</x>
+      <y>7</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #40</name>
+      <text>SP4</text>
+      <x>132</x>
+      <y>31</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #43</name>
+      <x>159</x>
+      <y>7</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP3</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #47</name>
+      <x>159</x>
+      <y>29</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP4</pv_name>
+        </rule>
+      </rules>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #52</name>
+    <x>3</x>
+    <y>189</y>
+    <width>157</width>
+    <height>67</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0&lt;2)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #55</name>
+      <width>155</width>
+      <height>50</height>
+      <line_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="choice" version="2.0.0">
+      <name>choice button #58</name>
+      <pv_name>$(P)$(GAUGE).DGSS</pv_name>
+      <x>104</x>
+      <y>19</y>
+      <width>45</width>
+      <height>28</height>
+      <background_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </background_color>
+      <horizontal>false</horizontal>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+      <items>
+        <item>Item 1</item>
+        <item>Item 2</item>
+      </items>
+    </widget>
+    <widget type="choice" version="2.0.0">
+      <name>choice button #61</name>
+      <pv_name>$(P)$(GAUGE).IG2S</pv_name>
+      <x>55</x>
+      <y>20</y>
+      <width>45</width>
+      <height>28</height>
+      <background_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </background_color>
+      <horizontal>false</horizontal>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+      <items>
+        <item>Item 1</item>
+        <item>Item 2</item>
+      </items>
+    </widget>
+    <widget type="choice" version="2.0.0">
+      <name>choice button #64</name>
+      <pv_name>$(P)$(GAUGE).IG1S</pv_name>
+      <x>5</x>
+      <y>20</y>
+      <width>45</width>
+      <height>28</height>
+      <background_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </background_color>
+      <horizontal>false</horizontal>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+      <items>
+        <item>Item 1</item>
+        <item>Item 2</item>
+      </items>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #67</name>
+      <x>5</x>
+      <y>3</y>
+      <width>45</width>
+      <height>15</height>
+      <line_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="arc" version="2.0.0">
+      <name>arc #70</name>
+      <x>24</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <total_angle>360.0</total_angle>
+      <line_color>
+        <color red="30" green="144" blue="255">
+        </color>
+      </line_color>
+    </widget>
+    <widget type="arc" version="2.0.0">
+      <name>arc #73</name>
+      <x>24</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <total_angle>360.0</total_angle>
+      <line_color>
+        <color red="30" green="144" blue="255">
+        </color>
+      </line_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).IG1R</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #77</name>
+      <x>55</x>
+      <y>3</y>
+      <width>45</width>
+      <height>15</height>
+      <line_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="arc" version="2.0.0">
+      <name>arc #80</name>
+      <x>72</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <total_angle>360.0</total_angle>
+      <line_color>
+        <color red="30" green="144" blue="255">
+        </color>
+      </line_color>
+    </widget>
+    <widget type="arc" version="2.0.0">
+      <name>arc #83</name>
+      <x>72</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <total_angle>360.0</total_angle>
+      <line_color>
+        <color red="30" green="144" blue="255">
+        </color>
+      </line_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).IG2R</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #87</name>
+      <x>104</x>
+      <y>3</y>
+      <width>45</width>
+      <height>15</height>
+      <line_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="arc" version="2.0.0">
+      <name>arc #90</name>
+      <x>121</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <total_angle>360.0</total_angle>
+      <line_color>
+        <color red="30" green="144" blue="255">
+        </color>
+      </line_color>
+    </widget>
+    <widget type="arc" version="2.0.0">
+      <name>arc #93</name>
+      <x>121</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <total_angle>360.0</total_angle>
+      <line_color>
+        <color red="30" green="144" blue="255">
+        </color>
+      </line_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).DGSR</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #97</name>
+      <text>IG1</text>
+      <x>11</x>
+      <y>52</y>
+      <width>32</width>
+      <height>15</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #101</name>
+      <text>IG2</text>
+      <x>60</x>
+      <y>52</y>
+      <width>32</width>
+      <height>15</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #105</name>
+      <text>DEGAS</text>
+      <x>107</x>
+      <y>52</y>
+      <width>50</width>
+      <height>15</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #110</name>
+    <text>$(P)$(GAUGE)</text>
+    <x>3</x>
+    <y>3</y>
+    <width>182</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #113</name>
+    <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+    <x>14</x>
+    <y>25</y>
+    <width>158</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>menu #117</name>
+    <pv_name>$(P)$(GAUGE).SCAN</pv_name>
+    <x>132</x>
+    <y>283</y>
+    <width>55</width>
+    <height>15</height>
+    <background_color>
+      <color red="174" green="174" blue="174">
+      </color>
+    </background_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #120</name>
+    <text>SP1</text>
+    <x>149</x>
+    <y>52</y>
+    <width>20</width>
+    <height>10</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="10.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #123</name>
+    <text>SP2</text>
+    <x>149</x>
+    <y>67</y>
+    <width>20</width>
+    <height>10</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="10.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #126</name>
+    <x>146</x>
+    <y>82</y>
+    <width>40</width>
+    <height>30</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0&lt;3)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #129</name>
+      <width>40</width>
+      <height>30</height>
+      <line_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #132</name>
+      <x>26</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #135</name>
+      <x>26</x>
+      <y>19</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #138</name>
+      <x>26</x>
+      <y>4</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP3</pv_name>
+        </rule>
+      </rules>
+      <scripts>
+        <script file="EmbeddedPy">
+          <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+          <pv_name>$(P)$(GAUGE).SP3</pv_name>
+        </script>
+      </scripts>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #142</name>
+      <x>26</x>
+      <y>18</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP4</pv_name>
+        </rule>
+      </rules>
+      <scripts>
+        <script file="EmbeddedPy">
+          <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+          <pv_name>$(P)$(GAUGE).SP4</pv_name>
+        </script>
+      </scripts>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #146</name>
+      <text>SP3</text>
+      <x>3</x>
+      <y>3</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #149</name>
+      <text>SP4</text>
+      <x>3</x>
+      <y>18</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #153</name>
+    <x>146</x>
+    <y>114</y>
+    <width>40</width>
+    <height>30</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==1)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #156</name>
+      <width>40</width>
+      <height>30</height>
+      <line_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #159</name>
+      <x>26</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #162</name>
+      <x>26</x>
+      <y>19</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #165</name>
+      <x>26</x>
+      <y>4</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP5</pv_name>
+        </rule>
+      </rules>
+      <scripts>
+        <script file="EmbeddedPy">
+          <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+          <pv_name>$(P)$(GAUGE).SP5</pv_name>
+        </script>
+      </scripts>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #169</name>
+      <x>26</x>
+      <y>18</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP6</pv_name>
+        </rule>
+      </rules>
+      <scripts>
+        <script file="EmbeddedPy">
+          <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+          <pv_name>$(P)$(GAUGE).SP6</pv_name>
+        </script>
+      </scripts>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #173</name>
+      <text>SP5</text>
+      <x>3</x>
+      <y>3</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #176</name>
+      <text>SP6</text>
+      <x>3</x>
+      <y>18</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #180</name>
+    <x>145</x>
+    <y>81</y>
+    <width>40</width>
+    <height>30</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==3)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #183</name>
+      <width>40</width>
+      <height>30</height>
+      <line_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="90" green="90" blue="90">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #186</name>
+      <x>26</x>
+      <y>5</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #189</name>
+      <x>26</x>
+      <y>19</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #192</name>
+      <x>26</x>
+      <y>4</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP3</pv_name>
+        </rule>
+      </rules>
+      <scripts>
+        <script file="EmbeddedPy">
+          <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+          <pv_name>$(P)$(GAUGE).SP3</pv_name>
+        </script>
+      </scripts>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #196</name>
+      <x>26</x>
+      <y>18</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP4</pv_name>
+        </rule>
+      </rules>
+      <scripts>
+        <script file="EmbeddedPy">
+          <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+from org.csstudio.display.builder.model.persist import WidgetColorService
+sevr = PVUtil.getSeverity(pvs[0])
+if sevr==1:
+    name = 'MINOR'
+elif sevr==2:
+    name = 'MAJOR'
+elif sevr==3:
+    name = 'INVALID'
+elif sevr==4:
+    name = 'DISCONNECTED'
+else:
+    name = 'OK'
+color = WidgetColorService.getColor(name)
+widget.setPropertyValue('background_color', color)
+]]></text>
+          <pv_name>$(P)$(GAUGE).SP4</pv_name>
+        </script>
+      </scripts>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #200</name>
+      <text>SP3</text>
+      <x>3</x>
+      <y>3</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #203</name>
+      <text>HV</text>
+      <x>3</x>
+      <y>18</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #207</name>
+    <x>7</x>
+    <y>51</y>
+    <width>131</width>
+    <height>42</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==3)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #210</name>
+      <pv_name>$(P)$(GAUGE).VAL</pv_name>
+      <x>1</x>
+      <width>130</width>
+      <height>30</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="30.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #214</name>
+      <text>Vac Gauge (Torr)</text>
+      <y>32</y>
+      <width>130</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #218</name>
+    <x>6</x>
+    <y>242</y>
+    <width>168</width>
+    <height>21</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==3)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #221</name>
+      <pv_name>$(P)$(GAUGE).SP3R</pv_name>
+      <width>125</width>
+      <height>21</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #225</name>
+      <text>SP3</text>
+      <x>132</x>
+      <y>7</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #228</name>
+      <x>158</x>
+      <y>7</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP3</pv_name>
+        </rule>
+      </rules>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #233</name>
+    <x>8</x>
+    <y>49</y>
+    <width>131</width>
+    <height>132</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=3)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="label" version="2.0.0">
+      <name>text #236</name>
+      <text>Convectron A (Torr)</text>
+      <x>1</x>
+      <y>76</y>
+      <width>130</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #239</name>
+      <pv_name>$(P)$(GAUGE).VAL</pv_name>
+      <x>1</x>
+      <width>130</width>
+      <height>30</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="30.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #243</name>
+      <pv_name>$(P)$(GAUGE).CGAP</pv_name>
+      <x>1</x>
+      <y>44</y>
+      <width>130</width>
+      <height>30</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="30.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="115" green="255" blue="107">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #247</name>
+      <text>Vac Gauge (Torr)</text>
+      <y>32</y>
+      <width>130</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #250</name>
+      <text>Convectron B (Torr)</text>
+      <x>1</x>
+      <y>122</y>
+      <width>130</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #253</name>
+      <pv_name>$(P)$(GAUGE).CGBP</pv_name>
+      <x>1</x>
+      <y>90</y>
+      <width>130</width>
+      <height>30</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="30.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="115" green="255" blue="107">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #258</name>
+    <x>7</x>
+    <y>191</y>
+    <width>167</width>
+    <height>46</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_calc" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0&gt;==2)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(GAUGE).TYPE</pv_name>
+      </rule>
+    </rules>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #261</name>
+      <pv_name>$(P)$(GAUGE).SP1R</pv_name>
+      <width>125</width>
+      <height>21</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #265</name>
+      <pv_name>$(P)$(GAUGE).SP2R</pv_name>
+      <y>25</y>
+      <width>125</width>
+      <height>21</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #269</name>
+      <x>157</x>
+      <y>7</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP1</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #273</name>
+      <x>157</x>
+      <y>33</y>
+      <width>10</width>
+      <height>10</height>
+      <line_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="45" green="127" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0!=0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(GAUGE).SP2</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #277</name>
+      <text>SP1</text>
+      <x>132</x>
+      <y>8</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="45" green="45" blue="45">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #280</name>
+      <text>SP2</text>
+      <x>132</x>
+      <y>33</y>
+      <width>20</width>
+      <height>10</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="10.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+  </widget>
+</display>
