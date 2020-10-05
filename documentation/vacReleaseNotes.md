@@ -1,5 +1,10 @@
 # vac Release Notes
 
+## Release 1-9-1 (Oct 5, 2020)
+
+  * Added bob files, updated edl and ui files.
+  * iocsh files now installed to top-level folder from vacApp/iocsh
+
 ## Release 1-9 (June 21, 2019)
 
   * Device supports using Asyn have been updated to flush input queues at various places.
