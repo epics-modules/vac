@@ -1,0 +1,6 @@
+BASE="7.0"
+
+MODULES="ipac asyn"
+
+ASYN="master"
+IPAC="master"
