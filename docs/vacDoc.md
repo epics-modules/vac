@@ -1,3 +1,10 @@
+---
+layout: default
+title: Overview
+nav_order: 2
+---
+
+
 # The synApps vac module
 
 The synApps vac module provides the EPICS databases, device drivers, and

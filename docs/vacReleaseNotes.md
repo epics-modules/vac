@@ -1,3 +1,10 @@
+---
+layout: default
+title: Release Notes
+nav_order: 3
+---
+
+
 # vac Release Notes
 
 ## Release 1-9-1 (Oct 5, 2020)
