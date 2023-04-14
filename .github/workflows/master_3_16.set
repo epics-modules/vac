@@ -1,6 +1,0 @@
-BASE="3.16"
-
-MODULES="ipac asyn"
-
-ASYN="master"
-IPAC="master"
