@@ -7,6 +7,10 @@ nav_order: 3
 
 # vac Release Notes
 
+## Release 1-9-2 (June 5, 2023)
+  
+  * Documentation converted to github pages
+
 ## Release 1-9-1 (Oct 5, 2020)
 
   * Added bob files, updated edl and ui files.
