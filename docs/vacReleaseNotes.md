@@ -90,5 +90,5 @@ one for a single pump (QPCsingle_pump.adl)
   * Db/vs.db, Db/digitelPump.db - added SCAN field
 
 Suggestions and Comments to:
-[Tim Mooney](mailto:mooney@aps.anl.gov) (mooney@aps.anl.gov)
+[Keenan Lang](mailto:klang@anl.gov) (klang@anl.gov)
 
