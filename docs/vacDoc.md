@@ -255,4 +255,4 @@ code and adding the MX200 support.
 Marty Smith added support for the QPC (Quad Pump Controller) from Gamma Vacuum
 and has supplied some documentation.
 
-Tim Mooney is responsible for coordinating development and releases.
+Tim Mooney managed the development and releases of this module for decades.
