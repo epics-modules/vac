@@ -1,5 +1,3 @@
-BASE="R7.0.4.1"
-
 MODULES="ipac asyn"
 
 ASYN="R4-42"

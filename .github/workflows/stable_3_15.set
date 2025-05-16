@@ -1,6 +1,0 @@
-BASE="3.15"
-
-MODULES="ipac asyn"
-
-ASYN="R4-42"
-IPAC="2.16"
