@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2025-08-20 12:52:36 by epics-->
+<display version="2.0.0">
+  <name>QPCtop</name>
+  <x>1253</x>
+  <y>121</y>
+  <width>400</width>
+  <height>400</height>
+  <background_color>
+    <color red="187" green="187" blue="187">
+    </color>
+  </background_color>
+  <grid_visible>false</grid_visible>
+  <grid_step_x>5</grid_step_x>
+  <widget type="action_button" version="3.0.0">
+    <name>related display #6</name>
+    <actions>
+      <action type="open_display">
+        <file>QPCsingle_pump_streams.opi</file>
+        <macros>
+          <P>13IDA:</P>
+          <PMP>ip3</PMP>
+          <SPLY>1</SPLY>
+          <SPT>1</SPT>
+        </macros>
+        <target>tab</target>
+        <description>Pump 1</description>
+      </action>
+      <action type="open_display">
+        <file>QPCsingle_pump_streams.opi</file>
+        <macros>
+          <P>13IDA:</P>
+          <PMP>ip4</PMP>
+          <SPLY>2</SPLY>
+          <SPT>2</SPT>
+        </macros>
+        <target>tab</target>
+        <description>Pump 2</description>
+      </action>
+      <action type="open_display">
+        <file>QPCsingle_pump_streams.opi</file>
+        <macros>
+          <P>13IDA:</P>
+          <PMP>ip5</PMP>
+          <SPLY>3</SPLY>
+          <SPT>3</SPT>
+        </macros>
+        <target>tab</target>
+        <description>Pump 3</description>
+      </action>
+      <action type="open_display">
+        <file>QPCsingle_pump_streams.opi</file>
+        <macros>
+          <P>13IDA:</P>
+          <PMP>ip5</PMP>
+          <SPLY>4</SPLY>
+          <SPT>4</SPT>
+        </macros>
+        <target>tab</target>
+        <description>Pump 4</description>
+      </action>
+      <action type="open_display">
+        <file>QPCpumps_streams.opi</file>
+        <macros>
+          <P>13IDA:</P>
+          <PMP1>ip3</PMP1>
+          <PMP2>ip4</PMP2>
+          <PMP3>ip5</PMP3>
+          <SPLY1>1</SPLY1>
+          <SPLY2>2</SPLY2>
+          <SPLY3>3</SPLY3>
+          <SPT1>1</SPT1>
+          <SPT2>2</SPT2>
+          <SPT3>3</SPT3>
+          <SPT4>4</SPT4>
+        </macros>
+        <target>tab</target>
+        <description>All pumps</description>
+      </action>
+    </actions>
+    <text>Pumps</text>
+    <x>44</x>
+    <y>37</y>
+    <width>122</width>
+    <height>23</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+</display>

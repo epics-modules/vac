@@ -85,6 +85,16 @@ caChoice &gt; QPushButton {
       padding: 1px;
 }
 
+/* when font specified, no font sizing is done any more,  font: 10pt; is not bad. You could Enable this when you converted from .adl files
+caRelatedDisplay  &gt; QPushButton {
+font: 10pt;
+}
+
+caShellCommand  &gt; QPushButton {
+font: 10pt;
+}
+*/
+
 caSlider::groove:horizontal {
 border: 1px solid #bbb;
 background: lightgrey;
@@ -263,7 +273,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Spt$(SPT)OnPress</string>
+                <string>$(P)$(PMP):Spt$(SPT)OnPressM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -317,7 +327,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Spt$(SPT)OffPress</string>
+                <string>$(P)$(PMP):Spt$(SPT)OffPressM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -371,7 +381,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):setSpt$(SPT)OffPressure.A</string>
+                <string>$(P)$(PMP):Spt$(SPT)OffPressureC.A</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -458,7 +468,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):setSpt$(SPT)OnPressure</string>
+                <string>$(P)$(PMP):Spt$(SPT)OnPressureC</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -509,7 +519,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):getPressUnits</string>
+                <string>$(P)$(PMP):Supply$(SPLY)PressUnitsM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -563,7 +573,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):getPressUnits</string>
+                <string>$(P)$(PMP):Supply$(SPLY)PressUnitsM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -617,7 +627,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):getPressUnits</string>
+                <string>$(P)$(PMP):Supply$(SPLY)PressUnitsM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -671,7 +681,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):getPressUnits</string>
+                <string>$(P)$(PMP):Supply$(SPLY)PressUnitsM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">

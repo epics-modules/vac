@@ -1,0 +1,2835 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2025-08-20 12:52:36 by epics-->
+<display version="2.0.0">
+  <name>QPC4pumps_streams</name>
+  <x>1237</x>
+  <y>85</y>
+  <width>232</width>
+  <height>634</height>
+  <background_color>
+    <color red="70" green="70" blue="70">
+    </color>
+  </background_color>
+  <grid_visible>false</grid_visible>
+  <grid_step_x>5</grid_step_x>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #6</name>
+    <x>6</x>
+    <y>3</y>
+    <width>220</width>
+    <height>24</height>
+    <line_color>
+      <color red="199" green="187" blue="109">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="199" green="187" blue="109">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #9</name>
+    <text>$(P):$(IPC)</text>
+    <x>9</x>
+    <y>8</y>
+    <width>140</width>
+    <height>16</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #12</name>
+    <x>6</x>
+    <y>30</y>
+    <width>220</width>
+    <height>18</height>
+    <line_color>
+      <color red="199" green="187" blue="109">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="199" green="187" blue="109">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #15</name>
+    <text>FIRMWARE VERSION</text>
+    <x>11</x>
+    <y>35</y>
+    <width>166</width>
+    <height>12</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      </font>
+    </font>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #18</name>
+    <pv_name>$(P):$(IPC):FirmwareVersM</pv_name>
+    <x>161</x>
+    <y>32</y>
+    <width>60</width>
+    <height>14</height>
+    <foreground_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #22</name>
+    <pv_name>$(P):$(IPC):ModelM</pv_name>
+    <x>161</x>
+    <y>9</y>
+    <width>60</width>
+    <height>14</height>
+    <foreground_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #26</name>
+    <x>4</x>
+    <y>487</y>
+    <width>224</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="ellipse" version="2.0.0">
+      <name>oval #29</name>
+      <x>152</x>
+      <y>82</y>
+      <width>2</width>
+      <height>2</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #32</name>
+      <width>224</width>
+      <height>142</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #35</name>
+      <x>75</x>
+      <y>49</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #38</name>
+      <x>75</x>
+      <y>71</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #41</name>
+      <x>75</x>
+      <y>93</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #44</name>
+      <x>2</x>
+      <y>2</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #47</name>
+      <text>THIS PUMP NOT USED</text>
+      <x>35</x>
+      <y>4</y>
+      <width>156</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #50</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #53</name>
+    <x>4</x>
+    <y>342</y>
+    <width>224</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="ellipse" version="2.0.0">
+      <name>oval #56</name>
+      <x>152</x>
+      <y>82</y>
+      <width>2</width>
+      <height>2</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #59</name>
+      <width>224</width>
+      <height>142</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #62</name>
+      <x>75</x>
+      <y>49</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #65</name>
+      <x>75</x>
+      <y>71</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #68</name>
+      <x>75</x>
+      <y>93</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #71</name>
+      <x>2</x>
+      <y>2</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #74</name>
+      <text>THIS PUMP NOT USED</text>
+      <x>35</x>
+      <y>4</y>
+      <width>156</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #77</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #80</name>
+    <x>4</x>
+    <y>197</y>
+    <width>224</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="ellipse" version="2.0.0">
+      <name>oval #83</name>
+      <x>152</x>
+      <y>82</y>
+      <width>2</width>
+      <height>2</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #86</name>
+      <width>224</width>
+      <height>142</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #89</name>
+      <x>75</x>
+      <y>49</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #92</name>
+      <x>75</x>
+      <y>71</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #95</name>
+      <x>75</x>
+      <y>93</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #98</name>
+      <x>2</x>
+      <y>2</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #101</name>
+      <text>THIS PUMP NOT USED</text>
+      <x>35</x>
+      <y>4</y>
+      <width>156</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #104</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #107</name>
+    <x>4</x>
+    <y>52</y>
+    <width>224</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="ellipse" version="2.0.0">
+      <name>oval #110</name>
+      <x>152</x>
+      <y>82</y>
+      <width>2</width>
+      <height>2</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #113</name>
+      <width>224</width>
+      <height>142</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #116</name>
+      <x>75</x>
+      <y>49</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #119</name>
+      <x>75</x>
+      <y>71</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #122</name>
+      <x>75</x>
+      <y>93</y>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #125</name>
+      <x>2</x>
+      <y>2</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #128</name>
+      <text>THIS PUMP NOT USED</text>
+      <x>35</x>
+      <y>4</y>
+      <width>156</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #131</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #134</name>
+    <x>4</x>
+    <y>197</y>
+    <width>226</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P):$(IPC):Pump2UsedM</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #137</name>
+      <x>2</x>
+      <y>1</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #140</name>
+      <x>191</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #143</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>114</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #146</name>
+      <x>2</x>
+      <y>120</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #149</name>
+      <x>5</x>
+      <y>47</y>
+      <width>64</width>
+      <height>69</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #152</name>
+      <x>10</x>
+      <y>51</y>
+      <width>54</width>
+      <height>19</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #155</name>
+      <pv_name>$(P):$(PMP2):PressureM</pv_name>
+      <x>75</x>
+      <y>49</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="82" green="218" blue="59">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #159</name>
+      <text>AMPS</text>
+      <x>183</x>
+      <y>74</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #162</name>
+      <text>VOLT</text>
+      <x>183</x>
+      <y>96</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #165</name>
+      <pv_name>$(P):$(PMP2):CurrentM</pv_name>
+      <x>75</x>
+      <y>71</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #169</name>
+      <pv_name>$(P):$(PMP2):VoltageM</pv_name>
+      <x>75</x>
+      <y>93</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #173</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP2):Supply$(SPLY2)HVenableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP2):Supply$(SPLY2)HVenableC.PROC</pv_name>
+      <text>HV ON</text>
+      <x>10</x>
+      <y>72</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #176</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP2):Supply$(SPLY2)HVdisableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP2):Supply$(SPLY2)HVdisableC.PROC</pv_name>
+      <text>HV OFF</text>
+      <x>10</x>
+      <y>92</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #179</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP2):isSupply$(SPLY2)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #183</name>
+      <text>HV OFF</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP2):isSupply$(SPLY2)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #187</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP2):isSupply$(SPLY2)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #191</name>
+      <text>HV ON</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP2):isSupply$(SPLY2)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #195</name>
+      <text>SP $(SPT2)</text>
+      <x>132</x>
+      <y>125</y>
+      <width>60</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <horizontal_alignment>2</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #198</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #201</name>
+      <text>STATUS</text>
+      <x>18</x>
+      <y>28</y>
+      <width>41</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="polyline" version="2.0.0">
+      <name>polyline #204</name>
+      <x>62</x>
+      <y>35</y>
+      <width>40</width>
+      <height>0</height>
+      <points>
+        <point x="0.0" y="0.0">
+        </point>
+        <point x="40.0" y="0.0">
+        </point>
+      </points>
+      <line_width>1</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #208</name>
+      <pv_name>$(P):$(PMP2):Supply$(SPLY2)StatusM</pv_name>
+      <x>74</x>
+      <y>28</y>
+      <width>145</width>
+      <height>14</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #212</name>
+      <x>196</x>
+      <y>124</y>
+      <width>24</width>
+      <height>12</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #215</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!((pv0&gt;1)||(pv0==0))">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP2):Spt$(SPT2)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #219</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP2):Spt$(SPT2)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #223</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #226</name>
+      <pv_name>$(P):$(PMP2):Supply$(SPLY2)PressUnitsM</pv_name>
+      <x>180</x>
+      <y>52</y>
+      <width>40</width>
+      <height>14</height>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #230</name>
+      <pv_name>$(P):$(PMP2):Supply$(SPLY2)PumpSizeM</pv_name>
+      <x>162</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #234</name>
+      <text>L/S</text>
+      <x>196</x>
+      <y>8</y>
+      <width>30</width>
+      <height>14</height>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #237</name>
+      <pv_name>$(P):$(PMP2):Pump$(SPLY2)NameM</pv_name>
+      <x>6</x>
+      <y>5</y>
+      <width>130</width>
+      <height>17</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #241</name>
+      <text>AUTO RESTART=</text>
+      <x>4</x>
+      <y>126</y>
+      <width>78</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #244</name>
+      <pv_name>$(P):$(PMP2):Supply$(SPLY2)AutoRestartM</pv_name>
+      <x>84</x>
+      <y>123</y>
+      <width>30</width>
+      <height>13</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #249</name>
+    <x>4</x>
+    <y>342</y>
+    <width>226</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P):$(IPC):Pump3UsedM</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #252</name>
+      <x>2</x>
+      <y>1</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #255</name>
+      <x>191</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #258</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>114</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #261</name>
+      <x>2</x>
+      <y>120</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #264</name>
+      <x>5</x>
+      <y>47</y>
+      <width>64</width>
+      <height>69</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #267</name>
+      <x>10</x>
+      <y>51</y>
+      <width>54</width>
+      <height>19</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #270</name>
+      <pv_name>$(P):$(PMP3):PressureM</pv_name>
+      <x>75</x>
+      <y>49</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="82" green="218" blue="59">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #274</name>
+      <text>AMPS</text>
+      <x>183</x>
+      <y>74</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #277</name>
+      <text>VOLT</text>
+      <x>183</x>
+      <y>96</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #280</name>
+      <pv_name>$(P):$(PMP3):CurrentM</pv_name>
+      <x>75</x>
+      <y>71</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #284</name>
+      <pv_name>$(P):$(PMP3):VoltageM</pv_name>
+      <x>75</x>
+      <y>93</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #288</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP3):Supply$(SPLY3)HVenableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP3):Supply$(SPLY3)HVenableC.PROC</pv_name>
+      <text>HV ON</text>
+      <x>10</x>
+      <y>72</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #291</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP3):Supply$(SPLY3)HVdisableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP3):Supply$(SPLY3)HVdisableC.PROC</pv_name>
+      <text>HV OFF</text>
+      <x>10</x>
+      <y>92</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #294</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP3):isSupply$(SPLY3)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #298</name>
+      <text>HV OFF</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP3):isSupply$(SPLY3)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #302</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP3):isSupply$(SPLY3)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #306</name>
+      <text>HV ON</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP3):isSupply$(SPLY3)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #310</name>
+      <text>SP $(SPT3)</text>
+      <x>132</x>
+      <y>125</y>
+      <width>60</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <horizontal_alignment>2</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #313</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #316</name>
+      <text>STATUS</text>
+      <x>18</x>
+      <y>28</y>
+      <width>41</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="polyline" version="2.0.0">
+      <name>polyline #319</name>
+      <x>62</x>
+      <y>35</y>
+      <width>40</width>
+      <height>0</height>
+      <points>
+        <point x="0.0" y="0.0">
+        </point>
+        <point x="40.0" y="0.0">
+        </point>
+      </points>
+      <line_width>1</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #323</name>
+      <pv_name>$(P):$(PMP3):Supply$(SPLY3)StatusM</pv_name>
+      <x>74</x>
+      <y>28</y>
+      <width>145</width>
+      <height>14</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #327</name>
+      <x>196</x>
+      <y>124</y>
+      <width>24</width>
+      <height>12</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #330</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!((pv0&gt;1)||(pv0==0))">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP3):Spt$(SPT3)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #334</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP3):Spt$(SPT3)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #338</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #341</name>
+      <pv_name>$(P):$(PMP3):Supply$(SPLY3)PressUnitsM</pv_name>
+      <x>180</x>
+      <y>52</y>
+      <width>40</width>
+      <height>14</height>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #345</name>
+      <pv_name>$(P):$(PMP3):Supply$(SPLY3)PumpSizeM</pv_name>
+      <x>162</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #349</name>
+      <pv_name>$(P):$(PMP3):Pump$(SPLY3)NameM</pv_name>
+      <x>6</x>
+      <y>5</y>
+      <width>130</width>
+      <height>17</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #353</name>
+      <text>L/S</text>
+      <x>196</x>
+      <y>7</y>
+      <width>30</width>
+      <height>14</height>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #356</name>
+      <text>AUTO RESTART=</text>
+      <x>4</x>
+      <y>126</y>
+      <width>78</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #359</name>
+      <pv_name>$(P):$(PMP3):Supply$(SPLY3)AutoRestartM</pv_name>
+      <x>84</x>
+      <y>123</y>
+      <width>30</width>
+      <height>13</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #364</name>
+    <x>4</x>
+    <y>52</y>
+    <width>226</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P):$(IPC):Pump1UsedM</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #367</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #370</name>
+      <x>2</x>
+      <y>1</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #373</name>
+      <x>191</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #376</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>114</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #379</name>
+      <x>2</x>
+      <y>120</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #382</name>
+      <x>5</x>
+      <y>47</y>
+      <width>64</width>
+      <height>69</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #385</name>
+      <x>10</x>
+      <y>51</y>
+      <width>54</width>
+      <height>19</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #388</name>
+      <pv_name>$(P):$(PMP1):PressureM</pv_name>
+      <x>75</x>
+      <y>49</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="82" green="218" blue="59">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #392</name>
+      <text>AMPS</text>
+      <x>183</x>
+      <y>74</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #395</name>
+      <text>VOLT</text>
+      <x>183</x>
+      <y>96</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #398</name>
+      <pv_name>$(P):$(PMP1):CurrentM</pv_name>
+      <x>75</x>
+      <y>71</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #402</name>
+      <pv_name>$(P):$(PMP1):VoltageM</pv_name>
+      <x>75</x>
+      <y>93</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #406</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP1):Supply$(SPLY1)HVenableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP1):Supply$(SPLY1)HVenableC.PROC</pv_name>
+      <text>HV ON</text>
+      <x>10</x>
+      <y>72</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #409</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP1):Supply$(SPLY1)HVdisableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP1):Supply$(SPLY1)HVdisableC.PROC</pv_name>
+      <text>HV OFF</text>
+      <x>10</x>
+      <y>92</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #412</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP1):isSupply$(SPLY1)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #416</name>
+      <text>HV OFF</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP1):isSupply$(SPLY1)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #420</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP1):isSupply$(SPLY1)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #424</name>
+      <text>HV ON</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP1):isSupply$(SPLY1)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #428</name>
+      <text>SP $(SPT1)</text>
+      <x>72</x>
+      <y>125</y>
+      <width>120</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <horizontal_alignment>2</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #431</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #434</name>
+      <text>STATUS</text>
+      <x>18</x>
+      <y>28</y>
+      <width>41</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="polyline" version="2.0.0">
+      <name>polyline #437</name>
+      <x>62</x>
+      <y>35</y>
+      <width>40</width>
+      <height>0</height>
+      <points>
+        <point x="0.0" y="0.0">
+        </point>
+        <point x="40.0" y="0.0">
+        </point>
+      </points>
+      <line_width>1</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #441</name>
+      <pv_name>$(P):$(PMP1):Supply$(SPLY1)StatusM</pv_name>
+      <x>74</x>
+      <y>28</y>
+      <width>145</width>
+      <height>14</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #445</name>
+      <x>196</x>
+      <y>124</y>
+      <width>24</width>
+      <height>12</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #448</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!((pv0&gt;1)||(pv0==0))">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP1):Spt$(SPT1)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #452</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP1):Spt$(SPT1)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #456</name>
+      <pv_name>$(P):$(PMP1):Supply$(SPLY1)PressUnitsM</pv_name>
+      <x>180</x>
+      <y>52</y>
+      <width>40</width>
+      <height>14</height>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #460</name>
+      <pv_name>$(P):$(PMP1):Supply$(SPLY1)PumpSizeM</pv_name>
+      <x>162</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #464</name>
+      <pv_name>$(P):$(PMP1):Pump$(SPLY1)NameM</pv_name>
+      <x>6</x>
+      <y>5</y>
+      <width>130</width>
+      <height>17</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #468</name>
+      <text>AUTO RESTART=</text>
+      <x>3</x>
+      <y>125</y>
+      <width>74</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #471</name>
+      <pv_name>$(P):$(PMP1):Supply$(SPLY1)AutoRestartM</pv_name>
+      <x>83</x>
+      <y>123</y>
+      <width>30</width>
+      <height>13</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #475</name>
+      <text>L/S</text>
+      <x>196</x>
+      <y>7</y>
+      <width>30</width>
+      <height>14</height>
+      <auto_size>true</auto_size>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #479</name>
+    <x>4</x>
+    <y>487</y>
+    <width>227</width>
+    <height>142</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P):$(IPC):Pump4UsedM</pv_name>
+      </rule>
+    </rules>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #482</name>
+      <x>2</x>
+      <y>1</y>
+      <width>220</width>
+      <height>24</height>
+      <line_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #485</name>
+      <x>191</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #488</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>114</height>
+      <line_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #491</name>
+      <x>2</x>
+      <y>120</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #494</name>
+      <x>5</x>
+      <y>47</y>
+      <width>64</width>
+      <height>69</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #497</name>
+      <x>10</x>
+      <y>51</y>
+      <width>54</width>
+      <height>19</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #500</name>
+      <pv_name>$(P):$(PMP4):PressureM</pv_name>
+      <x>75</x>
+      <y>49</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="82" green="218" blue="59">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #504</name>
+      <text>AMPS</text>
+      <x>183</x>
+      <y>74</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #507</name>
+      <text>VOLT</text>
+      <x>183</x>
+      <y>96</y>
+      <width>24</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #510</name>
+      <pv_name>$(P):$(PMP4):CurrentM</pv_name>
+      <x>75</x>
+      <y>71</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>2</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #514</name>
+      <pv_name>$(P):$(PMP4):VoltageM</pv_name>
+      <x>75</x>
+      <y>93</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #518</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP4):Supply$(SPLY4)HVenableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP4):Supply$(SPLY4)HVenableC.PROC</pv_name>
+      <text>HV ON</text>
+      <x>10</x>
+      <y>72</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>message button #521</name>
+      <actions>
+        <action type="write_pv">
+          <pv_name>$(P):$(PMP4):Supply$(SPLY4)HVdisableC.PROC</pv_name>
+          <value>0</value>
+          <description>Write</description>
+        </action>
+      </actions>
+      <pv_name>$(P):$(PMP4):Supply$(SPLY4)HVdisableC.PROC</pv_name>
+      <text>HV OFF</text>
+      <x>10</x>
+      <y>92</y>
+      <width>54</width>
+      <height>20</height>
+      <background_color>
+        <color red="88" green="147" blue="255">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #524</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP4):isSupply$(SPLY4)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #528</name>
+      <text>HV OFF</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==0)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP4):isSupply$(SPLY4)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #532</name>
+      <x>12</x>
+      <y>53</y>
+      <width>50</width>
+      <height>15</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP4):isSupply$(SPLY4)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #536</name>
+      <text>HV ON</text>
+      <x>12</x>
+      <y>53</y>
+      <width>48</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP4):isSupply$(SPLY4)HVenabledM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #540</name>
+      <text>SP $(SPT4)</text>
+      <x>132</x>
+      <y>125</y>
+      <width>60</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <horizontal_alignment>2</horizontal_alignment>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #543</name>
+      <x>2</x>
+      <y>25</y>
+      <width>220</width>
+      <height>18</height>
+      <line_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #546</name>
+      <text>STATUS</text>
+      <x>18</x>
+      <y>28</y>
+      <width>41</width>
+      <height>14</height>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="polyline" version="2.0.0">
+      <name>polyline #549</name>
+      <x>62</x>
+      <y>35</y>
+      <width>40</width>
+      <height>0</height>
+      <points>
+        <point x="0.0" y="0.0">
+        </point>
+        <point x="40.0" y="0.0">
+        </point>
+      </points>
+      <line_width>1</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #553</name>
+      <pv_name>$(P):$(PMP4):Supply$(SPLY4)StatusM</pv_name>
+      <x>74</x>
+      <y>28</y>
+      <width>145</width>
+      <height>14</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #557</name>
+      <x>196</x>
+      <y>124</y>
+      <width>24</width>
+      <height>12</height>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #560</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="253" green="0" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!((pv0&gt;1)||(pv0==0))">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP4):Spt$(SPT4)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #564</name>
+      <x>198</x>
+      <y>126</y>
+      <width>20</width>
+      <height>8</height>
+      <line_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="216" blue="0">
+        </color>
+      </background_color>
+      <rules>
+        <rule name="vis_calc" prop_id="visible" out_exp="false">
+          <exp bool_exp="!(pv0==1)">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P):$(PMP4):Spt$(SPT4)StatusM</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #568</name>
+      <width>224</width>
+      <height>142</height>
+      <line_width>2</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #571</name>
+      <pv_name>$(P):$(PMP4):Supply$(SPLY4)PressUnitsM</pv_name>
+      <x>180</x>
+      <y>52</y>
+      <width>40</width>
+      <height>14</height>
+      <background_color>
+        <color red="120" green="120" blue="120">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #575</name>
+      <pv_name>$(P):$(PMP4):Supply$(SPLY4)PumpSizeM</pv_name>
+      <x>162</x>
+      <y>6</y>
+      <width>30</width>
+      <height>16</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="145" green="145" blue="145">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #579</name>
+      <pv_name>$(P):$(PMP4):Pump$(SPLY4)NameM</pv_name>
+      <x>6</x>
+      <y>5</y>
+      <width>130</width>
+      <height>17</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="251" green="243" blue="74">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="105" green="105" blue="105">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #583</name>
+      <text>AUTO RESTART=</text>
+      <x>4</x>
+      <y>126</y>
+      <width>78</width>
+      <height>12</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="12.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>text update #586</name>
+      <pv_name>$(P):$(PMP4):Supply$(SPLY4)AutoRestartM</pv_name>
+      <x>84</x>
+      <y>123</y>
+      <width>30</width>
+      <height>13</height>
+      <foreground_color>
+        <color red="238" green="182" blue="43">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <format>6</format>
+      <show_units>false</show_units>
+      <horizontal_alignment>1</horizontal_alignment>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #590</name>
+      <text>L/S</text>
+      <x>197</x>
+      <y>7</y>
+      <width>30</width>
+      <height>14</height>
+      <auto_size>true</auto_size>
+    </widget>
+  </widget>
+</display>

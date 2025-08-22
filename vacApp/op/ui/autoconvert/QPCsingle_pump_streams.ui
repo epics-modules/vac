@@ -85,6 +85,16 @@ caChoice &gt; QPushButton {
       padding: 1px;
 }
 
+/* when font specified, no font sizing is done any more,  font: 10pt; is not bad. You could Enable this when you converted from .adl files
+caRelatedDisplay  &gt; QPushButton {
+font: 10pt;
+}
+
+caShellCommand  &gt; QPushButton {
+font: 10pt;
+}
+*/
+
 caSlider::groove:horizontal {
 border: 1px solid #bbb;
 background: lightgrey;
@@ -299,7 +309,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Pressure</string>
+                <string>$(P)$(PMP):PressureM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -353,7 +363,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Current</string>
+                <string>$(P)$(PMP):CurrentM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -407,7 +417,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Voltage</string>
+                <string>$(P)$(PMP):VoltageM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -528,7 +538,7 @@ border-radius: 2px;
             <property name="geometry">
                 <rect>
                     <x>73</x>
-                    <y>167</y>
+                    <y>174</y>
                     <width>10</width>
                     <height>10</height>
                 </rect>
@@ -561,7 +571,7 @@ border-radius: 2px;
             <property name="geometry">
                 <rect>
                     <x>73</x>
-                    <y>167</y>
+                    <y>175</y>
                     <width>10</width>
                     <height>10</height>
                 </rect>
@@ -590,7 +600,7 @@ border-radius: 2px;
                 <enum>caGraphics::IfNotZero</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Spt$(SPT)Status</string>
+                <string>$(P)$(PMP):Spt$(SPT)StatusM</string>
             </property>
         </widget>
         <widget class="caLabel" name="caLabel_5">
@@ -623,7 +633,7 @@ border-radius: 2px;
             <property name="geometry">
                 <rect>
                     <x>54</x>
-                    <y>168</y>
+                    <y>175</y>
                     <width>18</width>
                     <height>10</height>
                 </rect>
@@ -636,7 +646,7 @@ border-radius: 2px;
             <property name="geometry">
                 <rect>
                     <x>50</x>
-                    <y>165</y>
+                    <y>172</y>
                     <width>36</width>
                     <height>15</height>
                 </rect>
@@ -682,7 +692,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):PumpSize</string>
+                <string>$(P)$(PMP):Supply$(SPLY)PumpSizeM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -772,7 +782,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Model</string>
+                <string>$(P)ModelM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -898,7 +908,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):FirmwareVers</string>
+                <string>$(P)FirmwareVersM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -1024,7 +1034,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Status</string>
+                <string>$(P)$(PMP):Supply$(SPLY)StatusM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -1078,7 +1088,7 @@ border-radius: 2px;
                 <enum>EPushButton::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):enable.PROC</string>
+                <string>$(P)$(PMP):Supply$(SPLY)HVenableC.PROC</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -1117,7 +1127,7 @@ border-radius: 2px;
                 <enum>EPushButton::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):disable.PROC</string>
+                <string>$(P)$(PMP):Supply$(SPLY)HVdisableC.PROC</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -1153,7 +1163,7 @@ border-radius: 2px;
                 </rect>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):setPressUnits</string>
+                <string>$(P)$(PMP):Supply$(SPLY)PressUnitsC</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -1186,7 +1196,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):getPressUnits</string>
+                <string>$(P)$(PMP):Supply$(SPLY)PressUnitsM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -1227,48 +1237,6 @@ border-radius: 2px;
                 <enum>caLineEdit::Static</enum>
             </property>
         </widget>
-        <widget class="caRelatedDisplay" name="caRelatedDisplay_0">
-            <property name="geometry">
-                <rect>
-                    <x>38</x>
-                    <y>184</y>
-                    <width>65</width>
-                    <height>15</height>
-                </rect>
-            </property>
-            <property name="foreground">
-                <color alpha="255">
-                    <red>0</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                </color>
-            </property>
-            <property name="background">
-                <color alpha="255">
-                    <red>153</red>
-                    <green>255</green>
-                    <blue>255</blue>
-                </color>
-            </property>
-            <property name="label">
-                <string>SETPOINT</string>
-            </property>
-            <property name="stackingMode">
-                <enum>Menu</enum>
-            </property>
-            <property name="labels">
-                <string></string>
-            </property>
-            <property name="files">
-                <string>QPCsingle_pump_sp_streams.adl</string>
-            </property>
-            <property name="args">
-                <string>P=$(P),PMP=$(PMP),SPT=$(SPT)</string>
-            </property>
-            <property name="removeParent">
-                <string>false</string>
-            </property>
-        </widget>
         <widget class="caLineEdit" name="caLineEdit_8">
             <property name="geometry">
                 <rect>
@@ -1282,7 +1250,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(PMP):Pump$(SPLY)Name</string>
+                <string>$(P)$(PMP):Pump$(SPLY)NameM</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -1350,7 +1318,6 @@ border-radius: 2px;
         <zorder>caMessageButton_1</zorder>
         <zorder>caMenu_0</zorder>
         <zorder>caLineEdit_7</zorder>
-        <zorder>caRelatedDisplay_0</zorder>
         <zorder>caLineEdit_8</zorder>
     </widget>
 </widget>

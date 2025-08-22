@@ -218,7 +218,7 @@
     <name>Text Update</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):Spt$(SPT)OnPress</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OnPressM</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -269,7 +269,7 @@ $(pv_value)</tooltip>
     <name>Text Update</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):Spt$(SPT)OffPress</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OffPressM</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -327,7 +327,7 @@ $(pv_value)</tooltip>
     <password_input>false</password_input>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):setSpt$(SPT)OffPressure.A</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OffPressureC.A</pv_name>
     <pv_value />
     <read_only>false</read_only>
     <rotation_angle>0.0</rotation_angle>
@@ -429,7 +429,7 @@ $(pv_value)</tooltip>
     <password_input>false</password_input>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):setSpt$(SPT)OnPressure</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OnPressureC</pv_name>
     <pv_value />
     <read_only>false</read_only>
     <rotation_angle>0.0</rotation_angle>
@@ -484,7 +484,7 @@ $(pv_value)</tooltip>
     <name>Text Update</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -535,7 +535,7 @@ $(pv_value)</tooltip>
     <name>Text Update</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -586,7 +586,7 @@ $(pv_value)</tooltip>
     <name>Text Update</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -637,7 +637,7 @@ $(pv_value)</tooltip>
     <name>Text Update</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />

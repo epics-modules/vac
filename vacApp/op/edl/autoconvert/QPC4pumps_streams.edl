@@ -1,0 +1,3612 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1237
+y 85
+w 232
+h 634
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-bold-r-10.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor rgb 0 0 0
+bgColor rgb 17920 17920 17920
+textColor rgb 0 0 0
+ctlFgColor1 rgb 64256 62208 18944
+ctlFgColor2 rgb 60928 46592 11008
+ctlBgColor1 rgb 52480 24832 0
+ctlBgColor2 rgb 65280 45056 65280
+topShadowColor rgb 44544 19968 48128
+botShadowColor rgb 13312 13056 34304
+showGrid
+snapToGrid
+gridSize 4
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 3
+w 219
+h 23
+lineColor rgb 50944 47872 27904
+fill
+fillColor rgb 50944 47872 27904
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 9
+y 8
+w 140
+h 16
+font "helvetica-medium-r-14.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "$(P):$(IPC)"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 30
+w 219
+h 17
+lineColor rgb 50944 47872 27904
+fill
+fillColor rgb 50944 47872 27904
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 11
+y 35
+w 166
+h 12
+font "helvetica-medium-r-10.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "FIRMWARE VERSION"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 161
+y 32
+w 60
+h 14
+controlPv "$(P):$(IPC):FirmwareVersM"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor rgb 20992 55808 15104
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 161
+y 9
+w 60
+h 14
+controlPv "$(P):$(IPC):ModelM"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor rgb 20992 55808 15104
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 487
+w 224
+h 142
+
+beginGroup
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 157
+y 570
+w 0
+h 0
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 487
+w 223
+h 141
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 536
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 558
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 580
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 489
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 33
+y 491
+w 168
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 64256 62208 18944
+bgColor index 3
+useDisplayBg
+value {
+  "THIS PUMP NOT USED"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 488
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 342
+w 224
+h 142
+
+beginGroup
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 157
+y 425
+w 0
+h 0
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 342
+w 223
+h 141
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 391
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 413
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 435
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 344
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 33
+y 346
+w 168
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 64256 62208 18944
+bgColor index 3
+useDisplayBg
+value {
+  "THIS PUMP NOT USED"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 343
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 197
+w 224
+h 142
+
+beginGroup
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 157
+y 280
+w 0
+h 0
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 197
+w 223
+h 141
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 246
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 268
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 290
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 199
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 33
+y 201
+w 168
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 64256 62208 18944
+bgColor index 3
+useDisplayBg
+value {
+  "THIS PUMP NOT USED"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 198
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 52
+w 224
+h 142
+
+beginGroup
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 157
+y 135
+w 0
+h 0
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 52
+w 223
+h 141
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 101
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 123
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 79
+y 145
+w 99
+h 19
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 54
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 33
+y 56
+w 168
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 64256 62208 18944
+bgColor index 3
+useDisplayBg
+value {
+  "THIS PUMP NOT USED"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 53
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 197
+w 226
+h 142
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 198
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 195
+y 203
+w 29
+h 15
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 222
+w 219
+h 113
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 317
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 244
+w 63
+h 68
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 248
+w 53
+h 18
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 246
+w 100
+h 20
+controlPv "$(P):$(PMP2):PressureM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 174
+y 271
+w 50
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AMPS"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 176
+y 293
+w 47
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "VOLT"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 268
+w 100
+h 20
+controlPv "$(P):$(PMP2):CurrentM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 290
+w 100
+h 20
+controlPv "$(P):$(PMP2):VoltageM"
+format "decimal"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 250
+w 49
+h 14
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{(A=0)\}($(P):$(PMP2):isSupply$(SPLY2)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 9
+y 250
+w 62
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV OFF"
+}
+visPv "CALC\\\{(A=0)\}($(P):$(PMP2):isSupply$(SPLY2)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 250
+w 49
+h 14
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP2):isSupply$(SPLY2)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 13
+y 250
+w 55
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV ON"
+}
+visPv "CALC\\\{(A=1)\}($(P):$(PMP2):isSupply$(SPLY2)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 129
+y 322
+w 67
+h 12
+font "helvetica-medium-r-10.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "SP $(SPT2)"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 222
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 225
+w 61
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "STATUS"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 66
+y 232
+w 40
+h 0
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 0
+numPoints 2 {
+xPoints  {
+0 66
+1 106
+}
+yPoints  {
+0 232
+1 232
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 78
+y 225
+w 145
+h 14
+controlPv "$(P):$(PMP2):Supply$(SPLY2)StatusM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 321
+w 23
+h 11
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 323
+w 19
+h 7
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{((A>1)||(A=0))\}($(P):$(PMP2):Spt$(SPT2)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 323
+w 19
+h 7
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP2):Spt$(SPT2)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 198
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 184
+y 249
+w 40
+h 14
+controlPv "$(P):$(PMP2):Supply$(SPLY2)PressUnitsM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "left"
+fgColor rgb 0 0 0
+bgColor rgb 30720 30720 30720
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 166
+y 203
+w 30
+h 16
+controlPv "$(P):$(PMP2):Supply$(SPLY2)PumpSizeM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor rgb 37120 37120 37120
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 200
+y 205
+w 33
+h 14
+font "helvetica-medium-r-12.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "L/S"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 10
+y 202
+w 130
+h 17
+controlPv "$(P):$(PMP2):Pump$(SPLY2)NameM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "left"
+fgColor rgb 64256 62208 18944
+bgColor rgb 26880 26880 26880
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 323
+w 92
+h 12
+font "helvetica-medium-r-10.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AUTO RESTART="
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 88
+y 320
+w 30
+h 13
+controlPv "$(P):$(PMP2):Supply$(SPLY2)AutoRestartM"
+format "string"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump2UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 342
+w 226
+h 142
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 343
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 195
+y 348
+w 29
+h 15
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 367
+w 219
+h 113
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 462
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 389
+w 63
+h 68
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 393
+w 53
+h 18
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 391
+w 100
+h 20
+controlPv "$(P):$(PMP3):PressureM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 174
+y 416
+w 50
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AMPS"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 176
+y 438
+w 47
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "VOLT"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 413
+w 100
+h 20
+controlPv "$(P):$(PMP3):CurrentM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 435
+w 100
+h 20
+controlPv "$(P):$(PMP3):VoltageM"
+format "decimal"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 395
+w 49
+h 14
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{(A=0)\}($(P):$(PMP3):isSupply$(SPLY3)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 9
+y 395
+w 62
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV OFF"
+}
+visPv "CALC\\\{(A=0)\}($(P):$(PMP3):isSupply$(SPLY3)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 395
+w 49
+h 14
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP3):isSupply$(SPLY3)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 13
+y 395
+w 55
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV ON"
+}
+visPv "CALC\\\{(A=1)\}($(P):$(PMP3):isSupply$(SPLY3)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 129
+y 467
+w 67
+h 12
+font "helvetica-medium-r-10.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "SP $(SPT3)"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 367
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 370
+w 61
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "STATUS"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 66
+y 377
+w 40
+h 0
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 0
+numPoints 2 {
+xPoints  {
+0 66
+1 106
+}
+yPoints  {
+0 377
+1 377
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 78
+y 370
+w 145
+h 14
+controlPv "$(P):$(PMP3):Supply$(SPLY3)StatusM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 466
+w 23
+h 11
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 468
+w 19
+h 7
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{((A>1)||(A=0))\}($(P):$(PMP3):Spt$(SPT3)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 468
+w 19
+h 7
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP3):Spt$(SPT3)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 343
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 184
+y 394
+w 40
+h 14
+controlPv "$(P):$(PMP3):Supply$(SPLY3)PressUnitsM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "left"
+fgColor rgb 0 0 0
+bgColor rgb 30720 30720 30720
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 166
+y 348
+w 30
+h 16
+controlPv "$(P):$(PMP3):Supply$(SPLY3)PumpSizeM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor rgb 37120 37120 37120
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 10
+y 347
+w 130
+h 17
+controlPv "$(P):$(PMP3):Pump$(SPLY3)NameM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "left"
+fgColor rgb 64256 62208 18944
+bgColor rgb 26880 26880 26880
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 200
+y 349
+w 33
+h 14
+font "helvetica-medium-r-12.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "L/S"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 468
+w 92
+h 12
+font "helvetica-medium-r-10.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AUTO RESTART="
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 88
+y 465
+w 30
+h 13
+controlPv "$(P):$(PMP3):Supply$(SPLY3)AutoRestartM"
+format "string"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump3UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 52
+w 226
+h 142
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 53
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 53
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 195
+y 58
+w 29
+h 15
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 77
+w 219
+h 113
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 172
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 99
+w 63
+h 68
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 103
+w 53
+h 18
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 101
+w 100
+h 20
+controlPv "$(P):$(PMP1):PressureM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 174
+y 126
+w 50
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AMPS"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 176
+y 148
+w 47
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "VOLT"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 123
+w 100
+h 20
+controlPv "$(P):$(PMP1):CurrentM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 145
+w 100
+h 20
+controlPv "$(P):$(PMP1):VoltageM"
+format "decimal"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 105
+w 49
+h 14
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{(A=0)\}($(P):$(PMP1):isSupply$(SPLY1)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 9
+y 105
+w 62
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV OFF"
+}
+visPv "CALC\\\{(A=0)\}($(P):$(PMP1):isSupply$(SPLY1)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 105
+w 49
+h 14
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP1):isSupply$(SPLY1)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 13
+y 105
+w 55
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV ON"
+}
+visPv "CALC\\\{(A=1)\}($(P):$(PMP1):isSupply$(SPLY1)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 76
+y 177
+w 120
+h 12
+font "helvetica-medium-r-10.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "SP $(SPT1)"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 77
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 80
+w 61
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "STATUS"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 66
+y 87
+w 40
+h 0
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 0
+numPoints 2 {
+xPoints  {
+0 66
+1 106
+}
+yPoints  {
+0 87
+1 87
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 78
+y 80
+w 145
+h 14
+controlPv "$(P):$(PMP1):Supply$(SPLY1)StatusM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 176
+w 23
+h 11
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 178
+w 19
+h 7
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{((A>1)||(A=0))\}($(P):$(PMP1):Spt$(SPT1)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 178
+w 19
+h 7
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP1):Spt$(SPT1)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 184
+y 104
+w 40
+h 14
+controlPv "$(P):$(PMP1):Supply$(SPLY1)PressUnitsM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "left"
+fgColor rgb 0 0 0
+bgColor rgb 30720 30720 30720
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 166
+y 58
+w 30
+h 16
+controlPv "$(P):$(PMP1):Supply$(SPLY1)PumpSizeM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor rgb 37120 37120 37120
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 10
+y 57
+w 130
+h 17
+controlPv "$(P):$(PMP1):Pump$(SPLY1)NameM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "left"
+fgColor rgb 64256 62208 18944
+bgColor rgb 26880 26880 26880
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 7
+y 177
+w 95
+h 12
+font "helvetica-medium-r-10.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AUTO RESTART= "
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 87
+y 175
+w 30
+h 13
+controlPv "$(P):$(PMP1):Supply$(SPLY1)AutoRestartM"
+format "string"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 200
+y 59
+w 33
+h 14
+font "helvetica-medium-r-12.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "L/S"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump1UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 487
+w 227
+h 142
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 488
+w 219
+h 23
+lineColor rgb 26880 26880 26880
+fill
+fillColor rgb 26880 26880 26880
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 195
+y 493
+w 29
+h 15
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 512
+w 219
+h 113
+lineColor rgb 30720 30720 30720
+fill
+fillColor rgb 30720 30720 30720
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 607
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 9
+y 534
+w 63
+h 68
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 538
+w 53
+h 18
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 536
+w 100
+h 20
+controlPv "$(P):$(PMP4):PressureM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 174
+y 561
+w 50
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AMPS"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 176
+y 583
+w 47
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "VOLT"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 558
+w 100
+h 20
+controlPv "$(P):$(PMP4):CurrentM"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 79
+y 580
+w 100
+h 20
+controlPv "$(P):$(PMP4):VoltageM"
+format "decimal"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 540
+w 49
+h 14
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{(A=0)\}($(P):$(PMP4):isSupply$(SPLY4)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 9
+y 540
+w 62
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV OFF"
+}
+visPv "CALC\\\{(A=0)\}($(P):$(PMP4):isSupply$(SPLY4)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 540
+w 49
+h 14
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP4):isSupply$(SPLY4)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 13
+y 540
+w 55
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "HV ON"
+}
+visPv "CALC\\\{(A=1)\}($(P):$(PMP4):isSupply$(SPLY4)HVenabledM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 129
+y 612
+w 67
+h 12
+font "helvetica-medium-r-10.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "SP $(SPT4)"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 6
+y 512
+w 219
+h 17
+lineColor rgb 37120 37120 37120
+fill
+fillColor rgb 37120 37120 37120
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 515
+w 61
+h 14
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "STATUS"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 66
+y 522
+w 40
+h 0
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 0
+numPoints 2 {
+xPoints  {
+0 66
+1 106
+}
+yPoints  {
+0 522
+1 522
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 78
+y 515
+w 145
+h 14
+controlPv "$(P):$(PMP4):Supply$(SPLY4)StatusM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 611
+w 23
+h 11
+lineColor rgb 0 0 0
+fill
+fillColor rgb 0 0 0
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 613
+w 19
+h 7
+lineColor rgb 64768 0 0
+fill
+fillColor rgb 64768 0 0
+lineWidth 0
+visPv "CALC\\\{((A>1)||(A=0))\}($(P):$(PMP4):Spt$(SPT4)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 613
+w 19
+h 7
+lineColor rgb 0 55296 0
+fill
+fillColor rgb 0 55296 0
+lineWidth 0
+visPv "CALC\\\{(A=1)\}($(P):$(PMP4):Spt$(SPT4)StatusM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 488
+w 222
+h 140
+lineColor rgb 0 0 0
+fillColor rgb 0 0 0
+lineWidth 2
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 184
+y 539
+w 40
+h 14
+controlPv "$(P):$(PMP4):Supply$(SPLY4)PressUnitsM"
+format "string"
+font "helvetica-medium-r-12.0"
+fontAlign "left"
+fgColor rgb 0 0 0
+bgColor rgb 30720 30720 30720
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 166
+y 493
+w 30
+h 16
+controlPv "$(P):$(PMP4):Supply$(SPLY4)PumpSizeM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor rgb 37120 37120 37120
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 10
+y 492
+w 130
+h 17
+controlPv "$(P):$(PMP4):Pump$(SPLY4)NameM"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "left"
+fgColor rgb 64256 62208 18944
+bgColor rgb 26880 26880 26880
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 613
+w 92
+h 12
+font "helvetica-medium-r-10.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "AUTO RESTART="
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 88
+y 610
+w 30
+h 13
+controlPv "$(P):$(PMP4):Supply$(SPLY4)AutoRestartM"
+format "string"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor rgb 60928 46592 11008
+bgColor rgb 0 0 0
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 201
+y 494
+w 33
+h 14
+font "helvetica-medium-r-12.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "L/S"
+}
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump4UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 487
+w 224
+h 142
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 342
+w 224
+h 142
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 197
+w 224
+h 142
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 52
+w 224
+h 142
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 197
+w 226
+h 142
+
+beginGroup
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 269
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP2):Supply$(SPLY2)HVenableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV ON"
+offLabel "HV ON"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 289
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP2):Supply$(SPLY2)HVdisableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV OFF"
+offLabel "HV OFF"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump2UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 342
+w 226
+h 142
+
+beginGroup
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 414
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP3):Supply$(SPLY3)HVenableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV ON"
+offLabel "HV ON"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 434
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP3):Supply$(SPLY3)HVdisableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV OFF"
+offLabel "HV OFF"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump3UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 52
+w 226
+h 142
+
+beginGroup
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 124
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP1):Supply$(SPLY1)HVenableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV ON"
+offLabel "HV ON"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 144
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP1):Supply$(SPLY1)HVdisableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV OFF"
+offLabel "HV OFF"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump1UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 487
+w 227
+h 142
+
+beginGroup
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 559
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP4):Supply$(SPLY4)HVenableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV ON"
+offLabel "HV ON"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 14
+y 579
+w 54
+h 20
+fgColor rgb 0 0 0
+onColor rgb 22528 37632 65280
+offColor rgb 22528 37632 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P):$(PMP4):Supply$(SPLY4)HVdisableC.PROC"
+pressValue "0"
+releaseValue 
+onLabel "HV OFF"
+offLabel "HV OFF"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "CALC\\\{(A)\}($(P):$(IPC):Pump4UsedM)"
+visInvert
+visMin 0
+visMax 1
+endObjectProperties
+
+

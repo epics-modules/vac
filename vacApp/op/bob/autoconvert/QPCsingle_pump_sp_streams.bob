@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2025-08-20 12:52:36 by epics-->
 <display version="2.0.0">
   <name>QPCsingle_pump_sp_streams</name>
   <x>43</x>
@@ -65,7 +66,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #18</name>
-    <pv_name>$(P)$(PMP):Spt$(SPT)OnPress</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OnPressM</pv_name>
     <x>324</x>
     <y>26</y>
     <width>130</width>
@@ -89,7 +90,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #22</name>
-    <pv_name>$(P)$(PMP):Spt$(SPT)OffPress</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OffPressM</pv_name>
     <x>324</x>
     <y>77</y>
     <width>130</width>
@@ -113,7 +114,7 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>text entry #26</name>
-    <pv_name>$(P)$(PMP):setSpt$(SPT)OffPressure.A</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OffPressureC.A</pv_name>
     <x>66</x>
     <y>80</y>
     <width>130</width>
@@ -148,7 +149,7 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>text entry #33</name>
-    <pv_name>$(P)$(PMP):setSpt$(SPT)OnPressure</pv_name>
+    <pv_name>$(P)$(PMP):Spt$(SPT)OnPressureC</pv_name>
     <x>66</x>
     <y>26</y>
     <width>130</width>
@@ -171,7 +172,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #37</name>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <x>460</x>
     <y>30</y>
     <width>45</width>
@@ -190,7 +191,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #41</name>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <x>460</x>
     <y>82</y>
     <width>45</width>
@@ -209,7 +210,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #45</name>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <x>201</x>
     <y>32</y>
     <width>45</width>
@@ -228,7 +229,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #49</name>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <x>200</x>
     <y>84</y>
     <width>45</width>

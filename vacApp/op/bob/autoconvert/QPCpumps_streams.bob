@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2025-08-22 15:33:16 by epics-->
 <display version="2.0.0">
   <name>QPCpumps_streams</name>
-  <x>126</x>
-  <y>99</y>
+  <x>116</x>
+  <y>91</y>
   <width>817</width>
   <height>485</height>
   <background_color>
@@ -108,7 +109,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #24</name>
-    <pv_name>$(P)$(PMP1):FirmwareVers</pv_name>
+    <pv_name>$(P)FirmwareVersM</pv_name>
     <x>738</x>
     <y>8</y>
     <width>50</width>
@@ -216,7 +217,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #43</name>
-    <pv_name>$(P)$(PMP1):Pressure</pv_name>
+    <pv_name>$(P)$(PMP1):PressureM</pv_name>
     <x>101</x>
     <y>68</y>
     <width>130</width>
@@ -240,7 +241,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #47</name>
-    <pv_name>$(P)$(PMP1):Current</pv_name>
+    <pv_name>$(P)$(PMP1):CurrentM</pv_name>
     <x>101</x>
     <y>113</y>
     <width>130</width>
@@ -264,7 +265,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #51</name>
-    <pv_name>$(P)$(PMP1):Voltage</pv_name>
+    <pv_name>$(P)$(PMP1):VoltageM</pv_name>
     <x>100</x>
     <y>158</y>
     <width>130</width>
@@ -350,11 +351,11 @@
       </color>
     </background_color>
     <rules>
-      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
-        <exp bool_exp="!(pv0!=0)">
+      <rule name="vis_if_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==0)">
           <value>false</value>
         </exp>
-        <pv_name>$(P)$(PMP1):Spt$(SPT1)Status</pv_name>
+        <pv_name>$(P)$(PMP1):Spt$(SPT1)StatusM</pv_name>
       </rule>
     </rules>
   </widget>
@@ -394,7 +395,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #74</name>
-    <pv_name>$(P)$(PMP1):PumpSize</pv_name>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)PumpSizeM</pv_name>
     <x>255</x>
     <y>70</y>
     <width>141</width>
@@ -435,47 +436,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #81</name>
-    <pv_name>$(P)$(PMP1):Model</pv_name>
-    <x>281</x>
-    <y>133</y>
-    <width>80</width>
-    <height>27</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="28.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="216" blue="0">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
-    <format>2</format>
-    <show_units>false</show_units>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #85</name>
-    <text>Controller</text>
-    <x>281</x>
-    <y>168</y>
-    <width>80</width>
-    <height>10</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="10.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="153" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #88</name>
-    <pv_name>$(P)$(PMP1):Status</pv_name>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)StatusM</pv_name>
     <x>75</x>
     <y>207</y>
     <width>300</width>
@@ -496,15 +457,15 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #92</name>
+    <name>message button #85</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP1):enable.PROC</pv_name>
+        <pv_name>$(P)$(PMP1):Supply$(SPLY1)HVenableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP1):enable.PROC</pv_name>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)HVenableC.PROC</pv_name>
     <text>HV ON</text>
     <x>32</x>
     <y>76</y>
@@ -516,15 +477,15 @@
     </background_color>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #95</name>
+    <name>message button #88</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP1):disable.PROC</pv_name>
+        <pv_name>$(P)$(PMP1):Supply$(SPLY1)HVdisableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP1):disable.PROC</pv_name>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)HVdisableC.PROC</pv_name>
     <text>HV OFF</text>
     <x>32</x>
     <y>93</y>
@@ -536,8 +497,8 @@
     </background_color>
   </widget>
   <widget type="combo" version="2.0.0">
-    <name>menu #98</name>
-    <pv_name>$(P)$(PMP1):setPressUnits</pv_name>
+    <name>menu #91</name>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)PressUnitsC</pv_name>
     <x>32</x>
     <y>124</y>
     <width>61</width>
@@ -553,8 +514,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #101</name>
-    <pv_name>$(P)$(PMP1):getPressUnits</pv_name>
+    <name>text update #94</name>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)PressUnitsM</pv_name>
     <x>185</x>
     <y>100</y>
     <width>43</width>
@@ -577,12 +538,13 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>related display #105</name>
+    <name>related display #98</name>
     <actions>
       <action type="open_display">
         <file>QPCsingle_pump_sp_streams.opi</file>
         <macros>
           <PMP>$(PMP1)</PMP>
+          <SPLY>$(SPLY1)</SPLY>
           <SPT>$(SPT1)</SPT>
         </macros>
         <target>tab</target>
@@ -599,8 +561,8 @@
     </background_color>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #108</name>
-    <pv_name>$(P)$(PMP1):Pump$(SPLY1)Name</pv_name>
+    <name>text update #101</name>
+    <pv_name>$(P)$(PMP1):Pump$(SPLY1)NameM</pv_name>
     <x>74</x>
     <y>230</y>
     <width>300</width>
@@ -621,7 +583,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #112</name>
+    <name>text #105</name>
     <text>Pump Pressure</text>
     <x>500</x>
     <y>100</y>
@@ -638,7 +600,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #115</name>
+    <name>text #108</name>
     <text>Pump Current (Amps)</text>
     <x>500</x>
     <y>145</y>
@@ -655,7 +617,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #118</name>
+    <name>text #111</name>
     <text>Pump Voltage (Volts)</text>
     <x>499</x>
     <y>190</y>
@@ -672,8 +634,8 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #121</name>
-    <pv_name>$(P)$(PMP2):Pressure</pv_name>
+    <name>text update #114</name>
+    <pv_name>$(P)$(PMP2):PressureM</pv_name>
     <x>500</x>
     <y>68</y>
     <width>130</width>
@@ -696,8 +658,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #125</name>
-    <pv_name>$(P)$(PMP2):Current</pv_name>
+    <name>text update #118</name>
+    <pv_name>$(P)$(PMP2):CurrentM</pv_name>
     <x>500</x>
     <y>113</y>
     <width>130</width>
@@ -720,8 +682,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #129</name>
-    <pv_name>$(P)$(PMP2):Voltage</pv_name>
+    <name>text update #122</name>
+    <pv_name>$(P)$(PMP2):VoltageM</pv_name>
     <x>499</x>
     <y>158</y>
     <width>130</width>
@@ -744,7 +706,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #133</name>
+    <name>text #126</name>
     <text>Mode</text>
     <x>438</x>
     <y>111</y>
@@ -761,7 +723,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #136</name>
+    <name>rectangle #129</name>
     <x>418</x>
     <y>62</y>
     <width>390</width>
@@ -778,7 +740,7 @@
     <transparent>true</transparent>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #139</name>
+    <name>rectangle #132</name>
     <x>462</x>
     <y>159</y>
     <width>10</width>
@@ -793,7 +755,7 @@
     </background_color>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #142</name>
+    <name>rectangle #135</name>
     <x>462</x>
     <y>159</y>
     <width>10</width>
@@ -807,16 +769,16 @@
       </color>
     </background_color>
     <rules>
-      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
-        <exp bool_exp="!(pv0!=0)">
+      <rule name="vis_if_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==0)">
           <value>false</value>
         </exp>
-        <pv_name>$(P)$(PMP2):Spt$(SPT2)Status</pv_name>
+        <pv_name>$(P)$(PMP2):Spt$(SPT2)StatusM</pv_name>
       </rule>
     </rules>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #146</name>
+    <name>text #139</name>
     <text>SP</text>
     <x>443</x>
     <y>160</y>
@@ -833,7 +795,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #149</name>
+    <name>rectangle #142</name>
     <x>439</x>
     <y>157</y>
     <width>36</width>
@@ -850,8 +812,8 @@
     <transparent>true</transparent>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #152</name>
-    <pv_name>$(P)$(PMP2):PumpSize</pv_name>
+    <name>text update #145</name>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)PumpSizeM</pv_name>
     <x>654</x>
     <y>70</y>
     <width>141</width>
@@ -874,7 +836,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #156</name>
+    <name>text #149</name>
     <text>Ion Pump Size</text>
     <x>659</x>
     <y>102</y>
@@ -891,48 +853,8 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #159</name>
-    <pv_name>$(P)$(PMP2):Model</pv_name>
-    <x>680</x>
-    <y>133</y>
-    <width>80</width>
-    <height>27</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="28.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="216" blue="0">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
-    <format>2</format>
-    <show_units>false</show_units>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #163</name>
-    <text>Controller</text>
-    <x>680</x>
-    <y>168</y>
-    <width>80</width>
-    <height>10</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="10.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="153" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #166</name>
-    <pv_name>$(P)$(PMP2):Status</pv_name>
+    <name>text update #152</name>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)StatusM</pv_name>
     <x>474</x>
     <y>207</y>
     <width>300</width>
@@ -953,15 +875,15 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #170</name>
+    <name>message button #156</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP2):enable.PROC</pv_name>
+        <pv_name>$(P)$(PMP2):Supply$(SPLY2)HVenableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP2):enable.PROC</pv_name>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)HVenableC.PROC</pv_name>
     <text>HV ON</text>
     <x>431</x>
     <y>76</y>
@@ -973,15 +895,15 @@
     </background_color>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #173</name>
+    <name>message button #159</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP2):disable.PROC</pv_name>
+        <pv_name>$(P)$(PMP2):Supply$(SPLY2)HVdisableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP2):disable.PROC</pv_name>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)HVdisableC.PROC</pv_name>
     <text>HV OFF</text>
     <x>431</x>
     <y>93</y>
@@ -993,8 +915,8 @@
     </background_color>
   </widget>
   <widget type="combo" version="2.0.0">
-    <name>menu #176</name>
-    <pv_name>$(P)$(PMP2):setPressUnits</pv_name>
+    <name>menu #162</name>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)PressUnitsC</pv_name>
     <x>431</x>
     <y>124</y>
     <width>61</width>
@@ -1010,8 +932,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #179</name>
-    <pv_name>$(P)$(PMP2):getPressUnits</pv_name>
+    <name>text update #165</name>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)PressUnitsM</pv_name>
     <x>584</x>
     <y>100</y>
     <width>43</width>
@@ -1034,12 +956,13 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>related display #183</name>
+    <name>related display #169</name>
     <actions>
       <action type="open_display">
         <file>QPCsingle_pump_sp_streams.opi</file>
         <macros>
           <PMP>$(PMP2)</PMP>
+          <SPLY>$(SPLY2)</SPLY>
           <SPT>$(SPT2)</SPT>
         </macros>
         <target>tab</target>
@@ -1056,8 +979,8 @@
     </background_color>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #186</name>
-    <pv_name>$(P)$(PMP2):Pump$(SPLY2)Name</pv_name>
+    <name>text update #172</name>
+    <pv_name>$(P)$(PMP2):Pump$(SPLY2)NameM</pv_name>
     <x>473</x>
     <y>230</y>
     <width>300</width>
@@ -1078,7 +1001,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #190</name>
+    <name>text #176</name>
     <text>Pump Pressure</text>
     <x>101</x>
     <y>317</y>
@@ -1095,7 +1018,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #193</name>
+    <name>text #179</name>
     <text>Pump Current (Amps)</text>
     <x>101</x>
     <y>362</y>
@@ -1112,7 +1035,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #196</name>
+    <name>text #182</name>
     <text>Pump Voltage (Volts)</text>
     <x>100</x>
     <y>407</y>
@@ -1129,8 +1052,8 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #199</name>
-    <pv_name>$(P)$(PMP3):Pressure</pv_name>
+    <name>text update #185</name>
+    <pv_name>$(P)$(PMP3):PressureM</pv_name>
     <x>101</x>
     <y>285</y>
     <width>130</width>
@@ -1153,8 +1076,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #203</name>
-    <pv_name>$(P)$(PMP3):Current</pv_name>
+    <name>text update #189</name>
+    <pv_name>$(P)$(PMP3):CurrentM</pv_name>
     <x>101</x>
     <y>330</y>
     <width>130</width>
@@ -1177,8 +1100,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #207</name>
-    <pv_name>$(P)$(PMP3):Voltage</pv_name>
+    <name>text update #193</name>
+    <pv_name>$(P)$(PMP3):VoltageM</pv_name>
     <x>100</x>
     <y>375</y>
     <width>130</width>
@@ -1201,7 +1124,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #211</name>
+    <name>text #197</name>
     <text>Mode</text>
     <x>39</x>
     <y>328</y>
@@ -1218,7 +1141,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #214</name>
+    <name>rectangle #200</name>
     <x>19</x>
     <y>279</y>
     <width>390</width>
@@ -1235,7 +1158,7 @@
     <transparent>true</transparent>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #217</name>
+    <name>rectangle #203</name>
     <x>63</x>
     <y>376</y>
     <width>10</width>
@@ -1250,7 +1173,7 @@
     </background_color>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #220</name>
+    <name>rectangle #206</name>
     <x>63</x>
     <y>376</y>
     <width>10</width>
@@ -1264,16 +1187,16 @@
       </color>
     </background_color>
     <rules>
-      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
-        <exp bool_exp="!(pv0!=0)">
+      <rule name="vis_if_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==0)">
           <value>false</value>
         </exp>
-        <pv_name>$(P)$(PMP3):Spt$(SPT3)Status</pv_name>
+        <pv_name>$(P)$(PMP3):Spt$(SPT3)StatusM</pv_name>
       </rule>
     </rules>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #224</name>
+    <name>text #210</name>
     <text>SP</text>
     <x>44</x>
     <y>377</y>
@@ -1290,7 +1213,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #227</name>
+    <name>rectangle #213</name>
     <x>40</x>
     <y>374</y>
     <width>36</width>
@@ -1307,8 +1230,8 @@
     <transparent>true</transparent>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #230</name>
-    <pv_name>$(P)$(PMP3):PumpSize</pv_name>
+    <name>text update #216</name>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)PumpSizeM</pv_name>
     <x>255</x>
     <y>287</y>
     <width>141</width>
@@ -1331,7 +1254,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #234</name>
+    <name>text #220</name>
     <text>Ion Pump Size</text>
     <x>260</x>
     <y>319</y>
@@ -1348,48 +1271,8 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #237</name>
-    <pv_name>$(P)$(PMP3):Model</pv_name>
-    <x>281</x>
-    <y>350</y>
-    <width>80</width>
-    <height>27</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="28.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="216" blue="0">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
-    <format>2</format>
-    <show_units>false</show_units>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #241</name>
-    <text>Controller</text>
-    <x>281</x>
-    <y>385</y>
-    <width>80</width>
-    <height>10</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="10.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="153" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #244</name>
-    <pv_name>$(P)$(PMP3):Status</pv_name>
+    <name>text update #223</name>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)StatusM</pv_name>
     <x>75</x>
     <y>424</y>
     <width>300</width>
@@ -1410,15 +1293,15 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #248</name>
+    <name>message button #227</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP3):enable.PROC</pv_name>
+        <pv_name>$(P)$(PMP3):Supply$(SPLY3)HVenableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP3):enable.PROC</pv_name>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)HVenableC.PROC</pv_name>
     <text>HV ON</text>
     <x>32</x>
     <y>293</y>
@@ -1430,15 +1313,15 @@
     </background_color>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #251</name>
+    <name>message button #230</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP3):disable.PROC</pv_name>
+        <pv_name>$(P)$(PMP3):Supply$(SPLY3)HVdisableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP3):disable.PROC</pv_name>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)HVdisableC.PROC</pv_name>
     <text>HV OFF</text>
     <x>32</x>
     <y>310</y>
@@ -1450,8 +1333,8 @@
     </background_color>
   </widget>
   <widget type="combo" version="2.0.0">
-    <name>menu #254</name>
-    <pv_name>$(P)$(PMP3):setPressUnits</pv_name>
+    <name>menu #233</name>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)PressUnitsC</pv_name>
     <x>32</x>
     <y>341</y>
     <width>61</width>
@@ -1467,8 +1350,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #257</name>
-    <pv_name>$(P)$(PMP3):getPressUnits</pv_name>
+    <name>text update #236</name>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)PressUnitsM</pv_name>
     <x>185</x>
     <y>317</y>
     <width>43</width>
@@ -1491,12 +1374,13 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>related display #261</name>
+    <name>related display #240</name>
     <actions>
       <action type="open_display">
         <file>QPCsingle_pump_sp_streams.opi</file>
         <macros>
           <PMP>$(PMP3)</PMP>
+          <SPLY>$(SPLY3)</SPLY>
           <SPT>$(SPT3)</SPT>
         </macros>
         <target>tab</target>
@@ -1513,8 +1397,8 @@
     </background_color>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #264</name>
-    <pv_name>$(P)$(PMP3):Pump$(SPLY3)Name</pv_name>
+    <name>text update #243</name>
+    <pv_name>$(P)$(PMP3):Pump$(SPLY3)NameM</pv_name>
     <x>74</x>
     <y>447</y>
     <width>300</width>
@@ -1535,7 +1419,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #268</name>
+    <name>text #247</name>
     <text>Pump Pressure</text>
     <x>500</x>
     <y>317</y>
@@ -1552,7 +1436,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #271</name>
+    <name>text #250</name>
     <text>Pump Current (Amps)</text>
     <x>500</x>
     <y>362</y>
@@ -1569,7 +1453,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #274</name>
+    <name>text #253</name>
     <text>Pump Voltage (Volts)</text>
     <x>499</x>
     <y>407</y>
@@ -1586,8 +1470,8 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #277</name>
-    <pv_name>$(P)$(PMP4):Pressure</pv_name>
+    <name>text update #256</name>
+    <pv_name>$(P)$(PMP4):PressureM</pv_name>
     <x>500</x>
     <y>285</y>
     <width>130</width>
@@ -1610,8 +1494,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #281</name>
-    <pv_name>$(P)$(PMP4):Current</pv_name>
+    <name>text update #260</name>
+    <pv_name>$(P)$(PMP4):CurrentM</pv_name>
     <x>500</x>
     <y>330</y>
     <width>130</width>
@@ -1634,8 +1518,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #285</name>
-    <pv_name>$(P)$(PMP4):Voltage</pv_name>
+    <name>text update #264</name>
+    <pv_name>$(P)$(PMP4):VoltageM</pv_name>
     <x>499</x>
     <y>375</y>
     <width>130</width>
@@ -1658,7 +1542,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #289</name>
+    <name>text #268</name>
     <text>Mode</text>
     <x>438</x>
     <y>328</y>
@@ -1675,7 +1559,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #292</name>
+    <name>rectangle #271</name>
     <x>418</x>
     <y>279</y>
     <width>390</width>
@@ -1692,7 +1576,7 @@
     <transparent>true</transparent>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #295</name>
+    <name>rectangle #274</name>
     <x>462</x>
     <y>376</y>
     <width>10</width>
@@ -1707,7 +1591,7 @@
     </background_color>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #298</name>
+    <name>rectangle #277</name>
     <x>462</x>
     <y>376</y>
     <width>10</width>
@@ -1721,16 +1605,16 @@
       </color>
     </background_color>
     <rules>
-      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
-        <exp bool_exp="!(pv0!=0)">
+      <rule name="vis_if_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0==0)">
           <value>false</value>
         </exp>
-        <pv_name>$(P)$(PMP4):Spt$(SPT4)Status</pv_name>
+        <pv_name>$(P)$(PMP4):Spt$(SPT4)StatusM</pv_name>
       </rule>
     </rules>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #302</name>
+    <name>text #281</name>
     <text>SP</text>
     <x>443</x>
     <y>377</y>
@@ -1747,7 +1631,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #305</name>
+    <name>rectangle #284</name>
     <x>439</x>
     <y>374</y>
     <width>36</width>
@@ -1764,8 +1648,8 @@
     <transparent>true</transparent>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #308</name>
-    <pv_name>$(P)$(PMP4):PumpSize</pv_name>
+    <name>text update #287</name>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)PumpSizeM</pv_name>
     <x>654</x>
     <y>287</y>
     <width>141</width>
@@ -1788,7 +1672,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #312</name>
+    <name>text #291</name>
     <text>Ion Pump Size</text>
     <x>659</x>
     <y>319</y>
@@ -1805,48 +1689,8 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #315</name>
-    <pv_name>$(P)$(PMP4):Model</pv_name>
-    <x>680</x>
-    <y>350</y>
-    <width>80</width>
-    <height>27</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="28.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="216" blue="0">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
-    <format>2</format>
-    <show_units>false</show_units>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #319</name>
-    <text>Controller</text>
-    <x>680</x>
-    <y>385</y>
-    <width>80</width>
-    <height>10</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="10.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="153" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #322</name>
-    <pv_name>$(P)$(PMP4):Status</pv_name>
+    <name>text update #294</name>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)StatusM</pv_name>
     <x>474</x>
     <y>424</y>
     <width>300</width>
@@ -1867,15 +1711,15 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #326</name>
+    <name>message button #298</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP4):enable.PROC</pv_name>
+        <pv_name>$(P)$(PMP4):Supply$(SPLY4)HVenableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP4):enable.PROC</pv_name>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)HVenableC.PROC</pv_name>
     <text>HV ON</text>
     <x>431</x>
     <y>293</y>
@@ -1887,15 +1731,15 @@
     </background_color>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #329</name>
+    <name>message button #301</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP4):disable.PROC</pv_name>
+        <pv_name>$(P)$(PMP4):Supply$(SPLY4)HVdisableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP4):disable.PROC</pv_name>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)HVdisableC.PROC</pv_name>
     <text>HV OFF</text>
     <x>431</x>
     <y>310</y>
@@ -1907,8 +1751,8 @@
     </background_color>
   </widget>
   <widget type="combo" version="2.0.0">
-    <name>menu #332</name>
-    <pv_name>$(P)$(PMP4):setPressUnits</pv_name>
+    <name>menu #304</name>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)PressUnitsC</pv_name>
     <x>431</x>
     <y>341</y>
     <width>61</width>
@@ -1924,8 +1768,8 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #335</name>
-    <pv_name>$(P)$(PMP4):getPressUnits</pv_name>
+    <name>text update #307</name>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)PressUnitsM</pv_name>
     <x>584</x>
     <y>317</y>
     <width>43</width>
@@ -1948,12 +1792,13 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>related display #339</name>
+    <name>related display #311</name>
     <actions>
       <action type="open_display">
         <file>QPCsingle_pump_sp_streams.opi</file>
         <macros>
           <PMP>$(PMP4)</PMP>
+          <SPLY>$(SPLY4)</SPLY>
           <SPT>$(SPT4)</SPT>
         </macros>
         <target>tab</target>
@@ -1970,8 +1815,8 @@
     </background_color>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #342</name>
-    <pv_name>$(P)$(PMP4):Pump$(SPLY4)Name</pv_name>
+    <name>text update #314</name>
+    <pv_name>$(P)$(PMP4):Pump$(SPLY4)NameM</pv_name>
     <x>473</x>
     <y>447</y>
     <width>300</width>
@@ -1990,5 +1835,429 @@
     <format>6</format>
     <show_units>false</show_units>
     <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #318</name>
+    <pv_name>$(P)ModelM</pv_name>
+    <x>674</x>
+    <y>8</y>
+    <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="216" blue="0">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #322</name>
+    <text>Model</text>
+    <x>669</x>
+    <y>33</y>
+    <width>60</width>
+    <height>10</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="10.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #325</name>
+    <x>462</x>
+    <y>377</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </background_color>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(PMP4):Spt$(SPT4)StatusM</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #329</name>
+    <x>462</x>
+    <y>159</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </background_color>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(PMP2):Spt$(SPT2)StatusM</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #333</name>
+    <x>63</x>
+    <y>159</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </background_color>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(PMP1):Spt$(SPT1)StatusM</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>rectangle #337</name>
+    <x>63</x>
+    <y>376</y>
+    <width>10</width>
+    <height>10</height>
+    <line_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="82" green="218" blue="59">
+      </color>
+    </background_color>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(PMP3):Spt$(SPT3)StatusM</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #341</name>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)AutoRestartM</pv_name>
+    <x>763</x>
+    <y>173</y>
+    <width>40</width>
+    <height>19</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #345</name>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)AutoRestartM</pv_name>
+    <x>363</x>
+    <y>173</y>
+    <width>40</width>
+    <height>19</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #349</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP1):Supply$(SPLY1)AutoRestartC</pv_name>
+        <value>1</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)AutoRestartC</pv_name>
+    <text>Auto Restart On</text>
+    <x>263</x>
+    <y>121</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #352</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP1):Supply$(SPLY1)AutoRestartC</pv_name>
+        <value>0</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP1):Supply$(SPLY1)AutoRestartC</pv_name>
+    <text>Auto Restart Off</text>
+    <x>263</x>
+    <y>146</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #355</name>
+    <text>Auto Restart =</text>
+    <x>246</x>
+    <y>174</y>
+    <width>104</width>
+    <height>17</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #358</name>
+    <text>Auto Restart =</text>
+    <x>642</x>
+    <y>174</y>
+    <width>104</width>
+    <height>17</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #361</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP2):Supply$(SPLY2)AutoRestartC</pv_name>
+        <value>1</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)AutoRestartC</pv_name>
+    <text>Auto Restart On</text>
+    <x>658</x>
+    <y>121</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #364</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP2):Supply$(SPLY2)AutoRestartC</pv_name>
+        <value>0</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP2):Supply$(SPLY2)AutoRestartC</pv_name>
+    <text>Auto Restart Off</text>
+    <x>658</x>
+    <y>146</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #367</name>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)AutoRestartM</pv_name>
+    <x>363</x>
+    <y>388</y>
+    <width>40</width>
+    <height>19</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #371</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP3):Supply$(SPLY3)AutoRestartC</pv_name>
+        <value>1</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)AutoRestartC</pv_name>
+    <text>Auto Restart On</text>
+    <x>263</x>
+    <y>336</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #374</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP3):Supply$(SPLY3)AutoRestartC</pv_name>
+        <value>0</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP3):Supply$(SPLY3)AutoRestartC</pv_name>
+    <text>Auto Restart Off</text>
+    <x>263</x>
+    <y>361</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #377</name>
+    <text>Auto Restart =</text>
+    <x>246</x>
+    <y>389</y>
+    <width>104</width>
+    <height>17</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #380</name>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)AutoRestartM</pv_name>
+    <x>762</x>
+    <y>391</y>
+    <width>40</width>
+    <height>19</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #384</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP4):Supply$(SPLY4)AutoRestartC</pv_name>
+        <value>1</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)AutoRestartC</pv_name>
+    <text>Auto Restart On</text>
+    <x>662</x>
+    <y>339</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #387</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(P)$(PMP4):Supply$(SPLY4)AutoRestartC</pv_name>
+        <value>0</value>
+        <description>Write</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(PMP4):Supply$(SPLY4)AutoRestartC</pv_name>
+    <text>Auto Restart Off</text>
+    <x>662</x>
+    <y>364</y>
+    <width>120</width>
+    <height>20</height>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #390</name>
+    <text>Auto Restart =</text>
+    <x>645</x>
+    <y>392</y>
+    <width>104</width>
+    <height>17</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <auto_size>true</auto_size>
   </widget>
 </display>

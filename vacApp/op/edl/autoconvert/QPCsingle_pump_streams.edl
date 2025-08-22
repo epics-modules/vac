@@ -129,7 +129,7 @@ x 111
 y 76
 w 130
 h 30
-controlPv "$(P)$(PMP):Pressure"
+controlPv "$(P)$(PMP):PressureM"
 format "exponential"
 font "utopia-medium-r-24.0"
 fontAlign "center"
@@ -153,7 +153,7 @@ x 111
 y 121
 w 130
 h 30
-controlPv "$(P)$(PMP):Current"
+controlPv "$(P)$(PMP):CurrentM"
 format "exponential"
 font "utopia-medium-r-24.0"
 fontAlign "center"
@@ -177,7 +177,7 @@ x 110
 y 166
 w 130
 h 30
-controlPv "$(P)$(PMP):Voltage"
+controlPv "$(P)$(PMP):VoltageM"
 format "decimal"
 font "utopia-medium-r-24.0"
 fontAlign "center"
@@ -233,7 +233,7 @@ major 4
 minor 0
 release 0
 x 73
-y 167
+y 174
 w 9
 h 9
 lineColor rgb 47872 49408 34560
@@ -249,14 +249,14 @@ major 4
 minor 0
 release 0
 x 73
-y 167
+y 175
 w 9
 h 9
 lineColor rgb 64768 0 0
 fill
 fillColor rgb 64768 0 0
 lineWidth 0
-visPv "CALC\\\{(A)\}($(P)$(PMP):Spt$(SPT)Status)"
+visPv "CALC\\\{(A)\}($(P)$(PMP):Spt$(SPT)StatusM)"
 visInvert
 visMin 0
 visMax 1
@@ -269,7 +269,7 @@ major 4
 minor 1
 release 1
 x 53
-y 168
+y 175
 w 20
 h 10
 font "helvetica-medium-r-8.0"
@@ -289,7 +289,7 @@ major 4
 minor 0
 release 0
 x 50
-y 165
+y 172
 w 35
 h 14
 lineColor rgb 65280 65280 65280
@@ -306,7 +306,7 @@ x 265
 y 78
 w 141
 h 27
-controlPv "$(P)$(PMP):PumpSize"
+controlPv "$(P)$(PMP):Supply$(SPLY)PumpSizeM"
 format "decimal"
 font "utopia-medium-r-24.0"
 fontAlign "center"
@@ -350,7 +350,7 @@ x 259
 y 131
 w 80
 h 27
-controlPv "$(P)$(PMP):Model"
+controlPv "$(P)ModelM"
 format "exponential"
 font "utopia-medium-r-24.0"
 fontAlign "center"
@@ -415,7 +415,7 @@ x 355
 y 133
 w 50
 h 20
-controlPv "$(P)$(PMP):FirmwareVers"
+controlPv "$(P)FirmwareVersM"
 format "decimal"
 font "helvetica-medium-r-14.0"
 fontAlign "center"
@@ -479,7 +479,7 @@ x 85
 y 215
 w 300
 h 20
-controlPv "$(P)$(PMP):Status"
+controlPv "$(P)$(PMP):Supply$(SPLY)StatusM"
 format "string"
 font "helvetica-medium-r-14.0"
 fontAlign "left"
@@ -503,7 +503,7 @@ x 195
 y 108
 w 43
 h 12
-controlPv "$(P)$(PMP):getPressUnits"
+controlPv "$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 format "string"
 font "helvetica-medium-r-10.0"
 fontAlign "center"
@@ -527,7 +527,7 @@ x 84
 y 238
 w 300
 h 20
-controlPv "$(P)$(PMP):Pump$(SPLY)Name"
+controlPv "$(P)$(PMP):Pump$(SPLY)NameM"
 format "string"
 font "helvetica-medium-r-14.0"
 fontAlign "left"
@@ -556,7 +556,7 @@ onColor rgb 29440 57088 65280
 offColor rgb 29440 57088 65280
 topShadowColor rgb 65280 65280 65280
 botShadowColor rgb 0 0 0
-controlPv "$(P)$(PMP):enable.PROC"
+controlPv "$(P)$(PMP):Supply$(SPLY)HVenableC.PROC"
 pressValue "0"
 releaseValue 
 onLabel "HV ON"
@@ -581,7 +581,7 @@ onColor rgb 29440 57088 65280
 offColor rgb 29440 57088 65280
 topShadowColor rgb 65280 65280 65280
 botShadowColor rgb 0 0 0
-controlPv "$(P)$(PMP):disable.PROC"
+controlPv "$(P)$(PMP):Supply$(SPLY)HVdisableC.PROC"
 pressValue "0"
 releaseValue 
 onLabel "HV OFF"
@@ -606,41 +606,8 @@ bgColor rgb 0 0 0
 inconsistentColor rgb 17920 17920 17920
 topShadowColor rgb 55808 55808 55808
 botShadowColor rgb 17920 17920 17920
-controlPv "$(P)$(PMP):setPressUnits"
-indicatorPv "$(P)$(PMP):setPressUnits"
+controlPv "$(P)$(PMP):Supply$(SPLY)PressUnitsC"
+indicatorPv "$(P)$(PMP):Supply$(SPLY)PressUnitsC"
 font "helvetica-medium-r-10.0"
-endObjectProperties
-
-# (Related Display)
-object relatedDisplayClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 38
-y 184
-w 65
-h 15
-fgColor rgb 0 0 0
-bgColor rgb 39168 65280 65280
-topShadowColor rgb 55808 55808 55808
-botShadowColor rgb 17920 17920 17920
-font "helvetica-medium-r-8.0"
-icon
-buttonLabel "SETPOINT"
-numPvs 2
-numDsps 1
-displayFileName {
-  0 "QPCsingle_pump_sp_streams.edl"
-}
-menuLabel {
-  0 ""
-}
-symbols {
-  0 "P=$(P),PMP=$(PMP),SPT=$(SPT)"
-}
-replaceSymbols {
-  0 1
-}
 endObjectProperties
 

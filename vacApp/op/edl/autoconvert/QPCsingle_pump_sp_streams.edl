@@ -110,7 +110,7 @@ x 324
 y 26
 w 130
 h 30
-controlPv "$(P)$(PMP):Spt$(SPT)OnPress"
+controlPv "$(P)$(PMP):Spt$(SPT)OnPressM"
 format "exponential"
 font "utopia-medium-r-24.0"
 fontAlign "center"
@@ -134,7 +134,7 @@ x 324
 y 77
 w 130
 h 30
-controlPv "$(P)$(PMP):Spt$(SPT)OffPress"
+controlPv "$(P)$(PMP):Spt$(SPT)OffPressM"
 format "exponential"
 font "utopia-medium-r-24.0"
 fontAlign "center"
@@ -158,7 +158,7 @@ x 66
 y 80
 w 130
 h 30
-controlPv "$(P)$(PMP):setSpt$(SPT)OffPressure.A"
+controlPv "$(P)$(PMP):Spt$(SPT)OffPressureC.A"
 format "decimal"
 font "helvetica-medium-r-18.0"
 fontAlign "left"
@@ -204,7 +204,7 @@ x 66
 y 26
 w 130
 h 30
-controlPv "$(P)$(PMP):setSpt$(SPT)OnPressure"
+controlPv "$(P)$(PMP):Spt$(SPT)OnPressureC"
 format "decimal"
 font "helvetica-medium-r-18.0"
 fontAlign "left"
@@ -230,7 +230,7 @@ x 460
 y 30
 w 45
 h 20
-controlPv "$(P)$(PMP):getPressUnits"
+controlPv "$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 format "string"
 font "helvetica-medium-r-14.0"
 fontAlign "center"
@@ -254,7 +254,7 @@ x 460
 y 82
 w 45
 h 20
-controlPv "$(P)$(PMP):getPressUnits"
+controlPv "$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 format "string"
 font "helvetica-medium-r-14.0"
 fontAlign "center"
@@ -278,7 +278,7 @@ x 201
 y 32
 w 45
 h 20
-controlPv "$(P)$(PMP):getPressUnits"
+controlPv "$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 format "string"
 font "helvetica-medium-r-14.0"
 fontAlign "center"
@@ -302,7 +302,7 @@ x 200
 y 84
 w 45
 h 20
-controlPv "$(P)$(PMP):getPressUnits"
+controlPv "$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 format "string"
 font "helvetica-medium-r-14.0"
 fontAlign "center"

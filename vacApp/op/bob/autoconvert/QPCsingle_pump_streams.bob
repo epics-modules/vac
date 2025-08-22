@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2025-08-22 15:33:16 by epics-->
 <display version="2.0.0">
   <name>QPCsingle_pump_streams</name>
   <x>102</x>
@@ -96,7 +97,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #21</name>
-    <pv_name>$(P)$(PMP):Pressure</pv_name>
+    <pv_name>$(P)$(PMP):PressureM</pv_name>
     <x>111</x>
     <y>76</y>
     <width>130</width>
@@ -120,7 +121,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #25</name>
-    <pv_name>$(P)$(PMP):Current</pv_name>
+    <pv_name>$(P)$(PMP):CurrentM</pv_name>
     <x>111</x>
     <y>121</y>
     <width>130</width>
@@ -144,7 +145,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #29</name>
-    <pv_name>$(P)$(PMP):Voltage</pv_name>
+    <pv_name>$(P)$(PMP):VoltageM</pv_name>
     <x>110</x>
     <y>166</y>
     <width>130</width>
@@ -203,7 +204,7 @@
   <widget type="rectangle" version="2.0.0">
     <name>rectangle #39</name>
     <x>73</x>
-    <y>167</y>
+    <y>174</y>
     <width>10</width>
     <height>10</height>
     <line_color>
@@ -218,7 +219,7 @@
   <widget type="rectangle" version="2.0.0">
     <name>rectangle #42</name>
     <x>73</x>
-    <y>167</y>
+    <y>175</y>
     <width>10</width>
     <height>10</height>
     <line_color>
@@ -234,7 +235,7 @@
         <exp bool_exp="!(pv0!=0)">
           <value>false</value>
         </exp>
-        <pv_name>$(P)$(PMP):Spt$(SPT)Status</pv_name>
+        <pv_name>$(P)$(PMP):Spt$(SPT)StatusM</pv_name>
       </rule>
     </rules>
   </widget>
@@ -242,7 +243,7 @@
     <name>text #46</name>
     <text>SP</text>
     <x>54</x>
-    <y>168</y>
+    <y>175</y>
     <width>18</width>
     <height>10</height>
     <font>
@@ -258,7 +259,7 @@
   <widget type="rectangle" version="2.0.0">
     <name>rectangle #49</name>
     <x>50</x>
-    <y>165</y>
+    <y>172</y>
     <width>36</width>
     <height>15</height>
     <line_width>1</line_width>
@@ -274,7 +275,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #52</name>
-    <pv_name>$(P)$(PMP):PumpSize</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PumpSizeM</pv_name>
     <x>265</x>
     <y>78</y>
     <width>141</width>
@@ -315,7 +316,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #59</name>
-    <pv_name>$(P)$(PMP):Model</pv_name>
+    <pv_name>$(P)ModelM</pv_name>
     <x>259</x>
     <y>131</y>
     <width>80</width>
@@ -368,7 +369,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #69</name>
-    <pv_name>$(P)$(PMP):FirmwareVers</pv_name>
+    <pv_name>$(P)FirmwareVersM</pv_name>
     <x>355</x>
     <y>133</y>
     <width>50</width>
@@ -425,7 +426,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #79</name>
-    <pv_name>$(P)$(PMP):Status</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)StatusM</pv_name>
     <x>85</x>
     <y>215</y>
     <width>300</width>
@@ -449,12 +450,12 @@
     <name>message button #83</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP):enable.PROC</pv_name>
+        <pv_name>$(P)$(PMP):Supply$(SPLY)HVenableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP):enable.PROC</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)HVenableC.PROC</pv_name>
     <text>HV ON</text>
     <x>42</x>
     <y>84</y>
@@ -469,12 +470,12 @@
     <name>message button #86</name>
     <actions>
       <action type="write_pv">
-        <pv_name>$(P)$(PMP):disable.PROC</pv_name>
+        <pv_name>$(P)$(PMP):Supply$(SPLY)HVdisableC.PROC</pv_name>
         <value>0</value>
         <description>Write</description>
       </action>
     </actions>
-    <pv_name>$(P)$(PMP):disable.PROC</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)HVdisableC.PROC</pv_name>
     <text>HV OFF</text>
     <x>42</x>
     <y>101</y>
@@ -487,7 +488,7 @@
   </widget>
   <widget type="combo" version="2.0.0">
     <name>menu #89</name>
-    <pv_name>$(P)$(PMP):setPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsC</pv_name>
     <x>42</x>
     <y>132</y>
     <width>61</width>
@@ -504,7 +505,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #92</name>
-    <pv_name>$(P)$(PMP):getPressUnits</pv_name>
+    <pv_name>$(P)$(PMP):Supply$(SPLY)PressUnitsM</pv_name>
     <x>195</x>
     <y>108</y>
     <width>43</width>
@@ -526,27 +527,9 @@
     <horizontal_alignment>1</horizontal_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>related display #96</name>
-    <actions>
-      <action type="open_display">
-        <file>QPCsingle_pump_sp_streams.opi</file>
-        <target>tab</target>
-      </action>
-    </actions>
-    <text>SETPOINT</text>
-    <x>38</x>
-    <y>184</y>
-    <width>65</width>
-    <height>15</height>
-    <background_color>
-      <color red="153" green="255" blue="255">
-      </color>
-    </background_color>
-  </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #99</name>
-    <pv_name>$(P)$(PMP):Pump$(SPLY)Name</pv_name>
+    <name>text update #96</name>
+    <pv_name>$(P)$(PMP):Pump$(SPLY)NameM</pv_name>
     <x>84</x>
     <y>238</y>
     <width>300</width>
