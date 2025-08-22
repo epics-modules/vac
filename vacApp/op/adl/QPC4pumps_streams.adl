@@ -1,0 +1,2472 @@
+
+file {
+	name="/home/helios/BENES/C2/vacuum/vacApp/op/adl/QPC4pumps_streams.adl"
+	version=030120
+}
+display {
+	object {
+		x=1237
+		y=85
+		width=232
+		height=634
+	}
+	clr=14
+	bclr=12
+	cmap=""
+	gridSpacing=5
+	gridOn=0
+	snapToGrid=0
+}
+"color map" {
+	ncolors=65
+	colors {
+		ffffff,
+		ececec,
+		dadada,
+		c8c8c8,
+		bbbbbb,
+		aeaeae,
+		9e9e9e,
+		919191,
+		858585,
+		787878,
+		696969,
+		5a5a5a,
+		464646,
+		2d2d2d,
+		000000,
+		00d800,
+		1ebb00,
+		339900,
+		2d7f00,
+		216c00,
+		fd0000,
+		de1309,
+		be190b,
+		a01207,
+		820400,
+		5893ff,
+		597ee1,
+		4b6ec7,
+		3a5eab,
+		27548d,
+		fbf34a,
+		f9da3c,
+		eeb62b,
+		e19015,
+		cd6100,
+		ffb0ff,
+		d67fe2,
+		ae4ebc,
+		8b1a96,
+		610a75,
+		a4aaff,
+		8793e2,
+		6a73c1,
+		4d52a4,
+		343386,
+		c7bb6d,
+		b79d5c,
+		a47e3c,
+		7d5627,
+		58340f,
+		99ffff,
+		73dfff,
+		4ea5f9,
+		2a63e4,
+		0a00b8,
+		ebf1b5,
+		d4db9d,
+		bbc187,
+		a6a462,
+		8b8239,
+		73ff6b,
+		52da3b,
+		3cb420,
+		289315,
+		1a7309,
+	}
+}
+rectangle {
+	object {
+		x=6
+		y=3
+		width=220
+		height=24
+	}
+	"basic attribute" {
+		clr=45
+	}
+}
+text {
+	object {
+		x=9
+		y=8
+		width=140
+		height=16
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+	}
+	textix="$(P):$(IPC)"
+}
+rectangle {
+	object {
+		x=6
+		y=30
+		width=220
+		height=18
+	}
+	"basic attribute" {
+		clr=45
+	}
+}
+text {
+	object {
+		x=11
+		y=35
+		width=166
+		height=12
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="FIRMWARE VERSION"
+}
+"text update" {
+	object {
+		x=161
+		y=32
+		width=60
+		height=14
+	}
+	monitor {
+		chan="$(P):$(IPC):FirmwareVersM"
+		clr=61
+		bclr=14
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=161
+		y=9
+		width=60
+		height=14
+	}
+	monitor {
+		chan="$(P):$(IPC):ModelM"
+		clr=61
+		bclr=14
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+composite {
+	object {
+		x=4
+		y=487
+		width=224
+		height=142
+	}
+	"composite name"=""
+	children {
+		oval {
+			object {
+				x=156
+				y=569
+				width=2
+				height=2
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=4
+				y=487
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=536
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=558
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=580
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=489
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		text {
+			object {
+				x=39
+				y=491
+				width=156
+				height=20
+			}
+			"basic attribute" {
+				clr=30
+			}
+			textix="THIS PUMP NOT USED"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=4
+				y=487
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+	}
+}
+composite {
+	object {
+		x=4
+		y=342
+		width=224
+		height=142
+	}
+	"composite name"=""
+	children {
+		oval {
+			object {
+				x=156
+				y=424
+				width=2
+				height=2
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=4
+				y=342
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=391
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=413
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=435
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=344
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		text {
+			object {
+				x=39
+				y=346
+				width=156
+				height=20
+			}
+			"basic attribute" {
+				clr=30
+			}
+			textix="THIS PUMP NOT USED"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=4
+				y=342
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+	}
+}
+composite {
+	object {
+		x=4
+		y=197
+		width=224
+		height=142
+	}
+	"composite name"=""
+	children {
+		oval {
+			object {
+				x=156
+				y=279
+				width=2
+				height=2
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=4
+				y=197
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=246
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=268
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=290
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=199
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		text {
+			object {
+				x=39
+				y=201
+				width=156
+				height=20
+			}
+			"basic attribute" {
+				clr=30
+			}
+			textix="THIS PUMP NOT USED"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=4
+				y=197
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+	}
+}
+composite {
+	object {
+		x=4
+		y=52
+		width=224
+		height=142
+	}
+	"composite name"=""
+	children {
+		oval {
+			object {
+				x=156
+				y=134
+				width=2
+				height=2
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=4
+				y=52
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=101
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=123
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=79
+				y=145
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=54
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		text {
+			object {
+				x=39
+				y=56
+				width=156
+				height=20
+			}
+			"basic attribute" {
+				clr=30
+			}
+			textix="THIS PUMP NOT USED"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=4
+				y=52
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+	}
+}
+composite {
+	object {
+		x=4
+		y=197
+		width=226
+		height=142
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=6
+				y=198
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		rectangle {
+			object {
+				x=195
+				y=203
+				width=30
+				height=16
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=222
+				width=220
+				height=114
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=317
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=9
+				y=244
+				width=64
+				height=69
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=14
+				y=248
+				width=54
+				height=19
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=246
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP2):PressureM"
+				clr=61
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=187
+				y=271
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AMPS"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=187
+				y=293
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="VOLT"
+			align="horiz. centered"
+		}
+		"text update" {
+			object {
+				x=79
+				y=268
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP2):CurrentM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=290
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP2):VoltageM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=14
+				y=269
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP2):Supply$(SPLY2)HVenableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV ON"
+			press_msg="0"
+		}
+		"message button" {
+			object {
+				x=14
+				y=289
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP2):Supply$(SPLY2)HVdisableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV OFF"
+			press_msg="0"
+		}
+		rectangle {
+			object {
+				x=16
+				y=250
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP2):isSupply$(SPLY2)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=250
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP2):isSupply$(SPLY2)HVenabledM"
+			}
+			textix="HV OFF"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=16
+				y=250
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP2):isSupply$(SPLY2)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=250
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP2):isSupply$(SPLY2)HVenabledM"
+			}
+			textix="HV ON"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=136
+				y=322
+				width=60
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="SP $(SPT2)"
+			align="horiz. right"
+		}
+		rectangle {
+			object {
+				x=6
+				y=222
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		text {
+			object {
+				x=22
+				y=225
+				width=41
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="STATUS"
+			align="horiz. centered"
+		}
+		polyline {
+			object {
+				x=66
+				y=232
+				width=40
+				height=0
+			}
+			"basic attribute" {
+				clr=14
+			}
+			points {
+				(66,232)
+				(106,232)
+			}
+		}
+		"text update" {
+			object {
+				x=78
+				y=225
+				width=145
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP2):Supply$(SPLY2)StatusM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		rectangle {
+			object {
+				x=200
+				y=321
+				width=24
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=323
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="(A>1)||(A=0)"
+				chan="$(P):$(PMP2):Spt$(SPT2)StatusM"
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=323
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP2):Spt$(SPT2)StatusM"
+			}
+		}
+		rectangle {
+			object {
+				x=4
+				y=197
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+		"text update" {
+			object {
+				x=184
+				y=249
+				width=40
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP2):Supply$(SPLY2)PressUnitsM"
+				clr=14
+				bclr=9
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=166
+				y=203
+				width=30
+				height=16
+			}
+			monitor {
+				chan="$(P):$(PMP2):Supply$(SPLY2)PumpSizeM"
+				clr=14
+				bclr=7
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=200
+				y=205
+				width=30
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="L/S"
+		}
+		"text update" {
+			object {
+				x=10
+				y=202
+				width=130
+				height=17
+			}
+			monitor {
+				chan="$(P):$(PMP2):Pump$(SPLY2)NameM"
+				clr=30
+				bclr=10
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=8
+				y=323
+				width=78
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AUTO RESTART="
+		}
+		"text update" {
+			object {
+				x=88
+				y=320
+				width=30
+				height=13
+			}
+			monitor {
+				chan="$(P):$(PMP2):Supply$(SPLY2)AutoRestartM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P):$(IPC):Pump2UsedM"
+	}
+}
+composite {
+	object {
+		x=4
+		y=342
+		width=226
+		height=142
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=6
+				y=343
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		rectangle {
+			object {
+				x=195
+				y=348
+				width=30
+				height=16
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=367
+				width=220
+				height=114
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=462
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=9
+				y=389
+				width=64
+				height=69
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=14
+				y=393
+				width=54
+				height=19
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=391
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP3):PressureM"
+				clr=61
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=187
+				y=416
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AMPS"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=187
+				y=438
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="VOLT"
+			align="horiz. centered"
+		}
+		"text update" {
+			object {
+				x=79
+				y=413
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP3):CurrentM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=435
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP3):VoltageM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=14
+				y=414
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP3):Supply$(SPLY3)HVenableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV ON"
+			press_msg="0"
+		}
+		"message button" {
+			object {
+				x=14
+				y=434
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP3):Supply$(SPLY3)HVdisableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV OFF"
+			press_msg="0"
+		}
+		rectangle {
+			object {
+				x=16
+				y=395
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP3):isSupply$(SPLY3)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=395
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP3):isSupply$(SPLY3)HVenabledM"
+			}
+			textix="HV OFF"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=16
+				y=395
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP3):isSupply$(SPLY3)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=395
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP3):isSupply$(SPLY3)HVenabledM"
+			}
+			textix="HV ON"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=136
+				y=467
+				width=60
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="SP $(SPT3)"
+			align="horiz. right"
+		}
+		rectangle {
+			object {
+				x=6
+				y=367
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		text {
+			object {
+				x=22
+				y=370
+				width=41
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="STATUS"
+			align="horiz. centered"
+		}
+		polyline {
+			object {
+				x=66
+				y=377
+				width=40
+				height=0
+			}
+			"basic attribute" {
+				clr=14
+			}
+			points {
+				(66,377)
+				(106,377)
+			}
+		}
+		"text update" {
+			object {
+				x=78
+				y=370
+				width=145
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP3):Supply$(SPLY3)StatusM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		rectangle {
+			object {
+				x=200
+				y=466
+				width=24
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=468
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="(A>1)||(A=0)"
+				chan="$(P):$(PMP3):Spt$(SPT3)StatusM"
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=468
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP3):Spt$(SPT3)StatusM"
+			}
+		}
+		rectangle {
+			object {
+				x=4
+				y=342
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+		"text update" {
+			object {
+				x=184
+				y=394
+				width=40
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP3):Supply$(SPLY3)PressUnitsM"
+				clr=14
+				bclr=9
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=166
+				y=348
+				width=30
+				height=16
+			}
+			monitor {
+				chan="$(P):$(PMP3):Supply$(SPLY3)PumpSizeM"
+				clr=14
+				bclr=7
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=10
+				y=347
+				width=130
+				height=17
+			}
+			monitor {
+				chan="$(P):$(PMP3):Pump$(SPLY3)NameM"
+				clr=30
+				bclr=10
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=200
+				y=349
+				width=30
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="L/S"
+		}
+		text {
+			object {
+				x=8
+				y=468
+				width=78
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AUTO RESTART="
+		}
+		"text update" {
+			object {
+				x=88
+				y=465
+				width=30
+				height=13
+			}
+			monitor {
+				chan="$(P):$(PMP3):Supply$(SPLY3)AutoRestartM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P):$(IPC):Pump3UsedM"
+	}
+}
+composite {
+	object {
+		x=4
+		y=52
+		width=226
+		height=142
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=4
+				y=52
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=53
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		rectangle {
+			object {
+				x=195
+				y=58
+				width=30
+				height=16
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=77
+				width=220
+				height=114
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=172
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=9
+				y=99
+				width=64
+				height=69
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=14
+				y=103
+				width=54
+				height=19
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=101
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP1):PressureM"
+				clr=61
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=187
+				y=126
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AMPS"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=187
+				y=148
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="VOLT"
+			align="horiz. centered"
+		}
+		"text update" {
+			object {
+				x=79
+				y=123
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP1):CurrentM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=145
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP1):VoltageM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=14
+				y=124
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP1):Supply$(SPLY1)HVenableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV ON"
+			press_msg="0"
+		}
+		"message button" {
+			object {
+				x=14
+				y=144
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP1):Supply$(SPLY1)HVdisableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV OFF"
+			press_msg="0"
+		}
+		rectangle {
+			object {
+				x=16
+				y=105
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP1):isSupply$(SPLY1)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=105
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP1):isSupply$(SPLY1)HVenabledM"
+			}
+			textix="HV OFF"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=16
+				y=105
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP1):isSupply$(SPLY1)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=105
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP1):isSupply$(SPLY1)HVenabledM"
+			}
+			textix="HV ON"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=76
+				y=177
+				width=120
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="SP $(SPT1)"
+			align="horiz. right"
+		}
+		rectangle {
+			object {
+				x=6
+				y=77
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		text {
+			object {
+				x=22
+				y=80
+				width=41
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="STATUS"
+			align="horiz. centered"
+		}
+		polyline {
+			object {
+				x=66
+				y=87
+				width=40
+				height=0
+			}
+			"basic attribute" {
+				clr=14
+			}
+			points {
+				(66,87)
+				(106,87)
+			}
+		}
+		"text update" {
+			object {
+				x=78
+				y=80
+				width=145
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP1):Supply$(SPLY1)StatusM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		rectangle {
+			object {
+				x=200
+				y=176
+				width=24
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=178
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="(A>1)||(A=0)"
+				chan="$(P):$(PMP1):Spt$(SPT1)StatusM"
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=178
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP1):Spt$(SPT1)StatusM"
+			}
+		}
+		"text update" {
+			object {
+				x=184
+				y=104
+				width=40
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP1):Supply$(SPLY1)PressUnitsM"
+				clr=14
+				bclr=9
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=166
+				y=58
+				width=30
+				height=16
+			}
+			monitor {
+				chan="$(P):$(PMP1):Supply$(SPLY1)PumpSizeM"
+				clr=14
+				bclr=7
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=10
+				y=57
+				width=130
+				height=17
+			}
+			monitor {
+				chan="$(P):$(PMP1):Pump$(SPLY1)NameM"
+				clr=30
+				bclr=10
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=7
+				y=177
+				width=74
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AUTO RESTART= "
+		}
+		"text update" {
+			object {
+				x=87
+				y=175
+				width=30
+				height=13
+			}
+			monitor {
+				chan="$(P):$(PMP1):Supply$(SPLY1)AutoRestartM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=200
+				y=59
+				width=30
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="L/S"
+		}
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P):$(IPC):Pump1UsedM"
+	}
+}
+composite {
+	object {
+		x=4
+		y=487
+		width=227
+		height=142
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=6
+				y=488
+				width=220
+				height=24
+			}
+			"basic attribute" {
+				clr=10
+			}
+		}
+		rectangle {
+			object {
+				x=195
+				y=493
+				width=30
+				height=16
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=512
+				width=220
+				height=114
+			}
+			"basic attribute" {
+				clr=9
+			}
+		}
+		rectangle {
+			object {
+				x=6
+				y=607
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=9
+				y=534
+				width=64
+				height=69
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		rectangle {
+			object {
+				x=14
+				y=538
+				width=54
+				height=19
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=536
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP4):PressureM"
+				clr=61
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=187
+				y=561
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AMPS"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=187
+				y=583
+				width=24
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="VOLT"
+			align="horiz. centered"
+		}
+		"text update" {
+			object {
+				x=79
+				y=558
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP4):CurrentM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			format="exponential"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=79
+				y=580
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P):$(PMP4):VoltageM"
+				clr=15
+				bclr=14
+			}
+			clrmod="alarm"
+			align="horiz. centered"
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=14
+				y=559
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP4):Supply$(SPLY4)HVenableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV ON"
+			press_msg="0"
+		}
+		"message button" {
+			object {
+				x=14
+				y=579
+				width=54
+				height=20
+			}
+			control {
+				chan="$(P):$(PMP4):Supply$(SPLY4)HVdisableC.PROC"
+				clr=14
+				bclr=25
+			}
+			label="HV OFF"
+			press_msg="0"
+		}
+		rectangle {
+			object {
+				x=16
+				y=540
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP4):isSupply$(SPLY4)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=540
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=0"
+				chan="$(P):$(PMP4):isSupply$(SPLY4)HVenabledM"
+			}
+			textix="HV OFF"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=16
+				y=540
+				width=50
+				height=15
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP4):isSupply$(SPLY4)HVenabledM"
+			}
+		}
+		text {
+			object {
+				x=16
+				y=540
+				width=48
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP4):isSupply$(SPLY4)HVenabledM"
+			}
+			textix="HV ON"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=136
+				y=612
+				width=60
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="SP $(SPT4)"
+			align="horiz. right"
+		}
+		rectangle {
+			object {
+				x=6
+				y=512
+				width=220
+				height=18
+			}
+			"basic attribute" {
+				clr=7
+			}
+		}
+		text {
+			object {
+				x=22
+				y=515
+				width=41
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="STATUS"
+			align="horiz. centered"
+		}
+		polyline {
+			object {
+				x=66
+				y=522
+				width=40
+				height=0
+			}
+			"basic attribute" {
+				clr=14
+			}
+			points {
+				(66,522)
+				(106,522)
+			}
+		}
+		"text update" {
+			object {
+				x=78
+				y=515
+				width=145
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP4):Supply$(SPLY4)StatusM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		rectangle {
+			object {
+				x=200
+				y=611
+				width=24
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=613
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="(A>1)||(A=0)"
+				chan="$(P):$(PMP4):Spt$(SPT4)StatusM"
+			}
+		}
+		rectangle {
+			object {
+				x=202
+				y=613
+				width=20
+				height=8
+			}
+			"basic attribute" {
+				clr=15
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A=1"
+				chan="$(P):$(PMP4):Spt$(SPT4)StatusM"
+			}
+		}
+		rectangle {
+			object {
+				x=4
+				y=487
+				width=224
+				height=142
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=2
+			}
+		}
+		"text update" {
+			object {
+				x=184
+				y=539
+				width=40
+				height=14
+			}
+			monitor {
+				chan="$(P):$(PMP4):Supply$(SPLY4)PressUnitsM"
+				clr=14
+				bclr=9
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=166
+				y=493
+				width=30
+				height=16
+			}
+			monitor {
+				chan="$(P):$(PMP4):Supply$(SPLY4)PumpSizeM"
+				clr=14
+				bclr=7
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=10
+				y=492
+				width=130
+				height=17
+			}
+			monitor {
+				chan="$(P):$(PMP4):Pump$(SPLY4)NameM"
+				clr=30
+				bclr=10
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=8
+				y=613
+				width=78
+				height=12
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="AUTO RESTART="
+		}
+		"text update" {
+			object {
+				x=88
+				y=610
+				width=30
+				height=13
+			}
+			monitor {
+				chan="$(P):$(PMP4):Supply$(SPLY4)AutoRestartM"
+				clr=32
+				bclr=14
+			}
+			align="horiz. centered"
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=201
+				y=494
+				width=30
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="L/S"
+		}
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P):$(IPC):Pump4UsedM"
+	}
+}
