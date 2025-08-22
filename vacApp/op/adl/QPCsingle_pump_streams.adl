@@ -1,7 +1,7 @@
 
 file {
-	name="/home/phoebus/MLS/epics/github/vac/vacApp/op/adl/QPCsingle_pump_streams.adl"
-	version=030114
+	name="/home/helios/MLS/C2/iocs/frontend/opi/adl/QPCsingle_pump_streams.adl"
+	version=030120
 }
 display {
 	object {
@@ -163,7 +163,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP):Pressure"
+		chan="$(P)$(PMP):PressureM"
 		clr=61
 		bclr=14
 	}
@@ -180,7 +180,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP):Current"
+		chan="$(P)$(PMP):CurrentM"
 		clr=61
 		bclr=14
 	}
@@ -197,7 +197,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP):Voltage"
+		chan="$(P)$(PMP):VoltageM"
 		clr=61
 		bclr=14
 	}
@@ -234,7 +234,7 @@ rectangle {
 rectangle {
 	object {
 		x=73
-		y=167
+		y=174
 		width=10
 		height=10
 	}
@@ -245,7 +245,7 @@ rectangle {
 rectangle {
 	object {
 		x=73
-		y=167
+		y=175
 		width=10
 		height=10
 	}
@@ -254,13 +254,13 @@ rectangle {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="$(P)$(PMP):Spt$(SPT)Status"
+		chan="$(P)$(PMP):Spt$(SPT)StatusM"
 	}
 }
 text {
 	object {
 		x=54
-		y=168
+		y=175
 		width=18
 		height=10
 	}
@@ -274,7 +274,7 @@ text {
 rectangle {
 	object {
 		x=50
-		y=165
+		y=172
 		width=36
 		height=15
 	}
@@ -292,7 +292,7 @@ rectangle {
 		height=27
 	}
 	monitor {
-		chan="$(P)$(PMP):PumpSize"
+		chan="$(P)$(PMP):Supply$(SPLY)PumpSizeM"
 		clr=61
 		bclr=14
 	}
@@ -322,7 +322,7 @@ text {
 		height=27
 	}
 	monitor {
-		chan="$(P)$(PMP):Model"
+		chan="$(P)ModelM"
 		clr=15
 		bclr=14
 	}
@@ -367,7 +367,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP):FirmwareVers"
+		chan="$(P)FirmwareVersM"
 		clr=15
 		bclr=14
 	}
@@ -411,7 +411,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP):Status"
+		chan="$(P)$(PMP):Supply$(SPLY)StatusM"
 		clr=60
 		bclr=14
 	}
@@ -427,7 +427,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP):enable.PROC"
+		chan="$(P)$(PMP):Supply$(SPLY)HVenableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -442,7 +442,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP):disable.PROC"
+		chan="$(P)$(PMP):Supply$(SPLY)HVdisableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -457,7 +457,7 @@ menu {
 		height=18
 	}
 	control {
-		chan="$(P)$(PMP):setPressUnits"
+		chan="$(P)$(PMP):Supply$(SPLY)PressUnitsC"
 		clr=59
 		bclr=14
 	}
@@ -470,7 +470,7 @@ menu {
 		height=12
 	}
 	monitor {
-		chan="$(P)$(PMP):getPressUnits"
+		chan="$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 		clr=50
 		bclr=14
 	}
@@ -478,21 +478,6 @@ menu {
 	format="string"
 	limits {
 	}
-}
-"related display" {
-	object {
-		x=38
-		y=184
-		width=65
-		height=15
-	}
-	display[0] {
-		name="QPCsingle_pump_sp_streams.adl"
-		args="P=$(P),PMP=$(PMP),SPT=$(SPT)"
-	}
-	clr=14
-	bclr=50
-	label="SETPOINT"
 }
 "text update" {
 	object {
@@ -502,7 +487,7 @@ menu {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP):Pump$(SPLY)Name"
+		chan="$(P)$(PMP):Pump$(SPLY)NameM"
 		clr=60
 		bclr=14
 	}

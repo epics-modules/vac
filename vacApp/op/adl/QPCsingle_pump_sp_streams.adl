@@ -1,7 +1,7 @@
 
 file {
-	name="/home/phoebus/MLS/epics/github/vac/vacApp/op/adl/QPCsingle_pump_sp_streams.adl"
-	version=030114
+	name="/home/helios/MLS/C2/ioc-modules/vac/vacApp/op/adl/QPCsingle_pump_sp_streams.adl"
+	version=030120
 }
 display {
 	object {
@@ -147,7 +147,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP):Spt$(SPT)OnPress"
+		chan="$(P)$(PMP):Spt$(SPT)OnPressM"
 		clr=20
 		bclr=14
 	}
@@ -164,7 +164,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP):Spt$(SPT)OffPress"
+		chan="$(P)$(PMP):Spt$(SPT)OffPressM"
 		clr=20
 		bclr=14
 	}
@@ -181,7 +181,7 @@ text {
 		height=30
 	}
 	control {
-		chan="$(P)$(PMP):setSpt$(SPT)OffPressure.A"
+		chan="$(P)$(PMP):Spt$(SPT)OffPressureC.A"
 		clr=20
 		bclr=14
 	}
@@ -210,7 +210,7 @@ text {
 		height=30
 	}
 	control {
-		chan="$(P)$(PMP):setSpt$(SPT)OnPressure"
+		chan="$(P)$(PMP):Spt$(SPT)OnPressureC"
 		clr=20
 		bclr=14
 	}
@@ -225,7 +225,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP):getPressUnits"
+		chan="$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 		clr=14
 		bclr=32
 	}
@@ -242,7 +242,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP):getPressUnits"
+		chan="$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 		clr=14
 		bclr=32
 	}
@@ -259,7 +259,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP):getPressUnits"
+		chan="$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 		clr=14
 		bclr=32
 	}
@@ -276,7 +276,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP):getPressUnits"
+		chan="$(P)$(PMP):Supply$(SPLY)PressUnitsM"
 		clr=14
 		bclr=32
 	}
