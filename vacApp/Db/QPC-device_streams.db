@@ -1,0 +1,58 @@
+###########################################################
+# These 2 records could be loaded separately since they really
+# only need to be loaded once per QPC instead of once for each pump
+record(stringin, "$(P)ModelM"){
+	field(DESC, "Reads Device Model")
+	field(PINI, "YES")
+	field(DTYP, "stream")
+	field(INP, "@$(PROTO).proto getModel() $(PORT)")
+}
+record(stringin, "$(P)FirmwareVersM"){
+	field(DESC, "Reads Device Firmware")
+	field(PINI, "YES")
+	field(DTYP, "stream")
+	field(INP, "@$(PROTO).proto getFirmware() $(PORT)")
+}
+######################################################################
+# These records were added for visibility use on the display 
+# The default is to display 4 pumps for each controller but if the controller
+# is an MPC then you would want to set this to 3. 
+# The number to put in the record here is the bitwise (converted to decimal) 
+# number of pumps being used as follows.
+# Pump 1 = bit 0, Pump 2 = bit 1, Pump 3 = bit 2, Pump 4 = bit 4
+######################################################################
+record(ao,"$(P)PumpsUsedC"){
+	field(DESC,"# Of Ion Pumps")
+	field(PINI,"YES")
+	field(DTYP,"Soft Channel")
+	field(DOL,"15")
+	field(DRVH,"15")
+	field(DRVL,"0")
+	field(HOPR,"15")
+	field(LOPR,"0")
+}
+record(calc,"$(P)Pump1UsedM") {
+	field(DESC,"")
+	field(PINI,"YES")
+	field(CALC,"A&1")
+	field(INPA,"$(P)PumpsUsedC.VAL CP NMS")
+}
+record(calc,"$(P)Pump2UsedM") {
+	field(DESC,"")
+	field(PINI,"YES")
+	field(CALC,"A&2")
+	field(INPA,"$(P)PumpsUsedC.VAL CP NMS")
+}
+record(calc,"$(P)Pump3UsedM") {
+	field(DESC,"")
+	field(PINI,"YES")
+	field(CALC,"A&4")
+	field(INPA,"$(P)PumpsUsedC.VAL CP NMS")
+}
+record(calc,"$(P)Pump4UsedM") {
+	field(DESC,"")
+	field(PINI,"YES")
+	field(CALC,"A&8")
+	field(INPA,"$(P)PumpsUsedC.VAL CP NMS")
+}
+
