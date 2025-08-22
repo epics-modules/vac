@@ -5,80 +5,89 @@
 # P - PV prefix or system name
 # SPT - Set point number for this pump
 # SPLY - Which pump supply number
-record(ai, "$(P)$(PMP):Current"){
-	field(DESC, "Reads Channel Current")
-	field(SCAN, "5 second")
-	field(PINI, "YES")
+record(ai, "$(P)$(PMP):CurrentM"){
+	field(DESC, "Get Pump$(PMP) Current")
+	field(SCAN, "2 second")
 	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getCurrent($(SPLY)) $(PORT)")
+	field(INP, "@$(PROTO).proto getCurrent($(SPLY),$(P),$(PMP)) $(PORT)")
 	field(PREC, "1")
 }
 
-record(ai, "$(P)$(PMP):Pressure"){
-	field(DESC, "Reads Channel Current")
-	field(SCAN, "5 second")
-	field(PINI, "YES")
+record(ai, "$(P)$(PMP):Pressure_"){
+	field(DESC, "Get Pump$(PMP) Pressure")
+	field(SCAN,".5 second")
 	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getPressure($(SPLY)) $(PORT)")
+	field(INP, "@$(PROTO).proto getPressure($(SPLY),$(P),$(PMP)) $(PORT)")
 	field(PREC, "1")
+	field(FLNK, "$(P)$(PMP):PressureM")
 }
 
-record(ai, "$(P)$(PMP):Voltage"){
-	field(DESC, "Reads Channel Current")
-	field(SCAN, "5 second")
-	field(PINI, "YES")
+record(ai, "$(P)$(PMP):VoltageM"){
+	field(DESC, "Get Pump$(PMP) Volts")
+	field(SCAN, "2 second")
 	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getVoltage($(SPLY)) $(PORT)")
+	field(INP, "@$(PROTO).proto getVoltage($(SPLY),$(P),$(PMP)) $(PORT)")
+}
+# If the voltage is < 50 then set the pressure to an unreasonable value
+# otherwise use the pressure read back. 
+# This was done because if the HV is off the pressure read back will be
+# 0.1e-10 which appears to be a good vacuum reading. At least the QPC does this.
+record(calc,"$(P)$(PMP):PressureM") {
+	field(DESC,"")
+	field(CALC,"A<50?C:B")
+	field(INPA,"$(P)$(PMP):VoltageM.VAL NPP NMS")
+	field(INPB,"$(P)$(PMP):Pressure_.VAL NPP NMS")
+	field(INPC,"9.9e9")
+	field(HIGH,"1e-5")
+	field(HIHI,"1e-6")
+	field(HSV,"MINOR")
+	field(HHSV,"MAJOR")
+	field(PREC,"1")
 }
 
-record(stringin, "$(P)$(PMP):Status"){
-	field(DESC, "Reads Channel Current")
+record(stringin, "$(P)$(PMP):Supply$(SPLY)StatusM"){
+	field(DESC, "Get Pump$(PMP) Supply $(SPLY) Status")
 	field(SCAN, "5 second")
 	field(PINI, "NO")
 	field(DTYP, "stream")
 	field(INP, "@$(PROTO).proto getStatus($(SPLY)) $(PORT)")
 }
 
-record(stringin, "$(P)$(PMP):isEnabled"){
-	field(DESC, "Reads channel HV status.")
+record(stringin, "$(P)$(PMP):isSupply$(SPLY)HVenabled_"){
+	field(DESC, "Get HV status")
 	field(SCAN, "5 second")
 	field(PINI, "YES")
 	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto isEnabled($(SPLY)) $(PORT)")
+	field(INP, "@$(PROTO).proto isEnabled($(SPLY),$(P),$(PMP)) $(PORT)")
+}
+record(scalcout,"$(P)$(PMP):isSupply$(SPLY)HVenabledM") {
+	field(DESC,"Generates messages")
+	field(CALC,"AA=BB?1:0")
+	field(INAA,"$(P)$(PMP):isSupply$(SPLY)HVenabled_.VAL CP NMS")
+	field(BB,"YES")
+	field(OUT,"")
+	field(OOPT,"Never")
 }
 
-record(bo, "$(P)$(PMP):enable"){
-	field(DESC, "Enable ion pump HV")
+record(bo, "$(P)$(PMP):Supply$(SPLY)HVenableC"){
+	field(DESC, "Enable HV for Supply $(SPLY)")
 	field(PINI, "NO")
 	field(VAL, "1") # Dummy Value
 	field(DTYP, "stream")
 	field(OUT, "@$(PROTO).proto enable($(SPLY)) $(PORT)")
 }
 
-record(bo, "$(P)$(PMP):disable"){
-	field(DESC, "Disable ion pump HV")
+record(bo, "$(P)$(PMP):Supply$(SPLY)HVdisableC"){
+	field(DESC, "Disable HV for Supply $(SPLY)")
 	field(PINI, "NO")
 	field(VAL, "1") # Dummy Value
 	field(DTYP, "stream")
-	field(OUT, "@$(PROTO).proto disable($(SPLY)) $(PORT)")
+	field(OUT, "@$(PROTO).proto disable($(SPLY),$(P),$(PMP)) $(PORT)")
 }
+###########################################################
 
-record(stringin, "$(P)$(PMP):Model"){
-	field(DESC, "Reads Device Model")
-	field(PINI, "YES")
-	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getModel() $(PORT)")
-}
-
-record(stringin, "$(P)$(PMP):FirmwareVers"){
-	field(DESC, "Reads Device Firmware")
-	field(PINI, "YES")
-	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getFirmware() $(PORT)")
-}
-
-record(mbbo,$(P)$(PMP):setPressUnits) {
-	field(DESC,"Set Pressure Units for pump $(PMP)")
+record(mbbo,$(P)$(PMP):Supply$(SPLY)PressUnitsC) {
+	field(DESC,"Set Pressure Units for pump$(PMP)")
 	field(NOBT,"2")
  	field(DTYP, "stream")
 	field(OUT,"@$(PROTO).proto setPressUnit($(SPLY)) $(PORT)")
@@ -88,60 +97,57 @@ record(mbbo,$(P)$(PMP):setPressUnits) {
 	field(ZRST,"TORR")
 	field(ONST,"MBAR")
 	field(TWST,"PASCAL")
+	field(FLNK,"$(P)$(PMP):Supply$(SPLY)PressUnitsM")
 }
-record(mbbi,"$(P)$(PMP):getPressUnits") {
-        field(DESC, "Pressure Units Readback")
-#        field(INP, "$(P)$(PMP):setPressUnits.VAL CP NMS")
-        field(INP, "@$(PROTO).proto getPressureUnit($(SPLY)) $(PORT)")
-	field(SCAN,"10 second")
-	field(ZRST,"TORR")
-	field(ONST,"MBAR")
-	field(TWST,"PASCAL")
+record(stringin, "$(P)$(PMP):Supply$(SPLY)PressUnitsM"){
+	field(DESC, "Press Units for Pump# $(SPLY)")
+	field(PINI, "YES")
+	field(DTYP, "stream")
+	field(INP, "@$(PROTO).proto getPressureUnit($(SPLY)) $(PORT)")
 }
+
 ###################################################################
 # Pump size
-record(ai, "$(P)$(PMP):PumpSize"){
-	field(DESC, "Reads Pump Size for pump $(PMP)")
+record(ai, "$(P)$(PMP):Supply$(SPLY)PumpSizeM"){
+	field(DESC, "Reads Pump Size for pump$(PMP)")
 	field(PINI, "YES")
 	field(DTYP, "stream")
 	field(INP, "@$(PROTO).proto getPumpSize($(SPLY)) $(PORT)")
 	field(EGU,"L/S")
 }
-record(ao, "$(P)$(PMP):setPumpSize") {
-	field(DESC, "Sets Pump Size (L/S) for Pump $(PMP)")
+record(ao, "$(P)$(PMP):Supply$(SPLY)PumpSizeC") {
+	field(DESC, "Sets Pump Size (L/S) for Pump$(PMP)")
 	field(DTYP, "stream")
 	field(OUT, "@$(PROTO).proto setPumpSize($(SPLY)) $(PORT)")
 	field(OMSL, "supervisory")
 	field(EGU,"L/S")
 	field(DRVH,"1200")
-	field(DRVL,"30")
+	field(DRVL,"3")
 }
 ###################################################################
 # Pump set point readbacks for on/off pressures and relay/digital out status
 # These records are really only good for 1 set point but the database is good
 # for 1 of the controllers pump supplies.
-record(ai, "$(P)$(PMP):Spt$(SPT)OnPress"){
-	field(DESC, "Reads Pump on press for pump $(PMP)")
+record(ai, "$(P)$(PMP):Spt$(SPT)OnPressM"){
+	field(DESC, "Reads Pump on press for pump$(PMP)")
 	field(PINI, "YES")
-	field(SCAN, "5 second")
+	field(SCAN, "10 second")
 	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getOnPressSpt($(SPT)) $(PORT)")
-        field(PREC,"1")
+	field(INP, "@$(PROTO).proto getPressSpt($(SPT),$(P),$(PMP)) $(PORT)")
+	field(PREC,"1")
+	field(FLNK,"$(P)$(PMP):Spt$(SPT)OffPressM")
 }
-record(ai, "$(P)$(PMP):Spt$(SPT)OffPress"){
-	field(DESC, "Reads Pump off press for pump $(PMP)")
+record(ai, "$(P)$(PMP):Spt$(SPT)OffPressM"){
+	field(DESC, "Reads Pump off press for pump$(PMP)")
 	field(PINI, "YES")
-	field(SCAN, "5 second")
-	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getOffPressSpt($(SPT)) $(PORT)")
-        field(PREC,"1")
+	field(DTYP, "Raw Soft Channel")
+	field(PREC,"1")
+	field(FLNK,"$(P)$(PMP):Spt$(SPT)StatusM")
 }
-record(bi, "$(P)$(PMP):Spt$(SPT)Status") {
-	field(DESC, "Read Spt$(SPT) status for pump $(PMP)")
+record(bi, "$(P)$(PMP):Spt$(SPT)StatusM") {
+	field(DESC, "Read Spt$(SPT) status for pump$(PMP)")
 	field(PINI, "YES")
-	field(SCAN, "5 second")
-	field(DTYP, "stream")
-	field(INP, "@$(PROTO).proto getSptStatus($(SPT)) $(PORT)")
+	field(DTYP, "Raw Soft Channel")
 	field(OSV, "MAJOR")
 	field(ZNAM, "Setpoint $(SPT) Off")
 	field(ONAM, "Setpoint $(SPT) On")
@@ -153,15 +159,15 @@ record(bi, "$(P)$(PMP):Spt$(SPT)Status") {
 #	   so that the off pressure will be 20% greater than the on pressure
 #	   The same does not hold true for setting the off pressure but insetad
 #	   the controller will simply return an error.
-record(ao, "$(P)$(PMP):setSpt$(SPT)OnPressure") {
-	field(DESC, "Set on press for Spt$(SPT) Pump $(PMP)")
+record(ao, "$(P)$(PMP):Spt$(SPT)OnPressureC") {
+	field(DESC, "Set on press for Spt$(SPT) Pump$(PMP)")
 	field(DTYP, "stream")
 	field(OUT, "@$(PROTO).proto setOnPress($(SPLY),$(SPT),$(P),$(PMP)) $(PORT)")
 	field(OMSL, "supervisory")
 	field(DRVH,"1.0E-4")
 	field(DRVL,"1.0e-11")
-        field(PREC,"1")
-        field(FLNK,"$(P)$(PMP):SptMessage.PROC PP NMS")
+	field(PREC,"1")
+	field(FLNK,"$(P)$(PMP):SptMessage.PROC PP NMS")
 }
 record(stringin, "$(P)$(PMP):SptMessage"){
 	field(DESC, "Display Spt Error Mesg")
@@ -175,13 +181,13 @@ record(stringin, "$(P)$(PMP):SptMessage"){
 # Must be at least 20% > than on pressure
 # INPA - Reserved for user input of desired off pressure
 ############################################################
-record(calcout,"$(P)$(PMP):setSpt$(SPT)OffPressure") {
-        field(DESC,"Set off press for Spt$(SPT) Pump $(PMP)")
+record(calcout,"$(P)$(PMP):Spt$(SPT)OffPressureC") {
+        field(DESC,"Set off press for Spt$(SPT) Pump$(PMP)")
         field(CALC,"(A>=(B+B*0.2))?((A<D)&&(A>C))?A:2:1")
-        field(INPB,"$(P)$(PMP):Spt$(SPT)OnPress.VAL NPP NMS")
+        field(INPB,"$(P)$(PMP):Spt$(SPT)OnPressM.VAL NPP NMS")
         field(INPC,"$(P)$(PMP):sendOffPressure.DRVL NPP NMS")
         field(INPD,"$(P)$(PMP):sendOffPressure.DRVH NPP NMS")
-        field(INPE,"$(P)$(PMP):Spt$(SPT)OffPress.VAL NPP NMS")
+        field(INPE,"$(P)$(PMP):Spt$(SPT)OffPressM.VAL NPP NMS")
         field(OUT,"$(P)$(PMP):checkOffPressure.PROC PP NMS")
         field(OOPT,"Every Time")
         field(DOPT,"Use CALC")
@@ -197,17 +203,17 @@ record(calcout,"$(P)$(PMP):setSpt$(SPT)OffPressure") {
 # the message to the QPC to try and not generate an error.
 ######################################################################
 record(calcout,"$(P)$(PMP):checkOffPressure") {
-        field(DESC,"Set off press for Spt$(SPT) Pump $(PMP)")
-        field(CALC,"(A<1&&A>0)?A:0")
-        field(INPA,"$(P)$(PMP):setSpt$(SPT)OffPressure.VAL NPP NMS")
-        field(OUT,"$(P)$(PMP):sendOffPressure.VAL PP NMS")
-        field(OOPT,"When Non-zero")
-        field(DOPT,"Use CALC")
-        field(FLNK,"$(P)$(PMP):OffSptMsg.PROC PP NMS")
+	field(DESC,"Set off press for Spt$(SPT) Pump$(PMP)")
+	field(CALC,"(A<1&&A>0)?A:0")
+	field(INPA,"$(P)$(PMP):Spt$(SPT)OffPressureC.VAL NPP NMS")
+	field(OUT,"$(P)$(PMP):sendOffPressure.VAL PP NMS")
+	field(OOPT,"When Non-zero")
+	field(DOPT,"Use CALC")
+	field(FLNK,"$(P)$(PMP):OffSptMsg.PROC PP NMS")
 }
 # Sends a valid off pressure command
 record(ao, "$(P)$(PMP):sendOffPressure") {
-	field(DESC, "send press for Spt$(SPT) Pump $(PMP)")
+	field(DESC, "send press for Spt$(SPT) Pump$(PMP)")
 	field(DTYP, "stream")
 	field(OUT, "@$(PROTO).proto setOffPress($(SPLY),$(SPT),$(P),$(PMP)) $(PORT)")
 	field(OMSL, "supervisory")
@@ -217,31 +223,31 @@ record(ao, "$(P)$(PMP):sendOffPressure") {
 # Create a off set point range message for user display and forward it to
 # the actual message generator (OffPressMsg.CC)
 record(scalcout,"$(P)$(PMP):OffSptMsg") {
-        field(DESC,"Generates messages")
-        field(CALC,"A=2?AA+$P('%.1e',E)+BB+$P('%.1e',F):A")
-        field(INPA,"$(P)$(PMP):setSpt$(SPT)OffPressure.VAL NPP NMS")
-        field(INPB,"$(P)$(PMP):checkOffPressure.VAL NPP NMS")
-        field(INPE,"$(P)$(PMP):sendOffPressure.DRVH NPP NMS")
-        field(INPF,"$(P)$(PMP):sendOffPressure.DRVL NPP NMS")
-        field(AA,"Off Spt must be < ")
-        field(BB," & > ")
-        field(OUT,"$(P)$(PMP):OffPressMsg.CC PP NMS")
-        field(OOPT,"Every Time")
+	field(DESC,"Generates messages")
+	field(CALC,"A=2?AA+$P('%.1e',E)+BB+$P('%.1e',F):A")
+	field(INPA,"$(P)$(PMP):Spt$(SPT)OffPressureC.VAL NPP NMS")
+	field(INPB,"$(P)$(PMP):checkOffPressure.VAL NPP NMS")
+	field(INPE,"$(P)$(PMP):sendOffPressure.DRVH NPP NMS")
+	field(INPF,"$(P)$(PMP):sendOffPressure.DRVL NPP NMS")
+	field(AA,"Off Spt must be < ")
+	field(BB," & > ")
+	field(OUT,"$(P)$(PMP):OffPressMsg.CC PP NMS")
+	field(OOPT,"Every Time")
 }
 
 # Message to user about sending off set point pressure value
 # Probelm is with the CC message, in order to print values of E & F the calc
 # gets too long
 record(scalcout,"$(P)$(PMP):OffPressMsg") {
-        field(DESC,"Generates messages")
-        field(CALC,"A=1?BB:A=2?CC:B#0?AA:DD")
-        field(INPA,"$(P)$(PMP):setSpt$(SPT)OffPressure.VAL NPP NMS")
-        field(INPB,"$(P)$(PMP):checkOffPressure.VAL NPP NMS")
-        field(AA,"Off Setpoint Sent")
-        field(BB,"Off Spt must be 20% > than On")
-        field(DD," ")
-        field(OUT,"$(P)$(PMP):OffSptMessage.VAL PP NMS")
-        field(OOPT,"Every Time")
+	field(DESC,"Generates messages")
+	field(CALC,"A=1?BB:A=2?CC:B#0?AA:DD")
+	field(INPA,"$(P)$(PMP):Spt$(SPT)OffPressureC.VAL NPP NMS")
+	field(INPB,"$(P)$(PMP):checkOffPressure.VAL NPP NMS")
+	field(AA,"Off Setpoint Sent")
+	field(BB,"Off Spt must be 20% > than On")
+	field(DD," ")
+	field(OUT,"$(P)$(PMP):OffSptMessage.VAL PP NMS")
+	field(OOPT,"Every Time")
 }
 record(stringin, "$(P)$(PMP):OffSptMessage"){
 	field(DESC, "Display Off Spt Mesg")
@@ -249,11 +255,45 @@ record(stringin, "$(P)$(PMP):OffSptMessage"){
 }
 
 ######################################################################
-record(stringin, "$(P)$(PMP):Pump$(SPLY)Name"){
+record(stringin, "$(P)$(PMP):Pump$(SPLY)NameM"){
 	field(DESC, "Pump Name Supply #$(SPLY)")
-	field(SCAN, "5 second")
+#	field(SCAN, "5 second")
 	field(PINI, "YES")
 	field(DTYP, "stream")
 	field(INP, "@$(PROTO).proto getPumpName($(SPLY),$(P),$(PMP)) $(PORT)")
 }
+
+######################################################################
+# Auto Restart section
+record(stringin, "$(P)$(PMP):Supply$(SPLY)AutoRestartM"){
+	field(DESC, "Auto Restart status for Supply $(SPLY)")
+	field(PINI, "YES")
+	field(SCAN, "10 second")
+	field(DTYP, "stream")
+	field(INP, "@$(PROTO).proto getAutoRestart($(SPLY)) $(PORT)")
+}
+
+# Setting Auto Restart requires a Y or N to be sent so this record
+# is used to allow selection of which one to send.
+record(mbbo,"$(P)$(PMP):Supply$(SPLY)AutoRestartC") {
+	field(OMSL,"supervisory")
+	field(DOL,"1")
+	field(DTYP,"Soft Channel")
+	field(ZRST,"Auto Restart Off")
+	field(ONST,"Auto Restart On")
+	field(OUT,"$(P)$(PMP):Supply$(SPLY)AutoResC_.A PP NMS")
+}
+
+record(scalcout,"$(P)$(PMP):Supply$(SPLY)AutoResC_") {
+	field(DESC,"Set Auto Restart")
+	field(DTYP, "stream")
+	field(CALC,"A=1?AA:BB")
+	field(OCAL,"A=1?AA:BB")
+	field(AA,"Y")
+	field(BB,"N")
+	field(OUT,"@$(PROTO).proto setAutoRestart($(SPLY),$(P),$(PMP)) $(PORT)")
+#	field(FLNK,"$(P)$(PMP):Supply$(SPLY)AutoRestartM.PROC PP NMS")
+}
+######################################################################
+
 
