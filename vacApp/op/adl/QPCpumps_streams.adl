@@ -1,12 +1,12 @@
 
 file {
-	name="/home/phoebus/MLS/epics/github/vac/vacApp/op/adl/QPCpumps_streams.adl"
-	version=030114
+	name="/home/epics/support/vac/vacApp/op/adl/QPCpumps_streams.adl"
+	version=030117
 }
 display {
 	object {
-		x=126
-		y=99
+		x=116
+		y=91
 		width=817
 		height=485
 	}
@@ -176,7 +176,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP1):FirmwareVers"
+		chan="$(P)FirmwareVersM"
 		clr=15
 		bclr=14
 	}
@@ -262,7 +262,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP1):Pressure"
+		chan="$(P)$(PMP1):PressureM"
 		clr=61
 		bclr=14
 	}
@@ -279,7 +279,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP1):Current"
+		chan="$(P)$(PMP1):CurrentM"
 		clr=61
 		bclr=14
 	}
@@ -296,7 +296,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP1):Voltage"
+		chan="$(P)$(PMP1):VoltageM"
 		clr=61
 		bclr=14
 	}
@@ -352,8 +352,8 @@ rectangle {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(PMP1):Spt$(SPT1)Status"
+		vis="if zero"
+		chan="$(P)$(PMP1):Spt$(SPT1)StatusM"
 	}
 }
 text {
@@ -391,7 +391,7 @@ rectangle {
 		height=27
 	}
 	monitor {
-		chan="$(P)$(PMP1):PumpSize"
+		chan="$(P)$(PMP1):Supply$(SPLY1)PumpSizeM"
 		clr=61
 		bclr=14
 	}
@@ -415,45 +415,13 @@ text {
 }
 "text update" {
 	object {
-		x=281
-		y=133
-		width=80
-		height=27
-	}
-	monitor {
-		chan="$(P)$(PMP1):Model"
-		clr=15
-		bclr=14
-	}
-	clrmod="alarm"
-	align="horiz. centered"
-	format="exponential"
-	limits {
-	}
-}
-text {
-	object {
-		x=281
-		y=168
-		width=80
-		height=10
-	}
-	"basic attribute" {
-		clr=50
-		fill="outline"
-	}
-	textix="Controller"
-	align="horiz. centered"
-}
-"text update" {
-	object {
 		x=75
 		y=207
 		width=300
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP1):Status"
+		chan="$(P)$(PMP1):Supply$(SPLY1)StatusM"
 		clr=60
 		bclr=14
 	}
@@ -469,7 +437,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP1):enable.PROC"
+		chan="$(P)$(PMP1):Supply$(SPLY1)HVenableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -484,7 +452,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP1):disable.PROC"
+		chan="$(P)$(PMP1):Supply$(SPLY1)HVdisableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -499,7 +467,7 @@ menu {
 		height=18
 	}
 	control {
-		chan="$(P)$(PMP1):setPressUnits"
+		chan="$(P)$(PMP1):Supply$(SPLY1)PressUnitsC"
 		clr=59
 		bclr=14
 	}
@@ -512,7 +480,7 @@ menu {
 		height=12
 	}
 	monitor {
-		chan="$(P)$(PMP1):getPressUnits"
+		chan="$(P)$(PMP1):Supply$(SPLY1)PressUnitsM"
 		clr=50
 		bclr=14
 	}
@@ -530,7 +498,7 @@ menu {
 	}
 	display[0] {
 		name="QPCsingle_pump_sp_streams.adl"
-		args="P=$(P),PMP=$(PMP1),SPT=$(SPT1)"
+		args="P=$(P),PMP=$(PMP1),SPT=$(SPT1),SPLY=$(SPLY1)"
 	}
 	clr=14
 	bclr=50
@@ -544,7 +512,7 @@ menu {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP1):Pump$(SPLY1)Name"
+		chan="$(P)$(PMP1):Pump$(SPLY1)NameM"
 		clr=60
 		bclr=14
 	}
@@ -602,7 +570,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP2):Pressure"
+		chan="$(P)$(PMP2):PressureM"
 		clr=61
 		bclr=14
 	}
@@ -619,7 +587,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP2):Current"
+		chan="$(P)$(PMP2):CurrentM"
 		clr=61
 		bclr=14
 	}
@@ -636,7 +604,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP2):Voltage"
+		chan="$(P)$(PMP2):VoltageM"
 		clr=61
 		bclr=14
 	}
@@ -692,8 +660,8 @@ rectangle {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(PMP2):Spt$(SPT2)Status"
+		vis="if zero"
+		chan="$(P)$(PMP2):Spt$(SPT2)StatusM"
 	}
 }
 text {
@@ -731,7 +699,7 @@ rectangle {
 		height=27
 	}
 	monitor {
-		chan="$(P)$(PMP2):PumpSize"
+		chan="$(P)$(PMP2):Supply$(SPLY2)PumpSizeM"
 		clr=61
 		bclr=14
 	}
@@ -755,45 +723,13 @@ text {
 }
 "text update" {
 	object {
-		x=680
-		y=133
-		width=80
-		height=27
-	}
-	monitor {
-		chan="$(P)$(PMP2):Model"
-		clr=15
-		bclr=14
-	}
-	clrmod="alarm"
-	align="horiz. centered"
-	format="exponential"
-	limits {
-	}
-}
-text {
-	object {
-		x=680
-		y=168
-		width=80
-		height=10
-	}
-	"basic attribute" {
-		clr=50
-		fill="outline"
-	}
-	textix="Controller"
-	align="horiz. centered"
-}
-"text update" {
-	object {
 		x=474
 		y=207
 		width=300
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP2):Status"
+		chan="$(P)$(PMP2):Supply$(SPLY2)StatusM"
 		clr=60
 		bclr=14
 	}
@@ -809,7 +745,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP2):enable.PROC"
+		chan="$(P)$(PMP2):Supply$(SPLY2)HVenableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -824,7 +760,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP2):disable.PROC"
+		chan="$(P)$(PMP2):Supply$(SPLY2)HVdisableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -839,7 +775,7 @@ menu {
 		height=18
 	}
 	control {
-		chan="$(P)$(PMP2):setPressUnits"
+		chan="$(P)$(PMP2):Supply$(SPLY2)PressUnitsC"
 		clr=59
 		bclr=14
 	}
@@ -852,7 +788,7 @@ menu {
 		height=12
 	}
 	monitor {
-		chan="$(P)$(PMP2):getPressUnits"
+		chan="$(P)$(PMP2):Supply$(SPLY2)PressUnitsM"
 		clr=50
 		bclr=14
 	}
@@ -870,7 +806,7 @@ menu {
 	}
 	display[0] {
 		name="QPCsingle_pump_sp_streams.adl"
-		args="P=$(P),PMP=$(PMP2),SPT=$(SPT2)"
+		args="P=$(P),PMP=$(PMP2),SPT=$(SPT2),SPLY=$(SPLY2)"
 	}
 	clr=14
 	bclr=50
@@ -884,7 +820,7 @@ menu {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP2):Pump$(SPLY2)Name"
+		chan="$(P)$(PMP2):Pump$(SPLY2)NameM"
 		clr=60
 		bclr=14
 	}
@@ -942,7 +878,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP3):Pressure"
+		chan="$(P)$(PMP3):PressureM"
 		clr=61
 		bclr=14
 	}
@@ -959,7 +895,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP3):Current"
+		chan="$(P)$(PMP3):CurrentM"
 		clr=61
 		bclr=14
 	}
@@ -976,7 +912,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP3):Voltage"
+		chan="$(P)$(PMP3):VoltageM"
 		clr=61
 		bclr=14
 	}
@@ -1032,8 +968,8 @@ rectangle {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(PMP3):Spt$(SPT3)Status"
+		vis="if zero"
+		chan="$(P)$(PMP3):Spt$(SPT3)StatusM"
 	}
 }
 text {
@@ -1071,7 +1007,7 @@ rectangle {
 		height=27
 	}
 	monitor {
-		chan="$(P)$(PMP3):PumpSize"
+		chan="$(P)$(PMP3):Supply$(SPLY3)PumpSizeM"
 		clr=61
 		bclr=14
 	}
@@ -1095,45 +1031,13 @@ text {
 }
 "text update" {
 	object {
-		x=281
-		y=350
-		width=80
-		height=27
-	}
-	monitor {
-		chan="$(P)$(PMP3):Model"
-		clr=15
-		bclr=14
-	}
-	clrmod="alarm"
-	align="horiz. centered"
-	format="exponential"
-	limits {
-	}
-}
-text {
-	object {
-		x=281
-		y=385
-		width=80
-		height=10
-	}
-	"basic attribute" {
-		clr=50
-		fill="outline"
-	}
-	textix="Controller"
-	align="horiz. centered"
-}
-"text update" {
-	object {
 		x=75
 		y=424
 		width=300
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP3):Status"
+		chan="$(P)$(PMP3):Supply$(SPLY3)StatusM"
 		clr=60
 		bclr=14
 	}
@@ -1149,7 +1053,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP3):enable.PROC"
+		chan="$(P)$(PMP3):Supply$(SPLY3)HVenableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -1164,7 +1068,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP3):disable.PROC"
+		chan="$(P)$(PMP3):Supply$(SPLY3)HVdisableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -1179,7 +1083,7 @@ menu {
 		height=18
 	}
 	control {
-		chan="$(P)$(PMP3):setPressUnits"
+		chan="$(P)$(PMP3):Supply$(SPLY3)PressUnitsC"
 		clr=59
 		bclr=14
 	}
@@ -1192,7 +1096,7 @@ menu {
 		height=12
 	}
 	monitor {
-		chan="$(P)$(PMP3):getPressUnits"
+		chan="$(P)$(PMP3):Supply$(SPLY3)PressUnitsM"
 		clr=50
 		bclr=14
 	}
@@ -1210,7 +1114,7 @@ menu {
 	}
 	display[0] {
 		name="QPCsingle_pump_sp_streams.adl"
-		args="P=$(P),PMP=$(PMP3),SPT=$(SPT3)"
+		args="P=$(P),PMP=$(PMP3),SPT=$(SPT3),SPLY=$(SPLY3)"
 	}
 	clr=14
 	bclr=50
@@ -1224,7 +1128,7 @@ menu {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP3):Pump$(SPLY3)Name"
+		chan="$(P)$(PMP3):Pump$(SPLY3)NameM"
 		clr=60
 		bclr=14
 	}
@@ -1282,7 +1186,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP4):Pressure"
+		chan="$(P)$(PMP4):PressureM"
 		clr=61
 		bclr=14
 	}
@@ -1299,7 +1203,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP4):Current"
+		chan="$(P)$(PMP4):CurrentM"
 		clr=61
 		bclr=14
 	}
@@ -1316,7 +1220,7 @@ text {
 		height=30
 	}
 	monitor {
-		chan="$(P)$(PMP4):Voltage"
+		chan="$(P)$(PMP4):VoltageM"
 		clr=61
 		bclr=14
 	}
@@ -1372,8 +1276,8 @@ rectangle {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(PMP4):Spt$(SPT4)Status"
+		vis="if zero"
+		chan="$(P)$(PMP4):Spt$(SPT4)StatusM"
 	}
 }
 text {
@@ -1411,7 +1315,7 @@ rectangle {
 		height=27
 	}
 	monitor {
-		chan="$(P)$(PMP4):PumpSize"
+		chan="$(P)$(PMP4):Supply$(SPLY4)PumpSizeM"
 		clr=61
 		bclr=14
 	}
@@ -1435,45 +1339,13 @@ text {
 }
 "text update" {
 	object {
-		x=680
-		y=350
-		width=80
-		height=27
-	}
-	monitor {
-		chan="$(P)$(PMP4):Model"
-		clr=15
-		bclr=14
-	}
-	clrmod="alarm"
-	align="horiz. centered"
-	format="exponential"
-	limits {
-	}
-}
-text {
-	object {
-		x=680
-		y=385
-		width=80
-		height=10
-	}
-	"basic attribute" {
-		clr=50
-		fill="outline"
-	}
-	textix="Controller"
-	align="horiz. centered"
-}
-"text update" {
-	object {
 		x=474
 		y=424
 		width=300
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP4):Status"
+		chan="$(P)$(PMP4):Supply$(SPLY4)StatusM"
 		clr=60
 		bclr=14
 	}
@@ -1489,7 +1361,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP4):enable.PROC"
+		chan="$(P)$(PMP4):Supply$(SPLY4)HVenableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -1504,7 +1376,7 @@ text {
 		height=16
 	}
 	control {
-		chan="$(P)$(PMP4):disable.PROC"
+		chan="$(P)$(PMP4):Supply$(SPLY4)HVdisableC.PROC"
 		clr=14
 		bclr=51
 	}
@@ -1519,7 +1391,7 @@ menu {
 		height=18
 	}
 	control {
-		chan="$(P)$(PMP4):setPressUnits"
+		chan="$(P)$(PMP4):Supply$(SPLY4)PressUnitsC"
 		clr=59
 		bclr=14
 	}
@@ -1532,7 +1404,7 @@ menu {
 		height=12
 	}
 	monitor {
-		chan="$(P)$(PMP4):getPressUnits"
+		chan="$(P)$(PMP4):Supply$(SPLY4)PressUnitsM"
 		clr=50
 		bclr=14
 	}
@@ -1550,7 +1422,7 @@ menu {
 	}
 	display[0] {
 		name="QPCsingle_pump_sp_streams.adl"
-		args="P=$(P),PMP=$(PMP4),SPT=$(SPT4)"
+		args="P=$(P),PMP=$(PMP4),SPT=$(SPT4),SPLY=$(SPLY4)"
 	}
 	clr=14
 	bclr=50
@@ -1564,11 +1436,337 @@ menu {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(PMP4):Pump$(SPLY4)Name"
+		chan="$(P)$(PMP4):Pump$(SPLY4)NameM"
 		clr=60
 		bclr=14
 	}
 	format="string"
 	limits {
 	}
+}
+"text update" {
+	object {
+		x=674
+		y=8
+		width=50
+		height=20
+	}
+	monitor {
+		chan="$(P)ModelM"
+		clr=15
+		bclr=14
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+text {
+	object {
+		x=669
+		y=33
+		width=60
+		height=10
+	}
+	"basic attribute" {
+		clr=0
+		fill="outline"
+	}
+	textix="Model"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=462
+		y=377
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=61
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PMP4):Spt$(SPT4)StatusM"
+	}
+}
+rectangle {
+	object {
+		x=462
+		y=159
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=61
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PMP2):Spt$(SPT2)StatusM"
+	}
+}
+rectangle {
+	object {
+		x=63
+		y=159
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=61
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PMP1):Spt$(SPT1)StatusM"
+	}
+}
+rectangle {
+	object {
+		x=63
+		y=376
+		width=10
+		height=10
+	}
+	"basic attribute" {
+		clr=61
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(PMP3):Spt$(SPT3)StatusM"
+	}
+}
+"text update" {
+	object {
+		x=763
+		y=173
+		width=40
+		height=19
+	}
+	monitor {
+		chan="$(P)$(PMP2):Supply$(SPLY2)AutoRestartM"
+		clr=14
+		bclr=4
+	}
+	align="horiz. centered"
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=363
+		y=173
+		width=40
+		height=19
+	}
+	monitor {
+		chan="$(P)$(PMP1):Supply$(SPLY1)AutoRestartM"
+		clr=14
+		bclr=4
+	}
+	align="horiz. centered"
+	format="string"
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=263
+		y=121
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP1):Supply$(SPLY1)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart On"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=263
+		y=146
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP1):Supply$(SPLY1)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart Off"
+	press_msg="0"
+}
+text {
+	object {
+		x=246
+		y=174
+		width=104
+		height=17
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Auto Restart ="
+}
+text {
+	object {
+		x=642
+		y=174
+		width=104
+		height=17
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Auto Restart ="
+}
+"message button" {
+	object {
+		x=658
+		y=121
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP2):Supply$(SPLY2)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart On"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=658
+		y=146
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP2):Supply$(SPLY2)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart Off"
+	press_msg="0"
+}
+"text update" {
+	object {
+		x=363
+		y=388
+		width=40
+		height=19
+	}
+	monitor {
+		chan="$(P)$(PMP3):Supply$(SPLY3)AutoRestartM"
+		clr=14
+		bclr=4
+	}
+	align="horiz. centered"
+	format="string"
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=263
+		y=336
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP3):Supply$(SPLY3)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart On"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=263
+		y=361
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP3):Supply$(SPLY3)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart Off"
+	press_msg="0"
+}
+text {
+	object {
+		x=246
+		y=389
+		width=104
+		height=17
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Auto Restart ="
+}
+"text update" {
+	object {
+		x=762
+		y=391
+		width=40
+		height=19
+	}
+	monitor {
+		chan="$(P)$(PMP4):Supply$(SPLY4)AutoRestartM"
+		clr=14
+		bclr=4
+	}
+	align="horiz. centered"
+	format="string"
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=662
+		y=339
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP4):Supply$(SPLY4)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart On"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=662
+		y=364
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(PMP4):Supply$(SPLY4)AutoRestartC"
+		clr=14
+		bclr=4
+	}
+	label="Auto Restart Off"
+	press_msg="0"
+}
+text {
+	object {
+		x=645
+		y=392
+		width=104
+		height=17
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Auto Restart ="
 }
