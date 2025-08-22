@@ -13,6 +13,7 @@ DB += digitelPump.db
 DB += vs.db
 
 # QPCstreams.db can be used for Ethernet or serial
+DB += QPC-device_streams.db
 DB += QPCstreams.db
 DB += QPC-eth.proto
 DB += QPC-serial.proto
