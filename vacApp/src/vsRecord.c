@@ -270,19 +270,20 @@ static long get_control_double(DBADDR *paddr, struct dbr_ctrlDouble * pcd)
  ******************************************************************************/
 static long get_precision(const DBADDR *paddr, long *precision)
 {
+    vsRecord *pvs = (vsRecord *)paddr->precord;
     int fieldIndex = dbGetFieldIndex(paddr);
 
+    *precision = pvs->prec;
     if (fieldIndex == vsRecordVAL || fieldIndex == vsRecordPRES
       || fieldIndex == vsRecordCGAP || fieldIndex == vsRecordCGBP
       || fieldIndex == vsRecordSP1R || fieldIndex == vsRecordSP2R
       || fieldIndex == vsRecordSP3R || fieldIndex == vsRecordSP4R) {
-        *precision = 1;
         return 0;
     }
     if (fieldIndex == vsRecordLPRS
       || fieldIndex == vsRecordLCAP
       || fieldIndex == vsRecordLCBP) {
-        *precision = 2;
+        *precision = pvs->prec + 1;
         return 0;
     }
     *precision = 0;
