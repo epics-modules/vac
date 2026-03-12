@@ -85,6 +85,7 @@ typedef struct devVacSenPvt {
     int         cv1;
     int         cv2;
     int         spt;
+    int         spExist;
     int         errCount;
 } devVacSenPvt;
 
@@ -281,6 +282,7 @@ static long init(struct dbCommon *prec)
 
         pPvt->cc  = station;
         pPvt->spt = spt;
+        pPvt->spExist = 0xff;  /* assume all exist until S5 is read */
         pPvt->cv1 = (stationC1 < 1 || stationC1 > 6) ? 0 : stationC1;
         pPvt->cv2 = (stationC2 < 1 || stationC2 > 6) ? 0 : stationC2;
     }
@@ -785,11 +787,24 @@ static void devVacSenCallback(asynUser *pasynUser)
              pPvt->devType == vsTYPE_GP350) && i > 5)
              continue;
 
+        /*  check for CV1 nonexistance and skip*/
+        if ((pPvt->devType == vsTYPE_MM200 ||
+             pPvt->devType == vsTYPE_MX200) && i==2 && pPvt->cv1==0) continue;
+
         /*  check for CV2 nonexistance and skip*/
-        if (pPvt->devType == vsTYPE_MM200 && i==3 && pPvt->cv2==0) continue;
+        if ((pPvt->devType == vsTYPE_MM200 ||
+             pPvt->devType == vsTYPE_MX200) && i==3 && pPvt->cv2==0) continue;
 
         /*  for CC10 read gauges only once and go to setpoints  */
         if (pPvt->devType == vsTYPE_CC10  && i>4) continue;
+
+        /*  for MX200 skip setpoint reads for nonexistent channels
+         *  spExist is populated from the S5 response at i=0:
+         *  bit j is set if setpoint channel j+1 exists (ON or OF) */
+        if (pPvt->devType == vsTYPE_MX200 && i>=4) {
+            int spChan = (i-4)*2 + pPvt->spt;  /* 1-based channel */
+            if (!(pPvt->spExist & (1 << (spChan - 1)))) continue;
+        }
 
         strcpy(pPvt->sendBuf, pPvt->cmdPrefix);
         strcat(pPvt->sendBuf, readCmdString[i + pPvt->devType * 10]);
@@ -943,11 +958,15 @@ static void devVacSenCallback(asynUser *pasynUser)
             /* Then load a 1 or 0  as abit for total 8 bits...*/
             if (i == 0) {
                 value =0;
+                pPvt->spExist = 0;
                 for (j=0;i<8;j++) {
-                    if (readBuffer[4 +j*6] == 'N')
+                    char sc = readBuffer[4 + j*6];
+                    if (sc == 'N')
                         value += 1 << j;
+                    if (sc == 'N' || sc == 'F')
+                        pPvt->spExist |= 1 << j;
                 }
-                *readBuffer = sprintf("%2x", value);
+                sprintf(readBuffer, "%02x", value);
             }
 
             /* For setpoint readbacks the response is 12 character */
