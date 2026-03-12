@@ -943,7 +943,7 @@ static void devVacSenCallback(asynUser *pasynUser)
             /* Then load a 1 or 0  as abit for total 8 bits...*/
             if (i == 0) {
                 value =0;
-                for (j=0;i<8;j++) {
+                for (j=0;j<8;j++) {
                     if (readBuffer[4 +j*6] == 'N')
                         value += 1 << j;
                 }
