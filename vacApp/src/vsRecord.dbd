@@ -39,6 +39,12 @@ recordtype(vs) {
 		initial("5")
 		interest(1)
 	}
+	field(PREC,DBF_SHORT) {
+		prompt("Display Precision")
+		promptgroup(GUI_DISPLAY)
+		interest(1)
+		initial("1")
+	}
 	field(IG1S,DBF_MENU) {
 		prompt("Ion Gauge 1 Set")
 		promptgroup(GUI_ALARMS)
