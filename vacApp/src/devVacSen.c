@@ -633,16 +633,31 @@ static long readWrite_vs(vsRecord *pr)
         pr->sp4 = (value >> (pPvt->spt+5)) & 1;
 
         for (i = 1; i<8; i++) {
-            /* Process the cc, cv1 and cv2 in format "ppseePPSEE"
-             * meaning p.p * 10^see where s is '0' for -ve and '1' for +ve
-             * We ignore the second value PPSEE */
+            /* Process the cc, cv1 and cv2 pressure values.
+             * LO resolution format: "ppsee" -> p.p * 10^(+/-)ee
+             * HI resolution format: "pppsee" -> p.pp * 10^(+/-)ee
+             * where s is '0' for -ve and '1' for +ve exponent.
+             * Setpoint readbacks (i>=4) are always LO resolution.
+             * Auto-detect HI/LO by checking if sign char is at pos 3. */
             strncpy(data, &pPvt->recBuf[10*i], 10);
-            data[6] = 0;
-            sscanf(data, "%2d%c%2d", &value, &sign, &exp);
-            if (sign == '0')
-                exp = -exp;
+            data[9] = 0;
 
-            fvalue = value/10.0 * pow(10, exp);
+            if (i < 4 && strlen(data) >= 6 &&
+                (data[3] == '0' || data[3] == '1')) {
+                /* HI resolution: pppsee -> p.pp * 10^(+/-)ee */
+                data[7] = 0;
+                sscanf(data, "%3d%c%2d", &value, &sign, &exp);
+                if (sign == '0')
+                    exp = -exp;
+                fvalue = value / 100.0 * pow(10, exp);
+            } else {
+                /* LO resolution: ppsee -> p.p * 10^(+/-)ee */
+                data[6] = 0;
+                sscanf(data, "%2d%c%2d", &value, &sign, &exp);
+                if (sign == '0')
+                    exp = -exp;
+                fvalue = value / 10.0 * pow(10, exp);
+            }
 
             switch (i) {
             case 1:
