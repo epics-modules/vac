@@ -12,9 +12,31 @@ Each database creates records for a single pump supply on the QPC. Load one inst
 
 ## streamDevice Support
 
-The `QPCstreams.db` database uses streamDevice with protocol files for either serial or Ethernet communication. It provides records for current, pressure, voltage, status, HV enable/disable, model, firmware version, pressure units, pump size, setpoint on/off pressures, setpoint status, and pump name.
+The `QPCstreams.db` database uses streamDevice with protocol files for either serial or TCP communication. It provides records for current, pressure, voltage, status, HV enable/disable, model, firmware version, pressure units, pump size, setpoint on/off pressures, setpoint status, and pump name.
 
-### Macro Reference
+### Using the iocsh Script (Recommended)
+
+The [`QPCpump.iocsh`](iocsh-scripts#qpc-ion-pump-controllers-streamdevice) script handles protocol file selection and database loading. Create the ASYN port first, then call the script once per pump:
+
+```
+# QPC via direct TCP to QPCe (port 23)
+drvAsynIPPortConfigure("QPC1", "192.168.1.100:23", 0, 0, 0)
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=QPC1, SPLY=1, COMM=tcp")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=QPC1, SPLY=2, COMM=tcp")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=QPC1, SPLY=3, COMM=tcp")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP4, PORT=QPC1, SPLY=4, COMM=tcp")
+
+# QPC via serial over Moxa terminal server (COMM defaults to serial)
+drvAsynIPPortConfigure("QPC1_ser", "10.6.33.133:4002", 0, 0, 0)
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=QPC1_ser, SPLY=1")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=QPC1_ser, SPLY=2")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=QPC1_ser, SPLY=3")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP4, PORT=QPC1_ser, SPLY=4")
+```
+
+See the [iocsh scripts](iocsh-scripts#qpc-ion-pump-controllers-streamdevice) page for full macro reference and additional examples.
+
+### Database Macro Reference
 
 | Macro | Description | Example |
 |-------|-------------|---------|
@@ -29,8 +51,8 @@ The `QPCstreams.db` database uses streamDevice with protocol files for either se
 
 Two protocol files are provided:
 
-- **`QPC-eth.proto`** -- For Ethernet (TCP port 23). Uses the `cmd XX` command format without framing or checksum.
-- **`QPC-serial.proto`** -- For RS-232/RS-485. Uses the `~ AA XX data CC` framed format with address and checksum bytes.
+- **`QPC-eth.proto`** -- For direct TCP connections (port 23). Uses the `cmd XX` command format without framing or checksum.
+- **`QPC-serial.proto`** -- For RS-232/RS-485 (including serial-over-Ethernet via Moxa). Uses the `~ AA XX data CC` framed format with address and checksum bytes.
 
 ### Records Created
 
@@ -70,7 +92,7 @@ Each `QPCstreams.db` instance creates the following records (PV names are prefix
 - Setting the off pressure must be at least 20% greater than the on pressure, or the controller returns an error. The database includes validation logic to check this before sending the command.
 - Valid setpoint pressure range: 1.0E-11 to 1.0E-4.
 
-### Example: Ethernet Configuration
+### Manual st.cmd: TCP Configuration
 
 ```
 # Configure ASYN IP port to QPC Ethernet port (TCP port 23)
@@ -83,13 +105,11 @@ dbLoadRecords("db/QPCstreams.db", "P=SR:,PMP=IP3,SPLY=3,SPT=3,PROTO=QPC-eth,PORT
 dbLoadRecords("db/QPCstreams.db", "P=SR:,PMP=IP4,SPLY=4,SPT=4,PROTO=QPC-eth,PORT=QPC1")
 ```
 
-### Example: Serial Configuration (via Moxa Terminal Server)
+### Manual st.cmd: Serial Configuration (via Moxa Terminal Server)
 
 ```
 # Configure ASYN IP port to Moxa serial port
 drvAsynIPPortConfigure("QPC1_serial", "10.6.33.133:4002", 0, 0, 0)
-asynOctetSetInputEos("QPC1_serial", -1, "\r")
-asynOctetSetOutputEos("QPC1_serial", -1, "\r")
 
 # Load one instance per pump
 dbLoadRecords("db/QPCstreams.db", "P=SR:,PMP=IP1,SPLY=1,SPT=1,PROTO=QPC-serial,PORT=QPC1_serial")

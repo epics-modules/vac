@@ -1,0 +1,24 @@
+# ### QPCpump.iocsh ###
+
+#- ###################################################
+#- PREFIX         - IOC Prefix
+#- INSTANCE       - Instance Prefix (pump identifier)
+#- PORT           - Asyn port name (must already be created)
+#- SPLY           - Pump supply number (1-4)
+#- VAC            - Location of vac module
+#- SPT            - Optional: Setpoint number
+#-                  Default: same as SPLY
+#- COMM           - Optional: Communication type (serial or tcp)
+#-                  Default: serial
+#- ###################################################
+
+# Serial port parameters (ignored for IP ports)
+asynSetOption("$(PORT)", -1, "baud",    "9600")
+asynSetOption("$(PORT)", -1, "bits",    "8")
+asynSetOption("$(PORT)", -1, "stop",    "1")
+asynSetOption("$(PORT)", -1, "parity",  "none")
+asynSetOption("$(PORT)", -1, "clocal",  "Y")
+asynSetOption("$(PORT)", -1, "crtscts", "N")
+
+# Map COMM to the correct protocol file: serial -> QPC-serial, tcp -> QPC-eth
+iocshRun('dbLoadRecords("$(VAC)/vacApp/Db/QPCstreams.db", "P=$(PREFIX),PMP=$(INSTANCE),SPLY=$(SPLY),SPT=$(SPT=$(SPLY)),PROTO=$(PROTO_$(COMM=serial)),PORT=$(PORT)")', "PROTO_serial=QPC-serial, PROTO_tcp=QPC-eth")

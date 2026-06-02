@@ -50,7 +50,58 @@ iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=/dev
 iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=/dev/ttyUSB0, DEV=MPC, STN=2, ADDR=5")
 ```
 
-Note: There is no `digitelPump_QPC.iocsh` script. For QPC controllers, use manual st.cmd configuration as described on the [ion pump controllers](ion-pumps#example-manual-stcmd-configuration) page, or use the [streamDevice databases](qpc).
+Note: There is no `digitelPump_QPC.iocsh` script. For QPC controllers using the `digitel` record, use manual st.cmd configuration as described on the [ion pump controllers](ion-pumps#example-manual-stcmd-configuration) page. For QPC controllers using streamDevice, see the `QPCpump.iocsh` script below.
+
+## QPC Ion Pump Controllers (streamDevice)
+
+### QPCpump.iocsh
+
+Script for QPC ion pump controllers using the [streamDevice database](qpc). This loads the `QPCstreams.db` database with the correct protocol file based on the communication type.
+
+Unlike the other iocsh scripts, the ASYN port must be created by the user before calling this script, since the port type depends on the connection (direct serial, Moxa terminal server, direct TCP to QPCe, etc.).
+
+```
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=QPC1, SPLY=1, COMM=serial")
+```
+
+#### Macros
+
+| Macro | Required | Default | Description |
+|-------|----------|---------|-------------|
+| `PREFIX` | Yes | | PV prefix (maps to `P` in the database) |
+| `INSTANCE` | Yes | | PV suffix / pump identifier (maps to `PMP` in the database) |
+| `PORT` | Yes | | ASYN port name (must already be created) |
+| `SPLY` | Yes | | Pump supply number (1--4) |
+| `SPT` | No | same as `SPLY` | Setpoint number |
+| `COMM` | No | `serial` | Communication type: `serial` or `tcp` |
+| `VAC` | No | (auto) | Path to the vac module top directory |
+
+Use `COMM=serial` for RS-232, RS-485, or serial-over-Ethernet (e.g. Moxa terminal server). Use `COMM=tcp` for direct TCP connections to the QPCe Ethernet port (port 23).
+
+### Examples
+
+```
+# QPC via direct TCP to QPCe (port 23)
+drvAsynIPPortConfigure("QPC1", "192.168.1.100:23", 0, 0, 0)
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=QPC1, SPLY=1, COMM=tcp")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=QPC1, SPLY=2, COMM=tcp")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=QPC1, SPLY=3, COMM=tcp")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP4, PORT=QPC1, SPLY=4, COMM=tcp")
+
+# QPC via serial over Moxa terminal server
+drvAsynIPPortConfigure("QPC1_ser", "10.6.33.133:4002", 0, 0, 0)
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=QPC1_ser, SPLY=1")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=QPC1_ser, SPLY=2")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=QPC1_ser, SPLY=3")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP4, PORT=QPC1_ser, SPLY=4")
+
+# QPC via local serial port
+drvAsynSerialPortConfigure("QPC1_local", "/dev/ttyUSB0", 0, 0, 0)
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=QPC1_local, SPLY=1")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=QPC1_local, SPLY=2")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=QPC1_local, SPLY=3")
+iocshLoad("$(VAC)/iocsh/QPCpump.iocsh", "PREFIX=SR:, INSTANCE=IP4, PORT=QPC1_local, SPLY=4")
+```
 
 ## Vacuum Gauge Controllers
 
