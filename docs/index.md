@@ -4,112 +4,73 @@ title: Home
 nav_order: 1
 ---
 
+# The synApps vac Module
 
-# VacApp Modules
+The vac module provides EPICS custom record types, device support drivers, and databases for vacuum system instrumentation. It supports ion pump controllers and vacuum gauge controllers from several manufacturers, communicating over serial (RS-232/RS-485) and Ethernet (TCP/IP) using the ASYN driver framework.
 
-## External use
+## Supported Devices
 
-	vacSupport.dbd
-	libvac.a(so)
+### Ion Pump Controllers
 
-## Internals
+Supported through the [`digitel` record type](digitelRecord) and the `devDigitelPump` device support driver.
 
-	vsRecord.c
-	vsRecord.dbd
-	devVacSen.h             
-	devVacSen.c               
-	devVacSen.dbd             
+| Device | Manufacturer | Communication |
+|--------|-------------|---------------|
+| [Digitel 500 / 1500](ion-pumps#digitel-5001500) | Physical Electronics | RS-232 |
+| [MPC / MPC-II](ion-pumps#mpcmpc-ii) | Gamma Vacuum | RS-232, RS-485 |
+| [QPC / QPCe](ion-pumps#qpcqpce) | Gamma Vacuum | RS-232, RS-485, Ethernet |
+| [SPCe](ion-pumps#spce) | Gamma Vacuum | RS-232, RS-485, Ethernet |
 
-	choiceDigitel.h           
-	digitelRecord.dbd         
-	digitelRecord.c           
-	devDigitelPump.h          
-	devDigitelPump.c          
-	devDigitelPump.dbd        
+The QPC is also supported through [streamDevice and Modbus databases](qpc) using standard EPICS records.
 
+### Vacuum Gauge Controllers
 
-	vacAppCommonInclude.dbd  
-	vacAppInclude.dbd
-	vacAppVXInclude.dbd
+Supported through the [`vs` record type](vsRecord) and the `devVacSen` device support driver.
 
-## Notes
+| Device | Manufacturer | Communication |
+|--------|-------------|---------------|
+| [GP307](vacuum-gauges#gp307) | Granville-Phillips | RS-232 |
+| [GP350](vacuum-gauges#gp350) | Granville-Phillips | RS-232, RS-485 |
+| [MM200](vacuum-gauges#mm200) | Televac | RS-232 |
+| [MX200](vacuum-gauges#mx200) | Televac | RS-232, RS-485 |
+| [CC10](vacuum-gauges#cc10) | Televac | RS-232, RS-485 |
 
-August 2007.   Mohan Ramanathan
+## Build Requirements
 
-At this time the module has support for vacuum sensors GP307, GP350, Televac MM200
+| Module | Required | Notes |
+|--------|----------|-------|
+| ASYN | Yes | Serial and network communication |
+| IPAC | vxWorks only | tyGSOctal serial port support |
+| streamDevice | Optional | For QPC streamDevice databases |
+| modbus | Optional | For QPC Modbus databases |
 
-October 2014:
-The new Televac controller CC10 has been aded to the Vac Sensor.
+The vac module publishes `vacSupport.dbd` and `libvac` for use by IOC applications.
 
-For the Ion pumps we have support for PI Digitel 500/1500 and the MPC (Gamma One)
+## Quick Start
 
-Support for newer devices will be added at a later date.
+The recommended way to configure devices is through the provided [iocsh scripts](iocsh-scripts), which handle serial port setup and database loading in a single call:
 
-The generic record "vs" is for the vac sensors. this record and 
-the associated devVanSen supports the following gauges:
-	GP307,  GP350,  MM200 (Televac) and CC10 (Televac)
-	
-The startup file  has the following substitution:
-The database has a field called "TYPE" which has to be set correctly. 
-vs.db has various substitions for startup file.  
-  
-	  If address is 0 then it is RS232 
-	  For RS485 Address has to be a positive number
-		for GP350 has to be between 1 and 31 of the form "AA"
-	 	for MM200 has to be between 0 and 59 of the form [0..9..A..Z..a..z]
-		for CC10 has to be between 0 and F  in HEX
-	      Also for GP350 the prefix is "#" so we will force for MM200 the same!!
-	 	  for CC10  the prefix is <STX>  = hex 02
+```
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=/dev/ttyUSB0, DEV=MPC, STN=1")
+iocshLoad("$(VAC)/iocsh/vacSensor.iocsh", "PREFIX=SR:, INSTANCE=VS1, PORT=/dev/ttyUSB1, DEV=GP350")
+```
 
-### excerpts for an example st.cmd file
-
-	#  For GP307 the STN are irrelavent
-	#   GP307 expects "\n\r" for EOS for both inputs and outputs.
-	dbLoadRecords("db/vs.db", "P=MR:,GAUGE=VS1,PORT=serial1,ADDR=0,DEV=GP307,STN=0")
-	tyGSAsynInit("serial1",  "UART0", 0, 9600,'E',1,7,'N',"\r\n","\r\n")  
-
-	#  For GP350 STN is irrelavant
-	#   GP350 expects "\r" for EOS for both inputs and outputs.
-	dbLoadRecords("db/vs.db", "P=MR:,GAUGE=VS2,PORT=serial2,ADDR=0,DEV=GP350,STN=0")
-	tyGSAsynInit("serial2",  "UART0", 1, 9600,'N',1,8,'N',"\r","\r")  
-
-	#  For MM200 the Televac has two cold cathodes and a minimum of 2 convectrons
-	#	if STN is either 5/6 then the corresponding CV1 are 1/2 and CV2 are 3/4
-	#	if STN is either 3/4 then the corresponding CV is 1/2 and no CV2
-	#   MM200 expects "\r" for EOS for both inputs and outputs.
-	dbLoadRecords("db/vs.db", "P=MR:,GAUGE=VS3,PORT=serial3,ADDR=0,DEV=MM200,STN=3")
-	dbLoadRecords("db/vs.db", "P=MR:,GAUGE=VS4,PORT=serial3,ADDR=0,DEV=MM200,STN=4")
-	tyGSAsynInit("serial3",  "UART0", 2, 9600,'N',1,8,'N',"\r","\r")  
-
-	#  Alternative for MM200: specify CV1, CV2, and SPT directly.  If you specify more than
-	#  one number for STN, the code expects you to specify all four.
-	dbLoadRecords("db/vs.db","P=MR:,GAUGE=VS3,PORT=serial3,ADDR=0,DEV=MM200,STN=3 1 0 1")
-	dbLoadRecords("db/vs.db","P=MR:,GAUGE=VS4,PORT=serial3,ADDR=0,DEV=MM200,STN=5 1 0 2")
-	tyGSAsynInit("serial3",  "UART0", 2, 9600,'N',1,8,'N',"\r","\r")  
-
-	#  For CC10 the Televac has a diode and the cold cathode integrated into one unit.
-	#  It has three setpoints which are being read
-	dbLoadRecords("db/vs.db", "P=MR:,GAUGE=VS1,PORT=serial3,ADDR=1,DEV=CC10,STN=0")
-	tyGSAsynInit("serial3",  "UART0", 2, 9600,'N',1,8,'N',"\r","\r")  
-
-
-
-	#  For Digitel 500/1500 the DEV= D500 or D1500.  The device talks only at 9600 7 E 1
-	#  Also the  input EOS to device is "\r" while out from device is "\n\r"
-	#  THE ADDR is irrelvant and STN stands for the no of setpoints from 0-3
-	dbLoadRecords("db/digitelPump.db", "P=MR:,PUMP=IP1,PORT=serial5,ADDR=0,DEV=D500,STN=2")
-	tyGSAsynInit("serial5",  "UART0", 4, 9600,'E',1,7,'N',"\n\r","\r")  
-
-	#  For Gamma One MPC MPCe also LPC and SPC .  Device supports both RS232 and RS485
-	#  THE ADDR is addreess of device (both RS232 and RS485
-	#  STN stands for the no of the pump (MPC can do 2 devices) so 1 for pump1 and 2 for pump 2
-	#  Then the corrresponding setpoints are odd and even for the respective pumps.
-	dbLoadRecords("db/digitelPump.db", "P=MR:,PUMP=IP2,PORT=serial6,ADDR=5,DEV=MPC,STN=1")
-	dbLoadRecords("db/digitelPump.db", "P=MR:,PUMP=IP3,PORT=serial6,ADDR=5,DEV=MPC,STN=2")
-	tyGSAsynInit("serial6", "UART0", 5, 9600,'N',1,8,'N',"\r","\r") 
+For manual configuration details, see the [Ion Pumps](ion-pumps) and [Vacuum Gauges](vacuum-gauges) pages.
 
 ## Documentation
 
-* [Documentation](vacDoc.md)
-* [Release Notes](vacReleaseNotes.md)
+- [Ion Pump Controllers](ion-pumps) -- Digitel, MPC, QPC setup and configuration
+- [Vacuum Gauge Controllers](vacuum-gauges) -- GP307, GP350, MM200, MX200, CC10 setup and configuration
+- [QPC Alternate Databases](qpc) -- streamDevice and Modbus support for the QPC
+- [digitel Record Reference](digitelRecord) -- Field reference for the digitel record type
+- [vs Record Reference](vsRecord) -- Field reference for the vs record type
+- [iocsh Scripts](iocsh-scripts) -- Pre-built configuration scripts
+- [Release Notes](vacReleaseNotes) -- Version history
 
+## Credits
+
+- **Greg Nawrocki** -- Original Digitel 500 device support
+- **Mohan Ramanathan** -- Record types, device support for MPC, GP307, GP350, MM200, MX200
+- **Marty Smith** -- QPC support and documentation
+- **Tim Mooney** -- Module management and releases
+- **Keenan Lang** -- Current maintainer ([klang@anl.gov](mailto:klang@anl.gov))
