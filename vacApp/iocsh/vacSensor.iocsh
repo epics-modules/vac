@@ -9,6 +9,8 @@
 #- VAC            - Location of vac module
 #- ADDR           - Optional: Asyn address
 #-                  Default: 0
+#- BAUD           - Optional: Baud rate (MX200 only)
+#-                  Default: 9600
 #- ###################################################
 
 iocshLoad("$(VAC)/iocsh/vacSensor_$(DEV).iocsh")
