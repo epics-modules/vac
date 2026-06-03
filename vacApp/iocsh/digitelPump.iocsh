@@ -4,7 +4,7 @@
 #- PREFIX         - IOC Prefix
 #- INSTANCE       - Instance Prefix
 #- PORT           - Asyn serial port
-#- DEV            - Device model
+#- DEV            - Device model (D500, MPC, or QPC)
 #- STN            - STN field
 #- VAC            - Location of vac module
 #- ADDR           - Optional: Asyn address

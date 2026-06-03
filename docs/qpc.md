@@ -181,3 +181,63 @@ Display for a single QPC pump using the streamDevice database. Also available in
 Display showing all four QPC pumps using the streamDevice database.
 
 For QPC displays using the `digitel` record, see the [ion pump controller displays](ion-pumps#gui-displays).
+
+## Comparing the digitel Record and streamDevice Implementations
+
+The QPC can be controlled through either the custom [`digitel` record](ion-pumps#qpcqpce) or the streamDevice databases described above. Both talk to the same hardware using the same underlying serial/TCP protocol, but they differ in several ways.
+
+### Protocol Differences
+
+| Aspect | digitel record | streamDevice |
+|--------|---------------|-------------|
+| Device address | Configurable (0--255, from ASYN link) | Hardcoded to `05` in the proto file |
+| Checksum | Computed per message (sum of bytes after `~`, masked to 0xFF) | Hardcoded `00` (QPC firmware accepts this) |
+| Setpoint read command | `3C` (legacy) | `3B` (newer, replaces `3C`) |
+| Setpoint write command | `3D` (legacy) | `3B` (newer, replaces `3D`) |
+| Voltage parsing | Integer (`%d`) | Float (`%f`) |
+| I/O timeout | 1.0 second | 2.0 seconds |
+
+### Setpoint Commands
+
+The two implementations use different setpoint commands:
+
+- The **digitel record** uses the legacy `3C` (read) and `3D` (write) commands. These are deprecated but still supported by the QPC firmware for backward compatibility.
+- The **streamDevice database** uses the newer `3B` command for both reads and writes. This is the replacement command introduced in newer firmware revisions.
+
+The `3B` command has a known issue as of firmware 1.35: readback works correctly, but setting setpoints does not work properly. The digitel record avoids this by using the older `3C`/`3D` commands. The streamDevice database includes a `@mismatch` error handler that captures the error message from the controller when a write fails.
+
+Additionally, the digitel record only reads **one setpoint per pump** for the QPC (the setpoint whose number matches the pump number). The streamDevice approach reads each setpoint independently through separate records.
+
+### Feature Comparison
+
+| Feature | digitel record | streamDevice |
+|---------|---------------|-------------|
+| Pressure readback | Yes | Yes |
+| Current readback | Yes | Yes |
+| Voltage readback | Yes | Yes |
+| Supply status | Yes | Yes |
+| HV enable/disable | Yes | Yes |
+| Model number | Yes | Yes |
+| Firmware version | Yes | Yes |
+| Pump size readback | Yes | Yes |
+| Setpoint read/write | Yes (1 per pump) | Yes (per setpoint) |
+| Set pressure units | -- | Yes (`0x0E`) |
+| Set pump size | -- | Yes (`0x12`) |
+| Pump name readback | -- | Yes (`0xED`) |
+| HV enabled query | -- | Yes (`0x61`) |
+| Setpoint write error feedback | -- | Yes (via `@mismatch`) |
+| Pump-off pressure sentinel | Yes (sets `9.9e9` when V<1000 and I<1e-6) | -- |
+| Derived pressure from I and pump size | Yes | -- |
+| Consecutive error tracking with alarm escalation | Yes | -- |
+
+### Architecture
+
+The **digitel record** packs all functionality into a single custom record type. One record instance handles all reads (11 commands sent sequentially in a single scan cycle) and all writes for one pump. All values are stored as fields within the record.
+
+The **streamDevice database** uses 27 standard EPICS records per pump (ai, ao, bi, bo, stringin, mbbi, mbbo, calcout, scalcout). Each record independently sends its own command when scanned. This is more modular but creates more PVs per pump.
+
+### When to Use Which
+
+- Use the **digitel record** when you need tight integration with the existing ion pump GUI displays (Pump.adl, QPCsingle_pump.adl), alarm handling through the record's built-in alarm fields, or compatibility with systems already using the digitel record for MPC or Digitel 500/1500 controllers.
+
+- Use the **streamDevice database** when you need features like pump name readback, pressure unit control, or pump size configuration; when you prefer standard EPICS record types over a custom record; or when you want independent scan rates for different parameters.

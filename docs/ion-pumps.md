@@ -96,6 +96,12 @@ iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=/dev
 
 # Digitel 500
 iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=/dev/ttyUSB1, DEV=D500, STN=2")
+
+# All four pumps on a QPC
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=IP1_4, DEV=QPC, STN=1, ADDR=5")
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=IP1_4, DEV=QPC, STN=2, ADDR=5")
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=IP1_4, DEV=QPC, STN=3, ADDR=5")
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP4, PORT=IP1_4, DEV=QPC, STN=4, ADDR=5")
 ```
 
 ### Example: Manual st.cmd Configuration

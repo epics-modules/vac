@@ -27,9 +27,9 @@ iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=/dev
 | `PREFIX` | Yes | | PV prefix (maps to `P` in the database) |
 | `INSTANCE` | Yes | | PV suffix / pump identifier (maps to `PUMP` in the database) |
 | `PORT` | Yes | | Serial port device path (e.g. `/dev/ttyUSB0`) |
-| `DEV` | Yes | | Device type: `D500` or `MPC` |
-| `STN` | Yes | | Station number (pump number for MPC, setpoint number for D500/D1500) |
-| `ADDR` | No | `0` | Device address (for MPC on RS-485) |
+| `DEV` | Yes | | Device type: `D500`, `MPC`, or `QPC` |
+| `STN` | Yes | | Station number (pump number for MPC/QPC, setpoint number for D500/D1500) |
+| `ADDR` | No | `0` | Device address (for MPC/QPC on RS-485) |
 | `VAC` | No | (auto) | Path to the vac module top directory |
 
 ### Available Device Scripts
@@ -38,6 +38,7 @@ iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=/dev
 |--------|---------|
 | `digitelPump_D500.iocsh` | Digitel 500, Digitel 1500 |
 | `digitelPump_MPC.iocsh` | MPC, MPC-II, LPC |
+| `digitelPump_QPC.iocsh` | QPC, QPCe, SPCe |
 
 ### Examples
 
@@ -48,9 +49,15 @@ iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=/dev
 # Two pumps on the same MPC controller
 iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=/dev/ttyUSB0, DEV=MPC, STN=1, ADDR=5")
 iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=/dev/ttyUSB0, DEV=MPC, STN=2, ADDR=5")
+
+# All four pumps on a QPC via Moxa terminal server
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP1, PORT=IP1_4, DEV=QPC, STN=1, ADDR=5")
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP2, PORT=IP1_4, DEV=QPC, STN=2, ADDR=5")
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP3, PORT=IP1_4, DEV=QPC, STN=3, ADDR=5")
+iocshLoad("$(VAC)/iocsh/digitelPump.iocsh", "PREFIX=SR:, INSTANCE=IP4, PORT=IP1_4, DEV=QPC, STN=4, ADDR=5")
 ```
 
-Note: There is no `digitelPump_QPC.iocsh` script. For QPC controllers using the `digitel` record, use manual st.cmd configuration as described on the [ion pump controllers](ion-pumps#example-manual-stcmd-configuration) page. For QPC controllers using streamDevice, see the `QPCpump.iocsh` script below.
+The QPC is also supported through [streamDevice databases](qpc). See the `QPCpump.iocsh` script below for that approach.
 
 ## QPC Ion Pump Controllers (streamDevice)
 
