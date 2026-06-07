@@ -1,10 +1,17 @@
 ---
 layout: default
 title: iocsh Scripts
-nav_order: 5
+nav_order: 6
 ---
 
 # iocsh Scripts
+{: .no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 The vac module provides pre-built iocsh scripts that handle serial port configuration and database loading in a single call. These scripts are the recommended way to add vacuum devices to an IOC.
 

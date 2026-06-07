@@ -1,10 +1,17 @@
 ---
 layout: default
 title: digitel Record
-nav_order: 6
+nav_order: 7
 ---
 
 # digitel Record Reference
+{: .no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 The `digitel` record type supports ion pump controllers. It handles pressure readback, voltage, current, operating mode control, up to four setpoints, bakeout control, cooldown, pump identification, and alarm checking. The record communicates with hardware through the `devDigitelPump` device support driver using ASYN.
 

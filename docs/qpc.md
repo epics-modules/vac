@@ -1,10 +1,17 @@
 ---
 layout: default
 title: QPC Alternate Databases
-nav_order: 4
+nav_order: 5
 ---
 
 # QPC Alternate Databases
+{: .no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 In addition to the [digitel record support](ion-pumps#qpcqpce), the QPC can be controlled using standard EPICS records through **streamDevice** or **Modbus** databases. These provide an alternative approach that does not require the custom `digitel` record type.
 
@@ -122,7 +129,8 @@ dbLoadRecords("db/QPCstreams.db", "P=SR:,PMP=IP4,SPLY=4,SPT=4,PROTO=QPC-serial,P
 
 The `QPCmodbus.db` database uses the EPICS Modbus module to communicate with the QPC over Modbus TCP (port 502). This database currently supports a single pump and requires multiple ASYN port configurations for the different Modbus function codes.
 
-**Note:** This database is a work in progress. Status readback is not currently functional, and only a single pump is supported per database instance.
+{: .warning }
+> This database is a work in progress. Status readback is not currently functional, and only a single pump is supported per database instance.
 
 A QPC Modbus register map spreadsheet (`QPC_ModbusRegisterMap_v1_3-1.xlsx`) is included in the `docs/` directory.
 
@@ -204,7 +212,8 @@ The two implementations use different setpoint commands:
 - The **digitel record** uses the legacy `3C` (read) and `3D` (write) commands. These are deprecated but still supported by the QPC firmware for backward compatibility.
 - The **streamDevice database** uses the newer `3B` command for both reads and writes. This is the replacement command introduced in newer firmware revisions.
 
-The `3B` command has a known issue as of firmware 1.35: readback works correctly, but setting setpoints does not work properly. The digitel record avoids this by using the older `3C`/`3D` commands. The streamDevice database includes a `@mismatch` error handler that captures the error message from the controller when a write fails.
+{: .warning }
+> The `3B` command has a known issue as of firmware 1.35: readback works correctly, but setting setpoints does not work properly. The digitel record avoids this by using the older `3C`/`3D` commands. The streamDevice database includes a `@mismatch` error handler that captures the error message from the controller when a write fails.
 
 Additionally, the digitel record only reads **one setpoint per pump** for the QPC (the setpoint whose number matches the pump number). The streamDevice approach reads each setpoint independently through separate records.
 

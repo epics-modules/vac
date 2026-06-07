@@ -1,10 +1,17 @@
 ---
 layout: default
 title: Ion Pump Controllers
-nav_order: 2
+nav_order: 3
 ---
 
 # Ion Pump Controllers
+{: .no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 The vac module supports several ion pump controller models through the [`digitel` record type](digitelRecord) and the `devDigitelPump` ASYN device support driver. Each `digitelPump.db` instance creates a single `digitel` record that handles pressure, voltage, current, operating mode, setpoints, bakeout, and pump identification for one pump.
 
@@ -38,9 +45,9 @@ The MPC supports two pumps per controller. Each pump has its own setpoints: pump
 
 The LPC uses the same protocol and can be configured with `DEV=MPC`.
 
-**Firmware notes:**
-- MPC-II firmware 3.6 reports setpoint status inverted over the serial port.
-- Recommended firmware versions are 3.45 or 3.61.
+{: .warning }
+> MPC-II firmware 3.6 reports setpoint status inverted over the serial port.
+> Recommended firmware versions are 3.45 or 3.61.
 
 ### QPC/QPCe
 
@@ -56,9 +63,9 @@ The QPC is a quad pump controller. The driver associates each pump number with t
 
 The QPC can also be controlled through [streamDevice or Modbus databases](qpc) which use standard EPICS record types.
 
-**Firmware notes:**
-- Tested on firmware versions 1.27, 1.30, and 1.35.
-- Command 3B (combined setpoint read/write) reads correctly but does not set properly. The driver uses commands 3C and 3D instead.
+{: .important }
+> Tested on firmware versions 1.27, 1.30, and 1.35.
+> Command 3B (combined setpoint read/write) reads correctly but does not set properly. The driver uses commands 3C and 3D instead.
 
 ### SPCe
 

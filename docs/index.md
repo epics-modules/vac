@@ -5,6 +5,13 @@ nav_order: 1
 ---
 
 # The synApps vac Module
+{: .no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 The vac module provides EPICS custom record types, device support drivers, and databases for vacuum system instrumentation. It supports ion pump controllers and vacuum gauge controllers from several manufacturers, communicating over serial (RS-232/RS-485) and Ethernet (TCP/IP) using the ASYN driver framework.
 
@@ -56,16 +63,6 @@ iocshLoad("$(VAC)/iocsh/vacSensor.iocsh", "PREFIX=SR:, INSTANCE=VS1, PORT=/dev/t
 ```
 
 For manual configuration details, see the [Ion Pumps](ion-pumps) and [Vacuum Gauges](vacuum-gauges) pages.
-
-## Documentation
-
-- [Ion Pump Controllers](ion-pumps) -- Digitel, MPC, QPC setup and configuration
-- [Vacuum Gauge Controllers](vacuum-gauges) -- GP307, GP350, MM200, MX200, CC10 setup and configuration
-- [QPC Alternate Databases](qpc) -- streamDevice and Modbus support for the QPC
-- [digitel Record Reference](digitelRecord) -- Field reference for the digitel record type
-- [vs Record Reference](vsRecord) -- Field reference for the vs record type
-- [iocsh Scripts](iocsh-scripts) -- Pre-built configuration scripts
-- [Release Notes](vacReleaseNotes) -- Version history
 
 ## Credits
 

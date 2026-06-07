@@ -1,10 +1,17 @@
 ---
 layout: default
 title: Vacuum Gauge Controllers
-nav_order: 3
+nav_order: 4
 ---
 
 # Vacuum Gauge Controllers
+{: .no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 The vac module supports several vacuum gauge controller models through the [`vs` record type](vsRecord) and the `devVacSen` ASYN device support driver. Each `vs.db` instance creates a single `vs` record that handles ion gauge pressures, convectron gauge pressures, setpoint status, ion gauge on/off control, and degas control.
 
@@ -55,9 +62,9 @@ The MM200 has two cold cathode gauges and a minimum of two convectron gauges. Th
 
 Alternatively, you can specify all four parameters directly by providing them space-separated in the STN macro: `STN=<CC> <CV1> <CV2> <SPT>`. When more than one value is given, all four are required.
 
-**Firmware notes:**
-- Firmware version 2.34 reboots the processor periodically during communications.
-- Version 2.13 is the stable release.
+{: .warning }
+> Firmware version 2.34 reboots the processor periodically during communications.
+> Version 2.13 is the stable release.
 
 ### MX200
 
@@ -72,7 +79,8 @@ Alternatively, you can specify all four parameters directly by providing them sp
 
 The MX200 is the newer Televac model and does not have the firmware reboot issue present in the MM200. STN usage is the same as for the MM200.
 
-The iocsh script defaults to 9600 baud for consistency with other devices in this module. If your MX200 is at its factory default baud rate of 115200, either change the device to 9600 or pass `BAUD=115200` to the iocsh script.
+{: .important }
+> The MX200 factory default baud rate is 115200. The iocsh script defaults to 9600 for consistency with other devices in this module. Either change the device to 9600 or pass `BAUD=115200` to the iocsh script.
 
 ### CC10
 

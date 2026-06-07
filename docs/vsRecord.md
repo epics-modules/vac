@@ -1,10 +1,17 @@
 ---
 layout: default
 title: vs Record
-nav_order: 7
+nav_order: 8
 ---
 
 # vs Record Reference
+{: .no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
 
 The `vs` (vacuum sensor) record type supports vacuum gauge controllers. It handles ion gauge pressure readback, convectron gauge pressures, setpoint status and values, ion gauge on/off control, degas control, and alarm checking. The record communicates with hardware through the `devVacSen` device support driver using ASYN.
 
