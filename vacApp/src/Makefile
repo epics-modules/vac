@@ -12,6 +12,8 @@ DBD += vacSupport.dbd
 DBD += devDigitelPump.dbd
 DBD += devVacSen.dbd
 
+CFG += VAC_DEPS
+
 USR_CFLAGS += -DUSE_TYPED_RSET -DUSE_TYPED_DSET
 
 vac_SRCS += vsRecord.c
