@@ -2,6 +2,10 @@
 
 MODULE = VAC
 
+# Build IOC applications.
+# Set to YES in configure/CONFIG_SITE.local to build the IOC.
+BUILD_IOCS = NO
+
 -include $(SUPPORT)/configure/CONFIG_SITE
 
 # Make any application-specific changes to the EPICS build
