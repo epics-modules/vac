@@ -8,12 +8,12 @@
 #< ../nfsCommands
 
 cd topbin
-ld < vacApp.munch
+ld < vacExApp.munch
 
 ## Register all support components
 cd top
-dbLoadDatabase("dbd/vacAppVX.dbd")
-vacAppVX_registerRecordDeviceDriver(pdbbase)
+dbLoadDatabase("dbd/vacExApp.dbd")
+vacExApp_registerRecordDeviceDriver(pdbbase)
 
 cd startup
 

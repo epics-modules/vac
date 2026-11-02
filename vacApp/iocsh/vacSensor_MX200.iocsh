@@ -1,0 +1,14 @@
+# NOTE: The MX200 factory default baud rate is 115200.
+# This script defaults to 9600 for consistency with other Televac devices.
+# Set the BAUD macro to match your device's configured baud rate.
+
+asynSetOption("$(PORT)", -1, "baud",    "$(BAUD=9600)")
+asynSetOption("$(PORT)", -1, "bits",    "8")
+asynSetOption("$(PORT)", -1, "stop",    "1")
+asynSetOption("$(PORT)", -1, "parity",  "none")
+asynSetOption("$(PORT)", -1, "clocal",  "Y")
+asynSetOption("$(PORT)", -1, "crtscts", "N")
+asynOctetSetInputEos( "$(PORT)", -1, "\r")
+asynOctetSetOutputEos("$(PORT)", -1, "\r")
+
+dbLoadRecords("$(VAC)/vacApp/Db/vs.db", "P=$(PREFIX),GAUGE=$(INSTANCE),PORT=$(PORT),ADDR=$(ADDR=0),DEV=MX200,STN=$(STN)")
