@@ -959,7 +959,7 @@ static void devVacSenCallback(asynUser *pasynUser)
             if (i == 0) {
                 value =0;
                 pPvt->spExist = 0;
-                for (j=0;i<8;j++) {
+                for (j=0;j<8;j++) {
                     char sc = readBuffer[4 + j*6];
                     if (sc == 'N')
                         value += 1 << j;
